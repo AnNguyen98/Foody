@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91825DEB90200E73E20 /* AppDelegate.swift */; };
 		8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */; };
-		8E40D91D25DEB90200E73E20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91C25DEB90200E73E20 /* ContentView.swift */; };
+		8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91C25DEB90200E73E20 /* OnboardingView.swift */; };
 		8E40D91F25DEB90500E73E20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E40D91E25DEB90500E73E20 /* Assets.xcassets */; };
 		8E40D92225DEB90500E73E20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E40D92125DEB90500E73E20 /* Preview Assets.xcassets */; };
 		8E40D92525DEB90600E73E20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E40D92325DEB90600E73E20 /* LaunchScreen.storyboard */; };
 		8E40D93025DEB90600E73E20 /* FoodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D92F25DEB90600E73E20 /* FoodyTests.swift */; };
 		8E40D93B25DEB90600E73E20 /* FoodyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D93A25DEB90600E73E20 /* FoodyUITests.swift */; };
+		8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D96325DEBED100E73E20 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,7 @@
 		8E40D91525DEB90200E73E20 /* Foody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E40D91825DEB90200E73E20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8E40D91C25DEB90200E73E20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8E40D91C25DEB90200E73E20 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8E40D91E25DEB90500E73E20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E40D92125DEB90500E73E20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E40D92425DEB90600E73E20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		8E40D93625DEB90600E73E20 /* FoodyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E40D93A25DEB90600E73E20 /* FoodyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodyUITests.swift; sourceTree = "<group>"; };
 		8E40D93C25DEB90600E73E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E40D96325DEBED100E73E20 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +101,13 @@
 		8E40D91725DEB90200E73E20 /* Foody */ = {
 			isa = PBXGroup;
 			children = (
-				8E40D91825DEB90200E73E20 /* AppDelegate.swift */,
-				8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */,
-				8E40D91C25DEB90200E73E20 /* ContentView.swift */,
-				8E40D91E25DEB90500E73E20 /* Assets.xcassets */,
-				8E40D92325DEB90600E73E20 /* LaunchScreen.storyboard */,
-				8E40D92625DEB90600E73E20 /* Info.plist */,
+				8E40D95B25DEBC5B00E73E20 /* Define */,
+				8E40D94B25DEBA4F00E73E20 /* Model */,
+				8E40D94C25DEBA5700E73E20 /* View */,
+				8E40D94D25DEBA5F00E73E20 /* ViewModel */,
+				8E40D94F25DEBAC400E73E20 /* AppDelegate */,
+				8E40D95725DEBC2C00E73E20 /* Resources */,
+				8E40D95025DEBAD100E73E20 /* Supports */,
 				8E40D92025DEB90500E73E20 /* Preview Content */,
 			);
 			path = Foody;
@@ -134,6 +137,86 @@
 				8E40D93C25DEB90600E73E20 /* Info.plist */,
 			);
 			path = FoodyUITests;
+			sourceTree = "<group>";
+		};
+		8E40D94B25DEBA4F00E73E20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8E40D94C25DEBA5700E73E20 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E40D95C25DEBC8100E73E20 /* Base */,
+				8E40D95D25DEBC9500E73E20 /* Customs */,
+				8E40D96125DEBE9200E73E20 /* 1. Starting */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E40D94D25DEBA5F00E73E20 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E40D94F25DEBAC400E73E20 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				8E40D91825DEB90200E73E20 /* AppDelegate.swift */,
+				8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		8E40D95025DEBAD100E73E20 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				8E40D92625DEB90600E73E20 /* Info.plist */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		8E40D95725DEBC2C00E73E20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8E40D92325DEB90600E73E20 /* LaunchScreen.storyboard */,
+				8E40D91E25DEB90500E73E20 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8E40D95B25DEBC5B00E73E20 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		8E40D95C25DEBC8100E73E20 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		8E40D95D25DEBC9500E73E20 /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
+		8E40D96125DEBE9200E73E20 /* 1. Starting */ = {
+			isa = PBXGroup;
+			children = (
+				8E40D96325DEBED100E73E20 /* SplashView.swift */,
+				8E40D91C25DEB90200E73E20 /* OnboardingView.swift */,
+			);
+			path = "1. Starting";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,8 +350,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
+				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
 				8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */,
-				8E40D91D25DEB90200E73E20 /* ContentView.swift in Sources */,
+				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +524,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Foody/Preview Content\"";
 				DEVELOPMENT_TEAM = SG8WKWH7TV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Foody/Info.plist;
+				INFOPLIST_FILE = Foody/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,7 +545,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Foody/Preview Content\"";
 				DEVELOPMENT_TEAM = SG8WKWH7TV;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Foody/Info.plist;
+				INFOPLIST_FILE = Foody/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
