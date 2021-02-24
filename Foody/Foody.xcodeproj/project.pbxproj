@@ -16,6 +16,8 @@
 		8E40D93025DEB90600E73E20 /* FoodyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D92F25DEB90600E73E20 /* FoodyTests.swift */; };
 		8E40D93B25DEB90600E73E20 /* FoodyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D93A25DEB90600E73E20 /* FoodyUITests.swift */; };
 		8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D96325DEBED100E73E20 /* SplashView.swift */; };
+		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
+		8E62C85425E69D5400F0614D /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C85325E69D5400F0614D /* TextFieldCustom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		8E40D93A25DEB90600E73E20 /* FoodyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodyUITests.swift; sourceTree = "<group>"; };
 		8E40D93C25DEB90600E73E20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E40D96325DEBED100E73E20 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		8E62C84B25E6804800F0614D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8E62C85325E69D5400F0614D /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldCustom.swift; path = "Foody/View/2. Login/TextFieldCustom.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,9 +153,10 @@
 		8E40D94C25DEBA5700E73E20 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E40D96125DEBE9200E73E20 /* 1. Starting */,
+				8E62C84A25E6803100F0614D /* 2. Login */,
 				8E40D95C25DEBC8100E73E20 /* Base */,
 				8E40D95D25DEBC9500E73E20 /* Customs */,
-				8E40D96125DEBE9200E73E20 /* 1. Starting */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 		8E40D95D25DEBC9500E73E20 /* Customs */ = {
 			isa = PBXGroup;
 			children = (
+				8E62C85325E69D5400F0614D /* TextFieldCustom.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -217,6 +223,14 @@
 				8E40D91C25DEB90200E73E20 /* OnboardingView.swift */,
 			);
 			path = "1. Starting";
+			sourceTree = "<group>";
+		};
+		8E62C84A25E6803100F0614D /* 2. Login */ = {
+			isa = PBXGroup;
+			children = (
+				8E62C84B25E6804800F0614D /* LoginView.swift */,
+			);
+			path = "2. Login";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,9 +363,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E62C85425E69D5400F0614D /* TextFieldCustom.swift in Sources */,
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
 				8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */,
+				8E62C84C25E6804800F0614D /* LoginView.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -86,9 +86,8 @@ struct OnboardingView: View {
                     .padding(.bottom, 20)
                 }
                 
-                
                 NavigationLink(
-                    destination: Text("Destination"),
+                    destination: LoginView(),
                     isActive: $isActive,
                     label: {
                         HStack(alignment: .center, spacing: 2, content: {
@@ -106,8 +105,8 @@ struct OnboardingView: View {
                     .offset(x: -20, y: 20)
             }
             .ignoresSafeArea()
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 
