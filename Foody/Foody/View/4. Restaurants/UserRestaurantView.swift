@@ -13,8 +13,8 @@ struct UserRestaurantView: View {
     }
 }
 
-struct UserRestaurantView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserRestaurantView()
-    }
-}
+//struct UserRestaurantView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserRestaurantView()
+//    }
+//}

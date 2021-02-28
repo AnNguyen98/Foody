@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0F0F2625EB45700060C2A9 /* RegisterView.swift */; };
 		8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91825DEB90200E73E20 /* AppDelegate.swift */; };
 		8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */; };
 		8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91C25DEB90200E73E20 /* OnboardingView.swift */; };
@@ -19,7 +20,6 @@
 		8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FCB25EB3F9000D886F5 /* CommentView.swift */; };
 		8E415FD125EB404100D886F5 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FD025EB404100D886F5 /* VotesView.swift */; };
 		8E415FD725EB418400D886F5 /* UserRestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FD625EB418400D886F5 /* UserRestaurantView.swift */; };
-		8E415FDF25EB41A300D886F5 /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FDE25EB41A300D886F5 /* RestaurantView.swift */; };
 		8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FED25EB422F00D886F5 /* FavoritesView.swift */; };
 		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
 		8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB8825EA148C002FF3FA /* Colors.swift */; };
@@ -54,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0F0F2625EB45700060C2A9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		8E40D91525DEB90200E73E20 /* Foody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foody.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E40D91825DEB90200E73E20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E40D91A25DEB90200E73E20 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +73,6 @@
 		8E415FCB25EB3F9000D886F5 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		8E415FD025EB404100D886F5 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		8E415FD625EB418400D886F5 /* UserRestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRestaurantView.swift; sourceTree = "<group>"; };
-		8E415FDE25EB41A300D886F5 /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		8E415FED25EB422F00D886F5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		8E62C84B25E6804800F0614D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E9ABB8825EA148C002FF3FA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -230,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				8E415FD625EB418400D886F5 /* UserRestaurantView.swift */,
-				8E415FDE25EB41A300D886F5 /* RestaurantView.swift */,
 			);
 			path = "4. Restaurants";
 			sourceTree = "<group>";
@@ -247,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				8E62C84B25E6804800F0614D /* LoginView.swift */,
+				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
 			);
 			path = "2. Login";
 			sourceTree = "<group>";
@@ -459,10 +459,10 @@
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
 				8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
-				8E415FDF25EB41A300D886F5 /* RestaurantView.swift in Sources */,
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* FontExt.swift in Sources */,
+				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,
 				8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */,
 				8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */,
 				8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */,
