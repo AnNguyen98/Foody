@@ -9,10 +9,11 @@ import SwiftUI
 
 struct BoldViewModifier: ViewModifier {
     var size: CGFloat = 18
+    var relativeTo: Font.TextStyle = .body
     
     func body(content: Content) -> some View {
         content
-            .font(.custom(Fonts.sourceSansProBold, size: size))
+            .font(.custom(Fonts.sourceSansProBold, size: size, relativeTo: .body))
     }
 }
 
@@ -21,7 +22,7 @@ struct RegularViewModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .font(.custom(Fonts.sourceSansProRegular, size: size))
+            .font(.custom(Fonts.sourceSansProRegular, size: size, relativeTo: .body))
     }
 }
 

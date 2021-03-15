@@ -12,24 +12,24 @@ struct SplashView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .center) {
                 NavigationLink(
                     destination: OnboardingView(),
                     isActive: $isActive,
-                    label: {
-                        Text("")
-                    })
+                    label: {  Text("") }
+                )
                 Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1))
+                
                 VStack {
                     Image("logo")
                         .resizable()
                         .frame(width: 120, height: 120)
-                        .padding(.top, 120)
                     Text("Foody")
-                        .font(.system(size: 40))
+                        .bold(size: 40)
                         .foregroundColor(.white)
                     Spacer()
                 }
+                .fixedSize()
             }
             .navigationBarHidden(true)
             .ignoresSafeArea()
