@@ -40,6 +40,10 @@
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
 		B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58786AA25EF899500203EEC /* BottomTabBar.swift */; };
 		B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004B225FEF9AD00E4B9AE /* Session.swift */; };
+		B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */; };
+		B5D004C025FF1E6B00E4B9AE /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */; };
+		B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */; };
+		B5D004CD25FF3D4900E4B9AE /* TextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +110,10 @@
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B58786AA25EF899500203EEC /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
 		B5D004B225FEF9AD00E4B9AE /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneView.swift; sourceTree = "<group>"; };
+		B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
+		B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewModel.swift; sourceTree = "<group>"; };
+		B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExt.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +293,8 @@
 			children = (
 				8E62C84B25E6804800F0614D /* LoginView.swift */,
 				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
+				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
+				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
 			);
 			path = "2. Login";
 			sourceTree = "<group>";
@@ -303,6 +313,8 @@
 			children = (
 				8E9ABB9225EA17DF002FF3FA /* ColorExt.swift */,
 				8E9C946525EA530C00D00B03 /* FontExt.swift */,
+				B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */,
+				B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -632,6 +644,7 @@
 			files = (
 				8E9ABB9325EA17DF002FF3FA /* ColorExt.swift in Sources */,
 				8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */,
+				B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */,
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
 				8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
@@ -640,6 +653,7 @@
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* FontExt.swift in Sources */,
+				B5D004CD25FF3D4900E4B9AE /* TextFieldExt.swift in Sources */,
 				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,
 				8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */,
 				8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */,
@@ -648,8 +662,10 @@
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
 				8E9ABBA125EA196D002FF3FA /* TextFieldCustom.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
+				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
 				8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */,
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,
+				B5D004C025FF1E6B00E4B9AE /* ArrayExt.swift in Sources */,
 				8E415FD725EB418400D886F5 /* UserRestaurantView.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
 				8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */,
