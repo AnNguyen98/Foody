@@ -12,31 +12,53 @@ struct TextFieldCustom: View {
     var placeholder: Text
     var onCommit: (() -> Void)?
     var isSecureField: Bool = false
+    @State private var showPass = false
     
     var body: some View {
-        VStack {
-            ZStack(alignment: .leading) {
-                if text.isEmpty { placeholder }
-                HStack {
+        VStack(spacing: 0) {
+            HStack {
+                HStack(spacing: isSecureField ? 4: 2) {
                     if isSecureField {
-                        SecureField("", text: $text, onCommit: {
-                            onCommit?()
-                        })
+                        Image("padlock-icon")
+                            .resizable()
+                            .frame(width: 18, height: 23)
                     } else {
-                        TextField("", text: $text, onCommit: {
-                            onCommit?()
-                        })
+                        Image(systemName: "envelope")
                     }
-                    if !text.isEmpty {
-                        Button(action: {
-                            text = ""
-                        }, label: {
-                            Image(systemName: "multiply.circle.fill")
-                        })
+                    Text(":")
+                }
+                
+                ZStack(alignment: .leading) {
+                    if text.isEmpty { placeholder }
+                    HStack {
+                        if !isSecureField || showPass {
+                            TextField("", text: $text, onCommit: {
+                                onCommit?()
+                            })
+                        } else {
+                            SecureField("", text: $text, onCommit: {
+                                onCommit?()
+                            })
+                        }
+                        if isSecureField {
+                            Button(action: {
+                                showPass.toggle()
+                            }, label: {
+                                Image(systemName: showPass ? "eye.slash.fill": "eye.fill")
+                            })
+                        } else {
+                            if !text.isEmpty {
+                                Button(action: {
+                                    text = ""
+                                }, label: {
+                                    Image(systemName: "multiply.circle.fill")
+                                })
+                            }
+                        }
                     }
+                    .frame(height: 45)
                 }
             }
-            .padding(.horizontal, 10)
             
             Divider()
                 .background(Color.white)

@@ -6,8 +6,8 @@ target 'Foody' do
   use_frameworks!
 
   # Pods for Foody
-  
-  
+ 
+  pod 'ImagePicker'
 
   target 'FoodyTests' do
     inherit! :search_paths
