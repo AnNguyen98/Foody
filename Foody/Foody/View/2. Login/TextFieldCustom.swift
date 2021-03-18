@@ -13,6 +13,7 @@ struct TextFieldCustom: View {
     var onCommit: (() -> Void)?
     var isSecureField: Bool = false
     @State private var showPass = false
+    var systemNameImage: String = "envelope"
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,9 +24,9 @@ struct TextFieldCustom: View {
                             .resizable()
                             .frame(width: 18, height: 23)
                     } else {
-                        Image(systemName: "envelope")
+                        Image(systemName: systemNameImage)
                     }
-                    Text(":")
+                    //Text(":")
                 }
                 
                 ZStack(alignment: .leading) {

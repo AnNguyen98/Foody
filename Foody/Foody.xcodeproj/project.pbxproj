@@ -44,6 +44,7 @@
 		B5D004C025FF1E6B00E4B9AE /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */; };
 		B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */; };
 		B5D004CD25FF3D4900E4B9AE /* TextFieldExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */; };
+		B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -114,6 +115,7 @@
 		B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExt.swift; sourceTree = "<group>"; };
 		B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewModel.swift; sourceTree = "<group>"; };
 		B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExt.swift; sourceTree = "<group>"; };
+		B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -293,6 +295,7 @@
 			children = (
 				8E62C84B25E6804800F0614D /* LoginView.swift */,
 				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
+				B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */,
 				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
 				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
 			);
@@ -665,6 +668,7 @@
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
 				8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */,
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,
+				B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */,
 				B5D004C025FF1E6B00E4B9AE /* ArrayExt.swift in Sources */,
 				8E415FD725EB418400D886F5 /* UserRestaurantView.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
