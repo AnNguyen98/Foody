@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @StateObject var viewModel = LoginViewModel()
     
     var body: some View {
         ZStack {
@@ -28,10 +27,10 @@ struct LoginView: View {
                 .padding(.top, 60)
                 
                 VStack(spacing: 30) {
-                    TextFieldCustom(text: $email,
+                    TextFieldCustom(text: $viewModel.email,
                                     placeholder: Text("Email").foregroundColor(.gray))
                     
-                    TextFieldCustom(text: $password,
+                    TextFieldCustom(text: $viewModel.password,
                                     placeholder: Text("Password").foregroundColor(.gray),
                                     onCommit: {
                                         // TODO:
