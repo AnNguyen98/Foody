@@ -15,7 +15,10 @@ struct TabViews: View {
             VStack {
                 switch tabItem {
                 case .home:
-                    Text("Home")
+                    NavigationView {
+                        HomeView()
+                    }
+//                    .navigationBarHidden(true)
                 case .likes:
                     Text("Likes")
                         .onAppear(perform: {
@@ -37,6 +40,7 @@ struct TabViews: View {
             
             Spacer()
             BottomTabBar(currentItem: $tabItem)
+                .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)
         }
         .ignoresSafeArea()
