@@ -9,6 +9,9 @@ import SwiftUI
 //import ImagePicker
 
 struct HomeView: View {
+    
+    @State private var shadowRadius: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -29,6 +32,7 @@ struct HomeView: View {
                                     .foregroundColor(.blue)
                                     .offset(x: 6, y: -6)
                             }
+                            .shadow(color: .white, radius: 10, x: 0.0, y: 0.0)
                         })
                     }
                     Button(action: {

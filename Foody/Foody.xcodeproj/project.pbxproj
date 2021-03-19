@@ -36,6 +36,7 @@
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
 		8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */; };
 		AEA668770156EBC612937823 /* Pods_FoodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4A0DD61F547EAC86BD3B75 /* Pods_FoodyTests.framework */; };
+		B5055AC7260433FE003DE804 /* UITabKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055AC6260433FE003DE804 /* UITabKit.swift */; };
 		B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */; };
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
 		B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58786AA25EF899500203EEC /* BottomTabBar.swift */; };
@@ -109,6 +110,7 @@
 		8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		978D45E38DAFEDD47298A1A6 /* Pods-Foody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody.debug.xcconfig"; path = "Target Support Files/Pods-Foody/Pods-Foody.debug.xcconfig"; sourceTree = "<group>"; };
 		AD78B0BA281BC64C01DB55C1 /* Pods-Foody-FoodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody-FoodyUITests.release.xcconfig"; path = "Target Support Files/Pods-Foody-FoodyUITests/Pods-Foody-FoodyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B5055AC6260433FE003DE804 /* UITabKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITabKit.swift; path = "../../../../../ios-rd-swiftui/Exercies/Chapter11-List&Navigation/List-NavigationDemo/List-NavigationDemo/Module/0. TabBarView/UITabKit.swift"; sourceTree = "<group>"; };
 		B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B58786AA25EF899500203EEC /* BottomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTabBar.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		8E40D91725DEB90200E73E20 /* Foody */ = {
 			isa = PBXGroup;
 			children = (
+				B5055B3A26044656003DE804 /* Network */,
 				B5D004AF25FEF98600E4B9AE /* Model */,
 				8E9ABB9125EA17CE002FF3FA /* Ext */,
 				8E9ABB8D25EA1491002FF3FA /* Define */,
@@ -230,8 +233,7 @@
 		8E40D94C25DEBA5700E73E20 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B54C7C3A25F0BDB200AB8FE9 /* Home */,
-				B54C7C2E25F0A9F700AB8FE9 /* TabBarView */,
+				B54C7C3A25F0BDB200AB8FE9 /* 0. Home */,
 				8E415FEC25EB421B00D886F5 /* Favorites */,
 				8E40D96125DEBE9200E73E20 /* 1. Starting */,
 				8E62C84A25E6803100F0614D /* 2. Login */,
@@ -370,20 +372,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B54C7C2E25F0A9F700AB8FE9 /* TabBarView */ = {
+		B5055B3A26044656003DE804 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */,
 			);
-			path = TabBarView;
+			path = Network;
 			sourceTree = "<group>";
 		};
-		B54C7C3A25F0BDB200AB8FE9 /* Home */ = {
+		B54C7C3A25F0BDB200AB8FE9 /* 0. Home */ = {
 			isa = PBXGroup;
 			children = (
 				B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */,
+				B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */,
+				B5055AC6260433FE003DE804 /* UITabKit.swift */,
 			);
-			path = Home;
+			path = "0. Home";
 			sourceTree = "<group>";
 		};
 		B5D004AF25FEF98600E4B9AE /* Model */ = {
@@ -663,6 +666,7 @@
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* FontExt.swift in Sources */,
+				B5055AC7260433FE003DE804 /* UITabKit.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextFieldExt.swift in Sources */,
 				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,
 				8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */,
