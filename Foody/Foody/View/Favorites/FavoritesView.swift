@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @State var isPresented: Bool = false
+    
     var body: some View {
-        LazyVGrid(columns: [GridItem(.flexible())], content: {
-            LazyHGrid(rows: [GridItem(.fixed(5))], content: {
-                Text("Placeholder")
-                Text("Placeholder")
-                Text("Placeholder")
-                Text("Placeholder")
-            })
-        })
+        ZStack {
+            IndefiniteProgressView()
+        }
     }
 }
 
