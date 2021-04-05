@@ -36,6 +36,9 @@
 		8EEAC56A261B5096004A052D /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC569261B5096004A052D /* StringExt.swift */; };
 		8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC56E261B54DF004A052D /* HostingController.swift */; };
 		8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */; };
+		8EEAC57C261B5C5C004A052D /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */; };
+		8EEAC584261B60EC004A052D /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC583261B60EC004A052D /* BackButton.swift */; };
+		8EEAC589261B64F5004A052D /* ModifierExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC588261B64F5004A052D /* ModifierExt.swift */; };
 		8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */; };
 		AEA668770156EBC612937823 /* Pods_FoodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4A0DD61F547EAC86BD3B75 /* Pods_FoodyTests.framework */; };
 		B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B3E26045C84003DE804 /* IndefiniteProgressView.swift */; };
@@ -115,6 +118,9 @@
 		8EEAC569261B5096004A052D /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		8EEAC56E261B54DF004A052D /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
+		8EEAC583261B60EC004A052D /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		8EEAC588261B64F5004A052D /* ModifierExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierExt.swift; sourceTree = "<group>"; };
 		8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		978D45E38DAFEDD47298A1A6 /* Pods-Foody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody.debug.xcconfig"; path = "Target Support Files/Pods-Foody/Pods-Foody.debug.xcconfig"; sourceTree = "<group>"; };
 		AD78B0BA281BC64C01DB55C1 /* Pods-Foody-FoodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody-FoodyUITests.release.xcconfig"; path = "Target Support Files/Pods-Foody-FoodyUITests/Pods-Foody-FoodyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -311,9 +317,10 @@
 				B58DC23726034E59000A1E45 /* LoginViewModel.swift */,
 				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
 				B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */,
+				8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */,
+				8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */,
 				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
 				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
-				8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */,
 			);
 			path = "2. Login";
 			sourceTree = "<group>";
@@ -335,6 +342,7 @@
 				B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */,
 				B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */,
 				8EEAC569261B5096004A052D /* StringExt.swift */,
+				8EEAC588261B64F5004A052D /* ModifierExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -349,6 +357,7 @@
 				8E415FD025EB404100D886F5 /* VotesView.swift */,
 				B58786AA25EF899500203EEC /* BottomTabBar.swift */,
 				B5055B3E26045C84003DE804 /* IndefiniteProgressView.swift */,
+				8EEAC583261B60EC004A052D /* BackButton.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -715,7 +724,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EEAC584261B60EC004A052D /* BackButton.swift in Sources */,
 				8E9ABB9325EA17DF002FF3FA /* ColorExt.swift in Sources */,
+				8EEAC589261B64F5004A052D /* ModifierExt.swift in Sources */,
 				8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */,
 				B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */,
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
@@ -737,6 +748,7 @@
 				8E62C84C25E6804800F0614D /* LoginView.swift in Sources */,
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
 				B5055B78260473BB003DE804 /* ProfileView.swift in Sources */,
+				8EEAC57C261B5C5C004A052D /* ForgotPasswordViewModel.swift in Sources */,
 				B5055B6A260472FF003DE804 /* TextFieldCustom.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,

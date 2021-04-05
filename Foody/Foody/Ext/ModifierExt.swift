@@ -1,0 +1,35 @@
+//
+//  ModifierExt.swift
+//  Foody
+//
+//  Created by An Nguyễn on 4/5/21.
+//
+
+import SwiftUI
+
+struct BackBarModifier: ViewModifier {
+    var action: (()-> Void)?
+    var color: Color
+    var navigationBarHidden: Bool
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .top) {
+            content
+            
+            HStack {
+                BackButton(action: action)
+                    .foregroundColor(color)
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+        .navigationBarHidden(navigationBarHidden)
+    }
+}
+
+extension View {
+    func addBackBarCustom(_ color: Color = .white, barHidden: Bool = true,
+                          action: (()-> Void)? = nil) -> some View {
+        self.modifier(BackBarModifier(action: action, color: color, navigationBarHidden: barHidden))
+    }
+}

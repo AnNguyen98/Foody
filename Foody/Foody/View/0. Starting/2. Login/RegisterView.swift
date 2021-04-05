@@ -12,8 +12,7 @@ struct RegisterView: View {
     @State var isRestaurantJoined: Bool = false
     
     var body: some View {
-        ZStack {
-            
+        ZStack { 
             Image("bg_login")
                 .resizable()
                 .ignoresSafeArea()
@@ -78,8 +77,8 @@ struct RegisterView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal)
             }
-            .navigationBarHidden(true)
         }
+        .addBackBarCustom()
     }
 }
 
