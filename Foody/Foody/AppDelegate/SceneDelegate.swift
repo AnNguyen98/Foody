@@ -20,8 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return sceneDelegate
     }
     
-    func makeRoot(view: AnyView) {
-        window?.rootViewController = UIHostingController(rootView: view)
+    func makeRoot(_ status: Status) {
+        window?.rootViewController = UIHostingController(rootView: status.contentView)
         window?.makeKeyAndVisible()
     }
     
@@ -30,16 +30,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = RegisterView()
-
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
-            window.makeKeyAndVisible()
         }
+        makeRoot(.login)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -73,3 +69,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate {
+    enum Status {
+        case logged, login
+        
+        var contentView: AnyView {
+            switch self {
+            case .logged:
+                return AnyView(HomeView())
+            default:
+                return AnyView(SplashView())
+            }
+        }
+    }
+}
