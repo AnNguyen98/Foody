@@ -62,6 +62,7 @@ struct VerifyPhoneView: View {
             Spacer()
         }
         .padding(.horizontal)
+        .statusBarStyle(.darkContent)
     }
 }
 

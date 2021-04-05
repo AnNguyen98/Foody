@@ -38,6 +38,7 @@ struct SplashView: View {
                     isActive = true
                 }
             })
+            .statusBarStyle(.lightContent)
         }
     }
 }

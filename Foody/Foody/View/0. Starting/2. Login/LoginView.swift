@@ -80,6 +80,7 @@ struct LoginView: View {
             }
         }
         .navigationBarHidden(true)
+        .statusBarStyle(.lightContent)
         .foregroundColor(.white)
         .disabled(viewModel.isLoading)
     }

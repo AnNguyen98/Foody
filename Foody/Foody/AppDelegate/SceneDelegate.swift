@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func makeRoot(_ status: Status) {
-        window?.rootViewController = HostingController(rootView: status.contentView)
+        let hostingController = HostingController(rootView: status.contentView)
+        window?.rootViewController = hostingController
+        UIApplication.hostingController = hostingController
         window?.makeKeyAndVisible()
     }
     

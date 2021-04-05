@@ -22,6 +22,7 @@ struct BackBarModifier: ViewModifier {
                 Spacer()
             }
             .padding(.horizontal)
+            .padding(.vertical, 5)
         }
         .navigationBarHidden(navigationBarHidden)
     }

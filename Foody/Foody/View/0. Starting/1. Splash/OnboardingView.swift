@@ -109,6 +109,7 @@ struct OnboardingView: View {
             .padding(.bottom, 20)
         }
         .navigationBarHidden(true)
+        .statusBarStyle(.darkContent)
     }
 }
 

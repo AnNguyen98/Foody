@@ -42,6 +42,7 @@ struct ForgotPasswordView: View {
             .padding()
         }
         .addBackBarCustom(.black)
+        .statusBarStyle(.darkContent)
     }
 }
 
