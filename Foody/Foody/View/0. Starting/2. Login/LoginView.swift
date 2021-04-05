@@ -33,7 +33,7 @@ struct LoginView: View {
                     TextFieldCustom(text: $viewModel.password,
                                     placeholder: Text("Password").foregroundColor(.gray),
                                     onCommit: {
-                                        // TODO:
+                                        viewModel.login()
                                     }, isSecureField: true)
 
                 }
@@ -41,20 +41,21 @@ struct LoginView: View {
                 .padding(EdgeInsets(top: 50, leading: 20, bottom: 70, trailing: 20))
                 
                 VStack(spacing: 15) {
-                    Button(action: {}, label: {
+                    Button(action: {
+                        viewModel.login()
+                    }, label: {
                         Text("Sign In")
                             .bold(size: 18)
                             .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
+                            .foregroundColor(Color.white.opacity(viewModel.invalidInfo ? 0.5: 1))
+                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.invalidInfo ? 0.5: 0.7))
                     })
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-
+                    .disabled(viewModel.invalidInfo)
                     
-                    Button(action: {
-                        
-                    }, label: {
+                    NavigationLink(destination: ForgotPasswordView()) {
                         Text("Forgot password?")
-                    })
+                    }
                 }
                 .regular(size: 15)
                 .padding(.horizontal)
@@ -63,20 +64,24 @@ struct LoginView: View {
                 
                 HStack {
                     Text("Don't have an account?")
-                    Button(action: {
-                        
-                    }, label: {
+                    NavigationLink(destination: RegisterView()) {
                         Text("Create one")
                             .bold()
-                    })
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .padding([.bottom, .horizontal], 15)
                 .regular(size: 15)
             }
+            
+            if viewModel.isLoading {
+                IndefiniteProgressView()
+                    .animation(.easeInOut)
+            }
         }
         .navigationBarHidden(true)
         .foregroundColor(.white)
+        .disabled(viewModel.isLoading)
     }
 }
 

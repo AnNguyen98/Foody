@@ -32,6 +32,10 @@
 		8E9C946125EA4E7300D00B03 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E9C946025EA4E7300D00B03 /* SourceSansPro-Bold.ttf */; };
 		8E9C946625EA530C00D00B03 /* FontExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946525EA530C00D00B03 /* FontExt.swift */; };
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
+		8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC564261B4AE0004A052D /* ViewModel.swift */; };
+		8EEAC56A261B5096004A052D /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC569261B5096004A052D /* StringExt.swift */; };
+		8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC56E261B54DF004A052D /* HostingController.swift */; };
+		8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */; };
 		8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */; };
 		AEA668770156EBC612937823 /* Pods_FoodyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B4A0DD61F547EAC86BD3B75 /* Pods_FoodyTests.framework */; };
 		B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B3E26045C84003DE804 /* IndefiniteProgressView.swift */; };
@@ -107,6 +111,10 @@
 		8E9C946025EA4E7300D00B03 /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		8E9C946525EA530C00D00B03 /* FontExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExt.swift; sourceTree = "<group>"; };
 		8E9C946D25EA594800D00B03 /* NavigationCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustom.swift; sourceTree = "<group>"; };
+		8EEAC564261B4AE0004A052D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		8EEAC569261B5096004A052D /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
+		8EEAC56E261B54DF004A052D /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
+		8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		978D45E38DAFEDD47298A1A6 /* Pods-Foody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody.debug.xcconfig"; path = "Target Support Files/Pods-Foody/Pods-Foody.debug.xcconfig"; sourceTree = "<group>"; };
 		AD78B0BA281BC64C01DB55C1 /* Pods-Foody-FoodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody-FoodyUITests.release.xcconfig"; path = "Target Support Files/Pods-Foody-FoodyUITests/Pods-Foody-FoodyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				8E40D94F25DEBAC400E73E20 /* AppDelegate */,
+				8EEAC563261B4AA6004A052D /* Base */,
 				8E9ABB9125EA17CE002FF3FA /* Ext */,
 				8E9ABB8D25EA1491002FF3FA /* Define */,
 				B5D004AF25FEF98600E4B9AE /* Model */,
@@ -304,6 +313,7 @@
 				B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */,
 				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
 				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
+				8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */,
 			);
 			path = "2. Login";
 			sourceTree = "<group>";
@@ -324,6 +334,7 @@
 				8E9C946525EA530C00D00B03 /* FontExt.swift */,
 				B5D004BF25FF1E6B00E4B9AE /* ArrayExt.swift */,
 				B5D004CC25FF3D4900E4B9AE /* TextFieldExt.swift */,
+				8EEAC569261B5096004A052D /* StringExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -350,6 +361,15 @@
 				8E9C945125EA3E5600D00B03 /* AkayaTelivigala-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		8EEAC563261B4AA6004A052D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8EEAC564261B4AE0004A052D /* ViewModel.swift */,
+				8EEAC56E261B54DF004A052D /* HostingController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		8EF8F11625EA0C3C00B1499E /* 1. Deatails */ = {
@@ -705,6 +725,7 @@
 				B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */,
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
+				8EEAC56A261B5096004A052D /* StringExt.swift in Sources */,
 				B5055B85260473E0003DE804 /* SearchView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* FontExt.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextFieldExt.swift in Sources */,
@@ -719,13 +740,16 @@
 				B5055B6A260472FF003DE804 /* TextFieldCustom.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
+				8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */,
 				B58DC23826034E59000A1E45 /* LoginViewModel.swift in Sources */,
+				8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */,
 				8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */,
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,
 				B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
 				B5D004C025FF1E6B00E4B9AE /* ArrayExt.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
+				8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */,
 				8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
