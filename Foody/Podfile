@@ -6,6 +6,8 @@ target 'Foody' do
   use_frameworks!
 
   # Pods for Foody
+  
+  pod 'Moya', '~> 14.0'
  
   pod 'ImagePicker'
   pod 'SDWebImageSwiftUI'
