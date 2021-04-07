@@ -14,8 +14,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
     @Binding var images: [UIImage]
     
-    var onDismiss: (() -> Void)?
-    
     func makeUIViewController(context: Context) -> some ImagePickerController {
         let configuration = Configuration()
         configuration.noImagesFont = .boldSystemFont(ofSize: 17)
@@ -55,7 +53,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func dismiss(with images: [UIImage] = []) {
             parent.images = images
-            parent.onDismiss?()
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
