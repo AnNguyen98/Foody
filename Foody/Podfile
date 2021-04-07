@@ -18,10 +18,13 @@ target 'Foody' do
   pod 'AlamofireNetworkActivityIndicator', '~> 3.1'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
   
+  pod 'WaterfallGrid', '~> 1.0.0'
+  
   # Recommended: Add the Firebase pod
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Storage'
 
   target 'FoodyTests' do
     inherit! :search_paths
