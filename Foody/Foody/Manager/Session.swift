@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+final class Session {
+    private init() { }
+    static let shared = Session()
+    
+    
+}

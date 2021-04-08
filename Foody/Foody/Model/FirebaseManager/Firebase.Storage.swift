@@ -7,10 +7,10 @@
 
 import FirebaseStorage
 
-final class FirebaseStorage {
-    let storage = Storage.storage(url: "gs://food-app-30a00.appspot.com/")
+extension FirebaseManager.Storage {
     
     func uploadImages() {
+        let storage = Storage.storage(url: "gs://food-app-30a00.appspot.com/")
         let storageRef = storage.reference()
         let imagesRef = storageRef.child("images/mountains.jpg")
         
@@ -27,7 +27,7 @@ final class FirebaseStorage {
                   // Uh-oh, an error occurred!
                   return
                 }
-              }
+            }
         }
     }
 }
