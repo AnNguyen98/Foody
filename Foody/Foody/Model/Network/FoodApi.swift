@@ -81,7 +81,11 @@ extension FoodApi: TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        var headers = ["Content-type": "application/json"]
+        if let token = Session.shared.token {
+            headers["Authorization"] = token
+        }
+        return headers
     }
     
 }

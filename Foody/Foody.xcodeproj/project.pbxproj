@@ -52,7 +52,7 @@
 		B5055B78260473BB003DE804 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B77260473BB003DE804 /* ProfileView.swift */; };
 		B5055B80260473D4003DE804 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B7F260473D4003DE804 /* CartView.swift */; };
 		B5055B85260473E0003DE804 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B84260473E0003DE804 /* SearchView.swift */; };
-		B534C93E261ED6E8000B6CDF /* ResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C93D261ED6E8000B6CDF /* ResponseError.swift */; };
+		B534C93E261ED6E8000B6CDF /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C93D261ED6E8000B6CDF /* RequestError.swift */; };
 		B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C945261EDDDF000B6CDF /* Moya.Response.swift */; };
 		B534C959261EE844000B6CDF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C958261EE844000B6CDF /* FirebaseManager.swift */; };
 		B534C965261EFA2B000B6CDF /* Firebase.Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C964261EFA2B000B6CDF /* Firebase.Auth.swift */; };
@@ -154,7 +154,7 @@
 		B5055B77260473BB003DE804 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B5055B7F260473D4003DE804 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		B5055B84260473E0003DE804 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		B534C93D261ED6E8000B6CDF /* ResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseError.swift; sourceTree = "<group>"; };
+		B534C93D261ED6E8000B6CDF /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		B534C945261EDDDF000B6CDF /* Moya.Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya.Response.swift; sourceTree = "<group>"; };
 		B534C958261EE844000B6CDF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		B534C964261EFA2B000B6CDF /* Firebase.Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.Auth.swift; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 		B534C94D261EE7D8000B6CDF /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B534C93D261ED6E8000B6CDF /* ResponseError.swift */,
+				B534C93D261ED6E8000B6CDF /* RequestError.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -880,7 +880,7 @@
 				8EEAC5AD261B76A2004A052D /* HomeViewController.swift in Sources */,
 				B5D004C025FF1E6B00E4B9AE /* Array.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
-				B534C93E261ED6E8000B6CDF /* ResponseError.swift in Sources */,
+				B534C93E261ED6E8000B6CDF /* RequestError.swift in Sources */,
 				8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */,
 				8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */,
 			);
