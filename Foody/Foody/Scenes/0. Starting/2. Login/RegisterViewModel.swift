@@ -7,12 +7,8 @@
 
 import Foundation
 
-enum UserType {
-    case normal, restaurant
-}
-
 final class RegisterViewModel: ObservableObject {
-    @Published var type: UserType = .normal
+    @Published var type: UserType = .customer
     @Published var username: String = ""
     @Published var restaurantName: String = ""
     @Published var email: String = ""

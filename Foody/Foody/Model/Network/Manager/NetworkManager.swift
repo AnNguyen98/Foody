@@ -12,7 +12,6 @@ import Foundation
 
 
 struct NetworkManager {
-//    static let MovieAPIKey = "5e027139c66f977f5356baedc345f04f"
     static var shared: NetworkManager = NetworkManager()
     
     private var provider = MoyaProvider<FoodApi>(plugins: [NetworkLoggerPlugin()])

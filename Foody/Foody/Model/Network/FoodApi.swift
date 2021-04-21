@@ -14,6 +14,7 @@ typealias DataCompletion = () -> Void
 //typealias Completion = (Moya.Response<Any>) -> Void
 
 enum FoodApi {
+    case login(email: String, password: String)
     case details(id: String)
     
 //    case recommended(id:Int)
@@ -26,7 +27,7 @@ enum FoodApi {
 
 extension FoodApi: TargetType {
     var baseURL: URL {
-        guard let url = URL(string: "https://api.themoviedb.org/3/trending/movie/Week?api_key=5e027139c66f977f5356baedc345f04f") else {
+        guard let url = URL(string: "http://0.0.0.0:5000/v1") else {
             fatalError("baseURL could not be configured.")
         }
         return url
@@ -34,6 +35,8 @@ extension FoodApi: TargetType {
     
     var path: String {
         switch self {
+        case .login:
+            return "/login"
         case .details(let id):
             return ""
 //        case .recommended(let id):
@@ -51,6 +54,8 @@ extension FoodApi: TargetType {
     
     var method: Method {
         switch self {
+        case .login:
+            return .post
         case .details, .trending:
             return .get
         }
@@ -62,6 +67,8 @@ extension FoodApi: TargetType {
     
     var task: Task {
         switch self {
+        case .login(let email, let password):
+            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .details(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
 //        case .recommended, .video:
