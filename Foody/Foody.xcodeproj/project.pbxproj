@@ -56,8 +56,7 @@
 		B51E0B4126310E1B0051A892 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51E0B4026310E1B0051A892 /* Response.swift */; };
 		B534C93E261ED6E8000B6CDF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C93D261ED6E8000B6CDF /* NetworkError.swift */; };
 		B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C945261EDDDF000B6CDF /* Moya.Response.swift */; };
-		B534C959261EE844000B6CDF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C958261EE844000B6CDF /* FirebaseManager.swift */; };
-		B534C965261EFA2B000B6CDF /* Firebase.Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C964261EFA2B000B6CDF /* Firebase.Auth.swift */; };
+		B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C964261EFA2B000B6CDF /* FirebaseAuth.swift */; };
 		B534C96A261EFC9F000B6CDF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C969261EFC9F000B6CDF /* Data.swift */; };
 		B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */; };
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
@@ -159,8 +158,7 @@
 		B51E0B4026310E1B0051A892 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		B534C93D261ED6E8000B6CDF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		B534C945261EDDDF000B6CDF /* Moya.Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya.Response.swift; sourceTree = "<group>"; };
-		B534C958261EE844000B6CDF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
-		B534C964261EFA2B000B6CDF /* Firebase.Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.Auth.swift; sourceTree = "<group>"; };
+		B534C964261EFA2B000B6CDF /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		B534C969261EFC9F000B6CDF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -502,8 +500,7 @@
 		B534C957261EE818000B6CDF /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				B534C958261EE844000B6CDF /* FirebaseManager.swift */,
-				B534C964261EFA2B000B6CDF /* Firebase.Auth.swift */,
+				B534C964261EFA2B000B6CDF /* FirebaseAuth.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -826,7 +823,7 @@
 				8EC9BDDB263064FB00A711A6 /* LoginService.swift in Sources */,
 				B5055B85260473E0003DE804 /* SearchView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* Font.swift in Sources */,
-				B534C965261EFA2B000B6CDF /* Firebase.Auth.swift in Sources */,
+				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
 				B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */,
 				B59DF1AA261D728600E7AA76 /* Router.swift in Sources */,
@@ -843,7 +840,6 @@
 				B5055B78260473BB003DE804 /* ProfileView.swift in Sources */,
 				8EEAC57C261B5C5C004A052D /* ForgotPasswordViewModel.swift in Sources */,
 				B59DF1B0261D728E00E7AA76 /* Movie.swift in Sources */,
-				B534C959261EE844000B6CDF /* FirebaseManager.swift in Sources */,
 				B5055B6A260472FF003DE804 /* TextFieldCustom.swift in Sources */,
 				B55DE2E6261EA53200F6328A /* OrderView.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,

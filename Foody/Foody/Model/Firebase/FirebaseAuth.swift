@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension FirebaseManager.Auth {
+struct FirebaseAuth {
     static func auth() {
         
     }

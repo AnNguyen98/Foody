@@ -31,7 +31,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
         LoginService.login(email: self.email, password: self.password)
             .sink { (completion) in
                 if case .failure(let error) = completion {
-                    self.error = error as? NetworkError
+                    self.error = error
                 }
                 self.isLoading = false
             } receiveValue: { (response) in
