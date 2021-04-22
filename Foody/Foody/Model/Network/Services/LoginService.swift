@@ -14,16 +14,9 @@ final class LoginService {
         var token: String
     }
     
-    class func login(email: String, password: String) -> AnyPublisher<UserResponse, Error>  {
-        NetworkManager.shared.request(.login(email: email, password: password))
-            .tryMap({
-                guard let data = $0 as? Data else {
-                    throw ResponseError.invalidData
-                }
-                return data
-            })
-            .decode(type: UserResponse.self, decoder: JSONDecoder())
-            .receive(on: DispatchQueue.main)
+    class func login(email: String, password: String) -> AnyPublisher<UserResponse, NetworkError>  {
+        NetworkProvider.shared.request(.login(email: email, password: password))
+            .decode(type: UserResponse.self)
             .eraseToAnyPublisher()
     }
 }

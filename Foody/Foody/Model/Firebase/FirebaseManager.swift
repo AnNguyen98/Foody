@@ -7,12 +7,8 @@
 
 import Foundation
 
-final class FirebaseManager {
-    static let shared = FirebaseManager()
-    
+final class FirebaseManager {    
     private init() { }
-    
-    struct Storage { }
-    
+        
     struct Auth { }
 }

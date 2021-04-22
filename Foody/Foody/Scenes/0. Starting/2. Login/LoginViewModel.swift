@@ -12,7 +12,7 @@ import Moya
 final class LoginViewModel: ViewModel, ObservableObject{
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var error: RequestError?
+    @Published var error: NetworkError?
     
     var subscriptions = Set<AnyCancellable>()
     
@@ -31,7 +31,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
         LoginService.login(email: self.email, password: self.password)
             .sink { (completion) in
                 if case .failure(let error) = completion {
-                    self.error = error as? RequestError
+                    self.error = error as? NetworkError
                 }
                 self.isLoading = false
             } receiveValue: { (response) in

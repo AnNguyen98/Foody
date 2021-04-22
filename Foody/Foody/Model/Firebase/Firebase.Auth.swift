@@ -8,5 +8,7 @@
 import Foundation
 
 extension FirebaseManager.Auth {
-    
+    static func auth() {
+        
+    }
 }

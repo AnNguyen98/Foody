@@ -32,15 +32,9 @@ final class HomeService {
         }
     }
         
-    func getPupularMovies() -> AnyPublisher<TrendingResponse, Error> {
-        NetworkManager.shared.request(.trending)
-            .tryMap({
-                guard let data = $0 as? Data else {
-                    throw ResponseError.invalidData
-                }
-                return data
-            })
-            .decode(type: TrendingResponse.self, decoder: JSONDecoder())
+    func getPupularMovies() -> AnyPublisher<TrendingResponse, NetworkError> {
+        NetworkProvider.shared.request(.trending)
+            .decode(type: TrendingResponse.self)
             .eraseToAnyPublisher()
     }
 }
