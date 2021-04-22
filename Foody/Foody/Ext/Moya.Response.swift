@@ -15,4 +15,11 @@ extension Moya.Response {
         }
         return array
     }
+    
+    var messageError: String {
+        if let json = try? mapJSON() as? [String: Any], let message = json["message"] as? String {
+            return message
+        }
+        return "Can't get message error."
+    }
 }

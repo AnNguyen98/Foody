@@ -7,7 +7,7 @@
 
 import Moya
 
-enum NetworkError: Error {
+enum NetworkError: Error, Identifiable {
     case invalidData
     case invalidJSONFormat
     case authen
@@ -17,7 +17,10 @@ enum NetworkError: Error {
     case emptyData
     case noResponse
     case invalidURL
+    case invalidAreaCode
     case unknow(String)
+    
+    var id: String { UUID().uuidString }
     
     var description: String {
         switch self {
@@ -41,6 +44,8 @@ enum NetworkError: Error {
             return "Invalid Data Format."
         case .unknow(let description):
             return description
+        case .invalidAreaCode:
+            return "Invalid area code."
         }
     }
     

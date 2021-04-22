@@ -5,10 +5,46 @@
 //  Created by MBA0283F on 4/8/21.
 //
 
-import Foundation
+import FirebaseAuth
+import Combine
+import Moya
 
 struct FirebaseAuth {
-    static func auth() {
-        
+    static func verifyPhoneNumber(phoneNumber: String) -> AnyPublisher<String, NetworkError> {
+        guard phoneNumber.hasPrefix("+84") else {
+            return Fail(error: NetworkError.invalidAreaCode).eraseToAnyPublisher()
+        }
+        return Future<String, NetworkError> { promise in
+            PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+                if let error = error {
+                    print("DEBUG - FirebaseAuth verifyPhoneNumber: ", error.localizedDescription)
+                    promise(.failure(.unknow(error.localizedDescription)))
+                } else {
+                    if let verificationID = verificationID {
+                        promise(.success(verificationID))
+                    } else {
+                        promise(.failure(.unknow("Verification ID is empty.")))
+                    }
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
+    }
+    
+    static func signInAuth(verificationID: String, code: String) -> AnyPublisher<Any, NetworkError> {
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
+        return Future<Any, NetworkError> { promise in
+            Auth.auth().signIn(with: credential) { (result, error) in
+                if let error = error {
+                    print("DEBUG - FirebaseAuth signIn: ", error.localizedDescription)
+                    promise(.failure(.unknow(error.localizedDescription)))
+                } else {
+                    promise(.success(result ?? ""))
+                }
+            }
+        }
+        .receive(on: DispatchQueue.main)
+        .eraseToAnyPublisher()
     }
 }

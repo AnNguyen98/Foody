@@ -38,6 +38,7 @@ struct VerifyPhoneView: View {
                 TextField("", text: $viewModel.code)
                     .frame(height: 60)
                     .keyboardType(.numberPad)
+                    .textContentType(.oneTimeCode)
                     .foregroundColor(.clear)
                     .opacity(0.015)
                     

@@ -28,16 +28,30 @@ final class LoginViewModel: ViewModel, ObservableObject{
 //                self.isLoading = false
 //            }).store(in: &subscriptions)
         
-        LoginService.login(email: self.email, password: self.password)
+//        AccountService.login(email: self.email, password: self.password)
+//            .sink { (completion) in
+//                if case .failure(let error) = completion {
+//                    self.error = error
+//                }
+//                self.isLoading = false
+//            } receiveValue: { (response) in
+//                print("LoginService", response.email, response.token)
+//            }
+//            .store(in: &subscriptions)
+        
+        FirebaseAuth.verifyPhoneNumber(phoneNumber: "+84399873737")
             .sink { (completion) in
+                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-                self.isLoading = false
-            } receiveValue: { (response) in
-                print("LoginService", response.email, response.token)
+            } receiveValue: { (id) in
+                print(id)
             }
             .store(in: &subscriptions)
+
+
+            
     }
 }
 

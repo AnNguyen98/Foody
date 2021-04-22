@@ -7,16 +7,21 @@
 
 import Combine
 import Foundation
+import FirebaseAuth
 
 final class AccountService {
-    struct UserResponse: Decodable {
+    struct AccountResponse: Decodable {
         var email: String
         var token: String
     }
     
-    class func login(email: String, password: String) -> AnyPublisher<UserResponse, NetworkError>  {
+    class func login(email: String, password: String) -> AnyPublisher<AccountResponse, NetworkError>  {
         NetworkProvider.shared.request(.login(email: email, password: password))
-            .decode(type: UserResponse.self)
+            .decode(type: AccountResponse.self)
             .eraseToAnyPublisher()
+    }
+    
+    class func logout() {
+        try? Auth.auth().signOut()
     }
 }
