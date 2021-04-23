@@ -28,6 +28,14 @@ final class Session {
         }
     }
     
+    var isShowedOnboarding: Bool {
+        set {
+            Defaults.isShowedOnboarding = newValue
+        } get {
+            Defaults.isShowedOnboarding
+        }
+    }
+    
     
 }
 

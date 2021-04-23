@@ -15,6 +15,9 @@ struct LoginView: View {
             Image("bg_login")
                 .resizable()
                 .ignoresSafeArea()
+                .onAppear {
+                    Session.shared.isShowedOnboarding = true
+                }
             
             VStack(alignment: .leading) {
                 VStack(alignment: .leading) {
@@ -83,9 +86,6 @@ struct LoginView: View {
         .statusBarStyle(.lightContent)
         .foregroundColor(.white)
         .disabled(viewModel.isLoading)
-        .alert(item: $viewModel.error) { (item) -> Alert in
-            Alert(title: Text("Error"), message: Text(item.description), dismissButton: .default(Text("OK")))
-        }
     }
 }
 

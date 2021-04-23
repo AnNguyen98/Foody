@@ -12,9 +12,9 @@ struct SplashView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .center) {
+            ZStack {
                 NavigationLink(
-                    destination: OnboardingView(),
+                    destination: Session.shared.isShowedOnboarding ? AnyView(LoginView()): AnyView(OnboardingView()),
                     isActive: $isActive,
                     label: {  EmptyView() }
                 )
