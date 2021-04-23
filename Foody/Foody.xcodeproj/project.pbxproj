@@ -299,7 +299,7 @@
 				B5055B6F26047352003DE804 /* 4. Carts */,
 				8E415FEC25EB421B00D886F5 /* 5. Favorites */,
 				B5055B702604735D003DE804 /* 6. Profile */,
-				8E9ABB9F25EA1949002FF3FA /* Customs */,
+				8E9ABB9F25EA1949002FF3FA /* Views */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -393,7 +393,7 @@
 			path = Ext;
 			sourceTree = "<group>";
 		};
-		8E9ABB9F25EA1949002FF3FA /* Customs */ = {
+		8E9ABB9F25EA1949002FF3FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				B5055B69260472FF003DE804 /* TextFieldCustom.swift */,
@@ -406,7 +406,7 @@
 				8EEAC583261B60EC004A052D /* BackButton.swift */,
 				B59DF1E3261D9A8800E7AA76 /* ImagePickerView.swift */,
 			);
-			path = Customs;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		8E9C945025EA3E4000D00B03 /* Font */ = {
