@@ -9,19 +9,23 @@ import Combine
 import Foundation
 import FirebaseAuth
 
-final class AccountService {
+protocol AccountFetchable {
+    static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, NetworkError>
+}
+
+final class AccountService: AccountFetchable {
     struct AccountResponse: Decodable {
         var email: String
         var token: String
     }
     
-    class func login(email: String, password: String) -> AnyPublisher<AccountResponse, NetworkError>  {
+    static func login(email: String, password: String) -> AnyPublisher<AccountResponse, NetworkError>  {
         NetworkProvider.shared.request(.login(email: email, password: password))
             .decode(type: AccountResponse.self)
             .eraseToAnyPublisher()
     }
     
-    class func logout() {
+    static func logout() {
         try? Auth.auth().signOut()
     }
 }
