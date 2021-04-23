@@ -295,14 +295,14 @@
 		8E40D94C25DEBA5700E73E20 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				B55DE2E4261EA51E00F6328A /* Order */,
-				8E40D96125DEBE9200E73E20 /* 0. Starting */,
-				B5055B462604710C003DE804 /* 1. TabView */,
+				B5055B462604710C003DE804 /* 0. TabView */,
+				8E40D96125DEBE9200E73E20 /* 1. Starting */,
 				B54C7C3A25F0BDB200AB8FE9 /* 2. Home */,
 				B5055B6E2604733D003DE804 /* 3. Search */,
 				B5055B6F26047352003DE804 /* 4. Carts */,
 				8E415FEC25EB421B00D886F5 /* 5. Favorites */,
 				B5055B702604735D003DE804 /* 6. Profile */,
+				B55DE2E4261EA51E00F6328A /* Order */,
 				8E9ABB9F25EA1949002FF3FA /* Views */,
 			);
 			path = Scenes;
@@ -336,13 +336,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		8E40D96125DEBE9200E73E20 /* 0. Starting */ = {
+		8E40D96125DEBE9200E73E20 /* 1. Starting */ = {
 			isa = PBXGroup;
 			children = (
 				B5055B4A2604717B003DE804 /* 1. Splash */,
 				8E62C84A25E6803100F0614D /* 2. Login */,
+				8E9CBA2C2633054500C9954F /* 3. Register */,
+				8E9CBA2D2633054F00C9954F /* 4. Verify */,
+				8E9CBA2E2633056F00C9954F /* 5. Forgot pasword */,
 			);
-			path = "0. Starting";
+			path = "1. Starting";
 			sourceTree = "<group>";
 		};
 		8E415FEC25EB421B00D886F5 /* 5. Favorites */ = {
@@ -360,12 +363,6 @@
 			children = (
 				8E62C84B25E6804800F0614D /* LoginView.swift */,
 				B58DC23726034E59000A1E45 /* LoginViewModel.swift */,
-				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
-				B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */,
-				8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */,
-				8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */,
-				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
-				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
 			);
 			path = "2. Login";
 			sourceTree = "<group>";
@@ -425,6 +422,33 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		8E9CBA2C2633054500C9954F /* 3. Register */ = {
+			isa = PBXGroup;
+			children = (
+				8E0F0F2625EB45700060C2A9 /* RegisterView.swift */,
+				B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */,
+			);
+			path = "3. Register";
+			sourceTree = "<group>";
+		};
+		8E9CBA2D2633054F00C9954F /* 4. Verify */ = {
+			isa = PBXGroup;
+			children = (
+				B5D004BA25FF173200E4B9AE /* VerifyPhoneView.swift */,
+				B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */,
+			);
+			path = "4. Verify";
+			sourceTree = "<group>";
+		};
+		8E9CBA2E2633056F00C9954F /* 5. Forgot pasword */ = {
+			isa = PBXGroup;
+			children = (
+				8EEAC576261B5A83004A052D /* ForgotPasswordView.swift */,
+				8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */,
+			);
+			path = "5. Forgot pasword";
+			sourceTree = "<group>";
+		};
 		8EEAC563261B4AA6004A052D /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -464,13 +488,13 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		B5055B462604710C003DE804 /* 1. TabView */ = {
+		B5055B462604710C003DE804 /* 0. TabView */ = {
 			isa = PBXGroup;
 			children = (
 				B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */,
 				B5055B4B260471A9003DE804 /* UITabKit.swift */,
 			);
-			path = "1. TabView";
+			path = "0. TabView";
 			sourceTree = "<group>";
 		};
 		B5055B4A2604717B003DE804 /* 1. Splash */ = {
