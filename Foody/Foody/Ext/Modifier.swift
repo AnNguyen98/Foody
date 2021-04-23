@@ -34,3 +34,27 @@ extension View {
         self.modifier(BackBarModifier(action: action, color: color, navigationBarHidden: barHidden))
     }
 }
+
+
+struct HandleKeyboardModifier: ViewModifier {
+    var hiddenAction: () -> Void
+    
+    func body(content: Content) -> some View {
+        ZStack(alignment: .top) {
+            content
+                .onTapGesture {
+                    hiddenAction()
+                }
+        }
+    }
+}
+
+extension View {
+    func handleHidenKeyboard() -> some View {
+        self.modifier(
+            HandleKeyboardModifier(hiddenAction: {
+                hideKeyboard()
+            })
+        )
+    }
+}

@@ -13,45 +13,32 @@ final class LoginViewModel: ViewModel, ObservableObject{
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var error: NetworkError?
+    @Published var isLogged: Bool = false
     
-    var subscriptions = Set<AnyCancellable>()
+    private var subscriptions = Set<AnyCancellable>()
     
-    func login() {
+    override init() {
+        super.init()
+        Session.shared.isShowedOnboarding = true
+    }
+    
+    func login(completion: (() -> Void)? = nil) {
+        guard !invalidInfo else {
+            return
+        }
         isLoading = true
-//        HomeService().getPupularMovies()
-//            .sink(receiveCompletion: { completion in
-//                guard case let .failure(error) = completion else { return }
-//                self.isLoading = false
-//                print("AAAA", error)
-//            }, receiveValue: { response in
-//                print("AAAA", response)
-//                self.isLoading = false
-//            }).store(in: &subscriptions)
-        
-//        AccountService.login(email: self.email, password: self.password)
-//            .sink { (completion) in
-//                if case .failure(let error) = completion {
-//                    self.error = error
-//                }
-//                self.isLoading = false
-//            } receiveValue: { (response) in
-//                print("LoginService", response.email, response.token)
-//            }
-//            .store(in: &subscriptions)
-        
-        FirebaseAuth.verifyPhoneNumber(phoneNumber: "399873737")
+        AccountService.login(email: self.email, password: self.password)
             .sink { (completion) in
-                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
+                } else {
+                    self.isLogged = true
                 }
-            } receiveValue: { (id) in
-                print(id)
+                self.isLoading = false
+            } receiveValue: { (response) in
+                print("LoginService", response.email, response.token)
             }
             .store(in: &subscriptions)
-
-
-            
     }
 }
 
