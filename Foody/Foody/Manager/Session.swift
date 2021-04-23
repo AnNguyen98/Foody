@@ -6,13 +6,33 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 final class Session {
     private init() { }
     static let shared = Session()
     
-    var token: String? {
-        return ""
+    var currentUser: User? {
+        set {
+            Defaults.currentUser = newValue
+        } get {
+            Defaults.currentUser
+        }
     }
     
+    var accessTokens: String? {
+        set {
+            Defaults.accessTokens = newValue
+        } get {
+            Defaults.accessTokens
+        }
+    }
+    
+    
+}
+
+extension Session {
+    func reset() {
+        Defaults.removeAll()
+    }
 }

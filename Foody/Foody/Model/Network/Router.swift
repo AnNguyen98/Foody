@@ -20,8 +20,16 @@ enum Router {
 }
 
 extension Router: TargetType {
+    var version: String {
+        return "v1"
+    }
+    
     var baseURL: URL {
-        guard let url = URL(string: "http://0.0.0.0:5000/v1") else {
+        var baseURLString: String = "https://flask-fast-food.herokuapp.com" / version
+        #if DEBUG
+        baseURLString = "http://0.0.0.0:5000" / version
+        #endif
+        guard let url = URL(string: baseURLString) else {
             fatalError("baseURL could not be configured.")
         }
         return url
@@ -68,7 +76,7 @@ extension Router: TargetType {
     
     var headers: [String : String]? {
         var headers = ["Content-type": "application/json"]
-        if let token = Session.shared.token {
+        if let token = Session.shared.accessTokens {
             headers["Authorization"] = token
         }
         return headers

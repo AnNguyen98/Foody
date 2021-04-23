@@ -14,6 +14,7 @@ struct FirebaseAuth {
         guard phoneNumber.hasPrefix("+84") else {
             return Fail(error: NetworkError.invalidAreaCode).eraseToAnyPublisher()
         }
+        print("DEBUG - FirebaseAuth verifyPhoneNumber: \(phoneNumber)")
         return Future<String, NetworkError> { promise in
             PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
@@ -34,6 +35,7 @@ struct FirebaseAuth {
     
     static func signInAuth(verificationID: String, code: String) -> AnyPublisher<Any, NetworkError> {
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
+        print("DEBUG - FirebaseAuth signInAuth verificationID: \(verificationID) - code: \(code)")
         return Future<Any, NetworkError> { promise in
             Auth.auth().signIn(with: credential) { (result, error) in
                 if let error = error {

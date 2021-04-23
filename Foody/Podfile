@@ -13,7 +13,7 @@ target 'Foody' do
   pod 'SDWebImageSwiftUI'
   pod 'ToastUI'
   pod 'SwifterSwift', '~> 5.2.0'
-  pod 'SwiftyUserDefaults', '~> 4.0.0-alpha.1'
+  pod 'SwiftyUserDefaults', '~> 5.0'
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'AlamofireNetworkActivityIndicator', '~> 3.1'
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'

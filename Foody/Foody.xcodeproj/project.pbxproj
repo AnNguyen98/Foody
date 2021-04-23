@@ -74,6 +74,7 @@
 		B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */; };
 		B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextField.swift */; };
 		B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */; };
+		B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -175,6 +176,7 @@
 		B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewModel.swift; sourceTree = "<group>"; };
 		B5D004CC25FF3D4900E4B9AE /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -383,6 +385,7 @@
 				B51E0B3B26310DF10051A892 /* Publisher.swift */,
 				8EEAC569261B5096004A052D /* String.swift */,
 				B5D004CC25FF3D4900E4B9AE /* TextField.swift */,
+				B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -811,6 +814,7 @@
 				8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
 				B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */,
+				B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */,
 				B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */,
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				B55DE315261EB0D000F6328A /* HomeService.swift in Sources */,
@@ -1159,7 +1163,7 @@
 				8E40D93E25DEB90600E73E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		8E40D93F25DEB90600E73E20 /* Build configuration list for PBXNativeTarget "Foody" */ = {
 			isa = XCConfigurationList;
@@ -1168,7 +1172,7 @@
 				8E40D94125DEB90600E73E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		8E40D94225DEB90600E73E20 /* Build configuration list for PBXNativeTarget "FoodyTests" */ = {
 			isa = XCConfigurationList;
@@ -1177,7 +1181,7 @@
 				8E40D94425DEB90600E73E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		8E40D94525DEB90600E73E20 /* Build configuration list for PBXNativeTarget "FoodyUITests" */ = {
 			isa = XCConfigurationList;
@@ -1186,7 +1190,7 @@
 				8E40D94725DEB90600E73E20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

@@ -39,7 +39,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
 //            }
 //            .store(in: &subscriptions)
         
-        FirebaseAuth.verifyPhoneNumber(phoneNumber: "+84399873737")
+        FirebaseAuth.verifyPhoneNumber(phoneNumber: "399873737")
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {

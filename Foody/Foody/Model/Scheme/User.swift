@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
-enum UserType {
+enum UserType: Int, Codable {
     case customer, restaurant
 }
 
-class User {
+struct User: Codable, DefaultsSerializable {
     var type: UserType = .customer
 }

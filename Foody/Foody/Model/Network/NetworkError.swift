@@ -49,7 +49,5 @@ enum NetworkError: Error, Identifiable {
         }
     }
     
-    var code: Int {
-        0
-    }
+    
 }

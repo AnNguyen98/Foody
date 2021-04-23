@@ -125,7 +125,7 @@ PODS:
   - SwifterSwift/StoreKit (5.2.0)
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
-  - SwiftyUserDefaults (4.0.0)
+  - SwiftyUserDefaults (5.1.0)
   - ToastUI (2.0.0)
   - UIScrollView-InfiniteScroll (1.1.0)
   - WaterfallGrid (1.0.1)
@@ -141,7 +141,7 @@ DEPENDENCIES:
   - Moya (~> 14.0)
   - SDWebImageSwiftUI
   - SwifterSwift (~> 5.2.0)
-  - SwiftyUserDefaults (~> 4.0.0-alpha.1)
+  - SwiftyUserDefaults (~> 5.0)
   - ToastUI
   - UIScrollView-InfiniteScroll (~> 1.1.0)
   - WaterfallGrid (~> 1.0.0)
@@ -198,11 +198,11 @@ SPEC CHECKSUMS:
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageSwiftUI: ff3dc77f69330e6513c655bcb9b5080a033405a5
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
-  SwiftyUserDefaults: 6a1951df1daa19337862b677dd9a4b9bd4c288cd
+  SwiftyUserDefaults: 6746ede7f29e4c1bf2b1e104eb3139c5928e44d1
   ToastUI: 391eb9a1cc15e7ef4b79ee112e4a0b969259154f
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
   WaterfallGrid: 0554a759d9a8aa136fc1769480ddb01bc6fb94b9
 
-PODFILE CHECKSUM: 2119c3a1876f8e235cbe63f495282f029c5e5d75
+PODFILE CHECKSUM: 4c70c499511db5b89f2447d79d5ac1334572cbff
 
 COCOAPODS: 1.10.1
