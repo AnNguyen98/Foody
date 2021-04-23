@@ -18,12 +18,15 @@ enum NetworkError: Error, Identifiable {
     case noResponse
     case invalidURL
     case invalidAreaCode
+    case timeout
     case unknow(String)
     
     var id: String { UUID().uuidString }
     
     var description: String {
         switch self {
+        case .timeout:
+            return "Request timeout."
         case .apiKey:
             return ""
         case .invalidURL:

@@ -30,6 +30,8 @@ struct NetworkProvider {
                 }
             }
         }
+        .timeout(.seconds(60), scheduler: DispatchQueue.global(), customError: { .timeout })
+        .retry(1)
         .subscribe(on: DispatchQueue.global())
         .eraseToAnyPublisher()
     }
