@@ -75,6 +75,7 @@
 		B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextField.swift */; };
 		B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */; };
 		B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */; };
+		B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD22632751600FCBDEB /* Constants.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +178,7 @@
 		B5D004CC25FF3D4900E4B9AE /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
+		B5DA5FD22632751600FCBDEB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -369,6 +371,7 @@
 			children = (
 				8E9ABB8825EA148C002FF3FA /* Colors.swift */,
 				8E9C945B25EA445900D00B03 /* Fonts.swift */,
+				B5DA5FD22632751600FCBDEB /* Constants.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				B59DF1B0261D728E00E7AA76 /* Movie.swift in Sources */,
 				B5055B6A260472FF003DE804 /* TextFieldCustom.swift in Sources */,
 				B55DE2E6261EA53200F6328A /* OrderView.swift in Sources */,
+				B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
 				8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */,
