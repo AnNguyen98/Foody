@@ -15,7 +15,7 @@ public struct UIKitTabView: View {
     
     public init(selectedIndex: Binding<Int>? = nil, @TabBuilder _ views: () -> [Tab]) {
         self.viewControllers = views().map {
-            let host = UIHostingController(rootView: $0.view)
+            let host = HostingController(rootView: $0.view)
             if let item = $0.barItem {
                 host.tabBarItem = item
             }

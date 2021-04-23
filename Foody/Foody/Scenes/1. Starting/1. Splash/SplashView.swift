@@ -16,7 +16,7 @@ struct SplashView: View {
                 NavigationLink(
                     destination: OnboardingView(),
                     isActive: $isActive,
-                    label: {  Text("") }
+                    label: {  EmptyView() }
                 )
                 Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1))
                 
