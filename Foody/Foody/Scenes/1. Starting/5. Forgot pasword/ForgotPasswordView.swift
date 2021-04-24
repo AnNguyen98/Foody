@@ -29,19 +29,19 @@ struct ForgotPasswordView: View {
                         .regular(size: 17)
                     
                     TextFieldCustom(text: $viewModel.email,
-                                    placeholder: Text("Your email...").foregroundColor(.gray))
+                                    placeholder: Text("Your email").foregroundColor(.gray))
                         .padding(.top, 30)
                     
                     TextFieldCustom(text: $viewModel.newPassword,
-                                    placeholder: Text("New password...").foregroundColor(.gray),
+                                    placeholder: Text("New password").foregroundColor(.gray),
                                     isSecureField: true)
                     
                     TextFieldCustom(text: $viewModel.confirmPassword,
-                                    placeholder: Text("Confirm password...").foregroundColor(.gray),
+                                    placeholder: Text("Confirm password").foregroundColor(.gray),
                                     isSecureField: true)
                     
                     Button(action: {
-                        updatePassword()
+                        handleCheckEmail()
                     }, label: {
                         Text("Continue...")
                             .bold(size: 18)
@@ -65,9 +65,9 @@ struct ForgotPasswordView: View {
 }
 
 extension ForgotPasswordView {
-    private func updatePassword() {
+    private func handleCheckEmail() {
         hideKeyboard()
-        viewModel.handleUpdatePassword()
+        viewModel.handleCheckEmail()
     }
 }
 
