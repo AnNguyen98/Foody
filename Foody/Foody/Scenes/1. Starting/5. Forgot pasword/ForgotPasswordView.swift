@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import IQKeyboardManagerSwift
 
 struct ForgotPasswordView: View {
     

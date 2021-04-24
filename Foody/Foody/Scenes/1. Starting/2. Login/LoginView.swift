@@ -29,18 +29,19 @@ struct LoginView: View {
                 VStack(spacing: 30) {
                     TextFieldCustom(text: $viewModel.email,
                                     placeholder: Text("Email").foregroundColor(.gray))
-                        .frame(minHeight: 50)
                     
                     TextFieldCustom(text: $viewModel.password,
                                     placeholder: Text("Password").foregroundColor(.gray),
                                     onCommit: {
                                         handleLogin()
                                     }, isSecureField: true)
-                        .frame(minHeight: 50)
 
                 }
+                .layoutPriority(1)
                 .regular(size: 18)
-                .padding(EdgeInsets(top: 50, leading: 20, bottom: 70, trailing: 20))
+                .padding(.init(top: 50, leading: 20, bottom: 0, trailing: 20))
+                
+                Spacer()
                 
                 VStack(spacing: 15) {
                     Button(action: {
@@ -68,6 +69,7 @@ struct LoginView: View {
                     Text("Don't have an account?")
                     NavigationLink(destination: RegisterView()) {
                         Text("Create one")
+                            .underline()
                             .bold()
                     }
                 }

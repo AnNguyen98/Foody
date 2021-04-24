@@ -20,6 +20,11 @@ struct BackBarModifier: ViewModifier {
             HStack {
                 BackButton(action: action)
                     .foregroundColor(color)
+                    .background(
+                        Circle()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.gray.opacity(0.4))
+                    )
                 Spacer()
             }
             .padding(.horizontal)

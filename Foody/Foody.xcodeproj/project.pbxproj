@@ -35,6 +35,7 @@
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
 		8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CBA6326330F9000C9954F /* UserObservableObject.swift */; };
 		8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC9BDDA263064FB00A711A6 /* AccountService.swift */; };
+		8EE982592634492A00DCB575 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE982582634492A00DCB575 /* RadioButton.swift */; };
 		8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC564261B4AE0004A052D /* ViewModel.swift */; };
 		8EEAC56A261B5096004A052D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC569261B5096004A052D /* String.swift */; };
 		8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC56E261B54DF004A052D /* HostingController.swift */; };
@@ -139,6 +140,7 @@
 		8E9C946D25EA594800D00B03 /* NavigationCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustom.swift; sourceTree = "<group>"; };
 		8E9CBA6326330F9000C9954F /* UserObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservableObject.swift; sourceTree = "<group>"; };
 		8EC9BDDA263064FB00A711A6 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		8EE982582634492A00DCB575 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		8EEAC564261B4AE0004A052D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8EEAC569261B5096004A052D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		8EEAC56E261B54DF004A052D /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				8EEAC583261B60EC004A052D /* BackButton.swift */,
 				B59DF1E3261D9A8800E7AA76 /* ImagePickerView.swift */,
 				B5DA5FD72632858300FCBDEB /* AlertView.swift */,
+				8EE982582634492A00DCB575 /* RadioButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				B59DF1AA261D728600E7AA76 /* Router.swift in Sources */,
 				B534C96A261EFC9F000B6CDF /* Data.swift in Sources */,
 				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,
+				8EE982592634492A00DCB575 /* RadioButton.swift in Sources */,
 				8EEAC5B4261B7700004A052D /* FavoritesViewController.swift in Sources */,
 				8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */,
 				B5055B80260473D4003DE804 /* CartView.swift in Sources */,

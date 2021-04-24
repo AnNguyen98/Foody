@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwifterSwift
 
 final class RegisterViewModel: ObservableObject {
     @Published var type: UserType = .customer
@@ -14,5 +15,21 @@ final class RegisterViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var verifyPassword: String = ""
-    @Published var phoneNumber: String = "+84"
+    @Published var phoneNumber: String = ""
+    @Published var emailNotExist: Bool = false
+    
+    
+    func checkEmail() {
+        emailNotExist = true
+    }
+}
+
+extension RegisterViewModel {
+    var verifyPhoneViewModel: VerifyPhoneViewModel {
+        VerifyPhoneViewModel(for: .register)
+    }
+    
+    var inValidInfo: Bool {
+        username.isEmpty
+    }
 }

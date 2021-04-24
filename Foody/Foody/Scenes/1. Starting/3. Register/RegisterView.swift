@@ -10,6 +10,9 @@ import SwiftUI
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
     @State var isRestaurantJoined: Bool = false
+    @State var female: Bool = true
+    @State var male: Bool = false
+    @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
         ZStack {
@@ -17,20 +20,25 @@ struct RegisterView: View {
                 .resizable()
                 .ignoresSafeArea()
             
+            NavigationLink(destination: VerifyPhoneView(viewModel: viewModel.verifyPhoneViewModel),
+                           isActive: $viewModel.emailNotExist, label: { EmptyView() })
+            
             ScrollView {
-                VStack {
-                    Image("logo")
-                        .resizable()
-                        .frame(width: 100, height: 100)
-                        .padding(.top, 30)
+                VStack(alignment: .leading) {
+                    Section {
+                        Text("Register")
+                            .bold(size: 44)
+                        Text("Please enter details to register.")
+                            .regular(size: 18)
+                            .padding(.bottom, 30)
+                    }
                     
-                    Text("JOIN US")
-                        .bold(size: 44)
+                    Section(header: Text("")) {
+                        Toggle("Join with restaurant:", isOn: $isRestaurantJoined)
+                            .bold(size: 17)
+                    }
                     
-                    Toggle("Join with restaurant:", isOn: $isRestaurantJoined)
-                        .bold(size: 17)
-                    
-                    VStack(spacing: 20) {
+                    Section(header: Text(""), footer: Text("")) {
                         TextFieldCustom(text: $viewModel.username,
                                         placeholder: Text("Username").foregroundColor(.gray),
                                         systemNameImage: "person"
@@ -39,10 +47,35 @@ struct RegisterView: View {
                         if isRestaurantJoined {
                             TextFieldCustom(text: $viewModel.restaurantName,
                                             placeholder: Text("Restaurant name").foregroundColor(.gray),
-                                            systemNameImage: "person"
+                                            systemNameImage: "house"
                             )
                         }
-                        
+                    }
+                    
+                    Section(header: Text(""), footer: Text("")) {
+                        HStack(spacing: 20) {
+                            Text("Gender")
+                                .font(.system(size: 18, weight: .bold, design: .default))
+                                .padding(.trailing, 5)
+                            
+                            RadioButton(isSelected: $female,
+                                        action: {
+                                            female.toggle()
+                                            male = !female
+                            }, content: { Text("Female") })
+                            
+                            RadioButton(isSelected: $male,
+                                        action: {
+                                            male.toggle()
+                                            female = !male
+                            }, content: { Text("Male") })
+                            
+                            Spacer()
+                        }
+                    }
+                    .animation(.easeInOut(duration: 0.3))
+                    
+                    Section(header: Text(""), footer: Text("")) {
                         TextFieldCustom(text: $viewModel.email,
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
@@ -52,7 +85,10 @@ struct RegisterView: View {
                                         systemNameImage: "phone.fill"
                         )
                         .keyboardType(.numberPad)
-                        
+                    }
+                    
+                    
+                    Section(header: Text(""), footer: Text("")) {
                         TextFieldCustom(text: $viewModel.password,
                                         placeholder: Text("Password").foregroundColor(.gray),
                                         isSecureField: true
@@ -62,24 +98,46 @@ struct RegisterView: View {
                                         placeholder: Text("Confirm password").foregroundColor(.gray),
                                         isSecureField: true
                         )
-                        
-                        Button(action: {}, label: {
-                            Text("Sign Up")
+                    }
+                    
+                    Section(header: Text(""), footer: Text("")) {
+                        Button(action: {
+                            viewModel.checkEmail()
+                        }, label: {
+                            Text("Register")
                                 .bold(size: 18)
                                 .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
                         })
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .padding(.vertical, 30)
+                        .padding(.top, 30)
                     }
-                    .animation(.default)
+                    
+                    Section(header: Text(""), footer: Text("")) {
+                        HStack {
+                            Text("Already have an account?")
+                            Button(action: {
+                                presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Text("Login")
+                                    .underline()
+                                    .bold(size: 17)
+                            })
+                        }
+                        .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
+                        .frame(maxWidth: .infinity)
+                    }
                 }
+                .animation(.default)
                 .foregroundColor(.white)
                 .padding(.horizontal)
+                .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
+            .addBackBarCustom()
         }
-        .addBackBarCustom()
+        .handleHidenKeyboard()
         .statusBarStyle(.lightContent)
+        .regular(size: 17)
     }
 }
 

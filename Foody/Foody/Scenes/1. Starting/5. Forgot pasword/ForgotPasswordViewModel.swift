@@ -23,7 +23,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     }
     
     func handleCheckEmail() {
-        
+        emailExist = true
     }
     
     func handleVerifyOTP() {
