@@ -89,3 +89,25 @@ extension View {
         ModifiedContent(content: self, modifier: KeyboardAwareModifier())
     }
 }
+
+
+//TODO:- Padding
+
+struct PaddingModifier: ViewModifier {
+    var edge: Edge.Set
+    
+    func content() {
+        
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .padding([.trailing, .all], 10)
+    }
+}
+
+extension View {
+    func padding(_ edge: Edge.Set) -> some View {
+        ModifiedContent(content: self, modifier: PaddingModifier(edge: edge))
+    }
+}

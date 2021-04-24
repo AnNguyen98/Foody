@@ -17,13 +17,13 @@ struct ForgotPasswordView: View {
             Color.white
                 .ignoresSafeArea()
             
-            NavigationLink(destination: VerifyPhoneView(), isActive: $viewModel.emailExist, label: { EmptyView() })
+            NavigationLink(destination: VerifyPhoneView(viewModel: viewModel.verifyPhoneViewModel),
+                           isActive: $viewModel.emailExist, label: { EmptyView() })
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Forgot password")
                         .bold(size: 34)
-                        .padding(.top, 15)
                     
                     Text("Enter your email address below and we'll send you an email with instructions on how to change your password.")
                         .regular(size: 17)
@@ -53,8 +53,8 @@ struct ForgotPasswordView: View {
                     .foregroundColor(.white)
                     .disabled(viewModel.invalidInfo)
                 }
-                .padding()
-                .padding(.top, 20)
+                .padding(.horizontal)
+                .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
         }
         .addBackBarCustom(.black)

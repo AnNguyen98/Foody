@@ -18,11 +18,15 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
             && confirmPassword.isValidPasswordLength && newPassword == confirmPassword)
     }
     
+    var verifyPhoneViewModel: VerifyPhoneViewModel {
+        VerifyPhoneViewModel(for: .updatePassword)
+    }
+    
     func handleCheckEmail() {
         
     }
     
-    func handleUpdatePassword() {
+    func handleVerifyOTP() {
         
     }
 }

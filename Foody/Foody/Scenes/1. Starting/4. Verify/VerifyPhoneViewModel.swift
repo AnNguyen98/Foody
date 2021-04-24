@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-final class VerifyPhoneViewModel: ObservableObject {
-    private var lengthLimit: Int = 6
-    var values: [Character] { Array(code) }
-    var isValid: Bool { code.count >= lengthLimit }
+final class VerifyPhoneViewModel: ViewModel, ObservableObject {
+    var action: Action
+    
+    init(for action: Action = .register) {
+        self.action = action
+    }
     
     @Published var code: String = "" {
         didSet {
@@ -23,6 +25,49 @@ final class VerifyPhoneViewModel: ObservableObject {
                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
+    }
+    
+    func codeNumberOf(index: Int) -> String {
+        values[safeIndex: index] ?? codeTextEmpty
+    }
+}
+
+extension VerifyPhoneViewModel {
+    private func handleUpdatePassword() {
+        
+    }
+    
+    private func handleRegister() {
+        
+    }
+    
+    func handleAction() {
+        if action == .register {
+            handleRegister()
+        } else {
+            handleUpdatePassword()
+        }
+    }
+}
+
+extension VerifyPhoneViewModel {
+    enum Action {
+        case register, updatePassword
+    }
+    
+    var lengthLimit: Int { 6 }
+    
+    var values: [String] {
+        Array(code)
+            .map({ String($0) })
+    }
+    
+    var isValid: Bool {
+        code.count >= lengthLimit
+    }
+    
+    var codeTextEmpty: String {
+        "∙"
     }
 }
 
