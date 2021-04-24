@@ -6,43 +6,68 @@
 //
 
 import SwiftUI
+import IQKeyboardManagerSwift
 
 struct ForgotPasswordView: View {
     
-    @StateObject var viewModel = ForgotPasswordViewModel()
+    @StateObject private var viewModel = ForgotPasswordViewModel()
     
     var body: some View {
         ZStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Forgot password ")
-                    .bold(size: 34)
-                    .padding(.top, 15)
-                
-                Text("Enter your email address below and we'll send you an email with instructions on how to change your password")
-                    .regular(size: 17)
-                
-                TextFieldCustom(text: $viewModel.email,
-                                placeholder: Text("Enter your email").foregroundColor(.gray))
-                    .padding(.vertical, 40)
-                
-                Button(action: {
+            Color.white
+                .ignoresSafeArea()
+            
+            NavigationLink(destination: VerifyPhoneView(), isActive: $viewModel.emailExist, label: { EmptyView() })
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Forgot password")
+                        .bold(size: 34)
+                        .padding(.top, 15)
                     
-                }, label: {
-                    Text("Continue...")
-                        .bold(size: 18)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
-                })
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .padding(.vertical, 30)
-                .foregroundColor(.white)
-                
-                Spacer()
+                    Text("Enter your email address below and we'll send you an email with instructions on how to change your password.")
+                        .regular(size: 17)
+                    
+                    TextFieldCustom(text: $viewModel.email,
+                                    placeholder: Text("Your email...").foregroundColor(.gray))
+                        .padding(.top, 30)
+                    
+                    TextFieldCustom(text: $viewModel.newPassword,
+                                    placeholder: Text("New password...").foregroundColor(.gray),
+                                    isSecureField: true)
+                    
+                    TextFieldCustom(text: $viewModel.confirmPassword,
+                                    placeholder: Text("Confirm password...").foregroundColor(.gray),
+                                    isSecureField: true)
+                    
+                    Button(action: {
+                        updatePassword()
+                    }, label: {
+                        Text("Continue...")
+                            .bold(size: 18)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
+                    })
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.top, 40)
+                    .foregroundColor(.white)
+                    .disabled(viewModel.invalidInfo)
+                }
+                .padding()
+                .padding(.top, 20)
             }
-            .padding()
         }
         .addBackBarCustom(.black)
         .statusBarStyle(.darkContent)
+        .foregroundColor(Color.black)
+        .handleHidenKeyboard()
+    }
+}
+
+extension ForgotPasswordView {
+    private func updatePassword() {
+        hideKeyboard()
+        viewModel.handleUpdatePassword()
     }
 }
 

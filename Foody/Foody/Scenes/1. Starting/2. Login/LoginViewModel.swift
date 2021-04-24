@@ -12,7 +12,6 @@ import Moya
 final class LoginViewModel: ViewModel, ObservableObject{
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var error: NetworkError?
     @Published var isLogged: Bool = false
     
     private var subscriptions = Set<AnyCancellable>()

@@ -9,4 +9,5 @@ import Foundation
 
 class ViewModel {
     @Published var isLoading: Bool = false
+    @Published var error: NetworkError?
 }

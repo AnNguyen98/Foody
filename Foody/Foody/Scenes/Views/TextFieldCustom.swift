@@ -45,7 +45,7 @@ struct TextFieldCustom: View {
                             Button(action: {
                                 showPass.toggle()
                             }, label: {
-                                Image(systemName: showPass ? "eye.slash.fill": "eye.fill")
+                                Image(systemName: showPass ? "eye.fill": "eye.slash.fill")
                             })
                         } else {
                             if !text.isEmpty {

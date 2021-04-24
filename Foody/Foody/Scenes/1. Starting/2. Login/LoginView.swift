@@ -59,7 +59,7 @@ struct LoginView: View {
                         Text("Forgot password?")
                     }
                 }
-                .regular(size: 15)
+                .regular(size: 16)
                 .padding(.horizontal)
                 
                 Spacer()
@@ -73,7 +73,7 @@ struct LoginView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding([.bottom, .horizontal], 15)
-                .regular(size: 15)
+                .regular(size: 16)
             }
             
             if viewModel.isLoading {
