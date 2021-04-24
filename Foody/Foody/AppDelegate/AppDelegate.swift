@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import AlamofireNetworkActivityIndicator
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         NetworkActivityIndicatorManager.shared.isEnabled = true
+        IQKeyboardManager.shared.enable = true
         
         return true
     }
