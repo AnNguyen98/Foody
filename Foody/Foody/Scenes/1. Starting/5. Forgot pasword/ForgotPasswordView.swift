@@ -55,6 +55,7 @@ struct ForgotPasswordView: View {
                 .padding(.horizontal)
                 .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
+            .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
         .addBackBarCustom(.black)
         .statusBarStyle(.darkContent)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		8E415FD125EB404100D886F5 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FD025EB404100D886F5 /* VotesView.swift */; };
 		8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FED25EB422F00D886F5 /* FavoritesView.swift */; };
 		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
+		8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A60263854C1002C8210 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB8825EA148C002FF3FA /* Colors.swift */; };
 		8E9ABB9325EA17DF002FF3FA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB9225EA17DF002FF3FA /* Color.swift */; };
 		8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABBA525EA197B002FF3FA /* CircleButton.swift */; };
@@ -196,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
+				8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +619,9 @@
 			dependencies = (
 			);
 			name = Foody;
+			packageProductDependencies = (
+				8E8B9A60263854C1002C8210 /* SwiftUIX */,
+			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
 			productType = "com.apple.product-type.application";
@@ -691,6 +696,9 @@
 				Base,
 			);
 			mainGroup = 8E40D90C25DEB90200E73E20;
+			packageReferences = (
+				8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1237,6 +1245,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8E8B9A60263854C1002C8210 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8E40D90D25DEB90200E73E20 /* Project object */;
 }

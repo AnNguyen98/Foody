@@ -70,6 +70,7 @@ struct VerifyPhoneView: View {
             .onAppear(perform: {
                 UIScrollView.appearance().bounces = false
             })
+            .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
         .handleHidenKeyboard()
         .statusBarStyle(.darkContent)

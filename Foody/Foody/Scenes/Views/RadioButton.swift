@@ -39,7 +39,7 @@ struct RadioButton<Content: View>: View {
             
             content
                 .font(.system(size: 17, weight: .bold, design: .default))
-                .frame(maxWidth: kScreenSize.width / 3.7)
+                .frame(maxWidth: kScreenSize.width / 4)
                 .foregroundColor(isSelected ? Color.white: Color.gray)
         })
         .background(

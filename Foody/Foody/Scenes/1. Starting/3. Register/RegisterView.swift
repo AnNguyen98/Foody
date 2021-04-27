@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
@@ -53,10 +54,12 @@ struct RegisterView: View {
                     }
                     
                     Section(header: Text(""), footer: Text("")) {
-                        HStack(spacing: 20) {
+                        HStack(spacing: 10) {
                             Text("Gender")
                                 .font(.system(size: 18, weight: .bold, design: .default))
                                 .padding(.trailing, 5)
+                            
+                            Spacer()
                             
                             RadioButton(isSelected: $female,
                                         action: {
@@ -69,9 +72,8 @@ struct RegisterView: View {
                                             male.toggle()
                                             female = !male
                             }, content: { Text("Male") })
-                            
-                            Spacer()
-                        }
+                                .padding(.trailing, 10)
+                            }
                     }
                     .animation(.easeInOut(duration: 0.3))
                     
@@ -134,6 +136,7 @@ struct RegisterView: View {
                 .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
             .addBackBarCustom()
+            .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
         .handleHidenKeyboard()
         .statusBarStyle(.lightContent)

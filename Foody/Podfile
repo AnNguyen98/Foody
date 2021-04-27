@@ -24,7 +24,9 @@ target 'Foody' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
-  pod 'Firebase/Storage'
+  
+  # Combine
+  pod 'CombineExt'
 
   target 'FoodyTests' do
     inherit! :search_paths
