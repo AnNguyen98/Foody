@@ -24,6 +24,8 @@
 		8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FED25EB422F00D886F5 /* FavoritesView.swift */; };
 		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
 		8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A60263854C1002C8210 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8E8B9A6C26386612002C8210 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9A6B26386612002C8210 /* Account.swift */; };
+		8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A9226386CC6002C8210 /* SwiftUICharts */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB8825EA148C002FF3FA /* Colors.swift */; };
 		8E9ABB9325EA17DF002FF3FA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB9225EA17DF002FF3FA /* Color.swift */; };
 		8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABBA525EA197B002FF3FA /* CircleButton.swift */; };
@@ -129,6 +131,7 @@
 		8E415FD025EB404100D886F5 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		8E415FED25EB422F00D886F5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		8E62C84B25E6804800F0614D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8E8B9A6B26386612002C8210 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		8E9ABB8825EA148C002FF3FA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8E9ABB9225EA17DF002FF3FA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8E9ABBA525EA197B002FF3FA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */,
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
 				8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */,
 			);
@@ -597,6 +601,7 @@
 				B59DF1AF261D728E00E7AA76 /* Movie.swift */,
 				8E31703F2625FB400085AB4E /* User.swift */,
 				8E9CBA6326330F9000C9954F /* UserObservableObject.swift */,
+				8E8B9A6B26386612002C8210 /* Account.swift */,
 			);
 			path = Scheme;
 			sourceTree = "<group>";
@@ -621,6 +626,7 @@
 			name = Foody;
 			packageProductDependencies = (
 				8E8B9A60263854C1002C8210 /* SwiftUIX */,
+				8E8B9A9226386CC6002C8210 /* SwiftUICharts */,
 			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
@@ -698,6 +704,7 @@
 			mainGroup = 8E40D90C25DEB90200E73E20;
 			packageReferences = (
 				8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
@@ -888,6 +895,7 @@
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
 				8E3170402625FB400085AB4E /* User.swift in Sources */,
 				B5055B78260473BB003DE804 /* ProfileView.swift in Sources */,
+				8E8B9A6C26386612002C8210 /* Account.swift in Sources */,
 				8EEAC57C261B5C5C004A052D /* ForgotPasswordViewModel.swift in Sources */,
 				B59DF1B0261D728E00E7AA76 /* Movie.swift in Sources */,
 				B5055B6A260472FF003DE804 /* TextFieldCustom.swift in Sources */,
@@ -1255,6 +1263,14 @@
 				kind = branch;
 			};
 		};
+		8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1262,6 +1278,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
+		};
+		8E8B9A9226386CC6002C8210 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

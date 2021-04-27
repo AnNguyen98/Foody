@@ -7,27 +7,7 @@
 
 import SwiftUI
 
-struct ContentUI: Hashable, Identifiable {
-    var id: String = UUID().uuidString
-    var icon: String
-    var title: String
-    
-    init(_ icon: String, _ title: String) {
-        self.icon = icon
-        self.title = title
-    }
-}
-
 struct ProfileView: View {
-    
-    var contents: [ContentUI] = [
-        ContentUI("account-icon", "Account"),
-        ContentUI("storage-icon", "Storage"),
-        ContentUI("noti-icon", "Notification"),
-        ContentUI("info-icon", "Application Info"),
-        ContentUI("help-icon", "Help Center"),
-        ContentUI("logout-icon", "Logout")
-    ]
     
     var body: some View {
         VStack {
@@ -49,36 +29,7 @@ struct ProfileView: View {
                 }
             }
             
-            List(contents) { content in
-                if content.title == "Logout" {
-                    HStack {
-                        Image(content.icon)
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                        Text(content.title)
-                            .regular(size: 14)
-                    }
-                    .frame(height: 56)
-                    .onTapGesture {
-                        
-                    }
-                } else {
-                    NavigationLink(
-                        destination: Text("Destination"),
-                        label: {
-                            HStack {
-                                Image(content.icon)
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                Text(content.title)
-                                    .regular(size: 14)
-                            }
-                            .frame(height: 56)
-                        }
-                    )
-                }
-            }
-            .listStyle(InsetListStyle())
+            
         }
         .navigationBarHidden(true)
     }
