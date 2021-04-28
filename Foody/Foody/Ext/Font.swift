@@ -34,5 +34,10 @@ extension View {
     func regular(size: CGFloat) -> some View {
         modifier(RegularViewModifier(size: size))
     }
+    
+    func systemBold(size: CGFloat) -> some View {
+        self
+            .font(.system(size: size, weight: .bold, design: .default))
+    }
 }
 
