@@ -65,12 +65,12 @@ struct RegisterView: View {
                             RadioButton(isSelected: $viewModel.isMale,
                                         action: {
                                             viewModel.isMale = true
-                            }, content: { Text("Female") })
+                            }, content: { Text("Male") })
                             
                             RadioButton(isSelected: .constant(!viewModel.isMale),
                                         action: {
                                             viewModel.isMale = false
-                            }, content: { Text("Male") })
+                            }, content: { Text("Female") })
                                 .padding(.trailing, 10)
                             }
                     }
@@ -81,11 +81,18 @@ struct RegisterView: View {
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
                         
-                        TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
-                                        placeholder: Text("+84").foregroundColor(.gray),
-                                        systemNameImage: "phone.fill"
-                        )
-                        .keyboardType(.numberPad)
+                        ZStack(alignment: .leading) {
+                            TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
+                                            placeholder: Text(""), systemNameImage: "phone.fill"
+                            )
+                            .keyboardType(.numberPad)
+                            .foregroundColor(.clear)
+                            
+                            HStack(spacing: 2) {
+                                Image(systemName: "phone.fill")
+                                Text(viewModel.phoneNumber)
+                            }
+                        }
                     }
                     
                     
@@ -108,10 +115,12 @@ struct RegisterView: View {
                             Text("Register")
                                 .bold(size: 18)
                                 .frame(maxWidth: .infinity, minHeight: 50)
-                                .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
+                                .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.inValidInfo ? 0.5: 0.7))
+                                .foregroundColor(Color.white.opacity(viewModel.inValidInfo ? 0.5: 1))
                         })
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .padding(.top, 30)
+                        .disabled(viewModel.inValidInfo)
                     }
                     
                     Section(header: Text(""), footer: Text("")) {

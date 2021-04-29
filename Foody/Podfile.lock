@@ -91,6 +91,12 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - PhoneNumberKit (3.3.3):
+    - PhoneNumberKit/PhoneNumberKitCore (= 3.3.3)
+    - PhoneNumberKit/UIKit (= 3.3.3)
+  - PhoneNumberKit/PhoneNumberKitCore (3.3.3)
+  - PhoneNumberKit/UIKit (3.3.3):
+    - PhoneNumberKit/PhoneNumberKitCore
   - PromisesObjC (1.2.12)
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
@@ -136,6 +142,7 @@ DEPENDENCIES:
   - ImagePicker
   - IQKeyboardManagerSwift (= 6.3.0)
   - Moya (~> 14.0)
+  - PhoneNumberKit (~> 3.3)
   - SDWebImageSwiftUI
   - SwifterSwift (~> 5.2.0)
   - SwiftyUserDefaults (~> 5.0)
@@ -163,6 +170,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Moya
     - nanopb
+    - PhoneNumberKit
     - PromisesObjC
     - SDWebImage
     - SDWebImageSwiftUI
@@ -191,6 +199,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageSwiftUI: ff3dc77f69330e6513c655bcb9b5080a033405a5
@@ -200,6 +209,6 @@ SPEC CHECKSUMS:
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
   WaterfallGrid: 0554a759d9a8aa136fc1769480ddb01bc6fb94b9
 
-PODFILE CHECKSUM: 763d6647abd546800dd5d922f3507fc49bdfc79e
+PODFILE CHECKSUM: eaf1043efff3e4bd0e800b148ecc560fba806af1
 
 COCOAPODS: 1.10.1

@@ -5,9 +5,10 @@
 //  Created by MBA0283F on 3/15/21.
 //
 
-import Foundation
+import SwiftUI
 import SwifterSwift
 import Combine
+import PhoneNumberKit
 
 final class RegisterUserObject: ObservableObject {
     var type: UserType = .customer
@@ -18,11 +19,11 @@ final class RegisterUserObject: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var verifyPassword: String = ""
-    @Published var phoneNumber: String = ""
+    @Published var phoneNumber: String = "+84"
 }
 
 final class RegisterViewModel: ViewModel, ObservableObject {
-    var userInfo = RegisterUserObject()
+    @Published var userInfo = RegisterUserObject()
     @Published var emailNotExist: Bool = false
     @Published var isRestaurant: Bool = false {
         didSet {
@@ -49,11 +50,19 @@ final class RegisterViewModel: ViewModel, ObservableObject {
 }
 
 extension RegisterViewModel {
+    //MARK: - TODO Formater phone number display!
+    var phoneNumber: String {
+        return PartialFormatter().formatPartial("+84\(userInfo.phoneNumber.removingPrefix("+84"))")
+    }
+    
     var verifyPhoneViewModel: VerifyPhoneViewModel {
         VerifyPhoneViewModel(for: .register(userInfo))
     }
     
     var inValidInfo: Bool {
-        userInfo.username.isEmpty
+        userInfo.username.isEmpty || (userInfo.restaurantName.isEmpty && userInfo.type.isRestaurant)
+            || !userInfo.email.isValidateEmail || !("+" + userInfo.phoneNumber).validatePhoneNumber
+            || userInfo.password != userInfo.verifyPassword || !userInfo.password.isValidPasswordLength
+            || !userInfo.verifyPassword.isValidPasswordLength
     }
 }
