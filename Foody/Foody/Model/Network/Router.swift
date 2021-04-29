@@ -12,6 +12,7 @@ typealias JSObject = [String: Any]
 typealias JSArray = [JSObject]
 
 enum Router {
+    case verifyEmail(String)
     case login(email: String, password: String)
     case register(Parameters)
     case details(id: String)
@@ -28,7 +29,7 @@ extension Router: TargetType {
     var baseURL: URL {
         var baseURLString: String = "https://flask-fast-food.herokuapp.com" / version
         #if DEBUG
-        baseURLString = "http://0.0.0.0:5000" / version
+        baseURLString = "http://127.0.0.1:5000" / version
         #endif
         guard let url = URL(string: baseURLString) else {
             fatalError("baseURL could not be configured.")
@@ -38,6 +39,8 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .verifyEmail:
+            return "/verify"
         case .register:
             return "/register"
         case .login:
@@ -53,7 +56,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register:
+        case .login, .register, .verifyEmail:
             return .post
         case .details, .trending:
             return .get
@@ -66,6 +69,8 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
+        case .verifyEmail(let email):
+            return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
         case .register(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):

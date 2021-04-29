@@ -7,29 +7,53 @@
 
 import Foundation
 import SwifterSwift
+import Combine
 
-final class RegisterViewModel: ObservableObject {
-    @Published var type: UserType = .customer
+final class RegisterUserObject: ObservableObject {
+    var type: UserType = .customer
+    var gender: Bool = false
     @Published var username: String = ""
+    @Published var description: String = ""
     @Published var restaurantName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var verifyPassword: String = ""
     @Published var phoneNumber: String = ""
+}
+
+final class RegisterViewModel: ViewModel, ObservableObject {
+    var userInfo = RegisterUserObject()
     @Published var emailNotExist: Bool = false
-    
+    @Published var isRestaurant: Bool = false {
+        didSet {
+            userInfo.type = isRestaurant ? .restaurant: .customer
+        }
+    }
+    @Published var isMale: Bool = true {
+        didSet {
+            userInfo.gender = isMale
+        }
+    }
     
     func checkEmail() {
-        emailNotExist = true
+        AccountService.verifyEmail(email: userInfo.email)
+            .sink { (completion) in
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (res) in
+                self.emailNotExist = res.isValid ?? false
+            }
+            .store(in: &subscriptions)
     }
 }
 
 extension RegisterViewModel {
     var verifyPhoneViewModel: VerifyPhoneViewModel {
-        VerifyPhoneViewModel(for: .register)
+        VerifyPhoneViewModel(for: .register(userInfo))
     }
     
     var inValidInfo: Bool {
-        username.isEmpty
+        userInfo.username.isEmpty
     }
 }

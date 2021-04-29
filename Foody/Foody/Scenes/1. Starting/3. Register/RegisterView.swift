@@ -10,9 +10,6 @@ import SwiftUIX
 
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
-    @State var isRestaurantJoined: Bool = false
-    @State var female: Bool = true
-    @State var male: Bool = false
     @Environment(\.presentationMode) private var presentationMode
     
     var body: some View {
@@ -35,25 +32,26 @@ struct RegisterView: View {
                     }
                     
                     Section(header: Text("")) {
-                        Toggle("Join with restaurant:", isOn: $isRestaurantJoined)
+                        Toggle("Join with restaurant:", isOn: $viewModel.isRestaurant)
                             .bold(size: 17)
                     }
                     
                     Section(header: Text(""), footer: Text("")) {
-                        TextFieldCustom(text: $viewModel.username,
+                        TextFieldCustom(text: $viewModel.userInfo.username,
                                         placeholder: Text("Username").foregroundColor(.gray),
                                         systemNameImage: "person"
                         )
                         
-                        if isRestaurantJoined {
-                            TextFieldCustom(text: $viewModel.restaurantName,
+                        if viewModel.isRestaurant {
+                            TextFieldCustom(text: $viewModel.userInfo.restaurantName,
                                             placeholder: Text("Restaurant name").foregroundColor(.gray),
                                             systemNameImage: "house"
                             )
                             
-                            TextView("Descriptions...", text: $viewModel.username)
+                            TextView("Descriptions...", text: $viewModel.userInfo.description)
                                 .frame(minHeight: 100, maxHeight: 150)
                                 .padding(.vertical)
+                            TextField("", value: .constant(""), formatter: Formatter.init())
                         }
                     }
                     
@@ -65,16 +63,14 @@ struct RegisterView: View {
                             
                             Spacer()
                             
-                            RadioButton(isSelected: $female,
+                            RadioButton(isSelected: $viewModel.isMale,
                                         action: {
-                                            female.toggle()
-                                            male = !female
+                                            viewModel.isMale = true
                             }, content: { Text("Female") })
                             
-                            RadioButton(isSelected: $male,
+                            RadioButton(isSelected: .constant(!viewModel.isMale),
                                         action: {
-                                            male.toggle()
-                                            female = !male
+                                            viewModel.isMale = false
                             }, content: { Text("Male") })
                                 .padding(.trailing, 10)
                             }
@@ -82,11 +78,11 @@ struct RegisterView: View {
                     .animation(.easeInOut(duration: 0.3))
                     
                     Section(header: Text(""), footer: Text("")) {
-                        TextFieldCustom(text: $viewModel.email,
+                        TextFieldCustom(text: $viewModel.userInfo.email,
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
                         
-                        TextFieldCustom(text: $viewModel.phoneNumber,
+                        TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
                                         placeholder: Text("+84").foregroundColor(.gray),
                                         systemNameImage: "phone.fill"
                         )
@@ -95,12 +91,12 @@ struct RegisterView: View {
                     
                     
                     Section(header: Text(""), footer: Text("")) {
-                        TextFieldCustom(text: $viewModel.password,
+                        TextFieldCustom(text: $viewModel.userInfo.password,
                                         placeholder: Text("Password").foregroundColor(.gray),
                                         isSecureField: true
                         )
                         
-                        TextFieldCustom(text: $viewModel.verifyPassword,
+                        TextFieldCustom(text: $viewModel.userInfo.verifyPassword,
                                         placeholder: Text("Confirm password").foregroundColor(.gray),
                                         isSecureField: true
                         )
@@ -136,7 +132,7 @@ struct RegisterView: View {
                 }
                 .animation(.default)
                 .foregroundColor(.white)
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
                 .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
             .addBackBarCustom()

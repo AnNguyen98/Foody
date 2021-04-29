@@ -15,7 +15,7 @@ extension Publisher where Output == Data {
         
         return self.decode(type: type, decoder: decoder)
             .mapError { error in
-                .unknow(error.localizedDescription)
+                error as? CommonError ?? .invalidJSONFormat
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

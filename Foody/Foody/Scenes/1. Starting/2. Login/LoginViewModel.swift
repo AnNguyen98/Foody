@@ -13,9 +13,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var isLogged: Bool = false
-    
-    private var subscriptions = Set<AnyCancellable>()
-    
+        
     override init() {
         super.init()
         Session.shared.isShowedOnboarding = true
@@ -30,8 +28,6 @@ final class LoginViewModel: ViewModel, ObservableObject{
             .sink { (completion) in
                 if case .failure(let error) = completion {
                     self.error = error
-                } else {
-                    self.isLogged = true
                 }
                 self.isLoading = false
             } receiveValue: { (response) in

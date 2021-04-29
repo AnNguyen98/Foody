@@ -8,18 +8,7 @@
 import Foundation
 
 final class Restaurant: User {
-    var restaurantName: String
-    var description: String
-    
-    init(username: String, email: String, password: String, phoneNumber: String, address: String,
-         imageProfile: Data, restaurantName: String, description: String) {
-        self.restaurantName = restaurantName
-        self.description = description
-        super.init(username: username, email: email, password: password, phoneNumber: phoneNumber,
-                   address: address, imageProfile: imageProfile)
-    }
-    
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
+    var restaurantName: String = ""
+    var description: String = ""
+    var restaurantImages: [String] = []
 }

@@ -8,29 +8,41 @@
 import Foundation
 import SwiftyUserDefaults
 
-enum UserType: Int, Codable {
+enum UserType: String, Codable {
     case customer, restaurant
+    
+    var isCustomer: Bool {
+        self == .customer
+    }
+    
+    var isRestaurant: Bool {
+        self == .restaurant
+    }
 }
 
-class User: Account, Codable, DefaultsSerializable {
-    var username: String
+class User: Codable, Account, DefaultsSerializable {
+    var isActive: Bool = false
     
-    var email: String
+    var username: String = ""
     
-    var password: String
+    var email: String = ""
     
-    var phoneNumber: String
+    var password: String = ""
     
-    var address: String
+    var phoneNumber: String = ""
     
-    var imageProfile: Data
+    var address: String = ""
     
-    init(username: String, email: String, password: String, phoneNumber: String, address: String, imageProfile: Data) {
-        self.username = username
-        self.email = email
-        self.password = password
-        self.phoneNumber = phoneNumber
-        self.address = address
-        self.imageProfile = imageProfile
-    }
+    var imageProfile: String = ""
+    
+    var gender: Bool = false
+    
+//    init(username: String, email: String, password: String, phoneNumber: String, address: String, imageProfile: Data) {
+//        self.username = username
+//        self.email = email
+//        self.password = password
+//        self.phoneNumber = phoneNumber
+//        self.address = address
+//        self.imageProfile = imageProfile
+//    }
 }

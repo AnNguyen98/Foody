@@ -8,9 +8,13 @@
 import SwiftUI
 
 final class VerifyPhoneViewModel: ViewModel, ObservableObject {
+    private var user = RegisterUserObject()
     var action: Action
     
-    init(for action: Action = .register) {
+    init(for action: Action = .updatePassword) {
+        if case .register(let user) = action {
+            self.user = user
+        }
         self.action = action
     }
     
@@ -42,7 +46,7 @@ extension VerifyPhoneViewModel {
     }
     
     func handleAction() {
-        if action == .register {
+        if case .register = action {
             handleRegister()
         } else {
             handleUpdatePassword()
@@ -52,7 +56,7 @@ extension VerifyPhoneViewModel {
 
 extension VerifyPhoneViewModel {
     enum Action {
-        case register, updatePassword
+        case register(RegisterUserObject), updatePassword
     }
     
     var lengthLimit: Int { 6 }

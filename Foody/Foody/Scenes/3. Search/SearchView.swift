@@ -8,8 +8,22 @@
 import SwiftUI
 
 struct SearchView: View {
+    @State private var score = 0
+    
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            TextField("Amount to transfer", value: $score, formatter: formatter)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Text("Your score was \(score).")
+        }
     }
 }
 

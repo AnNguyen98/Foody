@@ -23,13 +23,15 @@ struct NetworkProvider {
                 case .success(let response):
                     if 400...499 ~= response.statusCode {
                         promise(.failure(.unknow(response.messageError)))
+                    } else {
+                        promise(.success(response.data))
                     }
-                    promise(.success(response.data))
                 case .failure(let error):
                     promise(.failure(.unknow(error.errorDescription ?? "")))
                 }
             }
         }
+        .print("NetworkProvider")
         .timeout(.seconds(Constants.TIMEOUT), scheduler: DispatchQueue.global(), customError: { .timeout })
         .retry(Constants.RETRYTIME)
         .subscribe(on: DispatchQueue.global())
