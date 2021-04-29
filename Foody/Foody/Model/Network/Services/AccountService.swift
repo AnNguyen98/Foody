@@ -19,6 +19,13 @@ final class AccountService: AccountFetchable {
         var token: String
     }
     
+    static func register() -> AnyPublisher<AccountResponse, NetworkError>  {
+        let params: Parameters = [:]
+        return NetworkProvider.shared.request(.register(params))
+            .decode(type: AccountResponse.self)
+            .eraseToAnyPublisher()
+    }
+    
     static func login(email: String, password: String) -> AnyPublisher<AccountResponse, NetworkError>  {
         NetworkProvider.shared.request(.login(email: email, password: password))
             .decode(type: AccountResponse.self)

@@ -39,6 +39,9 @@
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
 		8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CBA6326330F9000C9954F /* UserObservableObject.swift */; };
 		8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC9BDDA263064FB00A711A6 /* AccountService.swift */; };
+		8ED9504A263AA6B300E0B5B1 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED95049263AA6B300E0B5B1 /* Customer.swift */; };
+		8ED9504F263AA6D200E0B5B1 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED9504E263AA6D200E0B5B1 /* Restaurant.swift */; };
+		8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED95059263AB1EB00E0B5B1 /* Encodable.swift */; };
 		8EE982592634492A00DCB575 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE982582634492A00DCB575 /* RadioButton.swift */; };
 		8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC564261B4AE0004A052D /* ViewModel.swift */; };
 		8EEAC56A261B5096004A052D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC569261B5096004A052D /* String.swift */; };
@@ -146,6 +149,9 @@
 		8E9C946D25EA594800D00B03 /* NavigationCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustom.swift; sourceTree = "<group>"; };
 		8E9CBA6326330F9000C9954F /* UserObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservableObject.swift; sourceTree = "<group>"; };
 		8EC9BDDA263064FB00A711A6 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		8ED95049263AA6B300E0B5B1 /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
+		8ED9504E263AA6D200E0B5B1 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		8ED95059263AB1EB00E0B5B1 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		8EE982582634492A00DCB575 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		8EEAC564261B4AE0004A052D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8EEAC569261B5096004A052D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -403,6 +409,7 @@
 				8EEAC569261B5096004A052D /* String.swift */,
 				B5D004CC25FF3D4900E4B9AE /* TextField.swift */,
 				B507FF2C2632FA96003C54DE /* View.swift */,
+				8ED95059263AB1EB00E0B5B1 /* Encodable.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -582,8 +589,8 @@
 		B55DE2ED261EAE4000F6328A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B55DE314261EB0D000F6328A /* HomeService.swift */,
 				8EC9BDDA263064FB00A711A6 /* AccountService.swift */,
+				B55DE314261EB0D000F6328A /* HomeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -601,10 +608,12 @@
 		B5D004B025FEF98E00E4B9AE /* Scheme */ = {
 			isa = PBXGroup;
 			children = (
-				B59DF1AF261D728E00E7AA76 /* Movie.swift */,
+				8E8B9A6B26386612002C8210 /* Account.swift */,
+				8ED95049263AA6B300E0B5B1 /* Customer.swift */,
+				8ED9504E263AA6D200E0B5B1 /* Restaurant.swift */,
 				8E31703F2625FB400085AB4E /* User.swift */,
 				8E9CBA6326330F9000C9954F /* UserObservableObject.swift */,
-				8E8B9A6B26386612002C8210 /* Account.swift */,
+				B59DF1AF261D728E00E7AA76 /* Movie.swift */,
 			);
 			path = Scheme;
 			sourceTree = "<group>";
@@ -876,10 +885,12 @@
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				B55DE315261EB0D000F6328A /* HomeService.swift in Sources */,
 				B59DF1E4261D9A8800E7AA76 /* ImagePickerView.swift in Sources */,
+				8ED9504A263AA6B300E0B5B1 /* Customer.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
 				8EEAC56A261B5096004A052D /* String.swift in Sources */,
 				8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */,
 				B5055B85260473E0003DE804 /* SearchView.swift in Sources */,
+				8ED9504F263AA6D200E0B5B1 /* Restaurant.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* Font.swift in Sources */,
 				B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */,
 				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
@@ -913,6 +924,7 @@
 				8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */,
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,
 				B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */,
+				8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */,
 				B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
 				8EEAC5AD261B76A2004A052D /* HomeViewController.swift in Sources */,

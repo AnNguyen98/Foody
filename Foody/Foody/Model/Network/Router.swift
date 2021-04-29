@@ -13,6 +13,7 @@ typealias JSArray = [JSObject]
 
 enum Router {
     case login(email: String, password: String)
+    case register(Parameters)
     case details(id: String)
     case trending
 ////     First import Alamofire to make use of ‘Parameters’
@@ -37,6 +38,8 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .register:
+            return "/register"
         case .login:
             return "/login"
         case .details(let id):
@@ -50,7 +53,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login:
+        case .login, .register:
             return .post
         case .details, .trending:
             return .get
@@ -63,6 +66,8 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
+        case .register(let params):
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .details(let id):

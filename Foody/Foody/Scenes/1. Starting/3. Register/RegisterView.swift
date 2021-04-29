@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
@@ -49,6 +50,10 @@ struct RegisterView: View {
                                             placeholder: Text("Restaurant name").foregroundColor(.gray),
                                             systemNameImage: "house"
                             )
+                            
+                            TextView("Descriptions...", text: $viewModel.username)
+                                .frame(minHeight: 100, maxHeight: 150)
+                                .padding(.vertical)
                         }
                     }
                     

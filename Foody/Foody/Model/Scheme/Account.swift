@@ -12,5 +12,5 @@ protocol Account {
     var email: String { get set }
     var password: String { get set }
     var phoneNumber: String { get set }
-    
+    var address: String { set get }
 }
