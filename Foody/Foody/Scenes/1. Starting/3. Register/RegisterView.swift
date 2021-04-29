@@ -51,7 +51,6 @@ struct RegisterView: View {
                             TextView("Descriptions...", text: $viewModel.userInfo.description)
                                 .frame(minHeight: 100, maxHeight: 150)
                                 .padding(.vertical)
-                            TextField("", value: .constant(""), formatter: Formatter.init())
                         }
                     }
                     
