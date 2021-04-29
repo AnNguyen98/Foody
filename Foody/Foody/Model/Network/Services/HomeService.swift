@@ -32,7 +32,7 @@ final class HomeService {
         }
     }
         
-    func getPupularMovies() -> AnyPublisher<TrendingResponse, NetworkError> {
+    func getPupularMovies() -> AnyPublisher<TrendingResponse, CommonError> {
         NetworkProvider.shared.request(.trending)
             .decode(type: TrendingResponse.self)
             .eraseToAnyPublisher()

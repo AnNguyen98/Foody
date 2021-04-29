@@ -63,7 +63,7 @@
 		B5055B85260473E0003DE804 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5055B84260473E0003DE804 /* SearchView.swift */; };
 		B507FF2D2632FA96003C54DE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507FF2C2632FA96003C54DE /* View.swift */; };
 		B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51E0B3B26310DF10051A892 /* Publisher.swift */; };
-		B534C93E261ED6E8000B6CDF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C93D261ED6E8000B6CDF /* NetworkError.swift */; };
+		B534C93E261ED6E8000B6CDF /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C93D261ED6E8000B6CDF /* CommonError.swift */; };
 		B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C945261EDDDF000B6CDF /* Moya.Response.swift */; };
 		B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C964261EFA2B000B6CDF /* FirebaseAuth.swift */; };
 		B534C96A261EFC9F000B6CDF /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B534C969261EFC9F000B6CDF /* Data.swift */; };
@@ -175,7 +175,7 @@
 		B5055B84260473E0003DE804 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		B507FF2C2632FA96003C54DE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		B51E0B3B26310DF10051A892 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
-		B534C93D261ED6E8000B6CDF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		B534C93D261ED6E8000B6CDF /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		B534C945261EDDDF000B6CDF /* Moya.Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya.Response.swift; sourceTree = "<group>"; };
 		B534C964261EFA2B000B6CDF /* FirebaseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuth.swift; sourceTree = "<group>"; };
 		B534C969261EFC9F000B6CDF /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -502,7 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				B59DF1A7261D728500E7AA76 /* Router.swift */,
-				B534C93D261ED6E8000B6CDF /* NetworkError.swift */,
+				B534C93D261ED6E8000B6CDF /* CommonError.swift */,
 				B59DF1A8261D728600E7AA76 /* NetworkProvider.swift */,
 				B55DE2ED261EAE4000F6328A /* Services */,
 			);
@@ -931,7 +931,7 @@
 				B507FF2D2632FA96003C54DE /* View.swift in Sources */,
 				B5D004C025FF1E6B00E4B9AE /* Array.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
-				B534C93E261ED6E8000B6CDF /* NetworkError.swift in Sources */,
+				B534C93E261ED6E8000B6CDF /* CommonError.swift in Sources */,
 				8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */,
 				8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */,
 				8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */,

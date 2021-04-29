@@ -8,5 +8,5 @@
 import SwiftUI
 
 final class UserObservableObject: ObservableObject {
-    @Published var error: NetworkError?
+    @Published var error: CommonError?
 }

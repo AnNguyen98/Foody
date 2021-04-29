@@ -10,12 +10,12 @@ import Combine
 import Moya
 
 struct FirebaseAuth {
-    static func verifyPhoneNumber(phoneNumber: String) -> AnyPublisher<String, NetworkError> {
+    static func verifyPhoneNumber(phoneNumber: String) -> AnyPublisher<String, CommonError> {
         guard phoneNumber.hasPrefix("+84") else {
-            return Fail(error: NetworkError.invalidAreaCode).eraseToAnyPublisher()
+            return Fail(error: CommonError.invalidAreaCode).eraseToAnyPublisher()
         }
         print("DEBUG - FirebaseAuth verifyPhoneNumber: \(phoneNumber)")
-        return Future<String, NetworkError> { promise in
+        return Future<String, CommonError> { promise in
             PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
                     print("DEBUG - FirebaseAuth verifyPhoneNumber: ", error.localizedDescription)
@@ -33,10 +33,10 @@ struct FirebaseAuth {
         .eraseToAnyPublisher()
     }
     
-    static func signInAuth(verificationID: String, code: String) -> AnyPublisher<Any, NetworkError> {
+    static func signInAuth(verificationID: String, code: String) -> AnyPublisher<Any, CommonError> {
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: code)
         print("DEBUG - FirebaseAuth signInAuth verificationID: \(verificationID) - code: \(code)")
-        return Future<Any, NetworkError> { promise in
+        return Future<Any, CommonError> { promise in
             Auth.auth().signIn(with: credential) { (result, error) in
                 if let error = error {
                     print("DEBUG - FirebaseAuth signIn: ", error.localizedDescription)

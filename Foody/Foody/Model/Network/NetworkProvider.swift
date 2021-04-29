@@ -16,8 +16,8 @@ struct NetworkProvider {
     private var provider = MoyaProvider<Router>(plugins: [NetworkLoggerPlugin()])
     private init() { }
     
-    func request(_ api: Router) -> AnyPublisher<Data, NetworkError> {
-        return Future<Data, NetworkError> { promise in
+    func request(_ api: Router) -> AnyPublisher<Data, CommonError> {
+        return Future<Data, CommonError> { promise in
             self.provider.request(api) { (result) in
                 switch result {
                 case .success(let response):

@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension Publisher where Output == Data {
-    func decode<T: Decodable>(type: T.Type) -> AnyPublisher<T, NetworkError> {
+    func decode<T: Decodable>(type: T.Type) -> AnyPublisher<T, CommonError> {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .secondsSince1970
         

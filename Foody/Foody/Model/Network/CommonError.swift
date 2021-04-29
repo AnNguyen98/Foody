@@ -7,8 +7,9 @@
 
 import Moya
 
-enum NetworkError: Error, Identifiable {
+enum CommonError: Error, Identifiable {
     case invalidData
+    case invalidInputData
     case invalidJSONFormat
     case authen
     case apiKey
@@ -49,6 +50,8 @@ enum NetworkError: Error, Identifiable {
             return description
         case .invalidAreaCode:
             return "Invalid area code."
+        case .invalidInputData:
+            return "Invalid input data."
         }
     }
     

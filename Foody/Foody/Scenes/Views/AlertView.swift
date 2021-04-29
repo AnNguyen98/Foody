@@ -90,14 +90,14 @@ extension AlertView {
     }
     
     var message: String {
-        if let error = item as? NetworkError {
+        if let error = item as? CommonError {
             return error.localizedDescription
         }
         return ""
     }
     
     var type: AlertType {
-        if let _ = item as? NetworkError {
+        if let _ = item as? CommonError {
             return .error
         }
         return .normal
