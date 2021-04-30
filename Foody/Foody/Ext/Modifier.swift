@@ -136,4 +136,11 @@ extension View {
                 AlertView($0)
             })
     }
+    
+    func handleShowPupup(with content: Binding<PopupContent?>) -> some View {
+        self
+            .present(item: content, content: {
+                AlertView($0)
+            })
+    }
 }

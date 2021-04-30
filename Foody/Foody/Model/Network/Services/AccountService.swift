@@ -18,6 +18,7 @@ protocol AccountFetchable {
 final class AccountService: AccountFetchable {
     struct AccountResponse: Decodable {
         var email: String?
+        var password: String?
         var phoneNumber: String?
         var token: String?
         var isValid: Bool?

@@ -79,6 +79,7 @@ struct LoginView: View {
             }
         }
         .addLoadingIcon($viewModel.isLoading)
+        .handleErrors($viewModel.error)
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
         .foregroundColor(.white)

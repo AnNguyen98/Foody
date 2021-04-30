@@ -90,9 +90,25 @@ struct VerifyPhoneView: View {
         }
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
+        .handleAction(isActive: $viewModel.showSuccessPopup, action: {
+            handleShowNotiPupup()
+        })
         .handleHidenKeyboard()
         .statusBarStyle(.darkContent)
         .foregroundColor(Color.black)
+    }
+}
+
+extension VerifyPhoneView {
+    func handleShowNotiPupup() {
+        presentView(
+            AlertView(.constant(
+                    PopupContent(message: viewModel.messageNoti, title: viewModel.title, action: {
+                        SceneDelegate.shared.makeRoot(.login)
+                    })
+                )
+            )
+        )
     }
 }
 

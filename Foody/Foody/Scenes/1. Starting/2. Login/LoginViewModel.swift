@@ -31,7 +31,8 @@ final class LoginViewModel: ViewModel, ObservableObject{
                 }
                 self.isLoading = false
             } receiveValue: { (response) in
-                print("LoginService", response.email, response.token)
+//                Session.shared.currentUser = 
+                Session.shared.accessTokens = response.token
             }
             .store(in: &subscriptions)
     }

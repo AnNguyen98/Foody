@@ -11,6 +11,7 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
     private var user = RegisterUserObject()
     private var verificationID: String = ""
     var action: Action
+    @Published var showSuccessPopup: Bool = false
     @Published var code: String = "" {
         didSet {
             if /*Int(code) == nil || */ code.count > lengthLimit {
@@ -44,6 +45,41 @@ extension VerifyPhoneViewModel {
     
     private func handleRegister() {
         // MARK: TODO - handleRegister
+//        var type: UserType = .customer
+//        var gender: Bool = false
+//        @Published var username: String = ""
+//        @Published var description: String = ""
+//        @Published var restaurantName: String = ""
+//        @Published var email: String = ""
+//        @Published var password: String = ""
+//        @Published var verifyPassword: String = ""
+//        @Published var phoneNumber: String = ""
+        let userInfo = User()
+        userInfo.gender = user.gender
+        userInfo.username = user.username
+        userInfo.email = user.email
+        userInfo.phoneNumber = user.phoneNumber
+        userInfo.password = user.password
+        userInfo.isActive = true
+        userInfo.address = ""
+        userInfo.imageProfile = ""
+        
+        if user.type == .restaurant {
+            
+        }
+        isLoading = true
+        AccountService.register(for: userInfo)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (response) in
+                if let _ = response.email, let _ = response.password {
+                    self.showSuccessPopup =  true
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     func handleSendOTP() {
@@ -108,6 +144,17 @@ extension VerifyPhoneViewModel {
             return phone
         }
         return user.phoneNumber
+    }
+    
+    var messageNoti: String {
+        if case .register = action {
+            return "Congratulations your account has been successfully created."
+        }
+        return "Successful password reset."
+    }
+    
+    var title: String {
+        "Continue"
     }
 }
 

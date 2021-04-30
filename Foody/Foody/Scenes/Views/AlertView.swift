@@ -28,8 +28,9 @@ struct AlertView<Item>: View where Item: Identifiable {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     dismiss()
+                    (item as? PopupContent)?.action?()
                 }, label: {
-                    Text(type.buttonTitle)
+                    Text(buttonTitle)
                         .bold(size: 17)
                         .foregroundColor(Color.white)
                         .frame(maxWidth: .infinity)
@@ -84,15 +85,20 @@ extension AlertView {
         var title: String {
             self == .error ? "Error": "Success"
         }
-        
-        var buttonTitle: String {
-            self == .error ? "Close": "OK"
+    }
+    
+    var buttonTitle: String {
+        if let content = item as? PopupContent {
+            return content.title
         }
+        return type == .error ? "Close": "OK"
     }
     
     var message: String {
         if let error = item as? CommonError {
             return error.description
+        } else if let content = item as? PopupContent {
+            return content.message
         }
         return ""
     }
@@ -107,4 +113,11 @@ extension AlertView {
     var scale: CGFloat {
         kScreenSize.width / 375
     }
+}
+
+struct PopupContent: Identifiable {
+    var id: String = UUID.init().uuidString
+    var message: String
+    var title: String = "Success"
+    var action: (() -> Void)?
 }
