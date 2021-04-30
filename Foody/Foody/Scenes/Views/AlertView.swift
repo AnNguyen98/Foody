@@ -23,7 +23,7 @@ struct AlertView<Item>: View where Item: Identifiable {
                 
                 Text(message)
                     .regular(size: 17)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 15)
                 
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
@@ -33,7 +33,7 @@ struct AlertView<Item>: View where Item: Identifiable {
                         .bold(size: 17)
                         .foregroundColor(Color.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 20)
                         .background(type.color)
                 })
                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
@@ -91,7 +91,7 @@ extension AlertView {
     
     var message: String {
         if let error = item as? CommonError {
-            return error.localizedDescription
+            return error.description
         }
         return ""
     }

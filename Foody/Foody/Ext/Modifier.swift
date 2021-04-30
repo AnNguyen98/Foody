@@ -116,3 +116,24 @@ extension View {
         ModifiedContent(content: self, modifier: PaddingModifier(edge: edge))
     }
 }
+
+// Add loading view
+extension View {
+    func addLoadingIcon(_ isLoading: Binding<Bool>) -> some View {
+        ZStack {
+            self
+            
+            if isLoading.wrappedValue {
+                IndefiniteProgressView()
+                    .animation(.easeInOut)
+            }
+        }
+    }
+    
+    func handleErrors(_ error: Binding<CommonError?>) -> some View {
+        self
+            .present(item: error, content: {
+                AlertView($0)
+            })
+    }
+}

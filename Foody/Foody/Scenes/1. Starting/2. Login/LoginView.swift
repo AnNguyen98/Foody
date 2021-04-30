@@ -77,12 +77,8 @@ struct LoginView: View {
                 .padding([.bottom, .horizontal], 15)
                 .regular(size: 16)
             }
-            
-            if viewModel.isLoading {
-                IndefiniteProgressView()
-                    .animation(.easeInOut)
-            }
         }
+        .addLoadingIcon($viewModel.isLoading)
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
         .foregroundColor(.white)

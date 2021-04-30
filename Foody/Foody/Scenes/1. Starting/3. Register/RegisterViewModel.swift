@@ -37,8 +37,10 @@ final class RegisterViewModel: ViewModel, ObservableObject {
     }
     
     func checkEmail() {
+        isLoading = true
         AccountService.verifyEmail(email: userInfo.email)
             .sink { (completion) in
+                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
@@ -50,19 +52,18 @@ final class RegisterViewModel: ViewModel, ObservableObject {
 }
 
 extension RegisterViewModel {
-    //MARK: - TODO Formater phone number display!
-    var phoneNumber: String {
-        return PartialFormatter().formatPartial("+84\(userInfo.phoneNumber.removingPrefix("+84"))")
-    }
     
     var verifyPhoneViewModel: VerifyPhoneViewModel {
         VerifyPhoneViewModel(for: .register(userInfo))
     }
     
     var inValidInfo: Bool {
-        userInfo.username.isEmpty || (userInfo.restaurantName.isEmpty && userInfo.type.isRestaurant)
-            || !userInfo.email.isValidateEmail || !("+" + userInfo.phoneNumber).validatePhoneNumber
-            || userInfo.password != userInfo.verifyPassword || !userInfo.password.isValidPasswordLength
-            || !userInfo.verifyPassword.isValidPasswordLength
+        userInfo.username.trimmed.isEmpty
+            || (userInfo.restaurantName.trimmed.isEmpty && userInfo.type.isRestaurant)
+            || !userInfo.email.trimmed.isValidateEmail
+            || !userInfo.phoneNumber.trimmed.replacingOccurrences(of: " ", with: "").validatePhoneNumber
+            || userInfo.password.trimmed != userInfo.verifyPassword.trimmed
+            || !userInfo.password.trimmed.isValidPasswordLength
+            || !userInfo.verifyPassword.trimmed.isValidPasswordLength
     }
 }

@@ -81,20 +81,7 @@ struct RegisterView: View {
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
                         
-                        
                         PhoneNumberTextView(phoneNumber: $viewModel.userInfo.phoneNumber)
-//                        ZStack(alignment: .leading) {
-//                            TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
-//                                            placeholder: Text(""), systemNameImage: "phone.fill"
-//                            )
-//                            .keyboardType(.numberPad)
-//                            .foregroundColor(.clear)
-//
-//                            HStack(spacing: 2) {
-//                                Image(systemName: "phone.fill")
-//                                Text(viewModel.phoneNumber)
-//                            }
-//                        }
                     }
                     
                     
@@ -148,6 +135,9 @@ struct RegisterView: View {
             .addBackBarCustom()
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
+        .disabled(viewModel.isLoading)
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
         .handleHidenKeyboard()
         .statusBarStyle(.lightContent)
         .regular(size: 17)
