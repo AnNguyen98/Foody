@@ -19,7 +19,7 @@ final class RegisterUserObject: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var verifyPassword: String = ""
-    @Published var phoneNumber: String = "+84"
+    @Published var phoneNumber: String = ""
 }
 
 final class RegisterViewModel: ViewModel, ObservableObject {

@@ -81,18 +81,20 @@ struct RegisterView: View {
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
                         
-                        ZStack(alignment: .leading) {
-                            TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
-                                            placeholder: Text(""), systemNameImage: "phone.fill"
-                            )
-                            .keyboardType(.numberPad)
-                            .foregroundColor(.clear)
-                            
-                            HStack(spacing: 2) {
-                                Image(systemName: "phone.fill")
-                                Text(viewModel.phoneNumber)
-                            }
-                        }
+                        
+                        PhoneNumberTextView(phoneNumber: $viewModel.userInfo.phoneNumber)
+//                        ZStack(alignment: .leading) {
+//                            TextFieldCustom(text: $viewModel.userInfo.phoneNumber,
+//                                            placeholder: Text(""), systemNameImage: "phone.fill"
+//                            )
+//                            .keyboardType(.numberPad)
+//                            .foregroundColor(.clear)
+//
+//                            HStack(spacing: 2) {
+//                                Image(systemName: "phone.fill")
+//                                Text(viewModel.phoneNumber)
+//                            }
+//                        }
                     }
                     
                     
