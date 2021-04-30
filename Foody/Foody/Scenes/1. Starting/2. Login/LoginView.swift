@@ -84,8 +84,10 @@ struct LoginView: View {
         .foregroundColor(.white)
         .disabled(viewModel.isLoading)
         .handleHidenKeyboard()
-        .handleAction(isActive: $viewModel.isLogged, action: {
-            SceneDelegate.shared.makeRoot(.logged)
+        .onReceive(viewModel.$isLogged, perform: { (isLogged) in
+            if isLogged {
+                SceneDelegate.shared.makeRoot(.logged)
+            }
         })
     }
 }

@@ -45,7 +45,8 @@ struct ForgotPasswordView: View {
                         Text("Continue...")
                             .bold(size: 18)
                             .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(0.7))
+                            .foregroundColor(Color.white.opacity(viewModel.invalidInfo ? 0.5: 1))
+                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.invalidInfo ? 0.5: 1))
                     })
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(.top, 40)
@@ -58,6 +59,8 @@ struct ForgotPasswordView: View {
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
         .addBackBarCustom(.black)
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
         .statusBarStyle(.darkContent)
         .foregroundColor(Color.black)
         .handleHidenKeyboard()

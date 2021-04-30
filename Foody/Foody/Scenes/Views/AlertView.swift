@@ -33,7 +33,7 @@ struct AlertView<Item>: View where Item: Identifiable {
                         .bold(size: 17)
                         .foregroundColor(Color.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 20)
+                        .padding(.vertical, 16)
                         .background(type.color)
                 })
                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
@@ -65,6 +65,7 @@ struct AlertView<Item>: View where Item: Identifiable {
         .onDisappear(perform: {
             item = nil
         })
+        .shadow(color: .gray, radius: 2, x: -2, y: 2)
     }
 }
 

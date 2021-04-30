@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import SwiftUIX
 
 struct VerifyPhoneView: View {
     @StateObject var viewModel = VerifyPhoneViewModel()
@@ -49,15 +50,23 @@ struct VerifyPhoneView: View {
                             
                     }
                     .padding(.top, 40)
+                    
+                    Button(action: {
+                        viewModel.handleSendOTP()
+                    }, label: {
+                        Text("Resend code")
+                        Image(systemName: SFSymbolName.arrowClockwiseCircle)
+                    })
+                    .foregroundColor(.blue)
                                         
                     Button(action: {
-                        viewModel.handleAction()
+                        viewModel.handleVerifyOTP()
                     }, label: {
                         Text("Verify Now")
                             .bold(size: 18)
                             .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.isValid ? 1: 0.3))
-                            .foregroundColor(.white)
+                            .foregroundColor(Color.white.opacity(viewModel.isValid ? 1: 0.5))
+                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.isValid ? 0.7: 0.5))
                     })
                     .disabled(!viewModel.isValid)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -73,6 +82,7 @@ struct VerifyPhoneView: View {
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
         .addLoadingIcon($viewModel.isLoading)
+        .handleErrors($viewModel.error)
         .handleHidenKeyboard()
         .statusBarStyle(.darkContent)
         .foregroundColor(Color.black)

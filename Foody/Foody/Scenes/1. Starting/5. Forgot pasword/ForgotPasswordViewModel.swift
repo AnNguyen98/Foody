@@ -12,6 +12,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     @Published var newPassword: String = ""
     @Published var confirmPassword: String = ""
     @Published var emailExist: Bool = false
+    var phoneNumber: String = ""
     
     var invalidInfo: Bool {
         !(email.isValidateEmail && newPassword.isValidPasswordLength
@@ -19,7 +20,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     }
     
     var verifyPhoneViewModel: VerifyPhoneViewModel {
-        VerifyPhoneViewModel(for: .updatePassword)
+        VerifyPhoneViewModel(for: .updatePassword(phoneNumber))
     }
     
     func handleCheckEmail() {
@@ -31,12 +32,15 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (res) in
-                self.emailExist = res.isValid ?? false
+                if let phoneNumber = res.phoneNumber {
+                    if phoneNumber.validatePhoneNumber {
+                        self.phoneNumber = phoneNumber
+                        self.emailExist = res.isValid ?? false
+                    } else {
+                        self.error = .unknow("Phone number is invalid.")
+                    }
+                }
             }
             .store(in: &subscriptions)
-    }
-    
-    func handleVerifyOTP() {
-        
     }
 }

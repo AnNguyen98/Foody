@@ -11,13 +11,14 @@ import FirebaseAuth
 
 protocol AccountFetchable {
     static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
-    static func register(_ user: User) -> AnyPublisher<AccountService.AccountResponse, CommonError>
+    static func register(for user: User) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func verifyEmail(email: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
 }
 
 final class AccountService: AccountFetchable {
     struct AccountResponse: Decodable {
         var email: String?
+        var phoneNumber: String?
         var token: String?
         var isValid: Bool?
     }
@@ -28,7 +29,7 @@ final class AccountService: AccountFetchable {
             .eraseToAnyPublisher()
     }
     
-    static func register(_ user: User) -> AnyPublisher<AccountResponse, CommonError>  {
+    static func register(for user: User) -> AnyPublisher<AccountResponse, CommonError>  {
         var params: Parameters = [:]
         if let dict = try? user.toParameters() {
             params = dict
