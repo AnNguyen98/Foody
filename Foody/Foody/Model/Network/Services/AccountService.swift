@@ -12,7 +12,7 @@ import FirebaseAuth
 protocol AccountFetchable {
     static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func register(for user: User) -> AnyPublisher<AccountService.AccountResponse, CommonError>
-    static func verifyEmail(email: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
+    static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountService.AccountResponse, CommonError>
 }
 
 final class AccountService: AccountFetchable {
@@ -23,8 +23,8 @@ final class AccountService: AccountFetchable {
         var isValid: Bool?
     }
     
-    static func verifyEmail(email: String) -> AnyPublisher<AccountResponse, CommonError> {
-        return NetworkProvider.shared.request(.verifyEmail(email))
+    static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountResponse, CommonError> {
+        return NetworkProvider.shared.request(.verifyEmail(email: email, action: action))
             .decode(type: AccountResponse.self)
             .eraseToAnyPublisher()
     }

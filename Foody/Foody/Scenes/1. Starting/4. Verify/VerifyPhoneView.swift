@@ -51,13 +51,20 @@ struct VerifyPhoneView: View {
                     }
                     .padding(.top, 40)
                     
-                    Button(action: {
-                        viewModel.handleSendOTP()
-                    }, label: {
-                        Text("Resend code")
-                        Image(systemName: SFSymbolName.arrowClockwiseCircle)
-                    })
-                    .foregroundColor(.blue)
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            viewModel.handleSendOTP()
+                        }, label: {
+                            Text("Resend code")
+                                .underline()
+                            Image(systemName: SFSymbolName.arrowClockwiseCircle)
+                                .bold(size: 18)
+                        })
+                        .foregroundColor(.black)
+                        Spacer()
+                    }
+                    .padding(.top, 15)
                                         
                     Button(action: {
                         viewModel.handleVerifyOTP()

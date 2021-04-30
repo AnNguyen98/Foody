@@ -36,13 +36,4 @@ class User: Codable, Account, DefaultsSerializable {
     var imageProfile: String = ""
     
     var gender: Bool = false
-    
-//    init(username: String, email: String, password: String, phoneNumber: String, address: String, imageProfile: Data) {
-//        self.username = username
-//        self.email = email
-//        self.password = password
-//        self.phoneNumber = phoneNumber
-//        self.address = address
-//        self.imageProfile = imageProfile
-//    }
 }

@@ -25,7 +25,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     
     func handleCheckEmail() {
         isLoading = true
-        AccountService.verifyEmail(email: email)
+        AccountService.verifyEmail(email: email, action: .forgot)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {

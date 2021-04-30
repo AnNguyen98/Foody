@@ -45,7 +45,7 @@ struct AlertView<Item>: View where Item: Identifiable {
             .background(Color.white)
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             
-            let width = 80 * scale
+            let width = 70 * scale
             Circle()
                 .strokeBorder(Color.white, lineWidth: 5)
                 .frame(width: width, height: width)

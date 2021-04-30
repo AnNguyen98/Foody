@@ -11,8 +11,12 @@ typealias Parameters = [String: Any]
 typealias JSObject = [String: Any]
 typealias JSArray = [JSObject]
 
+enum VerifyAction: String {
+    case register, forgot
+}
+
 enum Router {
-    case verifyEmail(String)
+    case verifyEmail(email: String, action: VerifyAction)
     case login(email: String, password: String)
     case register(Parameters)
     case details(id: String)
@@ -40,7 +44,7 @@ extension Router: TargetType {
     var path: String {
         switch self {
         case .verifyEmail:
-            return "/verify"
+            return "/verify/email"
         case .register:
             return "/register"
         case .login:
@@ -69,8 +73,8 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
-        case .verifyEmail(let email):
-            return .requestParameters(parameters: ["email": email], encoding: JSONEncoding.default)
+        case .verifyEmail(let email, let action):
+            return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
         case .register(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
