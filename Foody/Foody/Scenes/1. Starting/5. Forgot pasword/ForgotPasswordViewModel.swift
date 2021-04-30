@@ -23,7 +23,17 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     }
     
     func handleCheckEmail() {
-        emailExist = true
+        isLoading = true
+        AccountService.verifyEmail(email: email)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (res) in
+                self.emailExist = res.isValid ?? false
+            }
+            .store(in: &subscriptions)
     }
     
     func handleVerifyOTP() {

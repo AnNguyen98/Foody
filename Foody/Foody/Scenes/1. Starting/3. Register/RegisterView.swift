@@ -19,7 +19,7 @@ struct RegisterView: View {
                 .ignoresSafeArea()
             
             NavigationLink(destination: VerifyPhoneView(viewModel: viewModel.verifyPhoneViewModel),
-                           isActive: $viewModel.emailNotExist, label: { EmptyView() })
+                           isActive: $viewModel.emailExist, label: { EmptyView() })
             
             ScrollView {
                 VStack(alignment: .leading) {

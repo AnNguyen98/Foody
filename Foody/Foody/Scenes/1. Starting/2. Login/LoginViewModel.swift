@@ -24,7 +24,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
             return
         }
         isLoading = true
-        AccountService.login(email: self.email, password: self.password)
+        AccountService.login(email: email, password: password)
             .sink { (completion) in
                 if case .failure(let error) = completion {
                     self.error = error

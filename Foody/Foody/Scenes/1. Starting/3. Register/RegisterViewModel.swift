@@ -24,7 +24,7 @@ final class RegisterUserObject: ObservableObject {
 
 final class RegisterViewModel: ViewModel, ObservableObject {
     @Published var userInfo = RegisterUserObject()
-    @Published var emailNotExist: Bool = false
+    @Published var emailExist: Bool = false
     @Published var isRestaurant: Bool = false {
         didSet {
             userInfo.type = isRestaurant ? .restaurant: .customer
@@ -45,7 +45,7 @@ final class RegisterViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (res) in
-                self.emailNotExist = res.isValid ?? false
+                self.emailExist = res.isValid ?? false
             }
             .store(in: &subscriptions)
     }

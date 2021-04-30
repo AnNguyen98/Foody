@@ -72,6 +72,7 @@ struct VerifyPhoneView: View {
             })
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
+        .addLoadingIcon($viewModel.isLoading)
         .handleHidenKeyboard()
         .statusBarStyle(.darkContent)
         .foregroundColor(Color.black)
