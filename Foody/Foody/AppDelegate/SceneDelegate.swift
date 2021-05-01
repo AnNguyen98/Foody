@@ -86,7 +86,7 @@ extension SceneDelegate {
         var contentView: AnyView {
             switch self {
             case .logged:
-                return AnyView(HomeView().environmentObject(UserObservableObject()))
+                return AnyView(TabViews().environmentObject(UserObservableObject()))
             default:
                 return AnyView(SplashView().environmentObject(UserObservableObject()))
             }
