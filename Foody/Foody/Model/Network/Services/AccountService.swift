@@ -13,6 +13,7 @@ protocol AccountFetchable {
     static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func register(for user: User, with account: Account, restaurant: Restaurant?) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountService.AccountResponse, CommonError>
+    static func updatePassword(for email: String, newPassword: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
 }
 
 final class AccountService: AccountFetchable {
@@ -22,6 +23,12 @@ final class AccountService: AccountFetchable {
         var phoneNumber: String?
         var token: String?
         var isValid: Bool?
+    }
+    
+    static func updatePassword(for email: String, newPassword: String) -> AnyPublisher<AccountResponse, CommonError> {
+        NetworkProvider.shared.request(.updatePassword(email: email, password: newPassword))
+            .decode(type: AccountResponse.self)
+            .eraseToAnyPublisher()
     }
     
     static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountResponse, CommonError> {

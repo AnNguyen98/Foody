@@ -36,6 +36,13 @@ final class Session {
         }
     }
     
+    var currentEmail: String {
+        set {
+            Defaults.currentEmail = newValue
+        } get {
+            Defaults.currentEmail
+        }
+    }
     
 }
 

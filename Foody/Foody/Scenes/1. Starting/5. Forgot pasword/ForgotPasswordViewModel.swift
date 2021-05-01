@@ -15,12 +15,17 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     var phoneNumber: String = ""
     
     var invalidInfo: Bool {
-        !(email.isValidateEmail && newPassword.isValidPasswordLength
-            && confirmPassword.isValidPasswordLength && newPassword == confirmPassword)
+        !(email.trimmed.isValidateEmail && newPassword.trimmed.isValidPasswordLength
+            && confirmPassword.trimmed.isValidPasswordLength && newPassword == confirmPassword)
     }
     
     var verifyPhoneViewModel: VerifyPhoneViewModel {
-        VerifyPhoneViewModel(for: .updatePassword(phoneNumber))
+        let userInfo = RegisterUserObject()
+        userInfo.phoneNumber = phoneNumber
+        userInfo.email = email
+        userInfo.password = newPassword
+        
+        return VerifyPhoneViewModel(for: .updatePassword, with: userInfo)
     }
     
     func handleCheckEmail() {

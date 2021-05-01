@@ -8,6 +8,7 @@
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
+    var currentEmail: DefaultsKey<String> { .init("currentEmail", defaultValue: "") }
     var accessTokens: DefaultsKey<String?> { .init("accessTokens") }
     var currentUser: DefaultsKey<User?> { .init("currentUser") }
     var isShowedOnboarding: DefaultsKey<Bool> { .init("isShowedOnboarding", defaultValue: false) }

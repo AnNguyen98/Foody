@@ -55,14 +55,14 @@ final class RegisterViewModel: ViewModel, ObservableObject {
 extension RegisterViewModel {
     
     var verifyPhoneViewModel: VerifyPhoneViewModel {
-        VerifyPhoneViewModel(for: .register(userInfo))
+        VerifyPhoneViewModel(for: .register, with: userInfo)
     }
     
     var inValidInfo: Bool {
         userInfo.username.trimmed.isEmpty
             || (userInfo.restaurantName.trimmed.isEmpty && userInfo.type.isRestaurant)
             || !userInfo.email.trimmed.isValidateEmail
-            || !userInfo.phoneNumber.trimmed.replacingOccurrences(of: " ", with: "").validatePhoneNumber
+            || !userInfo.phoneNumber.validatePhoneNumber
             || userInfo.password.trimmed != userInfo.verifyPassword.trimmed
             || !userInfo.password.trimmed.isValidPasswordLength
             || !userInfo.verifyPassword.trimmed.isValidPasswordLength

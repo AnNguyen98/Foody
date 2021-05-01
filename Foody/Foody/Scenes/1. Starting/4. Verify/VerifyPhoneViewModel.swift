@@ -8,9 +8,11 @@
 import SwiftUI
 
 final class VerifyPhoneViewModel: ViewModel, ObservableObject {
-    private var userInfo = RegisterUserObject()
     private var verificationID: String = ""
+    
+    var userInfo: RegisterUserObject
     var action: Action
+    
     @Published var showSuccessPopup: Bool = false
     @Published var code: String = "" {
         didSet {
@@ -24,10 +26,8 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
         }
     }
     
-    init(for action: Action = .updatePassword("")) {
-        if case .register(let user) = action {
-            self.userInfo = user
-        }
+    init(for action: Action = .updatePassword, with userInfo: RegisterUserObject = RegisterUserObject()) {
+        self.userInfo = userInfo
         self.action = action
         super.init()
         handleSendOTP()
@@ -41,6 +41,20 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
 extension VerifyPhoneViewModel {
     private func handleUpdatePassword() {
         // MARK: TODO - handleUpdatePassword
+        self.isLoading = true
+        AccountService.updatePassword(for: userInfo.email, newPassword: userInfo.password)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (response) in
+                if let email = response.email {
+                    self.showSuccessPopup = true
+                    Session.shared.currentEmail = email
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     private func handleRegister() {
@@ -79,8 +93,9 @@ extension VerifyPhoneViewModel {
                     self.error = error
                 }
             } receiveValue: { (response) in
-                if let _ = response.email, let _ = response.password {
+                if let email = response.email, let _ = response.password {
                     self.showSuccessPopup =  true
+                    Session.shared.currentEmail = email
                 }
             }
             .store(in: &subscriptions)
@@ -125,7 +140,7 @@ extension VerifyPhoneViewModel {
 
 extension VerifyPhoneViewModel {
     enum Action {
-        case register(RegisterUserObject), updatePassword(String)
+        case register, updatePassword
     }
     
     var lengthLimit: Int { 6 }
@@ -144,9 +159,6 @@ extension VerifyPhoneViewModel {
     }
     
     var phoneNumber: String {
-        if case .updatePassword(let phone) = action {
-            return phone
-        }
         return userInfo.phoneNumber
     }
     

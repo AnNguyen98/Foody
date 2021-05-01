@@ -16,6 +16,7 @@ enum VerifyAction: String {
 }
 
 enum Router {
+    case updatePassword(email: String, password: String)
     case verifyEmail(email: String, action: VerifyAction)
     case login(email: String, password: String)
     case register(Parameters)
@@ -43,6 +44,8 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .updatePassword:
+            return "/update/password"
         case .verifyEmail:
             return "/verify/email"
         case .register:
@@ -60,7 +63,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail:
+        case .login, .register, .verifyEmail, .updatePassword:
             return .post
         case .details, .trending:
             return .get
@@ -73,6 +76,8 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
+        case .updatePassword(let email, let password):
+            return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
             return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
         case .register(let params):

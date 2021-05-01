@@ -27,7 +27,7 @@ extension String {
     var validatePhoneNumber: Bool {
         let PHONE_REGEX = "^((\\+)|(00))[0-9]{6,14}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
-        let result =  phoneTest.evaluate(with: self)
+        let result =  phoneTest.evaluate(with: self.removeSpacing())
         return result
     }
 }
@@ -59,8 +59,13 @@ extension String {
 }
 
 extension String {
+    func removeSpacing() -> String {
+        trimmed.replacingOccurrences(of: " ", with: "")
+    }
+}
+
+extension String {
     static func / (lhs: String, rhs: String) -> String {
         return lhs + "/" + rhs
     }
 }
-

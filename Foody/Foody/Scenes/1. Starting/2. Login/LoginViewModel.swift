@@ -17,6 +17,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
     override init() {
         super.init()
         Session.shared.isShowedOnboarding = true
+        email = Session.shared.currentEmail
     }
     
     func login(completion: (() -> Void)? = nil) {
@@ -31,7 +32,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
                 }
                 self.isLoading = false
             } receiveValue: { (response) in
-//                Session.shared.currentUser = 
+//                Session.shared.currentUser =
                 Session.shared.accessTokens = response.token
             }
             .store(in: &subscriptions)
