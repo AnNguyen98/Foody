@@ -11,7 +11,7 @@ import FirebaseAuth
 
 protocol AccountFetchable {
     static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
-    static func register(for user: User) -> AnyPublisher<AccountService.AccountResponse, CommonError>
+    static func register(for user: User, with account: Account, restaurant: Restaurant?) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountService.AccountResponse, CommonError>
 }
 
@@ -30,10 +30,17 @@ final class AccountService: AccountFetchable {
             .eraseToAnyPublisher()
     }
     
-    static func register(for user: User) -> AnyPublisher<AccountResponse, CommonError>  {
+    static func register(for user: User, with account: Account, restaurant: Restaurant? = nil) -> AnyPublisher<AccountResponse, CommonError>  {
         var params: Parameters = [:]
-        if let dict = try? user.toParameters() {
-            params = dict
+        if let userJS = try? user.toParameters(), let accountJS = try? account.toParameters() {
+            params["user"] = userJS
+            params["account"] = accountJS
+            if restaurant != nil {
+                guard let resJS = try? restaurant?.toParameters() else {
+                    return Fail(error: .invalidInputData).eraseToAnyPublisher()
+                }
+                params["restaurant"] = resJS
+            }
         } else {
             return Fail(error: .invalidInputData).eraseToAnyPublisher()
         }

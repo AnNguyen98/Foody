@@ -2,13 +2,24 @@
 //  Restaurant.swift
 //  Foody
 //
-//  Created by An Nguyễn on 29/04/2021.
+//  Created by An Nguyễn on 01/05/2021.
 //
 
 import Foundation
+import SwiftyUserDefaults
 
-final class Restaurant: User {
-    var restaurantName: String = ""
-    var description: String = ""
-    var restaurantImages: [String] = []
+struct Restaurant: Codable, DefaultsSerializable {
+    var _id: String = UUID.init().uuidString
+    
+    var descriptions: String = ""
+    
+    var address: String = ""
+    
+    var images: [String] = []
+    
+    var name: String = ""
+    
+    var products: [Product] = []
+    
+    var vote: Int = 0
 }

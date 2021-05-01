@@ -12,7 +12,7 @@ import PhoneNumberKit
 
 final class RegisterUserObject: ObservableObject {
     var type: UserType = .customer
-    var gender: Bool = false
+    var gender: Bool = true
     @Published var username: String = ""
     @Published var description: String = ""
     @Published var restaurantName: String = ""
@@ -20,6 +20,7 @@ final class RegisterUserObject: ObservableObject {
     @Published var password: String = ""
     @Published var verifyPassword: String = ""
     @Published var phoneNumber: String = ""
+    @Published var address: String = ""
 }
 
 final class RegisterViewModel: ViewModel, ObservableObject {

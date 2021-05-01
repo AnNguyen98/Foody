@@ -7,18 +7,16 @@
 
 import Foundation
 
-protocol Account {
-    var username: String { get set }
+struct Account: Codable {
+    var _id: String = UUID.init().uuidString
     
-    var email: String { get set }
+    var email: String = ""
     
-    var password: String { get set }
+    var username: String = ""
     
-    var phoneNumber: String { get set }
+    var phoneNumber: String = ""
     
-    var address: String { set get }
+    var password: String = ""
     
-    var gender: Bool { set get }
-    
-    var isActive: Bool { set get }
+    var status: String = AccountStatus.active.rawValue
 }

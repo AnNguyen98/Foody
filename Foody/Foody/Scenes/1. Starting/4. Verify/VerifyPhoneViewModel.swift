@@ -8,7 +8,7 @@
 import SwiftUI
 
 final class VerifyPhoneViewModel: ViewModel, ObservableObject {
-    private var user = RegisterUserObject()
+    private var userInfo = RegisterUserObject()
     private var verificationID: String = ""
     var action: Action
     @Published var showSuccessPopup: Bool = false
@@ -26,7 +26,7 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
     
     init(for action: Action = .updatePassword("")) {
         if case .register(let user) = action {
-            self.user = user
+            self.userInfo = user
         }
         self.action = action
         super.init()
@@ -45,30 +45,34 @@ extension VerifyPhoneViewModel {
     
     private func handleRegister() {
         // MARK: TODO - handleRegister
-//        var type: UserType = .customer
-//        var gender: Bool = false
-//        @Published var username: String = ""
-//        @Published var description: String = ""
-//        @Published var restaurantName: String = ""
-//        @Published var email: String = ""
-//        @Published var password: String = ""
-//        @Published var verifyPassword: String = ""
-//        @Published var phoneNumber: String = ""
-        let userInfo = User()
-        userInfo.gender = user.gender
-        userInfo.username = user.username
-        userInfo.email = user.email
-        userInfo.phoneNumber = user.phoneNumber
-        userInfo.password = user.password
-        userInfo.isActive = true
-        userInfo.address = ""
-        userInfo.imageProfile = ""
+        var user: User = User()
+        user.gender = userInfo.gender
+        user.username = userInfo.username
+        user.email = userInfo.email
+        user.phoneNumber = userInfo.phoneNumber
+        user.address = userInfo.address
+        user.type = UserType.restaurant.rawValue
+//        userInfo.imageProfile = ""
         
-        if user.type == .restaurant {
-            
+        
+        var restaurant: Restaurant?
+        if userInfo.type == .restaurant {
+            restaurant = Restaurant()
+            restaurant?._id = user._id
+            restaurant?.descriptions = userInfo.description
+            restaurant?.name = userInfo.restaurantName
+            restaurant?.address = userInfo.address
         }
+        
+        var account: Account = Account()
+        account._id = user._id
+        account.email = userInfo.email
+        account.password = userInfo.password
+        account.username = userInfo.username
+        account.phoneNumber = userInfo.phoneNumber
+        
         isLoading = true
-        AccountService.register(for: userInfo)
+        AccountService.register(for: user, with: account, restaurant: restaurant)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
@@ -143,7 +147,7 @@ extension VerifyPhoneViewModel {
         if case .updatePassword(let phone) = action {
             return phone
         }
-        return user.phoneNumber
+        return userInfo.phoneNumber
     }
     
     var messageNoti: String {
