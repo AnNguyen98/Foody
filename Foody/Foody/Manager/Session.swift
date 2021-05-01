@@ -12,7 +12,7 @@ final class Session {
     private init() { }
     static let shared = Session()
     
-    var currentUser: User? {
+    var user: User? {
         set {
             Defaults.currentUser = newValue
         } get {
@@ -20,11 +20,11 @@ final class Session {
         }
     }
     
-    var accessTokens: String? {
+    var accessToken: String? {
         set {
-            Defaults.accessTokens = newValue
+            Defaults.accessToken = newValue
         } get {
-            Defaults.accessTokens
+            Defaults.accessToken
         }
     }
     

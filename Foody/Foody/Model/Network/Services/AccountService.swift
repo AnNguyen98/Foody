@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAuth
 
 protocol AccountFetchable {
-    static func login(email: String, password: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
+    static func login(email: String, password: String) -> AnyPublisher<AccountService.LoginResponse, CommonError>
     static func register(for user: User, with account: Account, restaurant: Restaurant?) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountService.AccountResponse, CommonError>
     static func updatePassword(for email: String, newPassword: String) -> AnyPublisher<AccountService.AccountResponse, CommonError>
@@ -21,7 +21,6 @@ final class AccountService: AccountFetchable {
         var email: String?
         var password: String?
         var phoneNumber: String?
-        var token: String?
         var isValid: Bool?
     }
     
@@ -56,9 +55,14 @@ final class AccountService: AccountFetchable {
             .eraseToAnyPublisher()
     }
     
-    static func login(email: String, password: String) -> AnyPublisher<AccountResponse, CommonError>  {
+    struct LoginResponse: Decodable {
+        var accessToken: String?
+        var user: User?
+    }
+    
+    static func login(email: String, password: String) -> AnyPublisher<LoginResponse, CommonError>  {
         NetworkProvider.shared.request(.login(email: email, password: password))
-            .decode(type: AccountResponse.self)
+            .decode(type: LoginResponse.self)
             .eraseToAnyPublisher()
     }
     

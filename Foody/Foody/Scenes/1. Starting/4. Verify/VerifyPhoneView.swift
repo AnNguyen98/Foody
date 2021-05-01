@@ -100,6 +100,7 @@ struct VerifyPhoneView: View {
 }
 
 extension VerifyPhoneView {
+    
     func handleShowNotiPupup() {
         presentView(
             AlertView(.constant(

@@ -95,7 +95,7 @@ extension Router: TargetType {
     
     var headers: [String : String]? {
         var headers = ["Content-type": "application/json"]
-        if let token = Session.shared.accessTokens {
+        if let token = Session.shared.accessToken {
             headers["Authorization"] = token
         }
         return headers
