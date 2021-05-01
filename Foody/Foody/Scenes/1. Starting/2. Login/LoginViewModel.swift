@@ -34,6 +34,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
             } receiveValue: { (response) in
                 Session.shared.user = response.user
                 Session.shared.accessToken = response.accessToken
+                Session.shared.currentEmail = response.user?.email ?? ""
                 self.isLogged = response.user != nil && response.accessToken != nil
             }
             .store(in: &subscriptions)

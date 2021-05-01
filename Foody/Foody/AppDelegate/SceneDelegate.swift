@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             self.window = window
         }
-        makeRoot(.login)
+        setupRoot()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -72,6 +72,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate {
+    func setupRoot() {
+        if let _ = Session.shared.user {
+            makeRoot(.logged)
+        } else {
+            makeRoot(.login)
+        }
+    }
+    
     enum Status {
         case logged, login
         
