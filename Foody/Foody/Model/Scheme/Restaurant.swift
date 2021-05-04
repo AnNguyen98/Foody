@@ -18,8 +18,6 @@ struct Restaurant: Codable, DefaultsSerializable {
     var images: [String] = []
     
     var name: String = ""
-    
-    var products: [Product] = []
-    
+        
     var vote: Int = 0
 }

@@ -34,6 +34,7 @@
 		8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A60263854C1002C8210 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E8B9A6C26386612002C8210 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9A6B26386612002C8210 /* Account.swift */; };
 		8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A9226386CC6002C8210 /* SwiftUICharts */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8E94CFAE263DBB1600155D59 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E94CFAD263DBB1600155D59 /* Notification.swift */; };
 		8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB8825EA148C002FF3FA /* Colors.swift */; };
 		8E9ABB9325EA17DF002FF3FA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB9225EA17DF002FF3FA /* Color.swift */; };
 		8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABBA525EA197B002FF3FA /* CircleButton.swift */; };
@@ -147,6 +148,7 @@
 		8E5DAD2E263CF18500234F92 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		8E62C84B25E6804800F0614D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E8B9A6B26386612002C8210 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		8E94CFAD263DBB1600155D59 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8E9ABB8825EA148C002FF3FA /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8E9ABB9225EA17DF002FF3FA /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		8E9ABBA525EA197B002FF3FA /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
@@ -624,11 +626,12 @@
 			isa = PBXGroup;
 			children = (
 				8E8B9A6B26386612002C8210 /* Account.swift */,
+				8E31703F2625FB400085AB4E /* User.swift */,
+				8E5DAD0C263CE87100234F92 /* Restaurant.swift */,
+				8E5DAD04263BFAD300234F92 /* Product.swift */,
 				8E5DAD2E263CF18500234F92 /* Comment.swift */,
 				8E5DAD1F263CED5000234F92 /* Order.swift */,
-				8E5DAD04263BFAD300234F92 /* Product.swift */,
-				8E5DAD0C263CE87100234F92 /* Restaurant.swift */,
-				8E31703F2625FB400085AB4E /* User.swift */,
+				8E94CFAD263DBB1600155D59 /* Notification.swift */,
 				8E5DAD11263CE9D200234F92 /* UserInfomation.swift */,
 				8E5DAD27263CEDA200234F92 /* Observable Objects */,
 			);
@@ -913,6 +916,7 @@
 				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
 				B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */,
+				8E94CFAE263DBB1600155D59 /* Notification.swift in Sources */,
 				B59DF1AA261D728600E7AA76 /* Router.swift in Sources */,
 				B534C96A261EFC9F000B6CDF /* Data.swift in Sources */,
 				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,

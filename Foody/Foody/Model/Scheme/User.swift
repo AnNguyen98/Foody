@@ -46,9 +46,6 @@ struct User: Codable, UserInfomation, DefaultsSerializable {
     var timeCreated: String = Date().dateTimeString()
     
     var status: String = AccountStatus.active.rawValue // Account status
-        
-    var restaurantId: String?
-    
 }
 
 extension User {

@@ -14,6 +14,8 @@ enum ProductType: String {
 struct Product: Codable {
     var _id: String = UUID.init().uuidString
     
+    var restaurantId: String = ""
+    
     var imageBase64Encodings: [String] = []
     
     var voteCount: Int = 0
@@ -23,8 +25,14 @@ struct Product: Codable {
     var price: Int = 0
     
     var descriptions: String = ""
-    
-    var commments: [Comment] = []
-    
+        
     var type: String = ProductType.food.rawValue
+    
+    var orderCount: Int = 0
+}
+
+extension Product {
+    var productImages: [Data?] {
+        imageBase64Encodings.map({ Data(base64Encoded: $0) })
+    }
 }

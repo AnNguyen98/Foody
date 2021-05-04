@@ -14,7 +14,7 @@ enum OrderStatus: String {
 struct Order: Codable {
     var _id: String = UUID.init().uuidString
     
-    var deliveryTime: String = ""
+    var userId: String = ""
     
     var products: Product = Product()
     
@@ -26,7 +26,9 @@ struct Order: Codable {
     
     var orderTime: String = Date().dateTimeString()
     
-    var acceptedTime: String = Date().dateTimeString()
+    var acceptedTime: String = ""
+    
+    var deliveryTime: String = ""
     
     var address: String = ""
     
