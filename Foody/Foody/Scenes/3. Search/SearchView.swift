@@ -10,63 +10,97 @@ import SwiftUIX
 import Introspect
 
 struct SearchView: View {
-    @State private var score = 0
-    @State var searchViewObject = SearchViewObject()
     
-    let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
+    @StateObject private var viewModel = SearchViewModel()
     
     var body: some View {
-        ScrollView(.vertical, content: {
+        ZStack {
+            Colors.redColorCustom
+                .ignoresSafeArea()
+                        
             VStack {
-                ForEach(0..<40) { (index) in
-                    Text("Row -- \(index)")
-                        .padding(.vertical)
-                        .background(Color.green)
+                HStack {
+                    Text("Results: \(viewModel.items.count) items")
+                        .systemBold(size: 16)
+                        .foregroundColor(.black)
+                    Spacer()
                 }
+                .padding(.horizontal, 20)
+                
+                ScrollView(.vertical) {
+                    LazyVStack(spacing: 20) {
+                        ForEach(viewModel.items, id: \._id) { item in
+                            Text("Item \(item._id)")
+                                .foregroundColor(.white)
+                                .font(.body)
+                                .frame(width: kScreenSize.width - 40, height: 50)
+                                .background(Color.red)
+                                .onAppear(perform: {
+                                    if item == viewModel.items.last {
+                                        viewModel.isLastRow = true
+                                    }
+                                })
+                                .onDisappear(perform: {
+                                    print("DEBUG - onDisappear")
+                                })
+                                .padding(.horizontal, 20)
+                        }
+                    }
+                    
+                    if viewModel.canLoadMore, viewModel.isLastRow {
+                        ActivityIndicator()
+                            .style(.regular)
+                            .tintColor(.black)
+                            .onAppear {
+                                handleLoadMore()
+                            }
+                            .padding(.bottom, 8)
+                    }
+                    
+                }
+                .onRefresh {
+                    handleRefresh()
+                }
+                .animation(.spring())
+                
             }
-        })
-        .introspectScrollView { scrollView in
-            let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(searchViewObject, action: #selector(SearchViewObject.handleRefreshData(_ :)), for: .valueChanged)
-            scrollView.refreshControl = refreshControl
+            .padding(.top, 20)
+            .background(Color.white)
         }
-        .introspectNavigationController(customize: { (nav) in
-            nav.navigationBar.barTintColor = .red
-            var searchBar: UISearchBar = UISearchBar(frame: .init(x: 0, y: 0, width: 200, height: 20))
-
-            nav.navigationItem.leftBarButtonItem = .init(customView: searchBar)
+        .navigationSearchBar({
+            SearchBar("Search...", text: $viewModel.searchText)
+                .showsCancelButton(true)
+                .searchBarStyle(.default)
+                .returnKeyType(.search)
         })
-//        .onRefresh {
-//            print("OKKKK")
-//        }
-//        .isRefreshing(false)
-//        .refreshControlTintColor(.black)
-        .isScrollEnabled(true)
-        .navigationSearchBarHiddenWhenScrolling(false)
-        .navigationBarTitle("Home", displayMode: .automatic)
-//        .navigationSearchBar({
-//            SearchBar("Search", text: .constant(""), onEditingChanged: { onEditingChanged in
-//
-//            }, onCommit: {
-//
-//            })
-//            .searchBarStyle(.prominent)
-//        })
+        .navigationBarTitle("Search", displayMode: .large)
+        .onAppear(perform: {
+            let titleTextAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.boldSystemFont(ofSize: 34),
+                .foregroundColor: UIColor.white,
+            ]
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().largeTitleTextAttributes = titleTextAttributes
+            UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor()
+        })
+        .addLoadingIcon($viewModel.isLoading)
+        .handleErrors($viewModel.error)
+        .statusBarStyle(.lightContent)
+        .handleHidenKeyboard()
+        .background(Color.white)
+        .handleErrors($viewModel.error)
     }
 }
 
 extension SearchView {
-    class SearchViewObject: NSObject {
-        @objc func handleRefreshData(_ refreshControl: UIRefreshControl) {
-            print("OKKKK")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                refreshControl.endRefreshing()
-            }
+    private func handleRefresh() {
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
+            viewModel.handleRefreshData()
         }
+    }
+    
+    private func handleLoadMore() {
+        viewModel.handleLoadMore()
     }
 }
 

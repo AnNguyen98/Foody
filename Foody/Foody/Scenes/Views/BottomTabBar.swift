@@ -7,9 +7,10 @@
 
 import SwiftUI
 import UIKit
+import SwiftUIX
 
 enum TabItems: Int, CaseIterable {
-    case home, likes, search, profile
+    case home, search, carts, likes, profile
     
     var id: UUID { return UUID() }
     
@@ -17,6 +18,8 @@ enum TabItems: Int, CaseIterable {
         switch self {
         case .home:
             return "Home"
+        case .carts:
+            return "Carts"
         case .likes:
             return "Likes"
         case .search:
@@ -26,16 +29,18 @@ enum TabItems: Int, CaseIterable {
         }
     }
     
-    var imageName: String {
+    var imageName: SFSymbolName {
         switch self {
         case .home:
-            return "house.fill"
+            return SFSymbolName.houseFill
+        case .carts:
+            return SFSymbolName.cart
         case .likes:
-            return "heart.fill"
+            return SFSymbolName.heartFill
         case .search:
-            return "magnifyingglass"
+            return SFSymbolName.magnifyingglass
         default:
-            return "person.fill"
+            return SFSymbolName.personFill
         }
     }
     
@@ -43,6 +48,8 @@ enum TabItems: Int, CaseIterable {
         switch self {
         case .home:
             return .purple
+        case .carts:
+            return .blue
         case .likes:
             return .pink
         case .search:
@@ -62,8 +69,13 @@ struct BottomTabBar: View {
             HStack(spacing: 20) {
                 Spacer()
                 TabItem(item: .home, currentItem: $currentItem)
-                TabItem(item: .likes, currentItem: $currentItem)
+                
                 TabItem(item: .search, currentItem: $currentItem)
+                
+                TabItem(item: .carts, currentItem: $currentItem)
+                
+                TabItem(item: .likes, currentItem: $currentItem)
+                
                 TabItem(item: .profile, currentItem: $currentItem)
                 Spacer()
             }

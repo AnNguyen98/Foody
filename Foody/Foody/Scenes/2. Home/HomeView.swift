@@ -6,51 +6,82 @@
 //
 
 import SwiftUI
-import SwiftUIX
+import SwifterSwift
 
 struct HomeView: View {
-    
-    @State private var shadowRadius: Bool = false
-    
+    @StateObject var viewModel = HomeViewModel()
+        
     var body: some View {
         ZStack {
-//            Color.red
+            Colors.redColorCustom
+                .ignoresSafeArea()
             
-            CocoaScrollView(.vertical, content: {
-                VStack {
-                    ForEach(0..<40) { (index) in
-                        Text("Row -- \(index)")
-                            .padding(.vertical)
-                            .background(Color.green)
+            ScrollView {
+                Section(header: headerView("Trending products")) {
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 20) {
+                            ForEach(0..<10) {
+                                Text("Item \($0)")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .frame(width: 100, height: 100)
+                                    .background(Color.red)
+                            }
+                        }
+                        .padding(.horizontal, 20)
                     }
                 }
-            })
-            .onRefresh {
-                print("OKKKK")
+                
+                Section(header: headerView("Most popular")) {
+                    LazyVStack(spacing: 20) {
+                        ForEach(0..<10) {
+                            Text("Item \($0)")
+                                .foregroundColor(.white)
+                                .font(.body)
+                                .frame(width: 100, height: 100)
+                                .background(Color.red)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                }
+                
+                Spacer()
             }
-            .isRefreshing(false)
-            .refreshControlTintColor(.black)
-            .isScrollEnabled(true)
-            .navigationSearchBarHiddenWhenScrolling(true)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                                        print("bell")
-                                    }, label: {
-                                        ZStack {
-                                            Image(systemName: SFSymbolName.bellFill)
-                                                .resizable()
-                                                .frame(width: 20, height: 20)
-                                            Circle()
-                                                .frame(width: 10, height: 10)
-                                                .foregroundColor(.blue)
-                                                .offset(x: 6, y: -6)
-                                        }
-                                        .shadow(color: .white, radius: 10, x: 0.0, y: 0.0)
-                                    })
-            )
-            .navigationBarTitle("Home", displayMode: .automatic)
+            .padding(.top, 20)
+            .background(Color.white)
+        }
+        .navigationBarItems(
+            trailing: NotificationsView()
+        )
+        .navigationBarTitle("Home", displayMode: .large)
+        .onAppear(perform: {
+            let titleTextAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.boldSystemFont(ofSize: 34),
+                .foregroundColor: UIColor.white,
+            ]
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().largeTitleTextAttributes = titleTextAttributes
+            UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
+        })
+        .statusBarStyle(.lightContent)
+        .handleHidenKeyboard()
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+    }
+}
+
+extension HomeView {
+    func headerView(_ title: String) -> some View {
+        HStack {
+            Text(title)
+                .multilineTextAlignment(.leading)
+                .systemBold(size: 17)
+                .padding(.leading, 20)
+            
+            Spacer()
         }
     }
+
 }
 
 extension HomeView {
@@ -60,14 +91,6 @@ extension HomeView {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 refreshControl.endRefreshing()
             }
-        }
-    }
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            HomeView()
         }
     }
 }

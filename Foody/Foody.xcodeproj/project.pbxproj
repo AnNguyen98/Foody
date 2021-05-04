@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42209B1F55409F5741708C67 /* Pods_Foody.framework */; };
 		8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0F0F2625EB45700060C2A9 /* RegisterView.swift */; };
+		8E0FF0A126419F090013B5CC /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0FF0A026419F090013B5CC /* SwiftUIX */; };
+		8E0FF0A62641BE6B0013B5CC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */; };
 		8E29E2A22639AAD6008F67B3 /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */; };
 		8E3170402625FB400085AB4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31703F2625FB400085AB4E /* User.swift */; };
 		8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91825DEB90200E73E20 /* AppDelegate.swift */; };
@@ -31,7 +33,6 @@
 		8E5DAD20263CED5000234F92 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5DAD1F263CED5000234F92 /* Order.swift */; };
 		8E5DAD2F263CF18500234F92 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5DAD2E263CF18500234F92 /* Comment.swift */; };
 		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
-		8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A60263854C1002C8210 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E8B9A6C26386612002C8210 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9A6B26386612002C8210 /* Account.swift */; };
 		8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A9226386CC6002C8210 /* SwiftUICharts */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E9419E52640E043008808D5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9419E42640E043008808D5 /* FavoritesViewModel.swift */; };
@@ -50,6 +51,11 @@
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
 		8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CBA6326330F9000C9954F /* UserObservableObject.swift */; };
 		8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC9BDDA263064FB00A711A6 /* AccountService.swift */; };
+		8ED8832B26413AE50091FD86 /* UIKitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8832A26413AE50091FD86 /* UIKitTabView.swift */; };
+		8ED8833326414FA10091FD86 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8833226414FA10091FD86 /* HomeViewModel.swift */; };
+		8ED8833B264151D10091FD86 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8833A264151D10091FD86 /* SFSymbols.swift */; };
+		8ED88340264162E10091FD86 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8833F264162E10091FD86 /* NotificationsView.swift */; };
+		8ED88345264164740091FD86 /* SeachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED88344264164740091FD86 /* SeachViewModel.swift */; };
 		8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED95059263AB1EB00E0B5B1 /* Encodable.swift */; };
 		8EE982592634492A00DCB575 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE982582634492A00DCB575 /* RadioButton.swift */; };
 		8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC564261B4AE0004A052D /* ViewModel.swift */; };
@@ -59,8 +65,6 @@
 		8EEAC57C261B5C5C004A052D /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */; };
 		8EEAC584261B60EC004A052D /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC583261B60EC004A052D /* BackButton.swift */; };
 		8EEAC589261B64F5004A052D /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC588261B64F5004A052D /* Modifier.swift */; };
-		8EEAC5AD261B76A2004A052D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC5AB261B76A2004A052D /* HomeViewController.swift */; };
-		8EEAC5AE261B76A2004A052D /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEAC5AC261B76A2004A052D /* HomeViewController.xib */; };
 		8EEAC5B4261B7700004A052D /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC5B2261B7700004A052D /* FavoritesViewController.swift */; };
 		8EEAC5B5261B7700004A052D /* FavoritesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EEAC5B3261B7700004A052D /* FavoritesViewController.xib */; };
 		8EF8F11825EA0C5D00B1499E /* RestaurantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */; };
@@ -122,6 +126,8 @@
 		617130E628A64C8032D0E2DE /* Pods-Foody.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody.release.xcconfig"; path = "Target Support Files/Pods-Foody/Pods-Foody.release.xcconfig"; sourceTree = "<group>"; };
 		793A5E4FE542D4F252F3B1E9 /* Pods-Foody-FoodyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody-FoodyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Foody-FoodyUITests/Pods-Foody-FoodyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E0F0F2625EB45700060C2A9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		8E0FF083264199AC0013B5CC /* UIScrollView_InfiniteScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIScrollView_InfiniteScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
 		8E31703F2625FB400085AB4E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8E40D91525DEB90200E73E20 /* Foody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foody.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +173,11 @@
 		8E9C946D25EA594800D00B03 /* NavigationCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustom.swift; sourceTree = "<group>"; };
 		8E9CBA6326330F9000C9954F /* UserObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservableObject.swift; sourceTree = "<group>"; };
 		8EC9BDDA263064FB00A711A6 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		8ED8832A26413AE50091FD86 /* UIKitTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitTabView.swift; sourceTree = "<group>"; };
+		8ED8833226414FA10091FD86 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8ED8833A264151D10091FD86 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
+		8ED8833F264162E10091FD86 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		8ED88344264164740091FD86 /* SeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachViewModel.swift; sourceTree = "<group>"; };
 		8ED95059263AB1EB00E0B5B1 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		8EE982582634492A00DCB575 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		8EEAC564261B4AE0004A052D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -176,15 +187,12 @@
 		8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		8EEAC583261B60EC004A052D /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		8EEAC588261B64F5004A052D /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
-		8EEAC5AB261B76A2004A052D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		8EEAC5AC261B76A2004A052D /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		8EEAC5B2261B7700004A052D /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		8EEAC5B3261B7700004A052D /* FavoritesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesViewController.xib; sourceTree = "<group>"; };
 		8EF8F11725EA0C5D00B1499E /* RestaurantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantView.swift; sourceTree = "<group>"; };
 		978D45E38DAFEDD47298A1A6 /* Pods-Foody.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody.debug.xcconfig"; path = "Target Support Files/Pods-Foody/Pods-Foody.debug.xcconfig"; sourceTree = "<group>"; };
 		AD78B0BA281BC64C01DB55C1 /* Pods-Foody-FoodyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foody-FoodyUITests.release.xcconfig"; path = "Target Support Files/Pods-Foody-FoodyUITests/Pods-Foody-FoodyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B5055B3E26045C84003DE804 /* IndefiniteProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndefiniteProgressView.swift; sourceTree = "<group>"; };
-		B5055B4B260471A9003DE804 /* UIKitTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitTabView.swift; sourceTree = "<group>"; };
 		B5055B69260472FF003DE804 /* TextFieldCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		B5055B77260473BB003DE804 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B5055B7F260473D4003DE804 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
@@ -221,9 +229,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E0FF0A126419F090013B5CC /* SwiftUIX in Frameworks */,
 				8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */,
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
-				8E8B9A61263854C1002C8210 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +431,7 @@
 				8E9ABB8825EA148C002FF3FA /* Colors.swift */,
 				8E9C945B25EA445900D00B03 /* Fonts.swift */,
 				B5DA5FD22632751600FCBDEB /* Constants.swift */,
+				8ED8833A264151D10091FD86 /* SFSymbols.swift */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -442,6 +451,7 @@
 				B5D004CC25FF3D4900E4B9AE /* TextField.swift */,
 				B507FF2C2632FA96003C54DE /* View.swift */,
 				8ED95059263AB1EB00E0B5B1 /* Encodable.swift */,
+				8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -463,6 +473,7 @@
 				8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */,
 				8E5DACF7263B928900234F92 /* PhoneNumberTextView.swift */,
 				8E5DACFC263B92E200234F92 /* TextView.swift */,
+				8ED8833F264162E10091FD86 /* NotificationsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -525,6 +536,7 @@
 		91C7D8C1AADC9442A24BEA5B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E0FF083264199AC0013B5CC /* UIScrollView_InfiniteScroll.framework */,
 				42209B1F55409F5741708C67 /* Pods_Foody.framework */,
 				58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */,
 				3B4A0DD61F547EAC86BD3B75 /* Pods_FoodyTests.framework */,
@@ -547,7 +559,7 @@
 			isa = PBXGroup;
 			children = (
 				B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */,
-				B5055B4B260471A9003DE804 /* UIKitTabView.swift */,
+				8ED8832A26413AE50091FD86 /* UIKitTabView.swift */,
 			);
 			path = "0. TabView";
 			sourceTree = "<group>";
@@ -565,6 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				B5055B84260473E0003DE804 /* SearchView.swift */,
+				8ED88344264164740091FD86 /* SeachViewModel.swift */,
 			);
 			path = "3. Search";
 			sourceTree = "<group>";
@@ -605,8 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */,
-				8EEAC5AB261B76A2004A052D /* HomeViewController.swift */,
-				8EEAC5AC261B76A2004A052D /* HomeViewController.xib */,
+				8ED8833226414FA10091FD86 /* HomeViewModel.swift */,
 				8EF8F11625EA0C3C00B1499E /* 1. Deatails */,
 				B55DE2E4261EA51E00F6328A /* 2. Order */,
 			);
@@ -674,8 +686,8 @@
 			);
 			name = Foody;
 			packageProductDependencies = (
-				8E8B9A60263854C1002C8210 /* SwiftUIX */,
 				8E8B9A9226386CC6002C8210 /* SwiftUICharts */,
+				8E0FF0A026419F090013B5CC /* SwiftUIX */,
 			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
@@ -752,8 +764,8 @@
 			);
 			mainGroup = 8E40D90C25DEB90200E73E20;
 			packageReferences = (
-				8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */,
+				8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
@@ -779,7 +791,6 @@
 				8EEAC5B5261B7700004A052D /* FavoritesViewController.xib in Resources */,
 				8E9C945225EA3E5600D00B03 /* AkayaTelivigala-Regular.ttf in Resources */,
 				8E9C946125EA4E7300D00B03 /* SourceSansPro-Bold.ttf in Resources */,
-				8EEAC5AE261B76A2004A052D /* HomeViewController.xib in Resources */,
 				8E9419EF2640E0EB008808D5 /* FavoriteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -916,16 +927,19 @@
 				B59DF1AB261D728600E7AA76 /* NetworkProvider.swift in Sources */,
 				8E5DAD05263BFAD300234F92 /* Product.swift in Sources */,
 				B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */,
+				8E0FF0A62641BE6B0013B5CC /* UIApplication.swift in Sources */,
 				8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */,
 				8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
 				B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */,
 				B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */,
+				8ED8832B26413AE50091FD86 /* UIKitTabView.swift in Sources */,
 				B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */,
 				8E5DAD0D263CE87100234F92 /* Restaurant.swift in Sources */,
 				8E9C945C25EA445900D00B03 /* Fonts.swift in Sources */,
 				B59DF1E4261D9A8800E7AA76 /* ImagePickerView.swift in Sources */,
 				8E415FD125EB404100D886F5 /* VotesView.swift in Sources */,
+				8ED8833326414FA10091FD86 /* HomeViewModel.swift in Sources */,
 				8EEAC56A261B5096004A052D /* String.swift in Sources */,
 				8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */,
 				B5055B85260473E0003DE804 /* SearchView.swift in Sources */,
@@ -947,6 +961,7 @@
 				8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */,
 				8E62C84C25E6804800F0614D /* LoginView.swift in Sources */,
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
+				8ED88345264164740091FD86 /* SeachViewModel.swift in Sources */,
 				8E3170402625FB400085AB4E /* User.swift in Sources */,
 				B5055B78260473BB003DE804 /* ProfileView.swift in Sources */,
 				8E8B9A6C26386612002C8210 /* Account.swift in Sources */,
@@ -958,6 +973,7 @@
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
 				8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */,
+				8ED8833B264151D10091FD86 /* SFSymbols.swift in Sources */,
 				8E9419E52640E043008808D5 /* FavoritesViewModel.swift in Sources */,
 				B58DC23826034E59000A1E45 /* LoginViewModel.swift in Sources */,
 				8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */,
@@ -966,11 +982,11 @@
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,
 				B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */,
 				8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */,
+				8ED88340264162E10091FD86 /* NotificationsView.swift in Sources */,
 				B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */,
 				8E9419EE2640E0EB008808D5 /* FavoriteCell.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
 				8E5DACFD263B92E200234F92 /* TextView.swift in Sources */,
-				8EEAC5AD261B76A2004A052D /* HomeViewController.swift in Sources */,
 				B507FF2D2632FA96003C54DE /* View.swift in Sources */,
 				B5D004C025FF1E6B00E4B9AE /* Array.swift in Sources */,
 				B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */,
@@ -1315,12 +1331,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
 			};
 		};
 		8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */ = {
@@ -1334,9 +1350,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8E8B9A60263854C1002C8210 /* SwiftUIX */ = {
+		8E0FF0A026419F090013B5CC /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E8B9A5F263854C1002C8210 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			package = 8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 		8E8B9A9226386CC6002C8210 /* SwiftUICharts */ = {

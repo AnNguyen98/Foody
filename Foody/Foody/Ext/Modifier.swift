@@ -144,3 +144,44 @@ extension View {
             })
     }
 }
+
+// Refresh Scroll
+
+extension ScrollView {
+    func onRefresh(_ onRefresh: @escaping () -> Void) -> some View {
+        modifier(RefreshScrollModifier(onRefresh))
+    }
+}
+
+struct RefreshScrollModifier: ViewModifier {
+    let coordinator: Coodinator
+    
+    init(_ action: (() -> Void)? = nil) {
+        coordinator = Coodinator(action)
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .introspectScrollView { (scrollView) in
+                let refreshControl = UIRefreshControl()
+                refreshControl.tintColor = .black
+                refreshControl.addTarget(coordinator, action: #selector(coordinator.onRefresh(_:)), for: .valueChanged)
+                scrollView.refreshControl = refreshControl
+            }
+    }
+    
+    class Coodinator: NSObject {
+        var action: (() -> Void)?
+        
+        init(_ action: (() -> Void)? = nil) {
+            self.action = action
+        }
+        
+        @objc func onRefresh(_ refreshControl: UIRefreshControl) {
+            action?()
+            refreshControl.endRefreshing()
+        }
+        
+    }
+}
+

@@ -37,6 +37,20 @@ struct Product: Codable {
     var status: String = ProductStatus.none.rawValue
 }
 
+extension Product: Identifiable {
+    var id: String { UUID.init().uuidString }
+}
+
+extension Product: Hashable {
+    static func ==(lhs: Product, rhs: Product?) -> Bool {
+            return lhs._id == rhs?._id
+        }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(_id)
+    }
+}
+
 extension Product {
     var productImages: [Data?] {
         imageBase64Encodings.map({ Data(base64Encoded: $0) })

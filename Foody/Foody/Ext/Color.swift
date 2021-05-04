@@ -8,5 +8,13 @@
 import SwiftUI
 
 extension UIColor {
-    var color: Color { Color(self) }
+    var color: Color {
+        Color(self)
+    }
+}
+
+extension Color {
+    var toUIColor: UIColor {
+        UIColor(self)
+    }
 }

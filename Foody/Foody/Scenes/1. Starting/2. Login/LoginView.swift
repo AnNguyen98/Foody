@@ -83,7 +83,6 @@ struct LoginView: View {
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
         .foregroundColor(.white)
-        .disabled(viewModel.isLoading)
         .handleHidenKeyboard()
         .onReceive(viewModel.$isLogged, perform: { (isLogged) in
             if isLogged {

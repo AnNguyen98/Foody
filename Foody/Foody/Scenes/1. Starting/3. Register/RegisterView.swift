@@ -135,7 +135,6 @@ struct RegisterView: View {
             .addBackBarCustom()
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
-        .disabled(viewModel.isLoading)
         .handleErrors($viewModel.error)
         .addLoadingIcon($viewModel.isLoading)
         .handleHidenKeyboard()

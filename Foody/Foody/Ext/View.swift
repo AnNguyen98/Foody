@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     var rootViewController: UIViewController? {
-        UIApplication.shared.windows.first?.rootViewController
+        UIApplication.shared.rootViewController
     }
     
     var topController: UIViewController? {
