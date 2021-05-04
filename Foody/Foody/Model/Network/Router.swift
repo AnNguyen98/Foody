@@ -45,9 +45,9 @@ extension Router: TargetType {
     var path: String {
         switch self {
         case .updatePassword:
-            return "/update/password"
+            return "/account/password/forgot"
         case .verifyEmail:
-            return "/verify/email"
+            return "/account/verify/email"
         case .register:
             return "/register"
         case .login:

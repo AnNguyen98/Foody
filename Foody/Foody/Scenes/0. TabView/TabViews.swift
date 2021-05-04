@@ -12,31 +12,7 @@ struct TabViews: View {
     
     var body: some View {
         VStack {
-            VStack {
-                switch tabItem {
-                case .home:
-                    NavigationView {
-                        HomeView()
-                    }
-//                    .navigationBarHidden(true)
-                case .likes:
-                    Text("Likes")
-                        .onAppear(perform: {
-                            print("Likes")
-                        })
-                case .search:
-                    Text("Search")
-                        .onAppear(perform: {
-                            print("Search")
-                        })
-                case .profile:
-                    Text("Profile")
-                        .onAppear(perform: {
-                            print("Profile")
-                        })
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//            UIKitTabView.init()
             
             Spacer()
             BottomTabBar(currentItem: $tabItem)

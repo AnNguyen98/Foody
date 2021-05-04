@@ -11,6 +11,10 @@ enum ProductType: String {
     case drink, food
 }
 
+enum ProductStatus: String {
+    case accepted, none
+}
+
 struct Product: Codable {
     var _id: String = UUID.init().uuidString
     
@@ -29,6 +33,8 @@ struct Product: Codable {
     var type: String = ProductType.food.rawValue
     
     var orderCount: Int = 0
+    
+    var status: String = ProductStatus.none.rawValue
 }
 
 extension Product {

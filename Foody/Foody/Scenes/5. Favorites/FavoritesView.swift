@@ -7,18 +7,20 @@
 
 import SwiftUI
 
-struct FavoritesView: View {
-    @State var isPresented: Bool = false
+struct FavoritesView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> some FavoritesViewController {
+        FavoritesViewController()
+    }
     
-    var body: some View {
-        ZStack {
-            IndefiniteProgressView()
-        }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
     }
 }
 
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView()
+        NavigationView {
+            FavoritesView()
+        }
     }
 }
