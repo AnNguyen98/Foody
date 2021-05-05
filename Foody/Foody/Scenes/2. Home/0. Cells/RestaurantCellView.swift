@@ -18,7 +18,7 @@ struct RestaurantCellView: View {
                         Image("food1")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 149 * scale, height: 80 * scale)
+                            .frame(width: 155 * scale, height: 85 * scale)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }

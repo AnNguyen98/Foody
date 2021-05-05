@@ -35,6 +35,7 @@ struct TabViews: View {
             BottomTabBar(currentItem: $tabItem)
                 .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)
+                .background(.white)
         }
         .ignoresSafeArea()
     }

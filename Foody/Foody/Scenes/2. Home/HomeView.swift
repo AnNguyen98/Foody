@@ -17,7 +17,7 @@ struct HomeView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 20) {
                         ForEach(0..<10) { item in
-                            NavigationLink(destination: Text("OKK"), label: {
+                            NavigationLink(destination: FoodDetailsView(), label: {
                                 ProductCellView()
                             })
                         }
@@ -29,7 +29,7 @@ struct HomeView: View {
             Section(header: headerView("Most popular", destination: AnyView(Text("destination")))) {
                 LazyVStack(spacing: 20) {
                     ForEach(0..<10) { item in
-                        NavigationLink(destination: Text("OKK"), label: {
+                        NavigationLink(destination: RestaurantDetailsView(), label: {
                             RestaurantCellView()
                         })
                     }
@@ -38,7 +38,7 @@ struct HomeView: View {
             }
         }
         .onRefresh {
-            
+            refreshData()
         }
         .background(.white)
         .setupBackgroundNavigationBar()
@@ -51,6 +51,9 @@ struct HomeView: View {
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
         .addLoadingIcon($viewModel.isLoading)
+        .onAppear {
+            setupData()
+        }
     }
 }
 
@@ -58,6 +61,7 @@ extension HomeView {
     func headerView(_ title: String, destination: AnyView) -> some View {
         HStack {
             Text(title)
+                .bold()
                 .multilineTextAlignment(.leading)
                 .font(.title3)
             
@@ -69,9 +73,9 @@ extension HomeView {
                     Text("See more")
                         .underline()
                         .font(.body)
-                        .foregroundColor(.black)
                 })
         }
+        .foregroundColor(.black)
         .padding([.horizontal, .top], 20)
         .padding(.bottom, 5)
     }
@@ -79,13 +83,12 @@ extension HomeView {
 }
 
 extension HomeView {
-    class HomeViewObject: NSObject {
-        @objc func refreshData(_ refreshControl: UIRefreshControl) {
-            print("OKKKK")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                refreshControl.endRefreshing()
-            }
-        }
+    func setupData() {
+        
+    }
+    
+    func refreshData() {
+        
     }
 }
 

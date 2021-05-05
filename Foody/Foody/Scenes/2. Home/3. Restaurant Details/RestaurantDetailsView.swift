@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RestaurantView: View {
+struct RestaurantDetailsView: View {
     let menus = ["Popular items", "Salads", "Chicken", "Soups", "Vegetables", "Noodles", "Drink"]
     
     var body: some View {
@@ -154,8 +154,8 @@ struct RestaurantView: View {
     }
 }
 
-struct RestaurantView_Previews: PreviewProvider {
+struct RestaurantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantView()
+        RestaurantDetailsView()
     }
 }
