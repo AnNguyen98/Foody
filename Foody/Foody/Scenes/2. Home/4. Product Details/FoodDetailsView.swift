@@ -25,16 +25,6 @@ struct FoodDetailsView: View {
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                     .frame(height: 358)
                     HStack {
-                        Button(action: {}, label: {
-                            HStack(spacing: 3) {
-                                Image(systemName: "chevron.left")
-                                Text("Back")
-                                    .fontWeight(.regular)
-                            }
-                            .foregroundColor(.white)
-                            .regular(size: 17)
-                        })
-                        
                         Spacer()
                         
                         CircleButton(systemName: "square.and.arrow.up", color: .black,

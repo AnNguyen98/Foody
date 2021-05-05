@@ -25,3 +25,18 @@ struct Restaurant: Codable, DefaultsSerializable {
     
     var closeTime: String = ""
 }
+
+extension Restaurant: Identifiable {
+    var id: String { UUID.init().uuidString }
+}
+
+extension Restaurant: Hashable {
+    static func ==(lhs: Restaurant, rhs: Restaurant?) -> Bool {
+            return lhs._id == rhs?._id
+        }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(_id)
+    }
+}
+

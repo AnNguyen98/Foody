@@ -15,10 +15,11 @@ struct ProductCellView: View {
     var restaurant: Product = Product()
         
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {            Image("food1")
+        VStack(alignment: .leading, spacing: 5) {
+            Image("food1")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 250 * scale, height: 130 * scale)
+                .frame(maxWidth: 250 * scale, maxHeight: 130 * scale)
                 .clipShape(RoundedRectangle(cornerRadius: 0))
             
             VStack(alignment: .leading, spacing: 2) {

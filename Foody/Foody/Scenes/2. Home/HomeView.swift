@@ -13,28 +13,29 @@ struct HomeView: View {
         
     var body: some View {
         ScrollView {
-            Section(header: headerView("Trending products",  destination: AnyView(Text("destination")))) {
+            Section(header: headerView("Trending products",  destination: TrendingProductsView().toAnyView)) {
                 ScrollView(.horizontal) {
-                    LazyHStack(spacing: 20) {
+                    LazyHStack(spacing: 15) {
                         ForEach(0..<10) { item in
                             NavigationLink(destination: FoodDetailsView(), label: {
                                 ProductCellView()
+                                    .frame(width: 250 * scale)
                             })
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal)
                 }
             }
             
-            Section(header: headerView("Most popular", destination: AnyView(Text("destination")))) {
-                LazyVStack(spacing: 20) {
+            Section(header: headerView("Most popular", destination: PopularRestaurantsView().toAnyView)) {
+                LazyVStack(spacing: 15) {
                     ForEach(0..<10) { item in
                         NavigationLink(destination: RestaurantDetailsView(), label: {
                             RestaurantCellView()
                         })
                     }
                 }
-                .padding([.horizontal, .bottom], 20)
+                .padding([.horizontal, .bottom])
             }
         }
         .onRefresh {
@@ -76,7 +77,7 @@ extension HomeView {
                 })
         }
         .foregroundColor(.black)
-        .padding([.horizontal, .top], 20)
+        .padding([.horizontal, .top])
         .padding(.bottom, 5)
     }
 
