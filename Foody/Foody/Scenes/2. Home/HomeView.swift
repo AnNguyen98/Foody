@@ -17,52 +17,43 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             ScrollView {
-                Section(header: headerView("Trending products")) {
+                Section(header: headerView("Trending products",  destination: AnyView(Text("destination")))) {
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 20) {
-                            ForEach(0..<10) {
-                                Text("Item \($0)")
-                                    .foregroundColor(.white)
-                                    .font(.body)
-                                    .frame(width: 100, height: 100)
-                                    .background(Color.red)
+                            ForEach(0..<10) { item in
+                                NavigationLink(destination: Text("OKK"), label: {
+                                    ProductCellView()
+                                })
                             }
                         }
-                        .padding(.horizontal, 20)
+                        .padding(.leading, 20)
                     }
                 }
                 
-                Section(header: headerView("Most popular")) {
+                Section(header: headerView("Most popular", destination: AnyView(Text("destination")))) {
                     LazyVStack(spacing: 20) {
-                        ForEach(0..<10) {
-                            Text("Item \($0)")
-                                .foregroundColor(.white)
-                                .font(.body)
-                                .frame(width: 100, height: 100)
-                                .background(Color.red)
+                        ForEach(0..<10) { item in
+                            NavigationLink(destination: Text("OKK"), label: {
+                                Text("Item \(item)")
+                                    .foregroundColor(.white)
+                                    .font(.body)
+                                    .frame(width: kScreenSize.width - 40, height: 182)
+                                    .background(Color.red)
+                            })
                         }
                     }
-                    .padding(.horizontal, 20)
+                    .padding([.horizontal, .bottom], 20)
                 }
                 
                 Spacer()
             }
-            .padding(.top, 20)
             .background(Color.white)
         }
         .navigationBarItems(
             trailing: NotificationsView()
         )
-        .navigationBarTitle("Home", displayMode: .large)
-        .onAppear(perform: {
-            let titleTextAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 34),
-                .foregroundColor: UIColor.white,
-            ]
-            UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().largeTitleTextAttributes = titleTextAttributes
-            UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
-        })
+        .navigationBarTitle("Home", displayMode: .automatic)
+        .setupNavigationBar()
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
@@ -70,16 +61,44 @@ struct HomeView: View {
     }
 }
 
+extension View {
+    func setupNavigationBar(titleSize: CGFloat = 20, largeTitleSize: CGFloat = 34, titleCOlor: UIColor = .white) -> some View {
+        self
+            .onAppear(perform: {
+                UINavigationBar.appearance().tintColor = .white
+                UINavigationBar.appearance().largeTitleTextAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: largeTitleSize),
+                    .foregroundColor: titleCOlor,
+                ]
+                UINavigationBar.appearance().titleTextAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: titleSize),
+                    .foregroundColor: titleCOlor,
+                ]
+                UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
+            })
+    }
+}
+
 extension HomeView {
-    func headerView(_ title: String) -> some View {
+    func headerView(_ title: String, destination: AnyView) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
-                .systemBold(size: 17)
-                .padding(.leading, 20)
+                .bold(size: 20)
             
             Spacer()
+            
+            NavigationLink(
+                destination: destination,
+                label: {
+                    Text("See more")
+                        .underline()
+                        .bold(size: 15)
+                        .foregroundColor(.black)
+                })
         }
+        .padding([.horizontal, .top], 20)
+        .padding(.bottom, 5)
     }
 
 }
@@ -91,6 +110,14 @@ extension HomeView {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 refreshControl.endRefreshing()
             }
+        }
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            HomeView()
         }
     }
 }

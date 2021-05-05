@@ -11,15 +11,26 @@ extension View {
     var rootViewController: UIViewController? {
         UIApplication.shared.rootViewController
     }
+
+    var keyWindow: UIWindow? {
+        UIApplication.shared.windows.first(where: \.isKeyWindow)
+    }
     
     var topController: UIViewController? {
-        if var topVC = rootViewController {
-            while let presentedViewController = topVC.presentedViewController {
-                topVC = presentedViewController
-            }
-            return topVC
+        var rootViewController = keyWindow?.rootViewController
+        while true {
+          if let presented = rootViewController?.presentedViewController {
+            rootViewController = presented
+          } else if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.visibleViewController
+          } else if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+          } else {
+            break
+          }
         }
-        return nil
+        UINavigationController().interactivePopGestureRecognizer?.isEnabled = true
+        return rootViewController
     }
     
     ///Dismisses the view controller that was presented modally by the view controller.

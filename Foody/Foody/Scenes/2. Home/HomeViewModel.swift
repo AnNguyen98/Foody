@@ -8,5 +8,6 @@
 import SwiftUI
 
 final class HomeViewModel: ViewModel, ObservableObject {
-    @Published var popularItems: [Product] = []
+    @Published var trendingProducts: [Product] = []
+    @Published var popularRestaurants: [Restaurant] = []
 }

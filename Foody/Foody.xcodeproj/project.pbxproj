@@ -98,6 +98,8 @@
 		B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */; };
 		B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD22632751600FCBDEB /* Constants.swift */; };
 		B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD72632858300FCBDEB /* AlertView.swift */; };
+		B5EA7285264297E000241260 /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA7284264297E000241260 /* ProductCellView.swift */; };
+		B5EA72962642A28A00241260 /* RestaurantCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA72952642A28A00241260 /* RestaurantCellView.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +223,8 @@
 		B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		B5DA5FD22632751600FCBDEB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5DA5FD72632858300FCBDEB /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		B5EA7284264297E000241260 /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
+		B5EA72952642A28A00241260 /* RestaurantCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellView.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -619,6 +623,7 @@
 			children = (
 				B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */,
 				8ED8833226414FA10091FD86 /* HomeViewModel.swift */,
+				B5EA7283264297CE00241260 /* Cells */,
 				8EF8F11625EA0C3C00B1499E /* 1. Deatails */,
 				B55DE2E4261EA51E00F6328A /* 2. Order */,
 			);
@@ -665,6 +670,15 @@
 				8E5DAD27263CEDA200234F92 /* Observable Objects */,
 			);
 			path = Scheme;
+			sourceTree = "<group>";
+		};
+		B5EA7283264297CE00241260 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B5EA7284264297E000241260 /* ProductCellView.swift */,
+				B5EA72952642A28A00241260 /* RestaurantCellView.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -948,7 +962,9 @@
 				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
 				B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */,
+				B5EA72962642A28A00241260 /* RestaurantCellView.swift in Sources */,
 				8E94CFAE263DBB1600155D59 /* Notification.swift in Sources */,
+				B5EA7285264297E000241260 /* ProductCellView.swift in Sources */,
 				B59DF1AA261D728600E7AA76 /* Router.swift in Sources */,
 				B534C96A261EFC9F000B6CDF /* Data.swift in Sources */,
 				8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */,

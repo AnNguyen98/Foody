@@ -73,11 +73,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     func setupRoot() {
-        if let _ = Session.shared.user {
-            makeRoot(.logged)
-        } else {
-            makeRoot(.login)
-        }
+        makeRoot(.logged)
+//        if let _ = Session.shared.user {
+//            makeRoot(.logged)
+//        } else {
+//            makeRoot(.login)
+//        }
     }
     
     enum Status {
