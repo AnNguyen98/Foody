@@ -111,12 +111,6 @@ struct PaddingModifier: ViewModifier {
     }
 }
 
-extension View {
-    func padding(_ edge: Edge.Set) -> some View {
-        ModifiedContent(content: self, modifier: PaddingModifier(edge: edge))
-    }
-}
-
 // Add loading view
 extension View {
     func addLoadingIcon(_ isLoading: Binding<Bool>) -> some View {
@@ -146,7 +140,6 @@ extension View {
 }
 
 // Refresh Scroll
-
 extension ScrollView {
     func onRefresh(_ onRefresh: @escaping () -> Void) -> some View {
         modifier(RefreshScrollModifier(onRefresh))

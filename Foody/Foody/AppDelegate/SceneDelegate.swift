@@ -20,13 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return sceneDelegate
     }
     
-    func makeRoot(_ status: Status) {
-        let hostingController = HostingController(rootView: status.contentView)
-        window?.rootViewController = hostingController
-        UIApplication.hostingController = hostingController
-        window?.makeKeyAndVisible()
-    }
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -37,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             self.window = window
         }
-        setupRoot()
+        makeRoot(.splash)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -72,24 +65,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate {
-    func setupRoot() {
-        makeRoot(.logged)
-//        if let _ = Session.shared.user {
-//            makeRoot(.logged)
-//        } else {
-//            makeRoot(.login)
-//        }
+    func makeRoot(_ status: Status) {
+        let hostingController = HostingController(rootView: status.contentView)
+        window?.rootViewController = hostingController
+        UIApplication.hostingController = hostingController
+        window?.makeKeyAndVisible()
     }
     
     enum Status {
-        case logged, login
+        case logged, login, splash
         
         var contentView: AnyView {
             switch self {
             case .logged:
-                return AnyView(TabViews().environmentObject(UserObservableObject()))
+                return TabViews().toAnyView
+            case .login:
+                return LoginView().toAnyView
             default:
-                return AnyView(SplashView().environmentObject(UserObservableObject()))
+                return SplashView().toAnyView
             }
         }
     }

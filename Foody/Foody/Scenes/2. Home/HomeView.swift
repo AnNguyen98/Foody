@@ -12,43 +12,36 @@ struct HomeView: View {
     @StateObject var viewModel = HomeViewModel()
         
     var body: some View {
-        ZStack {
-            Colors.redColorCustom
-                .ignoresSafeArea()
-            
-            ScrollView {
-                Section(header: headerView("Trending products",  destination: AnyView(Text("destination")))) {
-                    ScrollView(.horizontal) {
-                        LazyHStack(spacing: 20) {
-                            ForEach(0..<10) { item in
-                                NavigationLink(destination: Text("OKK"), label: {
-                                    ProductCellView()
-                                })
-                            }
-                        }
-                        .padding(.leading, 20)
-                    }
-                }
-                
-                Section(header: headerView("Most popular", destination: AnyView(Text("destination")))) {
-                    LazyVStack(spacing: 20) {
+        ScrollView {
+            Section(header: headerView("Trending products",  destination: AnyView(Text("destination")))) {
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 20) {
                         ForEach(0..<10) { item in
                             NavigationLink(destination: Text("OKK"), label: {
-                                Text("Item \(item)")
-                                    .foregroundColor(.white)
-                                    .font(.body)
-                                    .frame(width: kScreenSize.width - 40, height: 182)
-                                    .background(Color.red)
+                                ProductCellView()
                             })
                         }
                     }
-                    .padding([.horizontal, .bottom], 20)
+                    .padding(.horizontal, 20)
                 }
-                
-                Spacer()
             }
-            .background(Color.white)
+            
+            Section(header: headerView("Most popular", destination: AnyView(Text("destination")))) {
+                LazyVStack(spacing: 20) {
+                    ForEach(0..<10) { item in
+                        NavigationLink(destination: Text("OKK"), label: {
+                            RestaurantCellView()
+                        })
+                    }
+                }
+                .padding([.horizontal, .bottom], 20)
+            }
         }
+        .onRefresh {
+            
+        }
+        .background(.white)
+        .setupBackgroundNavigationBar()
         .navigationBarItems(
             trailing: NotificationsView()
         )
@@ -61,30 +54,12 @@ struct HomeView: View {
     }
 }
 
-extension View {
-    func setupNavigationBar(titleSize: CGFloat = 20, largeTitleSize: CGFloat = 34, titleCOlor: UIColor = .white) -> some View {
-        self
-            .onAppear(perform: {
-                UINavigationBar.appearance().tintColor = .white
-                UINavigationBar.appearance().largeTitleTextAttributes = [
-                    .font: UIFont.boldSystemFont(ofSize: largeTitleSize),
-                    .foregroundColor: titleCOlor,
-                ]
-                UINavigationBar.appearance().titleTextAttributes = [
-                    .font: UIFont.boldSystemFont(ofSize: titleSize),
-                    .foregroundColor: titleCOlor,
-                ]
-                UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
-            })
-    }
-}
-
 extension HomeView {
     func headerView(_ title: String, destination: AnyView) -> some View {
         HStack {
             Text(title)
                 .multilineTextAlignment(.leading)
-                .bold(size: 20)
+                .font(.title3)
             
             Spacer()
             
@@ -93,7 +68,7 @@ extension HomeView {
                 label: {
                     Text("See more")
                         .underline()
-                        .bold(size: 15)
+                        .font(.body)
                         .foregroundColor(.black)
                 })
         }

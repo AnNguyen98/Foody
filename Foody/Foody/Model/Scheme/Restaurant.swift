@@ -20,4 +20,8 @@ struct Restaurant: Codable, DefaultsSerializable {
     var name: String = ""
         
     var vote: Int = 0
+    
+    var openTime: String = ""
+    
+    var closeTime: String = ""
 }

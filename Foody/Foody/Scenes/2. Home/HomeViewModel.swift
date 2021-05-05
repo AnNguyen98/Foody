@@ -10,4 +10,6 @@ import SwiftUI
 final class HomeViewModel: ViewModel, ObservableObject {
     @Published var trendingProducts: [Product] = []
     @Published var popularRestaurants: [Restaurant] = []
+    
+    
 }

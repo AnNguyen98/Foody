@@ -70,3 +70,38 @@ extension View {
 }
 #endif
 
+extension View {
+    // Set background ignoresSafeArea
+    func setupBackgroundNavigationBar(_ color: Color = Colors.redColorCustom) -> some View {
+        ZStack {
+            color
+                .ignoresSafeArea()
+            
+            self
+        }
+    }
+}
+
+extension View {
+    func setupNavigationBar(titleSize: CGFloat = 20, largeTitleSize: CGFloat = 34, titleCOlor: UIColor = .white) -> some View {
+        self
+            .onAppear(perform: {
+                UINavigationBar.appearance().tintColor = .white
+                UINavigationBar.appearance().largeTitleTextAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: largeTitleSize),
+                    .foregroundColor: titleCOlor,
+                ]
+                UINavigationBar.appearance().titleTextAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: titleSize),
+                    .foregroundColor: titleCOlor,
+                ]
+                UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
+            })
+    }
+}
+
+extension View {
+    var toAnyView: AnyView {
+        AnyView(self)
+    }
+}

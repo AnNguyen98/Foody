@@ -10,30 +10,25 @@ import Introspect
 
 struct TabViews: View {
     @State private var tabItem: TabItems = .home
-    var coordinator = Coordinator()
     
     var body: some View {
         VStack {
             UIKitTabView(selectedIndex: .constant(tabItem.rawValue)) {
                 UIKitTabView.Tab(
-                    view: AnyView(
-                        NavigationView {
-                            HomeView()
-                        }
-                        .introspectNavigationController(customize: { (nav) in
-                            nav.interactivePopGestureRecognizer?.isEnabled = false
-                            nav.interactivePopGestureRecognizer?.delegate = coordinator
-                        })
-                    )
+                    view: NavigationView { HomeView() }.toAnyView
+//                        .introspectNavigationController(customize: { (nav) in
+//                            nav.interactivePopGestureRecognizer?.isEnabled = false
+//                            nav.interactivePopGestureRecognizer?.delegate = coordinator
+//                        })
                 )
                 
-                UIKitTabView.Tab(view: AnyView(NavigationView { SearchView() }))
+                UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
                 
-                UIKitTabView.Tab(view: AnyView(NavigationView { CartView() }))
+                UIKitTabView.Tab(view: NavigationView { CartView() }.toAnyView)
                 
-                UIKitTabView.Tab(view: AnyView(NavigationView { FavoritesView() }))
+                UIKitTabView.Tab(view: NavigationView { FavoritesView() }.toAnyView)
                 
-                UIKitTabView.Tab(view: AnyView(NavigationView { ProfileView() }))
+                UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
                 
             }
             

@@ -35,7 +35,11 @@ struct SplashView: View {
             .ignoresSafeArea()
             .onAppear(perform: {
                 Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
-                    isActive = true
+                    if let _ = Session.shared.user {
+                        SceneDelegate.shared.makeRoot(.logged)
+                    } else {
+                        isActive = true
+                    }
                 }
             })
             .statusBarStyle(.lightContent)

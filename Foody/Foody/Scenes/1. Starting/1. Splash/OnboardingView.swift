@@ -12,11 +12,12 @@ var kScreenSize: CGSize {
 }
 
 let mainColor: UIColor = #colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)
-let scale: CGFloat = 815 / kScreenSize.height
 
 struct OnboardingView: View {
     @State private var isActive: Bool = false
     @State private var currentIndex: Int = 0
+    
+    private let scale: CGFloat = 815 / kScreenSize.height
     
     private let sizeContent: CGFloat =  285 / 815 * kScreenSize.height
     private var titles: [String] = ["Discover place near you", "Choose A Tasty Dish", "Pick Up Or Delivery"]

@@ -61,15 +61,8 @@ extension View {
 
 fileprivate struct TabBarController: UIViewControllerRepresentable {
     var controllers: [UIViewController]
-    @Binding var selectedIndex: Int {
-        didSet {
-            print(selectedIndex)
-            if selectedIndex == oldValue {
-                controllers[selectedIndex].navigationController?.popToRoot(withAnimation: .easeInOut(duration: 0.5))
-            }
-        }
-    }
-
+    @Binding var selectedIndex: Int
+    
     func makeUIViewController(context: Context) -> UITabBarController {
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = controllers
@@ -102,7 +95,7 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
             parent.selectedIndex = tabBarController.selectedIndex
         }
         
-        func popToRootOrScrollUp(on viewController: UIViewController) {
+        private func popToRootOrScrollUp(on viewController: UIViewController) {
             let nvc = navigationController(for: viewController)
             let popped = nvc?.popToRootViewController(animated: true)
             
@@ -116,7 +109,7 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
             }
         }
         
-        func navigationController(for viewController: UIViewController) -> UINavigationController? {
+        private func navigationController(for viewController: UIViewController) -> UINavigationController? {
             for child in viewController.children {
                 if let nvc = viewController as? UINavigationController {
                     return nvc
