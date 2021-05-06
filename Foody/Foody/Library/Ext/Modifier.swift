@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Introspect
 
 struct BackBarModifier: ViewModifier {
     var action: (()-> Void)?

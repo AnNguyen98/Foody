@@ -12,26 +12,22 @@ struct SearchView: View {
     
     @StateObject private var viewModel = SearchViewModel()
     
-    private var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 15), count: 2)
-
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: gridItemLayout, spacing: 10) {
-                ForEach(viewModel.products, id: \._id) { product in
-                    ProductCellView()
-                }
+        LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
+            ForEach(viewModel.products, id: \._id) { product in
+                ProductCellView()
+                    .onAppear(perform: {
+                        if product == viewModel.products.last {
+                            viewModel.isLastRow = true
+                        }
+                    })
             }
-            .padding([.horizontal, .top])
-            
-            if viewModel.canLoadMore, viewModel.isLastRow {
-                ActivityIndicator()
-                    .style(.regular)
-                    .tintColor(.black)
-                    .onAppear {
-                        handleLoadMore()
-                    }
-                    .padding(.bottom, 8)
-            }
+        }
+        .prepareForLoadMore(loadMore: {
+            handleLoadMore()
+        }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
+        .onRefresh {
+            handleRefresh()
         }
         .navigationSearchBar({
             SearchBar("Enter product name...", text: $viewModel.searchText)

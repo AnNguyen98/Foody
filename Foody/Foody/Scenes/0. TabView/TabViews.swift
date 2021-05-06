@@ -6,24 +6,35 @@
 //
 
 import SwiftUI
-import Introspect
 
 struct TabViews: View {
     @State private var indexSelected: Int = 0
     
     var body: some View {
         VStack {
-            UIKitTabView(selectedIndex: $indexSelected) {
-                UIKitTabView.Tab(view: NavigationView { HomeView() }.toAnyView )
+            ZStack(alignment: .bottomTrailing) {
+                UIKitTabView(selectedIndex: $indexSelected) {
+                    UIKitTabView.Tab(view: NavigationView { HomeView() }.toAnyView )
+                    
+                    UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
+                    
+                    UIKitTabView.Tab(view: NavigationView { CartView() }.toAnyView)
+                    
+                    UIKitTabView.Tab(view: NavigationView { FavoritesView() }.toAnyView)
+                    
+                    UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
+                    
+                }
                 
-                UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
-                
-                UIKitTabView.Tab(view: NavigationView { CartView() }.toAnyView)
-                
-                UIKitTabView.Tab(view: NavigationView { FavoritesView() }.toAnyView)
-                
-                UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
-                
+                Button(action: {
+                    print("OKKK")
+                }, label: {
+                    GifView(gifName: "cart-preview")
+                        .frame(.init(width: 70, height: 70))
+                        .clipShape(Circle())
+                        .opacity(0.96)
+                })
+                .padding()
             }
             
             BottomTabBar(tabItems: [.home, .search, .carts, .likes, .profile],

@@ -129,6 +129,7 @@ PODS:
   - SwifterSwift/StoreKit (5.2.0)
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
+  - SwiftyGif (5.4.0)
   - SwiftyUserDefaults (5.1.0)
   - ToastUI (2.0.0)
   - UIScrollView-InfiniteScroll (1.1.0)
@@ -147,6 +148,7 @@ DEPENDENCIES:
   - PhoneNumberKit (~> 3.3)
   - SDWebImageSwiftUI
   - SwifterSwift (~> 5.2.0)
+  - SwiftyGif
   - SwiftyUserDefaults (~> 5.0)
   - ToastUI
   - UIScrollView-InfiniteScroll (~> 1.1.0)
@@ -178,6 +180,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageSwiftUI
     - SwifterSwift
+    - SwiftyGif
     - SwiftyUserDefaults
     - ToastUI
     - UIScrollView-InfiniteScroll
@@ -208,11 +211,12 @@ SPEC CHECKSUMS:
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageSwiftUI: ff3dc77f69330e6513c655bcb9b5080a033405a5
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   SwiftyUserDefaults: 6746ede7f29e4c1bf2b1e104eb3139c5928e44d1
   ToastUI: 391eb9a1cc15e7ef4b79ee112e4a0b969259154f
   UIScrollView-InfiniteScroll: 3ef456bcbe759c19f510a383cff96e6647c98c98
   WaterfallGrid: 0554a759d9a8aa136fc1769480ddb01bc6fb94b9
 
-PODFILE CHECKSUM: 4992e6b7cd89f054fb9c1cf9450f193efbb46387
+PODFILE CHECKSUM: ecfde01ff8efaca1e673f58f6154dc4ef93f82a1
 
 COCOAPODS: 1.10.1

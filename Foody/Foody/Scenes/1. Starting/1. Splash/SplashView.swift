@@ -18,18 +18,26 @@ struct SplashView: View {
                     isActive: $isActive,
                     label: {  EmptyView() }
                 )
-                Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1))
+                                
+                GifView(gifName: "splash-bg")
+                    .frame(width: kScreenSize.width)
+                    .clipped()
+                    .ignoresSafeArea()
                 
                 VStack {
                     Image("logo")
                         .resizable()
-                        .frame(width: 100, height: 100)
-                    Text("Foody")
-                        .bold(size: 40)
-                        .foregroundColor(.white)
+                        .frame(width: 85, height: 85)
+                        .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
+                    
+                    Text("Fast Food")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.black.opacity(0.7))
+                    
                     Spacer()
                 }
-                .fixedSize()
+                .offset(x: 0, y: 100)
+                
             }
             .navigationBarHidden(true)
             .ignoresSafeArea()

@@ -24,6 +24,11 @@
 		8E415FCC25EB3F9000D886F5 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FCB25EB3F9000D886F5 /* CommentView.swift */; };
 		8E415FD125EB404100D886F5 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FD025EB404100D886F5 /* VotesView.swift */; };
 		8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E415FED25EB422F00D886F5 /* FavoritesView.swift */; };
+		8E4662A326441DFB009DA24F /* GifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4662A226441DFB009DA24F /* GifView.swift */; };
+		8E4662A826441F73009DA24F /* cart.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E4662A726441F73009DA24F /* cart.gif */; };
+		8E4662BB26442661009DA24F /* cart-preview.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E4662BA26442661009DA24F /* cart-preview.gif */; };
+		8E4662C02644294D009DA24F /* green-cart-small.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E4662BF2644294D009DA24F /* green-cart-small.gif */; };
+		8E4662C526442B2F009DA24F /* splash-bg.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8E4662C426442B2F009DA24F /* splash-bg.gif */; };
 		8E4C3F622642E3FE00E69662 /* PopularRestaurantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4C3F612642E3FE00E69662 /* PopularRestaurantsView.swift */; };
 		8E4C3F672642E41900E69662 /* TrendingProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4C3F662642E41900E69662 /* TrendingProductsView.swift */; };
 		8E4C3F7C2642E73E00E69662 /* PopularRestaurantsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4C3F7B2642E73E00E69662 /* PopularRestaurantsViewModel.swift */; };
@@ -152,6 +157,12 @@
 		8E415FCB25EB3F9000D886F5 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		8E415FD025EB404100D886F5 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
 		8E415FED25EB422F00D886F5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		8E46627726440D65009DA24F /* SwiftUIX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SwiftUIX; path = ../../../../../SwiftUIX; sourceTree = "<group>"; };
+		8E4662A226441DFB009DA24F /* GifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifView.swift; sourceTree = "<group>"; };
+		8E4662A726441F73009DA24F /* cart.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cart.gif; sourceTree = "<group>"; };
+		8E4662BA26442661009DA24F /* cart-preview.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "cart-preview.gif"; sourceTree = "<group>"; };
+		8E4662BF2644294D009DA24F /* green-cart-small.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "green-cart-small.gif"; sourceTree = "<group>"; };
+		8E4662C426442B2F009DA24F /* splash-bg.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "splash-bg.gif"; sourceTree = "<group>"; };
 		8E4C3F612642E3FE00E69662 /* PopularRestaurantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRestaurantsView.swift; sourceTree = "<group>"; };
 		8E4C3F662642E41900E69662 /* TrendingProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingProductsView.swift; sourceTree = "<group>"; };
 		8E4C3F7B2642E73E00E69662 /* PopularRestaurantsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularRestaurantsViewModel.swift; sourceTree = "<group>"; };
@@ -224,7 +235,6 @@
 		B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewModel.swift; sourceTree = "<group>"; };
 		B5D004CC25FF3D4900E4B9AE /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		B5D889F22643D0760023B05A /* SwiftUIX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SwiftUIX; path = ../../SwiftUIX; sourceTree = "<group>"; };
 		B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		B5DA5FD22632751600FCBDEB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5DA5FD72632858300FCBDEB /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
@@ -285,7 +295,7 @@
 				8E40D91625DEB90200E73E20 /* Products */,
 				765ECB79A3917B29C214E67E /* Pods */,
 				91C7D8C1AADC9442A24BEA5B /* Frameworks */,
-				B5D889F22643D0760023B05A /* SwiftUIX */,
+				8E46627726440D65009DA24F /* SwiftUIX */,
 			);
 			sourceTree = "<group>";
 		};
@@ -377,6 +387,10 @@
 		8E40D95725DEBC2C00E73E20 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8E4662C426442B2F009DA24F /* splash-bg.gif */,
+				8E4662BF2644294D009DA24F /* green-cart-small.gif */,
+				8E4662BA26442661009DA24F /* cart-preview.gif */,
+				8E4662A726441F73009DA24F /* cart.gif */,
 				8E9C945025EA3E4000D00B03 /* Font */,
 				8E40D92325DEB90600E73E20 /* LaunchScreen.storyboard */,
 				8E40D91E25DEB90500E73E20 /* Assets.xcassets */,
@@ -515,6 +529,7 @@
 				8E5DACF7263B928900234F92 /* PhoneNumberTextView.swift */,
 				8E5DACFC263B92E200234F92 /* TextView.swift */,
 				8ED8833F264162E10091FD86 /* NotificationsView.swift */,
+				8E4662A226441DFB009DA24F /* GifView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -838,12 +853,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B55DA05E263164C200F73686 /* GoogleService-Info.plist in Resources */,
+				8E4662BB26442661009DA24F /* cart-preview.gif in Resources */,
 				8E9C945725EA411C00D00B03 /* SourceSansPro-Regular.ttf in Resources */,
 				8E40D92525DEB90600E73E20 /* LaunchScreen.storyboard in Resources */,
 				8E40D92225DEB90500E73E20 /* Preview Assets.xcassets in Resources */,
 				8E40D91F25DEB90500E73E20 /* Assets.xcassets in Resources */,
 				8E9C945225EA3E5600D00B03 /* AkayaTelivigala-Regular.ttf in Resources */,
+				8E4662C526442B2F009DA24F /* splash-bg.gif in Resources */,
 				8E9C946125EA4E7300D00B03 /* SourceSansPro-Bold.ttf in Resources */,
+				8E4662C02644294D009DA24F /* green-cart-small.gif in Resources */,
+				8E4662A826441F73009DA24F /* cart.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -985,6 +1004,7 @@
 				8E4C3F812642EB5200E69662 /* TrendingProductsViewModel.swift in Sources */,
 				8E40D96425DEBED100E73E20 /* SplashView.swift in Sources */,
 				B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */,
+				8E4662A326441DFB009DA24F /* GifView.swift in Sources */,
 				B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */,
 				8ED8832B26413AE50091FD86 /* UIKitTabView.swift in Sources */,
 				B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */,

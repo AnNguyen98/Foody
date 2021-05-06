@@ -19,6 +19,7 @@ target 'Foody' do
   pod 'UIScrollView-InfiniteScroll', '~> 1.1.0'
   pod 'PhoneNumberKit', '~> 3.3'
   pod 'Introspect'
+  pod 'SwiftyGif'
   
   pod 'WaterfallGrid', '~> 1.0.0'
   
