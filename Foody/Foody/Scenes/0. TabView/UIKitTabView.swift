@@ -10,10 +10,9 @@ import SwiftUI
 /// An iOS style TabView that doesn't reset it's childrens navigation stacks when tabs are switched.
 public struct UIKitTabView: View {
     private var viewControllers: [UIHostingController<AnyView>]
-    private var selectedIndex: Binding<Int>?
-    @State private var fallbackSelectedIndex: Int = 0
+    @Binding var selectedIndex: Int
     
-    public init(selectedIndex: Binding<Int>? = nil, @TabBuilder _ views: () -> [Tab]) {
+    public init(selectedIndex: Binding<Int>, @TabBuilder _ views: () -> [Tab]) {
         self.viewControllers = views().map {
             let host = HostingController(rootView: $0.view)
             if let item = $0.barItem {
@@ -21,11 +20,11 @@ public struct UIKitTabView: View {
             }
             return host
         }
-        self.selectedIndex = selectedIndex
+        _selectedIndex = selectedIndex
     }
     
     public var body: some View {
-        TabBarController(controllers: viewControllers, selectedIndex: selectedIndex ?? $fallbackSelectedIndex)
+        TabBarController(controllers: viewControllers, selectedIndex: $selectedIndex)
             .edgesIgnoringSafeArea(.all)
     }
     

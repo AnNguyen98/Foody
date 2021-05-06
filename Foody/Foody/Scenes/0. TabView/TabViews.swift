@@ -9,18 +9,12 @@ import SwiftUI
 import Introspect
 
 struct TabViews: View {
-    @State private var tabItem: TabItems = .home
+    @State private var indexSelected: Int = 0
     
     var body: some View {
         VStack {
-            UIKitTabView(selectedIndex: .constant(tabItem.rawValue)) {
-                UIKitTabView.Tab(
-                    view: NavigationView { HomeView() }.toAnyView
-//                        .introspectNavigationController(customize: { (nav) in
-//                            nav.interactivePopGestureRecognizer?.isEnabled = false
-//                            nav.interactivePopGestureRecognizer?.delegate = coordinator
-//                        })
-                )
+            UIKitTabView(selectedIndex: $indexSelected) {
+                UIKitTabView.Tab(view: NavigationView { HomeView() }.toAnyView )
                 
                 UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
                 
@@ -32,23 +26,13 @@ struct TabViews: View {
                 
             }
             
-            BottomTabBar(currentItem: $tabItem)
+            BottomTabBar(tabItems: [.home, .search, .carts, .likes, .profile],
+                         indexSelected: $indexSelected)
                 .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)
         }
         .background(.white)
         .ignoresSafeArea()
-    }
-}
-
-extension TabViews {
-    class Coordinator: NSObject, UIGestureRecognizerDelegate {
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive event: UIEvent) -> Bool {
-            print(event)
-            return true
-        }
-        
-        
     }
 }
 

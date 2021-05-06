@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 import SwiftUIX
 
-enum TabItems: Int, CaseIterable {
+enum TabItem: Int, CaseIterable {
     case home, search, carts, likes, profile
     
     var id: UUID { return UUID() }
@@ -61,22 +61,19 @@ enum TabItems: Int, CaseIterable {
 }
 
 struct BottomTabBar: View {
-    @Binding var currentItem: TabItems
+    var tabItems: [TabItem]
+    @Binding var indexSelected: Int
     
     var body: some View {
         VStack {
             Divider()
             HStack(spacing: 20) {
                 Spacer()
-                TabItem(item: .home, currentItem: $currentItem)
                 
-                TabItem(item: .search, currentItem: $currentItem)
+                ForEach(tabItems, id: \.id) { (item) -> TabBarItem in
+                    TabBarItem(item: item, indexSelected: $indexSelected)
+                }
                 
-                TabItem(item: .carts, currentItem: $currentItem)
-                
-                TabItem(item: .likes, currentItem: $currentItem)
-                
-                TabItem(item: .profile, currentItem: $currentItem)
                 Spacer()
             }
         }
@@ -84,11 +81,13 @@ struct BottomTabBar: View {
     }
 }
 
-struct TabItem: View {
-    var item: TabItems
-    @Binding var currentItem: TabItems
+struct TabBarItem: View {
+    var item: TabItem
+    @Binding var indexSelected: Int
     @State private var isClicking: Bool = false
-    private var isSelected: Bool { item == currentItem }
+    private var isSelected: Bool {
+        item.rawValue == indexSelected
+    }
     
     var body: some View {
         HStack(spacing: 0) {
@@ -112,7 +111,7 @@ struct TabItem: View {
         .animation(.interpolatingSpring(mass: 1.0, stiffness: 200,
                                         damping: 20, initialVelocity: 0.1))
         .onTapGesture {
-            currentItem = item
+            indexSelected = item.rawValue
             isClicking = true
             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in
                 isClicking = false

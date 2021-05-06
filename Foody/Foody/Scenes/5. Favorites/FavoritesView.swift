@@ -7,13 +7,9 @@
 
 import SwiftUI
 
-struct FavoritesView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some FavoritesViewController {
-        FavoritesViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
+struct FavoritesView: View {
+    var body: some View {
+        Text("")
     }
 }
 
