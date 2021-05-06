@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabViews: View {
     @State private var indexSelected: Int = 0
+    @State private var showCartsView: Bool = false
     
     var body: some View {
         VStack {
@@ -17,9 +18,7 @@ struct TabViews: View {
                     UIKitTabView.Tab(view: NavigationView { HomeView() }.toAnyView )
                     
                     UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
-                    
-                    UIKitTabView.Tab(view: NavigationView { CartView() }.toAnyView)
-                    
+                                        
                     UIKitTabView.Tab(view: NavigationView { FavoritesView() }.toAnyView)
                     
                     UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
@@ -27,17 +26,21 @@ struct TabViews: View {
                 }
                 
                 Button(action: {
-                    print("OKKK")
+                    showCartsView = true
                 }, label: {
                     GifView(gifName: "cart-preview")
                         .frame(.init(width: 70, height: 70))
                         .clipShape(Circle())
-                        .opacity(0.96)
+                        .blur(radius: 0.5)
+                        .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
                 })
                 .padding()
+                .fullScreenCover(isPresented: $showCartsView, content: {
+                    CartView()
+                })
             }
             
-            BottomTabBar(tabItems: [.home, .search, .carts, .likes, .profile],
+            BottomTabBar(tabItems: [.home, .search, .likes, .profile],
                          indexSelected: $indexSelected)
                 .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)

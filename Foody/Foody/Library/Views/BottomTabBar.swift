@@ -67,10 +67,10 @@ struct BottomTabBar: View {
     var body: some View {
         VStack {
             Divider()
-            HStack(spacing: 20) {
+            HStack(spacing: 30) {
                 Spacer()
                 
-                ForEach(tabItems, id: \.id) { (item) -> TabBarItem in
+                ForEach(tabItems, id: \.id) { item in
                     TabBarItem(item: item, indexSelected: $indexSelected)
                 }
                 
@@ -93,9 +93,10 @@ struct TabBarItem: View {
         HStack(spacing: 0) {
             Image(systemName: item.imageName)
                 .resizable()
+                .systemBold(size: 5)
                 .frame(width: 17, height: 17)
             Text(isSelected ? item.title: "")
-                .font(.system(size: 11, weight: .bold, design: .default))
+                .systemBold(size: 12)
                 .padding(.leading, isSelected ? 5: 0)
         }
         .frame(width: isSelected ? 90: 30)
