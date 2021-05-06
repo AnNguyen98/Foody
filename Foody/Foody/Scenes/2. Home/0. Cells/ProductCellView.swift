@@ -54,7 +54,7 @@ struct ProductCellView: View {
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(color: .gray, radius: 5, x: 0.0, y: 2)
+        .shadow(color: .gray, radius: 3, x: 0.0, y: 2)
         .padding(.bottom, 15)
     }
 }

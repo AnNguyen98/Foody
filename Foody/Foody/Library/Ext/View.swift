@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 extension View {
     var rootViewController: UIViewController? {
@@ -71,7 +72,7 @@ extension View {
 #endif
 
 extension View {
-    // Set background ignoresSafeArea
+    // Set background ignoresSafeArea, should be in last of view
     func setupBackgroundNavigationBar(_ color: Color = Colors.redColorCustom) -> some View {
         ZStack {
             color
@@ -83,6 +84,7 @@ extension View {
 }
 
 extension View {
+    /// Setup font, color for title navigation
     func setupNavigationBar(titleSize: CGFloat = 20, largeTitleSize: CGFloat = 34, titleCOlor: UIColor = .white) -> some View {
         self
             .onAppear(perform: {
@@ -103,5 +105,29 @@ extension View {
 extension View {
     var toAnyView: AnyView {
         AnyView(self)
+    }
+}
+
+// Prepare For LoadMore
+extension View {
+    var defaultGridItemLayout: [GridItem] {
+        Array(repeating: GridItem(.flexible(), spacing: 15), count: 2)
+    }
+    
+    func prepareForLoadMore(loadMore: @escaping () -> Void, showIndicator: Bool) -> some View {
+        ScrollView {
+            self
+                .padding([.horizontal, .top])
+
+            if showIndicator {
+                ActivityIndicator()
+                    .style(.regular)
+                    .tintColor(.black)
+                    .onAppear {
+                        loadMore()
+                    }
+                    .padding(.bottom, 8)
+            }
+        }
     }
 }

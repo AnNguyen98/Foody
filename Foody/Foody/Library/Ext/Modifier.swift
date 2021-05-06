@@ -140,7 +140,8 @@ extension View {
 }
 
 // Refresh Scroll
-extension ScrollView {
+extension View {
+    /// Before is scroll view
     func onRefresh(_ onRefresh: @escaping () -> Void) -> some View {
         modifier(RefreshScrollModifier(onRefresh))
     }

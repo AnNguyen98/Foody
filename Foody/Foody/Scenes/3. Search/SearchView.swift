@@ -16,7 +16,7 @@ struct SearchView: View {
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: gridItemLayout, spacing: 15) {
+            LazyVGrid(columns: gridItemLayout, spacing: 10) {
                 ForEach(viewModel.products, id: \._id) { product in
                     ProductCellView()
                 }
@@ -39,21 +39,13 @@ struct SearchView: View {
                 .searchBarStyle(.default)
                 .returnKeyType(.search)
         })
-        .navigationBarTitle("Search", displayMode: .large)
-        .onAppear(perform: {
-            let titleTextAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 34),
-                .foregroundColor: UIColor.white,
-            ]
-            UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().largeTitleTextAttributes = titleTextAttributes
-            UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor()
-        })
+        .background(Color.white)
+        .navigationBarTitle("Search", displayMode: .automatic)
+        .setupNavigationBar()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
-        .background(Color.white)
         .handleErrors($viewModel.error)
         .setupBackgroundNavigationBar()
     }
