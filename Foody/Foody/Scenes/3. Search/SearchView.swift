@@ -7,68 +7,34 @@
 
 import SwiftUI
 import SwiftUIX
-import Introspect
 
 struct SearchView: View {
     
     @StateObject private var viewModel = SearchViewModel()
     
+    private var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 15), count: 2)
+
     var body: some View {
-        ZStack {
-            Colors.redColorCustom
-                .ignoresSafeArea()
-                        
-            VStack {
-                HStack {
-                    Text("Results: \(viewModel.items.count) items")
-                        .systemBold(size: 16)
-                        .foregroundColor(.black)
-                    Spacer()
+        ScrollView {
+            LazyVGrid(columns: gridItemLayout, spacing: 15) {
+                ForEach(viewModel.products, id: \._id) { product in
+                    ProductCellView()
                 }
-                .padding(.horizontal, 20)
-                
-                ScrollView(.vertical) {
-                    LazyVStack(spacing: 20) {
-                        ForEach(viewModel.items, id: \._id) { item in
-                            Text("Item \(item._id)")
-                                .foregroundColor(.white)
-                                .font(.body)
-                                .frame(width: kScreenSize.width - 40, height: 50)
-                                .background(Color.red)
-                                .onAppear(perform: {
-                                    if item == viewModel.items.last {
-                                        viewModel.isLastRow = true
-                                    }
-                                })
-                                .onDisappear(perform: {
-                                    print("DEBUG - onDisappear")
-                                })
-                                .padding(.horizontal, 20)
-                        }
-                    }
-                    
-                    if viewModel.canLoadMore, viewModel.isLastRow {
-                        ActivityIndicator()
-                            .style(.regular)
-                            .tintColor(.black)
-                            .onAppear {
-                                handleLoadMore()
-                            }
-                            .padding(.bottom, 8)
-                    }
-                    
-                }
-                .onRefresh {
-                    handleRefresh()
-                }
-                .animation(.spring())
-                
             }
-            .padding(.top, 20)
-            .background(Color.white)
+            .padding([.horizontal, .top])
+            
+            if viewModel.canLoadMore, viewModel.isLastRow {
+                ActivityIndicator()
+                    .style(.regular)
+                    .tintColor(.black)
+                    .onAppear {
+                        handleLoadMore()
+                    }
+                    .padding(.bottom, 8)
+            }
         }
         .navigationSearchBar({
-            SearchBar("Search...", text: $viewModel.searchText)
+            SearchBar("Enter product name...", text: $viewModel.searchText)
                 .showsCancelButton(true)
                 .searchBarStyle(.default)
                 .returnKeyType(.search)
@@ -89,6 +55,7 @@ struct SearchView: View {
         .handleHidenKeyboard()
         .background(Color.white)
         .handleErrors($viewModel.error)
+        .setupBackgroundNavigationBar()
     }
 }
 

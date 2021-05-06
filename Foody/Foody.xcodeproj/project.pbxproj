@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42209B1F55409F5741708C67 /* Pods_Foody.framework */; };
 		8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0F0F2625EB45700060C2A9 /* RegisterView.swift */; };
-		8E0FF0A126419F090013B5CC /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 8E0FF0A026419F090013B5CC /* SwiftUIX */; };
 		8E0FF0A62641BE6B0013B5CC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */; };
 		8E29E2A22639AAD6008F67B3 /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */; };
 		8E3170402625FB400085AB4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31703F2625FB400085AB4E /* User.swift */; };
@@ -97,6 +96,7 @@
 		B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */; };
 		B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextField.swift */; };
 		B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */; };
+		B5D889F82643D2B20023B05A /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = B5D889F72643D2B20023B05A /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */; };
 		B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD22632751600FCBDEB /* Constants.swift */; };
 		B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD72632858300FCBDEB /* AlertView.swift */; };
@@ -224,6 +224,7 @@
 		B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPhoneViewModel.swift; sourceTree = "<group>"; };
 		B5D004CC25FF3D4900E4B9AE /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		B5D889F22643D0760023B05A /* SwiftUIX */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SwiftUIX; path = ../../SwiftUIX; sourceTree = "<group>"; };
 		B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		B5DA5FD22632751600FCBDEB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5DA5FD72632858300FCBDEB /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
@@ -237,7 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E0FF0A126419F090013B5CC /* SwiftUIX in Frameworks */,
+				B5D889F82643D2B20023B05A /* SwiftUIX in Frameworks */,
 				8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */,
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
 			);
@@ -284,6 +285,7 @@
 				8E40D91625DEB90200E73E20 /* Products */,
 				765ECB79A3917B29C214E67E /* Pods */,
 				91C7D8C1AADC9442A24BEA5B /* Frameworks */,
+				B5D889F22643D0760023B05A /* SwiftUIX */,
 			);
 			sourceTree = "<group>";
 		};
@@ -739,7 +741,7 @@
 			name = Foody;
 			packageProductDependencies = (
 				8E8B9A9226386CC6002C8210 /* SwiftUICharts */,
-				8E0FF0A026419F090013B5CC /* SwiftUIX */,
+				B5D889F72643D2B20023B05A /* SwiftUIX */,
 			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
@@ -817,7 +819,7 @@
 			mainGroup = 8E40D90C25DEB90200E73E20;
 			packageReferences = (
 				8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */,
-				8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
@@ -1387,14 +1389,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.6;
-			};
-		};
 		8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
@@ -1403,18 +1397,26 @@
 				minimumVersion = 1.5.5;
 			};
 		};
+		B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AnNguyen98/SwiftUIX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8E0FF0A026419F090013B5CC /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8E0FF08F26419BDF0013B5CC /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
-		};
 		8E8B9A9226386CC6002C8210 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		B5D889F72643D2B20023B05A /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
