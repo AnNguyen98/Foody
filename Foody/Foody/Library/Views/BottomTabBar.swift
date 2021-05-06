@@ -10,7 +10,7 @@ import UIKit
 import SwiftUIX
 
 enum TabItem: Int, CaseIterable {
-    case home, search, carts, likes, profile
+    case home = 0, search = 1, carts = 4, likes = 2, profile = 3
     
     var id: UUID { return UUID() }
     
