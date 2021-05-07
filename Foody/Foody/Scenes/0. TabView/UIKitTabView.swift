@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Foundation
+import SwifterSwift
 
 /// An iOS style TabView that doesn't reset it's childrens navigation stacks when tabs are switched.
 public struct UIKitTabView: View {
@@ -84,6 +86,15 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
 
         init(_ tabBarController: TabBarController) {
             self.parent = tabBarController
+            super.init()
+            NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectedTab), name: .didSelectedTab, object: nil)
+        }
+        
+        @objc private func onDidSelectedTab(_ notification: Notification) {
+            if let selectedIndex = notification.object as? Int,
+               selectedIndex < parent.controllers.count, parent.selectedIndex == selectedIndex {
+                popToRootOrScrollUp(on: parent.controllers[selectedIndex])
+            }
         }
         
         func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
@@ -129,6 +140,10 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
             }
             
             return nil
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
         }
     }
 }

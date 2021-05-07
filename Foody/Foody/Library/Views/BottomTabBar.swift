@@ -113,6 +113,7 @@ struct TabBarItem: View {
                                         damping: 20, initialVelocity: 0.1))
         .onTapGesture {
             indexSelected = item.rawValue
+            NotificationCenter.default.post(name: .didSelectedTab, object: indexSelected)
             isClicking = true
             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in
                 isClicking = false

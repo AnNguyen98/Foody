@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notification: Codable {
+struct Notifications: Codable {
     var _id: String = UUID.init().uuidString
     
     var userId: String = ""
