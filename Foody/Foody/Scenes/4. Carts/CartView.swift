@@ -9,19 +9,22 @@ import SwiftUI
 
 struct CartView: View {
     @Environment(\.presentationMode) private var presentationMode
-    //@Environment(\.editMode)
-    @State private var editMode = false
+    @Environment(\.editMode) var editMode = EditMode.inactive
+//    @State private var editMode = false
     
     var body: some View {
         NavigationView {
-            LazyVStack {
+            List {
                 ForEach(0..<20) { index in
                     HStack {
 //                        if editMode {
 //                            Button(action: {
 //
 //                            }, label: {
-//                                Image(systemName: SFSymbols.trash)
+//                                Image(systemName: SFSymbols.checkmarkCircleFill)
+//                                    .resizable()
+//                                    .frame(width: 20, height: 20)
+//                                    .foregroundColor(.gray)
 //                            })
 //                        }
                         
@@ -44,6 +47,7 @@ struct CartView: View {
                             }
                             .padding(.trailing)
                         }
+//                        .disabled()
                         .font(.body)
                         .lineLimit(1)
                         .frame(maxWidth: kScreenSize.width)
@@ -51,25 +55,31 @@ struct CartView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow(color: .gray, radius: 3, x: 2, y: 2)
                         
-                        if editMode {
-                            Button(action: {
-                                
-                            }, label: {
-                                Image(systemName: SFSymbols.trash)
-                            })
-                        }
+//                        if editMode {
+//                            Button(action: {
+//
+//                            }, label: {
+//                                Image(systemName: SFSymbols.trash)
+//                            })
+//                        }
                     }
                     .animation(.default)
                 }
-            }
-//            .environment(\.editMode, $editMode)
-            .prepareForLoadMore(loadMore: {
                 
-            }, showIndicator: true)
+                Button(action: {
+                    
+                }, label: {
+                    Text("Complete Order")
+                    
+                })
+            }
+//            .prepareForLoadMore(loadMore: {
+//
+//            }, showIndicator: true)
             .onRefresh {
                 
             }
-            .navigationBarTitle("My Orders", displayMode: .inline)
+            .navigationBarTitle("Carts", displayMode: .inline)
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -77,14 +87,11 @@ struct CartView: View {
                     }, label: Image(systemName: SFSymbols.xmark))
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        editMode.toggle()
-                    }, label: Text(editMode ? "Done": "Edit"))
-                }
-            })
-            .onAppear(perform: {
-                UINavigationBar.appearance().tintColor = .gray
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button(action: {
+//                        editMode.toggle()
+//                    }, label: Text(editMode ? "Done": "Edit"))
+//                }
             })
         }
     }

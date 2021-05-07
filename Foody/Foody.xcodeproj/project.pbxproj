@@ -92,6 +92,7 @@
 		B55DE2E6261EA53200F6328A /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55DE2E5261EA53200F6328A /* OrderView.swift */; };
 		B58786AB25EF899500203EEC /* BottomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58786AA25EF899500203EEC /* BottomTabBar.swift */; };
 		B58DC23826034E59000A1E45 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58DC23726034E59000A1E45 /* LoginViewModel.swift */; };
+		B59764152644ECDA00086482 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = B59764142644ECDA00086482 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B59DF1AA261D728600E7AA76 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59DF1A7261D728500E7AA76 /* Router.swift */; };
 		B59DF1AB261D728600E7AA76 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59DF1A8261D728600E7AA76 /* NetworkProvider.swift */; };
 		B59DF1E4261D9A8800E7AA76 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59DF1E3261D9A8800E7AA76 /* ImagePickerView.swift */; };
@@ -102,7 +103,6 @@
 		B5D004C825FF2BD100E4B9AE /* VerifyPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004C725FF2BD100E4B9AE /* VerifyPhoneViewModel.swift */; };
 		B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004CC25FF3D4900E4B9AE /* TextField.swift */; };
 		B5D004D225FF450000E4B9AE /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D004D125FF450000E4B9AE /* RegisterViewModel.swift */; };
-		B5D889F82643D2B20023B05A /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = B5D889F72643D2B20023B05A /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B5DA5FAA2632594C00FCBDEB /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FA92632594C00FCBDEB /* DefaultsKeys.swift */; };
 		B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD22632751600FCBDEB /* Constants.swift */; };
 		B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD72632858300FCBDEB /* AlertView.swift */; };
@@ -249,7 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5D889F82643D2B20023B05A /* SwiftUIX in Frameworks */,
+				B59764152644ECDA00086482 /* SwiftUIX in Frameworks */,
 				8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */,
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
 			);
@@ -415,7 +415,6 @@
 			children = (
 				8E415FED25EB422F00D886F5 /* FavoritesView.swift */,
 				8E9419E42640E043008808D5 /* FavoritesViewModel.swift */,
-				8E586F592640DC20001C279B /* Cells */,
 			);
 			path = "5. Favorites";
 			sourceTree = "<group>";
@@ -454,13 +453,6 @@
 				8E9ABB9125EA17CE002FF3FA /* Ext */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		8E586F592640DC20001C279B /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		8E5DAD27263CEDA200234F92 /* Observable Objects */ = {
@@ -757,7 +749,7 @@
 			name = Foody;
 			packageProductDependencies = (
 				8E8B9A9226386CC6002C8210 /* SwiftUICharts */,
-				B5D889F72643D2B20023B05A /* SwiftUIX */,
+				B59764142644ECDA00086482 /* SwiftUIX */,
 			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
@@ -835,7 +827,7 @@
 			mainGroup = 8E40D90C25DEB90200E73E20;
 			packageReferences = (
 				8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */,
-				B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				B59764132644ECDA00086482 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
@@ -1419,12 +1411,12 @@
 				minimumVersion = 1.5.5;
 			};
 		};
-		B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		B59764132644ECDA00086482 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AnNguyen98/SwiftUIX";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.6;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1435,9 +1427,9 @@
 			package = 8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
-		B5D889F72643D2B20023B05A /* SwiftUIX */ = {
+		B59764142644ECDA00086482 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B5D889F62643D2B20023B05A /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			package = B59764132644ECDA00086482 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
