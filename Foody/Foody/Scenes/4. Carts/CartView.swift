@@ -9,75 +9,77 @@ import SwiftUI
 
 struct CartView: View {
     @Environment(\.presentationMode) private var presentationMode
-    @Environment(\.editMode) var editMode = EditMode.inactive
-//    @State private var editMode = false
+    @State private var value = 1
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(0..<20) { index in
-                    HStack {
-//                        if editMode {
-//                            Button(action: {
-//
-//                            }, label: {
-//                                Image(systemName: SFSymbols.checkmarkCircleFill)
-//                                    .resizable()
-//                                    .frame(width: 20, height: 20)
-//                                    .foregroundColor(.gray)
-//                            })
-//                        }
-                        
-                        HStack {
-                            Image("food1")
-                                .resizable()
-                                .frame(width: 150, height: 90)
-                            
-                            VStack(spacing: 15) {
-                                HStack {
-                                    Text("\(index)")
-                                        .font(.title2)
+            VStack {
+                LazyVStack(spacing: 15) {
+                    ForEach(0..<15) { index in
+                        SwipeableView(content: {
+                            HStack {
+                                Image("food1")
+                                    .resizable()
+                                    .frame(width: 150)
+
+                                VStack(spacing: 15) {
+                                    HStack {
+                                        Text("\(value)")
+                                            .font(.title2)
+
+                                        Spacer()
+
+                                        Text("Today")
+                                            .foregroundColor(.gray)
+                                    }
                                     
-                                    Spacer()
-                                    
-                                    Text("Today")
-                                        .foregroundColor(.gray)
+                                    HStack {
+                                        Text("Order ID: \(UUID().uuidString)")
+                                        
+                                        Spacer()
+                                        
+                                        SteperLabel(value: $value)
+                                    }
                                 }
-                                Text("Order ID: \(UUID().uuidString)")
+                                .padding(.trailing)
                             }
-                            .padding(.trailing)
-                        }
-//                        .disabled()
-                        .font(.body)
-                        .lineLimit(1)
-                        .frame(maxWidth: kScreenSize.width)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .shadow(color: .gray, radius: 3, x: 2, y: 2)
-                        
-//                        if editMode {
-//                            Button(action: {
-//
-//                            }, label: {
-//                                Image(systemName: SFSymbols.trash)
-//                            })
-//                        }
+                            .font(.body)
+                            .lineLimit(1)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .background(Color.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow(color: .gray, radius: 3, x: 0, y: 0)
+                        },
+                        leftActions: [
+                            Action(title: "Delete", iconName: SFSymbols.trash.rawValue, bgColor: .red, action: {
+                                
+                            }),
+                        ], rightActions: [],
+                        rounded: true
+                        ).frame(height: 90)
                     }
-                    .animation(.default)
                 }
+                .prepareForLoadMore(loadMore: {
+
+                }, showIndicator: true)
+                .onRefresh {
+                    
+                }
+                
+                Divider()
                 
                 Button(action: {
                     
                 }, label: {
-                    Text("Complete Order")
-                    
+                    Text("Complete order")
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Colors.redColorCustom)
+                        .foregroundColor(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 })
-            }
-//            .prepareForLoadMore(loadMore: {
-//
-//            }, showIndicator: true)
-            .onRefresh {
-                
+                .padding([.bottom, .horizontal])
             }
             .navigationBarTitle("Carts", displayMode: .inline)
             .toolbar(content: {
@@ -86,14 +88,13 @@ struct CartView: View {
                         presentationMode.dismiss()
                     }, label: Image(systemName: SFSymbols.xmark))
                 }
-                
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button(action: {
-//                        editMode.toggle()
-//                    }, label: Text(editMode ? "Done": "Edit"))
-//                }
             })
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        //users.remove(atOffsets: offsets)
+        print(offsets)
     }
 }
 

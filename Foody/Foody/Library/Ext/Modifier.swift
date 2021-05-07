@@ -159,7 +159,8 @@ struct RefreshScrollModifier: ViewModifier {
         content
             .introspectScrollView { (scrollView) in
                 let refreshControl = UIRefreshControl()
-                refreshControl.tintColor = .black
+                refreshControl.tintColor = .gray
+                refreshControl.transform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
                 refreshControl.addTarget(coordinator, action: #selector(coordinator.onRefresh(_:)), for: .valueChanged)
                 scrollView.refreshControl = refreshControl
             }

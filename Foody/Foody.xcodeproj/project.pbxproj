@@ -65,6 +65,12 @@
 		8ED88340264162E10091FD86 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8833F264162E10091FD86 /* NotificationsView.swift */; };
 		8ED88345264164740091FD86 /* SeachViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED88344264164740091FD86 /* SeachViewModel.swift */; };
 		8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED95059263AB1EB00E0B5B1 /* Encodable.swift */; };
+		8EE1275426450E440010459C /* SwManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1275126450E430010459C /* SwManager.swift */; };
+		8EE1275526450E440010459C /* EditActionsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1275226450E440010459C /* EditActionsVM.swift */; };
+		8EE1275626450E440010459C /* SWViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1275326450E440010459C /* SWViewModel.swift */; };
+		8EE1275C26450E4F0010459C /* SwipeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1275A26450E4E0010459C /* SwipeableView.swift */; };
+		8EE1275D26450E4F0010459C /* EditActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1275B26450E4F0010459C /* EditActions.swift */; };
+		8EE1278326452A880010459C /* SteperLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE1278226452A880010459C /* SteperLabel.swift */; };
 		8EE982592634492A00DCB575 /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE982582634492A00DCB575 /* RadioButton.swift */; };
 		8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC564261B4AE0004A052D /* ViewModel.swift */; };
 		8EEAC56A261B5096004A052D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEAC569261B5096004A052D /* String.swift */; };
@@ -198,6 +204,12 @@
 		8ED8833F264162E10091FD86 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		8ED88344264164740091FD86 /* SeachViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeachViewModel.swift; sourceTree = "<group>"; };
 		8ED95059263AB1EB00E0B5B1 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
+		8EE1275126450E430010459C /* SwManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwManager.swift; sourceTree = "<group>"; };
+		8EE1275226450E440010459C /* EditActionsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActionsVM.swift; sourceTree = "<group>"; };
+		8EE1275326450E440010459C /* SWViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWViewModel.swift; sourceTree = "<group>"; };
+		8EE1275A26450E4E0010459C /* SwipeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableView.swift; sourceTree = "<group>"; };
+		8EE1275B26450E4F0010459C /* EditActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActions.swift; sourceTree = "<group>"; };
+		8EE1278226452A880010459C /* SteperLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteperLabel.swift; sourceTree = "<group>"; };
 		8EE982582634492A00DCB575 /* RadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		8EEAC564261B4AE0004A052D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		8EEAC569261B5096004A052D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -507,6 +519,7 @@
 		8E9ABB9F25EA1949002FF3FA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8EE1274E26450E250010459C /* SwipeableView */,
 				B5055B69260472FF003DE804 /* TextFieldCustom.swift */,
 				8E9ABBA525EA197B002FF3FA /* CircleButton.swift */,
 				8E9C946D25EA594800D00B03 /* NavigationCustom.swift */,
@@ -523,6 +536,7 @@
 				8E5DACFC263B92E200234F92 /* TextView.swift */,
 				8ED8833F264162E10091FD86 /* NotificationsView.swift */,
 				8E4662A226441DFB009DA24F /* GifView.swift */,
+				8EE1278226452A880010459C /* SteperLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -562,6 +576,34 @@
 				8EEAC57B261B5C5B004A052D /* ForgotPasswordViewModel.swift */,
 			);
 			path = "5. Forgot pasword";
+			sourceTree = "<group>";
+		};
+		8EE1274E26450E250010459C /* SwipeableView */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1275026450E370010459C /* ViewModel */,
+				8EE1274F26450E320010459C /* View */,
+			);
+			path = SwipeableView;
+			sourceTree = "<group>";
+		};
+		8EE1274F26450E320010459C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1275B26450E4F0010459C /* EditActions.swift */,
+				8EE1275A26450E4E0010459C /* SwipeableView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EE1275026450E370010459C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EE1275226450E440010459C /* EditActionsVM.swift */,
+				8EE1275126450E430010459C /* SwManager.swift */,
+				8EE1275326450E440010459C /* SWViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8EEAC563261B4AA6004A052D /* Base */ = {
@@ -984,6 +1026,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EEAC584261B60EC004A052D /* BackButton.swift in Sources */,
+				8EE1275D26450E4F0010459C /* EditActions.swift in Sources */,
 				8E5DAD2F263CF18500234F92 /* Comment.swift in Sources */,
 				8E9ABB9325EA17DF002FF3FA /* Color.swift in Sources */,
 				8EEAC589261B64F5004A052D /* Modifier.swift in Sources */,
@@ -1014,6 +1057,7 @@
 				8E9C946625EA530C00D00B03 /* Font.swift in Sources */,
 				B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */,
 				8E4C3F622642E3FE00E69662 /* PopularRestaurantsView.swift in Sources */,
+				8EE1275626450E440010459C /* SWViewModel.swift in Sources */,
 				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
 				B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */,
 				B5D004CD25FF3D4900E4B9AE /* TextField.swift in Sources */,
@@ -1031,6 +1075,7 @@
 				8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */,
 				8E62C84C25E6804800F0614D /* LoginView.swift in Sources */,
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
+				8EE1275526450E440010459C /* EditActionsVM.swift in Sources */,
 				8ED88345264164740091FD86 /* SeachViewModel.swift in Sources */,
 				8E3170402625FB400085AB4E /* User.swift in Sources */,
 				B5055B78260473BB003DE804 /* ProfileView.swift in Sources */,
@@ -1047,6 +1092,7 @@
 				8ED8833B264151D10091FD86 /* SFSymbols.swift in Sources */,
 				8E9419E52640E043008808D5 /* FavoritesViewModel.swift in Sources */,
 				B58DC23826034E59000A1E45 /* LoginViewModel.swift in Sources */,
+				8EE1275426450E440010459C /* SwManager.swift in Sources */,
 				8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */,
 				8E5DACF8263B928900234F92 /* PhoneNumberTextView.swift in Sources */,
 				8EF8F11825EA0C5D00B1499E /* RestaurantDetailsView.swift in Sources */,
@@ -1065,6 +1111,8 @@
 				8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */,
 				8E5DAD20263CED5000234F92 /* Order.swift in Sources */,
 				8EEAC577261B5A83004A052D /* ForgotPasswordView.swift in Sources */,
+				8EE1275C26450E4F0010459C /* SwipeableView.swift in Sources */,
+				8EE1278326452A880010459C /* SteperLabel.swift in Sources */,
 				8E415FEE25EB422F00D886F5 /* FavoritesView.swift in Sources */,
 				8E4C3F672642E41900E69662 /* TrendingProductsView.swift in Sources */,
 			);
