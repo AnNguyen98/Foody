@@ -20,6 +20,8 @@ struct Product: Codable {
     
     var restaurantId: String = ""
     
+    var restaurantName: String = ""
+    
     var imageBase64Encodings: [String] = []
     
     var voteCount: Int = 0
@@ -52,7 +54,7 @@ extension Product: Hashable {
 }
 
 extension Product {
-    var productImages: [Data?] {
-        imageBase64Encodings.map({ Data(base64Encoded: $0) })
+    var productImages: [Data] {
+        imageBase64Encodings.compactMap({ Data(base64Encoded: $0) })
     }
 }

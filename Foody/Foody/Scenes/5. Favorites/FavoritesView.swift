@@ -15,7 +15,7 @@ struct FavoritesView: View {
             ForEach(viewModel.products, id: \._id) { product in
                 NavigationLink(destination: productView(with: product), label: {
                     ZStack(alignment: .topTrailing) {
-                        ProductCellView()
+                        ProductCellView(product: product)
                         
                         Button(action: {
                             viewModel.deleteFavorite(id: product._id)
@@ -51,6 +51,9 @@ struct FavoritesView: View {
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .setupBackgroundNavigationBar()
+        .onAppear(perform: {
+            viewModel.getProducts()
+        })
     }
     
     func productView(with product: Product) -> FoodDetailsView {

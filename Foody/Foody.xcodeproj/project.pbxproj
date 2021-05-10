@@ -119,6 +119,7 @@
 		B5FC92A626493E9B0037632F /* UpdateInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92A526493E9B0037632F /* UpdateInfoView.swift */; };
 		B5FC92AB26493EA90037632F /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92AA26493EA90037632F /* ChartsView.swift */; };
 		B5FC92B3264946140037632F /* ProductServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92B2264946140037632F /* ProductServices.swift */; };
+		B5FC92DC264974030037632F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92DB264974030037632F /* Image.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -263,6 +264,7 @@
 		B5FC92A526493E9B0037632F /* UpdateInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoView.swift; sourceTree = "<group>"; };
 		B5FC92AA26493EA90037632F /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		B5FC92B2264946140037632F /* ProductServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductServices.swift; sourceTree = "<group>"; };
+		B5FC92DB264974030037632F /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -522,6 +524,7 @@
 				8ED95059263AB1EB00E0B5B1 /* Encodable.swift */,
 				8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */,
 				B5C0691F2644D61E0088F336 /* Notification.Name.swift */,
+				B5FC92DB264974030037632F /* Image.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -1137,6 +1140,7 @@
 				B58DC23826034E59000A1E45 /* LoginViewModel.swift in Sources */,
 				8EE1275426450E440010459C /* SwManager.swift in Sources */,
 				8EEAC565261B4AE0004A052D /* ViewModel.swift in Sources */,
+				B5FC92DC264974030037632F /* Image.swift in Sources */,
 				8E5DACF8263B928900234F92 /* PhoneNumberTextView.swift in Sources */,
 				8EF8F11825EA0C5D00B1499E /* RestaurantDetailsView.swift in Sources */,
 				B5D004B325FEF9AD00E4B9AE /* Session.swift in Sources */,

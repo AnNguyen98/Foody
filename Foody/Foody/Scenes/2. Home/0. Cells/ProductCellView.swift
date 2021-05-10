@@ -11,21 +11,21 @@ let scale: CGFloat =  kScreenSize.width / 375
 
 struct ProductCellView: View {
     
-    @State var voteCount: Int = Int.random(in: 1...5)
-    var restaurant: Product = Product()
+    var product: Product = Product()
+    var voteProduct: ((Int) -> Void)?
         
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Image("food1")
+            Image(product.productImages.first)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: 250 * scale, maxHeight: 130 * scale)
                 .clipShape(RoundedRectangle(cornerRadius: 0))
             
             VStack(alignment: .leading, spacing: 2) {
-                Text("Crispy Chicken Sandwich")
+                Text(product.name)
                 
-                Text("Korean BBQ")
+                Text(product.restaurantName)
                     .foregroundColor(Color(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1)))
                     .font(.subheadline)
                 
@@ -34,15 +34,15 @@ struct ProductCellView: View {
                         Image(systemName: "star.fill")
                             .resizable()
                             .frame(width: 16 * scale, height: 16 * scale)
-                            .foregroundColor(index <= voteCount ? .yellow: .gray)
+                            .foregroundColor(index <= product.voteCount ? .yellow: .gray)
                             .onTapGesture {
-                                voteCount = index
+                                voteProduct?(index)
                             }
                     }
                     
                     Spacer(minLength: 0)
                     
-                    Text("0.00")
+                    Text("\(product.price)")
                         .bold()
                 }
                 .padding(.bottom, 10)
