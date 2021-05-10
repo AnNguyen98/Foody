@@ -66,7 +66,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     func makeRoot(_ status: Status) {
-        let hostingController = HostingController(rootView: Status.logged.contentView)
+        let hostingController = HostingController(rootView: status.contentView) // Status.logged.contentView)
         window?.rootViewController = hostingController
         UIApplication.hostingController = hostingController
         window?.makeKeyAndVisible()

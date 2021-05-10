@@ -13,30 +13,38 @@ struct ProfileButtonView: View {
     var imageName: String
     
     var body: some View {
-        Button(action: {
-            action?()
-        }) {
-            Label(
-                title: {
-                    Text(text)
-                        .padding(.leading, 40)
-                        .systemBold(size: 19)
-                    
-                    Spacer()
-                },
-                icon: {
-                    Image(imageName)
-                        .resizable()
-                        .frame(.init(width: 23, height: 24))
-                        .background(
-                            Circle()
-                                .frame(.init(width: 50, height: 50))
-                                .foregroundColor(Color(#colorLiteral(red: 0.1568627451, green: 0.1764705882, blue: 0.2117647059, alpha: 1)))
-                        )
-                }
-            )
+        VStack(spacing: 25) {
+            Button(action: {
+                action?()
+            }) {
+                Label(
+                    title: {
+                        Text(text)
+                            .padding(.leading, 30)
+                            .font(.body)
+                        
+                        Spacer()
+                    },
+                    icon: {
+                        Image(imageName)
+                            .resizable()
+                            .frame(.init(width: 22, height: 22))
+                            .foregroundColor(.white)
+                            .background(
+                                Circle()
+                                    .frame(.init(width: 44, height: 44))
+                                    .foregroundColor(Color(#colorLiteral(red: 0.1568627451, green: 0.1764705882, blue: 0.2117647059, alpha: 1)).opacity(0.9))
+                            )
+                    }
+                )
+            }
+            
+            Divider()
+                .background(Color.black)
         }
-        .padding([.top], 20)
+        
+        .padding([.top], 15)
         .padding(.horizontal)
+        .foregroundColor(.black)
     }
 }
