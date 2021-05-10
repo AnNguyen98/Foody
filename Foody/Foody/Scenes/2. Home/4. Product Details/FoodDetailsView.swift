@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FoodDetailsView: View {
+    @StateObject var viewModel = ProductDetailsViewModel()
+    
     @State private var numberOfItems: Int = 0
     @State private var checkItems: [Int] = []
     

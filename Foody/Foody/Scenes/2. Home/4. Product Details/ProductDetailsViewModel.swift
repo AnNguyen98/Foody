@@ -8,5 +8,9 @@
 import SwiftUI
 
 final class ProductDetailsViewModel: ViewModel, ObservableObject {
+    var productId: String
     
+    init(id: String = "") {
+        self.productId = id
+    }
 }

@@ -13,31 +13,33 @@ struct FavoritesView: View {
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
             ForEach(viewModel.products, id: \._id) { product in
-                ZStack(alignment: .topTrailing) {
-                    ProductCellView()
-                    
-                    Button(action: {
+                NavigationLink(destination: productView(with: product), label: {
+                    ZStack(alignment: .topTrailing) {
+                        ProductCellView()
                         
-                    }, label: {
-                        Image(systemName: SFSymbols.heartFill)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.red)
-                            .padding(8)
-                            
-                    })
-                }
-                .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
-                .onAppear(perform: {
-                    if product == viewModel.products.last {
-                        viewModel.isLastRow = true
+                        Button(action: {
+                            viewModel.deleteFavorite(id: product._id)
+                        }, label: {
+                            Image(systemName: SFSymbols.heartFill)
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.red)
+                                .padding(8)
+                                
+                        })
                     }
+                    .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
+                    .onAppear(perform: {
+                        if product == viewModel.products.last {
+                            viewModel.isLastRow = true
+                        }
+                    })
                 })
             }
         }
         .prepareForLoadMore(loadMore: {
             handleLoadMore()
-        }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
+        }, showIndicator: viewModel.canLoadMore)
         .onRefresh {
             handleRefresh()
         }
@@ -49,6 +51,10 @@ struct FavoritesView: View {
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .setupBackgroundNavigationBar()
+    }
+    
+    func productView(with product: Product) -> FoodDetailsView {
+        FoodDetailsView(viewModel: viewModel.detailsViewModel(with: product))
     }
 }
 

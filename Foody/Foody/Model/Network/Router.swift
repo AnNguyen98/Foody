@@ -16,6 +16,7 @@ enum VerifyAction: String {
 }
 
 enum Router {
+    case getFavorites, newFavorite(params: Parameters), deleteFavorite(id: String)
     case updatePassword(email: String, password: String)
     case verifyEmail(email: String, action: VerifyAction)
     case login(email: String, password: String)
@@ -44,6 +45,8 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .getFavorites, .deleteFavorite, .newFavorite:
+            return "/v1/products/favorite"
         case .updatePassword:
             return "/account/password/forgot"
         case .verifyEmail:
@@ -63,10 +66,12 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .updatePassword:
+        case .login, .register, .verifyEmail, .updatePassword, .newFavorite:
             return .post
-        case .details, .trending:
+        case .details, .trending, .getFavorites:
             return .get
+        case .deleteFavorite:
+            return .delete
         }
     }
     
@@ -76,6 +81,12 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
+        case .newFavorite(let params):
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
+        case .getFavorites:
+            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
+        case .deleteFavorite(let id):
+            return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
         case .updatePassword(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):

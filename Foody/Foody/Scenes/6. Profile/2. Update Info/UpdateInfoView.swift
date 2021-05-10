@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct UpdateInfoVIew: View {
+struct UpdateInfoView: View {
     var body: some View {
         Text("Hello, World!")
     }
 }
 
-struct UpdateInfoVIew_Previews: PreviewProvider {
+struct UpdateInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateInfoVIew()
+        UpdateInfoView()
     }
 }
