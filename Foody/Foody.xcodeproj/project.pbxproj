@@ -115,6 +115,9 @@
 		B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA5FD72632858300FCBDEB /* AlertView.swift */; };
 		B5EA7285264297E000241260 /* ProductCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA7284264297E000241260 /* ProductCellView.swift */; };
 		B5EA72962642A28A00241260 /* RestaurantCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EA72952642A28A00241260 /* RestaurantCellView.swift */; };
+		B5FC929E26493E8A0037632F /* InfoVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC929D26493E8A0037632F /* InfoVIew.swift */; };
+		B5FC92A626493E9B0037632F /* UpdateInfoVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92A526493E9B0037632F /* UpdateInfoVIew.swift */; };
+		B5FC92AB26493EA90037632F /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92AA26493EA90037632F /* ChartsView.swift */; };
 		D092427AA980DDAF38B4D794 /* Pods_Foody_FoodyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58403AAFE599A1A04AB9D5DF /* Pods_Foody_FoodyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -255,6 +258,9 @@
 		B5DA5FD72632858300FCBDEB /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		B5EA7284264297E000241260 /* ProductCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellView.swift; sourceTree = "<group>"; };
 		B5EA72952642A28A00241260 /* RestaurantCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellView.swift; sourceTree = "<group>"; };
+		B5FC929D26493E8A0037632F /* InfoVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoVIew.swift; sourceTree = "<group>"; };
+		B5FC92A526493E9B0037632F /* UpdateInfoVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoVIew.swift; sourceTree = "<group>"; };
+		B5FC92AA26493EA90037632F /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 		EF74DE9D542E4109D77164E0 /* Pods-FoodyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FoodyTests.debug.xcconfig"; path = "Target Support Files/Pods-FoodyTests/Pods-FoodyTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -688,6 +694,9 @@
 			children = (
 				B5055B77260473BB003DE804 /* ProfileView.swift */,
 				B5C3F88726491FF2003CBE8A /* ProfileViewModel.swift */,
+				B5FC929A26493E450037632F /* 1. Info */,
+				B5FC929B26493E520037632F /* 2. Update Info */,
+				B5FC929C26493E620037632F /* 3. Charts */,
 			);
 			path = "6. Profile";
 			sourceTree = "<group>";
@@ -772,6 +781,30 @@
 				B5EA72952642A28A00241260 /* RestaurantCellView.swift */,
 			);
 			path = "0. Cells";
+			sourceTree = "<group>";
+		};
+		B5FC929A26493E450037632F /* 1. Info */ = {
+			isa = PBXGroup;
+			children = (
+				B5FC929D26493E8A0037632F /* InfoVIew.swift */,
+			);
+			path = "1. Info";
+			sourceTree = "<group>";
+		};
+		B5FC929B26493E520037632F /* 2. Update Info */ = {
+			isa = PBXGroup;
+			children = (
+				B5FC92A526493E9B0037632F /* UpdateInfoVIew.swift */,
+			);
+			path = "2. Update Info";
+			sourceTree = "<group>";
+		};
+		B5FC929C26493E620037632F /* 3. Charts */ = {
+			isa = PBXGroup;
+			children = (
+				B5FC92AA26493EA90037632F /* ChartsView.swift */,
+			);
+			path = "3. Charts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1056,6 +1089,7 @@
 				8EEAC56A261B5096004A052D /* String.swift in Sources */,
 				8E4C3F942642F24900E69662 /* ProductDetailsViewModel.swift in Sources */,
 				8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */,
+				B5FC929E26493E8A0037632F /* InfoVIew.swift in Sources */,
 				B5055B85260473E0003DE804 /* SearchView.swift in Sources */,
 				8E9C946625EA530C00D00B03 /* Font.swift in Sources */,
 				B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */,
@@ -1076,6 +1110,7 @@
 				8E40D91B25DEB90200E73E20 /* SceneDelegate.swift in Sources */,
 				8E5DAD12263CE9D200234F92 /* UserInfomation.swift in Sources */,
 				8E9ABBA625EA197B002FF3FA /* CircleButton.swift in Sources */,
+				B5FC92AB26493EA90037632F /* ChartsView.swift in Sources */,
 				8E62C84C25E6804800F0614D /* LoginView.swift in Sources */,
 				8E9C943E25EA361B00D00B03 /* FoodDetailsView.swift in Sources */,
 				8EE1275526450E440010459C /* EditActionsVM.swift in Sources */,
@@ -1106,6 +1141,7 @@
 				8ED88340264162E10091FD86 /* NotificationsView.swift in Sources */,
 				B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
+				B5FC92A626493E9B0037632F /* UpdateInfoVIew.swift in Sources */,
 				8E5DACFD263B92E200234F92 /* TextView.swift in Sources */,
 				B507FF2D2632FA96003C54DE /* View.swift in Sources */,
 				8E4C3F7C2642E73E00E69662 /* PopularRestaurantsViewModel.swift in Sources */,
