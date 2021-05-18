@@ -43,14 +43,15 @@ struct SplashView: View {
             .ignoresSafeArea()
             .onAppear(perform: {
                 Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (_) in
-                    if let _ = Session.shared.user {
-                        SceneDelegate.shared.makeRoot(.logged)
-                    } else {
-                        isActive = true
-                    }
+                    SceneDelegate.shared.makeRoot(.logged)
+//                    if let _ = Session.shared.user {
+//                        SceneDelegate.shared.makeRoot(.logged)
+//                    } else {
+//                        isActive = true
+//                    }
                 }
             })
-            .statusBarStyle(.lightContent)
+            .statusBarStyle(.darkContent)
         }
     }
 }

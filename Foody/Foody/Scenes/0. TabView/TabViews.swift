@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TabViews: View {
     @State private var indexSelected: Int = 0
-    @State private var showCartsView: Bool = false
+    @State private var showOrdersView: Bool = false
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct TabViews: View {
                 }
                 
                 Button(action: {
-                    showCartsView = true
+                    showOrdersView = true
                 }, label: {
                     GifView(gifName: "cart-preview")
                         .frame(.init(width: 70, height: 70))
@@ -35,8 +35,8 @@ struct TabViews: View {
                         .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
                 })
                 .padding()
-                .fullScreenCover(isPresented: $showCartsView, content: {
-                    CartView()
+                .fullScreenCover(isPresented: $showOrdersView, content: {
+                    OrdersView()
                 })
             }
             
