@@ -24,7 +24,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
     
     func getProducts(page: Int = 0) {
         isLoading = true
-        ProductServices.getFavoriteProducts()
+        CustomerServices.getFavoriteProducts()
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
@@ -51,7 +51,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
     }
     
     func deleteFavorite(id: String) {
-        ProductServices.deleteFavorite(productId: id)
+        CustomerServices.deleteFavorite(productId: id)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {

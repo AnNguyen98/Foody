@@ -25,13 +25,13 @@ final class AccountService: AccountFetchable {
     }
     
     static func updatePassword(for email: String, newPassword: String) -> AnyPublisher<AccountResponse, CommonError> {
-        NetworkProvider.shared.request(.updatePassword(email: email, password: newPassword))
+        NetworkProvider.shared.request(.updatePassword(email, newPassword))
             .decode(type: AccountResponse.self)
             .eraseToAnyPublisher()
     }
     
     static func verifyEmail(email: String, action: VerifyAction) -> AnyPublisher<AccountResponse, CommonError> {
-        return NetworkProvider.shared.request(.verifyEmail(email: email, action: action))
+        return NetworkProvider.shared.request(.verifyEmail(email: email, action))
             .decode(type: AccountResponse.self)
             .eraseToAnyPublisher()
     }
@@ -61,7 +61,7 @@ final class AccountService: AccountFetchable {
     }
     
     static func login(email: String, password: String) -> AnyPublisher<LoginResponse, CommonError>  {
-        NetworkProvider.shared.request(.login(email: email, password: password))
+        NetworkProvider.shared.request(.login(email, password))
             .decode(type: LoginResponse.self)
             .eraseToAnyPublisher()
     }

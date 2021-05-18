@@ -16,15 +16,33 @@ enum VerifyAction: String {
 }
 
 enum Router {
-    case getFavorites, newFavorite(params: Parameters), deleteFavorite(id: String)
-    case updatePassword(email: String, password: String)
-    case verifyEmail(email: String, action: VerifyAction)
-    case login(email: String, password: String)
+    
+    //Customer
+    case cancelOrder(String)
+    case popularRestaurants, trendingProducts
+    case getRestaurant(String)
+    case comment(String, Parameters)
+    case voteRestaurant(String, Int)
+    case voteProduct(String, Int)
+    
+    // Common
+    case getProduct(String)
+    case getOrders
+    case getNotifications, readNotification(id: String) // SWIP
+    
+    // Restaurant
+    case getProducts, newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
+    case searchProducts(productName: String)
+    case getChartInfo
+    case verifySending(id: String)
+    case verifySend(id: String)
+    
+    case getFavorites, newFavorite(Parameters), deleteFavorite(String)
+    case updatePassword(String, String)
+    case verifyEmail(email: String, VerifyAction)
+    case login(String, String)
     case register(Parameters)
-    case details(id: String)
     case trending
-////     First import Alamofire to make use of ‘Parameters’
-//    case endPointWithLotsOfParams(parameters: Parameters)
 }
 
 extension Router: TargetType {
@@ -33,10 +51,10 @@ extension Router: TargetType {
     }
     
     var baseURL: URL {
-        var baseURLString: String = "https://flask-fast-food.herokuapp.com" / version
-        #if DEBUG
-        baseURLString = "http://127.0.0.1:5000" / version
-        #endif
+        let baseURLString: String = "https://flask-fast-food.herokuapp.com" / version
+//        #if DEBUG
+//        baseURLString = "http://127.0.0.1:5000" / version
+//        #endif
         guard let url = URL(string: baseURLString) else {
             fatalError("baseURL could not be configured.")
         }
@@ -45,8 +63,23 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .voteProduct:
+            return "/product/vote"
+        case .voteRestaurant:
+            return "/restaurant/vote"
+        case .comment:
+            return "/product/comment"
+        case .getRestaurant:
+            return "/restaurant"
+        case .cancelOrder:
+            return "/order/cancel"
+        case .trendingProducts:
+            return "/products/trending"
+        case .popularRestaurants:
+            return "/restaurants/popular"
+            
         case .getFavorites, .deleteFavorite, .newFavorite:
-            return "/v1/products/favorite"
+            return "/products/favorite"
         case .updatePassword:
             return "/account/password/forgot"
         case .verifyEmail:
@@ -55,23 +88,42 @@ extension Router: TargetType {
             return "/register"
         case .login:
             return "/login"
-        case .details(let id):
-            return ""
         case .trending:
             return ""
-//        case .endPointWithLotsOfParams(parameters: let parameters):
-//            return "/videos"
+            
+        case .getProducts:
+            return "/products"
+        case .getProduct, .newProduct, .deleteProduct, .updateProduct:
+            return "/product"
+            
+        case .searchProducts:
+            return "search/products"
+            
+        case .getChartInfo:
+            return "/charts"
+        
+        case .getOrders:
+            return "/orders"
+        case .verifySending, .verifySend:
+            return "/order/verify"
+            
+        case .getNotifications:
+            return "/notifications"
+        case .readNotification:
+            return "/notification"
         }
     }
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .updatePassword, .newFavorite:
+        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant:
             return .post
-        case .details, .trending, .getFavorites:
-            return .get
-        case .deleteFavorite:
+        case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification:
+            return .put
+        case .deleteFavorite, .deleteProduct, .cancelOrder:
             return .delete
+        default:
+            return .get
         }
     }
     
@@ -81,12 +133,25 @@ extension Router: TargetType {
     
     var task: Task {
         switch self {
-        case .newFavorite(let params):
+        case .voteProduct(let id, let vote), .voteRestaurant(let id, let vote):
+            return .requestParameters(parameters: ["id": id, "voteCount": vote], encoding: JSONEncoding.default)
+        case .newFavorite(let params), .newProduct(let params), .updateProduct(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
-        case .getFavorites:
-            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
-        case .deleteFavorite(let id):
+        
+        case .comment(let id, let params):
+            var tempParams = params
+            tempParams["productId"] = id
+            return .requestParameters(parameters: tempParams, encoding: JSONEncoding.default)
+        
+        case .deleteFavorite(let id), .deleteProduct(let id), .verifySending(let id), .verifySend(let id),
+             .readNotification(let id), .cancelOrder(let id), .getRestaurant(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
+        
+        case .getProduct(let id):
+            return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
+        case .searchProducts(let productName):
+            return .requestParameters(parameters: ["productName": productName], encoding: URLEncoding.queryString)
+            
         case .updatePassword(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
@@ -95,12 +160,10 @@ extension Router: TargetType {
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
-        case .details(let id):
-            return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
-        case .trending: //, .newMovies(let page):
+            
+        case .trending, .popularRestaurants, .trendingProducts, .getFavorites,
+             .getProducts, .getChartInfo, .getOrders, .getNotifications: //, .newMovies(let page):
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
-//        case .endPointWithLotsOfParams(parameters: let parameters):
-//            return .requestParameters(parameters:  parameters, encoding: URLEncoding.queryString)
         }
     }
     
@@ -113,6 +176,7 @@ extension Router: TargetType {
         if let token = Session.shared.accessToken {
             headers["Authorization"] = token
         }
+        headers["Authorization"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRoZWFubmd1eWVuOThAZ21haWwuY29tIiwiZXhwIjo1MjIwMTE2MDY2fQ.REe2ueW0q0vow1yQfTmbtAx0yHMGY5O9pRvncVi5alQ"
         return headers
     }
     
