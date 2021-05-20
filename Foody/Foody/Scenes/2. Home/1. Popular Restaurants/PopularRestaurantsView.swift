@@ -28,7 +28,6 @@ struct PopularRestaurantsView: View {
         .onRefresh {
             handleRefresh()
         }
-        .background(.white)
         .setupBackgroundNavigationBar()
         .navigationBarTitle("Popular", displayMode: .automatic)
         .setupNavigationBar()

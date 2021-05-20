@@ -40,6 +40,7 @@ struct Product: Codable {
 }
 
 extension Product: Identifiable {
+    /// Only for ui
     var id: String { UUID.init().uuidString }
 }
 

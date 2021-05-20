@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationsView: View {
+struct NotificationView: View {
     var body: some View {
         Button(action: {
             print("bell")
@@ -27,8 +27,8 @@ struct NotificationsView: View {
     }
 }
 
-struct NotificationsView_Previews: PreviewProvider {
+struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationsView()
+        NotificationView()
     }
 }

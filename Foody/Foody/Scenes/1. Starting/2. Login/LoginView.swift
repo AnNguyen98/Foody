@@ -86,7 +86,7 @@ struct LoginView: View {
         .handleHidenKeyboard()
         .onReceive(viewModel.$isLogged, perform: { (isLogged) in
             if isLogged {
-                SceneDelegate.shared.makeRoot(.logged)
+                makeRoot(.logged)
             }
         })
     }

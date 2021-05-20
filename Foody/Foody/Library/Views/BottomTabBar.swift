@@ -77,7 +77,6 @@ struct BottomTabBar: View {
                 Spacer()
             }
         }
-        .background(.white)
     }
 }
 

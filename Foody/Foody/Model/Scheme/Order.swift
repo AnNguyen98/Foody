@@ -8,7 +8,7 @@
 import Foundation
 
 enum OrderStatus: String {
-    case processing, shipping, payment
+    case processing, shipping, paymented, canceled
 }
 
 struct Order: Codable {
@@ -34,4 +34,14 @@ struct Order: Codable {
     
     var phoneNumber: String = ""
     
+}
+
+extension Order: Hashable {
+    static func ==(lhs: Order, rhs: Order?) -> Bool {
+            return lhs._id == rhs?._id
+        }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(_id)
+    }
 }

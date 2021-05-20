@@ -43,7 +43,6 @@ struct FavoritesView: View {
         .onRefresh {
             handleRefresh()
         }
-        .background(Color.white)
         .navigationBarTitle("Favorites", displayMode: .automatic)
         .setupNavigationBar()
         .addLoadingIcon($viewModel.isLoading)
@@ -51,9 +50,6 @@ struct FavoritesView: View {
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .setupBackgroundNavigationBar()
-        .onAppear(perform: {
-            viewModel.getProducts()
-        })
     }
     
     func productView(with product: Product) -> FoodDetailsView {

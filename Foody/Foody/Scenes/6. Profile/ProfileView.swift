@@ -113,7 +113,7 @@ extension ProfileView {
     
     private func logout() {
         Session.shared.reset()
-        SceneDelegate.shared.makeRoot(.login)
+        makeRoot(.login)
     }
 }
 

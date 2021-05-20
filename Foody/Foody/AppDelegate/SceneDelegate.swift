@@ -29,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             self.window = window
+            self.window?.makeKeyAndVisible()
         }
         makeRoot(.splash)
     }
@@ -60,8 +61,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
 extension SceneDelegate {
@@ -69,7 +68,6 @@ extension SceneDelegate {
         let hostingController = HostingController(rootView: status.contentView) // Status.logged.contentView)
         window?.rootViewController = hostingController
         UIApplication.hostingController = hostingController
-        window?.makeKeyAndVisible()
     }
     
     enum Status {
@@ -80,9 +78,9 @@ extension SceneDelegate {
             case .logged:
                 return TabViews().toAnyView
             case .login:
-                return LoginView().toAnyView
+                return NavigationView { LoginView() }.toAnyView
             default:
-                return SplashView().toAnyView
+                return NavigationView { SplashView() }.toAnyView
             }
         }
     }

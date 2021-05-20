@@ -9,7 +9,7 @@ import SwiftUI
 import SwifterSwift
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    @StateObject private var viewModel = HomeViewModel()
         
     var body: some View {
         ScrollView {
@@ -41,10 +41,9 @@ struct HomeView: View {
         .onRefresh {
             refreshData()
         }
-        .background(.white)
         .setupBackgroundNavigationBar()
         .navigationBarItems(
-            trailing: NotificationsView()
+            trailing: NotificationView()
         )
         .navigationBarTitle("Home", displayMode: .automatic)
         .setupNavigationBar()

@@ -105,7 +105,7 @@ extension VerifyPhoneView {
         presentView(
             AlertView(.constant(
                     PopupContent(message: viewModel.messageNoti, title: viewModel.title, action: {
-                        SceneDelegate.shared.makeRoot(.login)
+                        makeRoot(.login)
                     })
                 )
             )

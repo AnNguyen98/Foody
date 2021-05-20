@@ -35,7 +35,6 @@ struct SearchView: View {
                 .searchBarStyle(.default)
                 .returnKeyType(.search)
         })
-        .background(Color.white)
         .navigationBarTitle("Search", displayMode: .automatic)
         .setupNavigationBar()
         .addLoadingIcon($viewModel.isLoading)

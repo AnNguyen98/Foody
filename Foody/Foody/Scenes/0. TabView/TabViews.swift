@@ -45,7 +45,6 @@ struct TabViews: View {
                 .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)
         }
-        .background(.white)
         .ignoresSafeArea()
     }
 }

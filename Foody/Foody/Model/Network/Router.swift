@@ -24,20 +24,21 @@ enum Router {
     case comment(String, Parameters)
     case voteRestaurant(String, Int)
     case voteProduct(String, Int)
+    case getFavorites, newFavorite(Parameters), deleteFavorite(String)
     
     // Common
     case getProduct(String)
+    case getComments(String)
     case getOrders
     case getNotifications, readNotification(id: String) // SWIP
     
     // Restaurant
     case getProducts, newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
-    case searchProducts(productName: String)
-    case getChartInfo
+    case searchProducts(productName: String, page: Int)
+    case getChartInfo(Int) //month
     case verifySending(id: String)
     case verifySend(id: String)
     
-    case getFavorites, newFavorite(Parameters), deleteFavorite(String)
     case updatePassword(String, String)
     case verifyEmail(email: String, VerifyAction)
     case login(String, String)
@@ -63,23 +64,26 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
-        case .voteProduct:
-            return "/product/vote"
-        case .voteRestaurant:
-            return "/restaurant/vote"
+        case .getComments:
+            return "/product/comments"
         case .comment:
             return "/product/comment"
+        case .trendingProducts:
+            return "/products/trending"
+        case .getFavorites, .deleteFavorite, .newFavorite:
+            return "/products/favorite"
+        case .voteProduct:
+            return "/product/vote"
+        
+        case .voteRestaurant:
+            return "/restaurant/vote"
+        case .popularRestaurants:
+            return "/restaurants/popular"
         case .getRestaurant:
             return "/restaurant"
         case .cancelOrder:
             return "/order/cancel"
-        case .trendingProducts:
-            return "/products/trending"
-        case .popularRestaurants:
-            return "/restaurants/popular"
             
-        case .getFavorites, .deleteFavorite, .newFavorite:
-            return "/products/favorite"
         case .updatePassword:
             return "/account/password/forgot"
         case .verifyEmail:
@@ -147,10 +151,10 @@ extension Router: TargetType {
              .readNotification(let id), .cancelOrder(let id), .getRestaurant(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
         
-        case .getProduct(let id):
+        case .getProduct(let id), .getComments(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
-        case .searchProducts(let productName):
-            return .requestParameters(parameters: ["productName": productName], encoding: URLEncoding.queryString)
+        case .searchProducts(let productName, let page):
+            return .requestParameters(parameters: ["productName": productName, "page": page], encoding: URLEncoding.queryString)
             
         case .updatePassword(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)

@@ -42,7 +42,6 @@ struct TrendingProductsView: View {
         .onRefresh {
             handleRefresh()
         }
-        .background(.white)
         .setupBackgroundNavigationBar()
         .navigationBarTitle("Trending", displayMode: .automatic)
         .setupNavigationBar()

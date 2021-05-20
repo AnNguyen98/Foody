@@ -14,9 +14,15 @@ final class CommonServices {
             .eraseToAnyPublisher()
     }
     
+    static func getComments(productId: String) -> AnyPublisher<[Comment], CommonError> {
+        NetworkProvider.shared.request(.getComments(productId))
+            .decode(type: [Comment].self)
+            .eraseToAnyPublisher()
+    }
+    
     // Search by restaurant (id) / customer (all)
-    static func searchProducts(productName: String) -> AnyPublisher<ProductResponse, CommonError> {
-        NetworkProvider.shared.request(.searchProducts(productName: productName))
+    static func searchProducts(productName: String, page: Int = 0) -> AnyPublisher<ProductResponse, CommonError> {
+        NetworkProvider.shared.request(.searchProducts(productName: productName, page: page))
             .decode(type: ProductResponse.self)
             .eraseToAnyPublisher()
     }

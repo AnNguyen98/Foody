@@ -34,6 +34,12 @@ extension View {
         return rootViewController
     }
     
+    func makeRoot(_ status: SceneDelegate.Status) {
+        let hostingController = HostingController(rootView: status.contentView) // Status.logged.contentView)
+        keyWindow?.rootViewController = hostingController
+        UIApplication.hostingController = hostingController
+    }
+    
     ///Dismisses the view controller that was presented modally by the view controller.
     func dismiss() {
         topController?.dismiss(animated: true)
@@ -79,6 +85,7 @@ extension View {
                 .ignoresSafeArea()
             
             self
+                .background(Color.white)
         }
     }
 }
@@ -129,5 +136,15 @@ extension View {
                     .padding(.bottom, 8)
             }
         }
+    }
+}
+
+extension View {
+    func border(cornerRadius: CGFloat = 0, borderColor: Color = .gray, lineWidth: CGFloat = 1) -> some View {
+        self
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(borderColor, lineWidth: lineWidth)
+            )
     }
 }

@@ -10,12 +10,16 @@ import Foundation
 final class FavoritesViewModel: ViewModel, ObservableObject {
     @Published var products: [Product] = []
     @Published var isLastRow: Bool = false
-    
     var currentPage: Int = 0
     var nextPage: Bool = true
     
     var canLoadMore: Bool  {
         isLastRow && nextPage
+    }
+    
+    override init() {
+        super.init()
+        getProducts()
     }
     
     func detailsViewModel(with product: Product) -> ProductDetailsViewModel {
