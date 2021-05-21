@@ -14,7 +14,7 @@ struct VotesView: View {
     var body: some View {
         HStack(spacing: 2) {
             ForEach(0..<5) { i in
-                Image(systemName: "star.fill")
+                Image(systemName: SFSymbols.starFill)
                     .resizable()
                     .frame(width: size, height: size)
                     .foregroundColor(numberOfVotes > i ? .yellow: #colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)

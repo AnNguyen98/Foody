@@ -106,6 +106,7 @@ extension View {
                 ]
                 UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
             })
+            .statusBarStyle(.lightContent)
     }
 }
 

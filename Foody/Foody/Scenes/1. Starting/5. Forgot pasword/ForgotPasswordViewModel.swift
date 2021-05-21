@@ -29,6 +29,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
     }
     
     func handleCheckEmail() {
+        guard !isLoading else { return }
         isLoading = true
         AccountService.verifyEmail(email: email, action: .forgot)
             .sink { (completion) in

@@ -31,7 +31,7 @@ struct ProductCellView: View {
                 
                 HStack(spacing: 5) {
                     ForEach(0..<5) { index in
-                        Image(systemName: "star.fill")
+                        Image(systemName: SFSymbols.starFill)
                             .resizable()
                             .frame(width: 16 * scale, height: 16 * scale)
                             .foregroundColor(index <= product.voteCount ? .yellow: .gray)

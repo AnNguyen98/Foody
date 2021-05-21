@@ -36,7 +36,7 @@ enum Router {
     case getProducts, newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
     case searchProducts(productName: String, page: Int)
     case getChartInfo(Int) //month
-    case verifySending(id: String)
+    case verifySending(id: String, status: OrderStatus)
     case verifySend(id: String)
     
     case updatePassword(String, String)
@@ -147,9 +147,12 @@ extension Router: TargetType {
             tempParams["productId"] = id
             return .requestParameters(parameters: tempParams, encoding: JSONEncoding.default)
         
-        case .deleteFavorite(let id), .deleteProduct(let id), .verifySending(let id), .verifySend(let id),
+        case .deleteFavorite(let id), .deleteProduct(let id), .verifySend(let id),
              .readNotification(let id), .cancelOrder(let id), .getRestaurant(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
+            
+        case .verifySending(let id, let status):
+            return .requestParameters(parameters: ["id": id, "status": status.rawValue], encoding: JSONEncoding.default)
         
         case .getProduct(let id), .getComments(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)

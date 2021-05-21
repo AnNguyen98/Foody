@@ -17,6 +17,7 @@ final class PopularRestaurantsViewModel: ViewModel, ObservableObject {
     }
     
     func handleLoadMore() {
+        guard !isLoading else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.restaurants += (0...20).map({ _ in Restaurant() })
             self.isLastRow = false
@@ -24,6 +25,7 @@ final class PopularRestaurantsViewModel: ViewModel, ObservableObject {
     }
     
     func handleRefreshData() {
+        guard !isLoading else { return }
         isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.restaurants = (0...20).map({ _ in Restaurant() })

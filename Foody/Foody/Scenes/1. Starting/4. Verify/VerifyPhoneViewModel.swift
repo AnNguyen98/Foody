@@ -12,6 +12,7 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
     
     var userInfo: RegisterUserObject
     var action: Action
+    var otpCount: Int = 0
     
     @Published var showSuccessPopup: Bool = false
     @Published var code: String = "" {
@@ -41,7 +42,8 @@ final class VerifyPhoneViewModel: ViewModel, ObservableObject {
 extension VerifyPhoneViewModel {
     private func handleUpdatePassword() {
         // MARK: TODO - handleUpdatePassword
-        self.isLoading = true
+        guard !isLoading else { return }
+        isLoading = true
         AccountService.updatePassword(for: userInfo.email, newPassword: userInfo.password)
             .sink { (completion) in
                 self.isLoading = false
@@ -85,6 +87,7 @@ extension VerifyPhoneViewModel {
         account.username = userInfo.username
         account.phoneNumber = userInfo.phoneNumber
         
+        guard !isLoading else { return }
         isLoading = true
         AccountService.register(for: user, with: account, restaurant: restaurant)
             .sink { (completion) in
@@ -102,12 +105,17 @@ extension VerifyPhoneViewModel {
     }
     
     func handleSendOTP() {
+        guard otpCount < 5 else {
+            error = CommonError.unknow("OTP code confirmations exceeded!")
+            return
+        }
         FirebaseAuth.verifyPhoneNumber(phoneNumber: phoneNumber)
             .sink { (completion) in
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (verificationID) in
+                self.otpCount += 1
                 self.verificationID = verificationID
             }
             .store(in: &subscriptions)

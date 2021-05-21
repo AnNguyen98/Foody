@@ -10,6 +10,8 @@ import SwiftUI
 struct RFoodDetailsView: View {
     @StateObject var viewModel = RProductDetailsViewModel()
     @State private var lineLimit: Int = 5
+    @State private var isPresentedConfirmDelete: Bool = false
+    @State private var isPresentedEditView: Bool = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -30,16 +32,23 @@ struct RFoodDetailsView: View {
                     
                     if viewModel.action != .preview {
                         HStack {
+                            NavigationLink(
+                                destination: RAddProductView(isActive: $isPresentedEditView),
+                                isActive: $isPresentedEditView,
+                                label: {
+                                    EmptyView()
+                                })
+                            
                             Spacer()
                             
-                            CircleButton(systemName: SFSymbols.squareAndArrowUp.rawValue, color: .black,
+                            CircleButton(systemName: SFSymbols.squareAndPencil, color: .blue,
                                          action: {
-                                            
+                                            isPresentedEditView = true
                                          })
                             
-                            CircleButton(systemName: SFSymbols.starFill.rawValue, color: .red,
+                            CircleButton(systemName: SFSymbols.trashFill, color: .red,
                                          action: {
-                                            
+                                            isPresentedConfirmDelete = true
                                          })
                         }
                         .padding()
@@ -148,10 +157,28 @@ struct RFoodDetailsView: View {
         .ignoresSafeArea()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
+        .onReceive(viewModel.$deleteSuccess, perform: { deleted in
+            if deleted {
+                topController?.navigationController?.popToRoot(withAnimation: .easeOut)
+            }
+        })
+        .alert(isPresented: $isPresentedConfirmDelete, content: {
+            Alert(title: Text("Delete product"),
+                  message: Text("Are you sure you want to delete this product?"),
+                  primaryButton: .destructive(Text("Delete"), action: {
+                    deleteProduct()
+                  }),
+                  secondaryButton: .cancel()
+            )
+        })
     }
 }
 
 extension RFoodDetailsView {
+    func deleteProduct() {
+        viewModel.deleteProduct()
+    }
+    
     func handleShowNotiPupup() {
         presentView(
             AlertView(.constant(

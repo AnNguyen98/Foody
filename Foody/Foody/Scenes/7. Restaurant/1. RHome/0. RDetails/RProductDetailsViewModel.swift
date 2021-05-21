@@ -16,6 +16,7 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     @Published var product: Product
     @Published var comments: [Comment] = []
     @Published var showSuccessPopup = false
+    @Published var deleteSuccess = false
     
     var action: DetailsAction = .normal
     var images: [Data] {
@@ -72,5 +73,18 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
             }
             .store(in: &subscriptions)
 
+    }
+    
+    func deleteProduct() {
+        RestaurantServices.deleteProduct(id: product._id)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (product) in
+                self.deleteSuccess = true
+            }
+            .store(in: &subscriptions)
     }
 }

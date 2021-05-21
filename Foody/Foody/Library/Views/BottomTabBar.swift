@@ -9,10 +9,23 @@ import SwiftUI
 import UIKit
 import SwiftUIX
 
-enum TabItem: Int, CaseIterable {
-    case home = 0, search = 1, carts = 4, likes = 2, profile = 3
+enum TabItem: CaseIterable {
+    case home, search, carts, likes, profile, orders, charts
     
     var id: UUID { return UUID() }
+    
+    var index: Int {
+        switch self {
+        case .home:
+            return 0
+        case .search, .orders, .carts:
+            return 1
+        case .likes, .charts:
+            return 2
+        case .profile:
+            return 3
+        }
+    }
     
     var title: String {
         switch self {
@@ -24,6 +37,10 @@ enum TabItem: Int, CaseIterable {
             return "Likes"
         case .search:
             return "Search"
+        case .orders:
+            return "Orders"
+        case .charts:
+            return "Charts"
         default:
             return "Profile"
         }
@@ -39,6 +56,10 @@ enum TabItem: Int, CaseIterable {
             return SFSymbolName.heartFill
         case .search:
             return SFSymbolName.magnifyingglass
+        case .orders:
+            return SFSymbolName.docFill
+        case .charts:
+            return SFSymbolName.flameFill
         default:
             return SFSymbolName.personFill
         }
@@ -48,14 +69,12 @@ enum TabItem: Int, CaseIterable {
         switch self {
         case .home:
             return .purple
-        case .carts:
+        case .profile:
             return .blue
-        case .likes:
+        case .likes, .charts:
             return .pink
-        case .search:
+        case .search, .orders, .carts:
             return .orange
-        default:
-            return .primary
         }
     }
 }
@@ -85,7 +104,7 @@ struct TabBarItem: View {
     @Binding var indexSelected: Int
     @State private var isClicking: Bool = false
     private var isSelected: Bool {
-        item.rawValue == indexSelected
+        item.index == indexSelected
     }
     
     var body: some View {
@@ -111,7 +130,7 @@ struct TabBarItem: View {
         .animation(.interpolatingSpring(mass: 1.0, stiffness: 200,
                                         damping: 20, initialVelocity: 0.1))
         .onTapGesture {
-            indexSelected = item.rawValue
+            indexSelected = item.index
             NotificationCenter.default.post(name: .didSelectedTab, object: indexSelected)
             isClicking = true
             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in

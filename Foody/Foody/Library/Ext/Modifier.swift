@@ -13,13 +13,14 @@ struct BackBarModifier: ViewModifier {
     var action: (()-> Void)?
     var color: Color
     var navigationBarHidden: Bool
+    var icon: SFSymbols
     
     func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             content
             
             HStack {
-                BackButton(action: action)
+                BackButton(action: action, icon: icon)
                     .foregroundColor(color)
                     .background(
                         Circle()
@@ -36,9 +37,24 @@ struct BackBarModifier: ViewModifier {
 }
 
 extension View {
+    /// ZStack
     func addBackBarCustom(_ color: Color = .white, barHidden: Bool = true,
-                          action: (()-> Void)? = nil) -> some View {
-        self.modifier(BackBarModifier(action: action, color: color, navigationBarHidden: barHidden))
+                          action: (()-> Void)? = nil, icon: SFSymbols = SFSymbols.arrowLeft) -> some View {
+        modifier(BackBarModifier(action: action, color: color, navigationBarHidden: barHidden, icon: icon))
+    }
+    
+    /// Navi item
+    func addBackBarCustom(icon: SFSymbols = SFSymbols.arrowLeft, color: Color = .white) -> some View {
+        self
+            .navigationBarItems(
+                leading: BackButton(icon: icon)
+                            .foregroundColor(color)
+                                .background(
+                                    Circle()
+                                        .frame(width: 40, height: 40)
+                                        .foregroundColor(Color.gray.opacity(0.4))
+                                ))
+            .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -175,10 +191,27 @@ struct RefreshScrollModifier: ViewModifier {
         }
         
         @objc func onRefresh(_ refreshControl: UIRefreshControl) {
-            action?()
-            refreshControl.endRefreshing()
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
+                self.action?()
+                refreshControl.endRefreshing()
+            }
         }
-        
     }
 }
 
+// Refresh Scroll
+extension View {
+    /// Before is scroll view
+    func addEmptyView(isEmpty: Bool, _ emptyText: String = "No items found") -> some View {
+        ZStack {
+            HStack {
+                Text(emptyText)
+                
+                Image(systemName: SFSymbols.scribble)
+            }
+            .opacity(isEmpty ? 1: 0)
+            
+            self
+        }
+    }
+}

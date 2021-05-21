@@ -43,6 +43,7 @@ final class RHomeViewModel: ViewModel, ObservableObject {
     }
     
     func getProducts(page: Int = 0) {
+        guard !isLoading else { return }
         isLoading = true
         RestaurantServices.getProducts()
             .sink { (completion) in

@@ -67,7 +67,6 @@ struct ProfileView: View {
                         })
                         .offset(x: kScreenSize.width / 2 - 50, y: -kScreenSize.height / (3.5 * 2) + 30)
                         .foregroundColor(.gray)
-
                 }
 
                 ProfileButtonView(action: {

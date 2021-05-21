@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct NotificationView: View {
+    var action: (() -> Void)?
+    
     var body: some View {
         Button(action: {
-            print("bell")
+            action?()
         }, label: {
             ZStack {
                 Image(systemName: SFSymbols.bellFill)

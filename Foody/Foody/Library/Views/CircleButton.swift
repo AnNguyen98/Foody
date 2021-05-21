@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CircleButton: View {
-    var systemName: String
+    var systemName: SFSymbols
     var color: Color = .black
     var action: (() -> Void)?
     

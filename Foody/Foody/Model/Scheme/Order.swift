@@ -16,7 +16,11 @@ struct Order: Codable {
     
     var userId: String = ""
     
-    var products: Product = Product()
+    var username: String = ""
+    
+    var userProfileBase64: String = ""
+    
+    var product: Product = Product()
     
     var count: Int = 0
     

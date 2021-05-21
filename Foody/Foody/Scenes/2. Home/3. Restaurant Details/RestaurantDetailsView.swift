@@ -28,7 +28,7 @@ struct RestaurantDetailsView: View {
                 
                 HStack {
                     ForEach(0..<5) { _ in
-                        Image(systemName: "star.fill")
+                        Image(systemName: SFSymbols.starFill)
                             .foregroundColor(.yellow)
                     }
                     Text("( 245 reviews )")
@@ -51,13 +51,13 @@ struct RestaurantDetailsView: View {
                 Group {
                     Divider()
                     HStack {
-                        CircleButton(systemName: "square.and.arrow.up", color: .black,
+                        CircleButton(systemName:  SFSymbols.squareAndArrowUp, color: .black,
                                      action: { })
                         
-                        CircleButton(systemName: "star", color: .black,
+                        CircleButton(systemName: SFSymbols.starFill, color: .black,
                                      action: { })
                         
-                        CircleButton(systemName: "location", color: .black,
+                        CircleButton(systemName: SFSymbols.location, color: .black,
                                      action: { })
                         
                         Spacer()
@@ -130,7 +130,7 @@ struct RestaurantDetailsView: View {
                                     }
                                     HStack(spacing: 2) {
                                         ForEach(0..<5) { _ in
-                                            Image(systemName: "star.fill")
+                                            Image(systemName: SFSymbols.starFill)
     //                                            .resizable()
                                                 .frame(height: 16)
                                                 .foregroundColor(.yellow)

@@ -17,6 +17,7 @@ final class TrendingProductsViewModel: ViewModel, ObservableObject {
     }
     
     func handleLoadMore() {
+        guard !isLoading else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.products += (0...20).map({ _ in Product() })
             self.isLastRow = false
@@ -24,6 +25,7 @@ final class TrendingProductsViewModel: ViewModel, ObservableObject {
     }
     
     func handleRefreshData() {
+        guard !isLoading else { return }
         isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.products = (0...20).map({ _ in Product() })

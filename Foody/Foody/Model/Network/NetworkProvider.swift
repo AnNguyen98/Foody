@@ -31,7 +31,7 @@ struct NetworkProvider {
                 }
             }
         }
-        .print("NetworkProvider")
+        .print("DEBUG - NetworkProvider")
         .timeout(.seconds(Constants.TIMEOUT), scheduler: DispatchQueue.global(), customError: { .timeout })
         .retry(Constants.RETRYTIME)
         .subscribe(on: DispatchQueue.global())

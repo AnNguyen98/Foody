@@ -17,6 +17,9 @@ extension Moya.Response {
     }
     
     var messageError: String {
+        if statusCode == 404 {
+            return "404 Not Found"
+        }
         if let json = try? mapJSON() as? [String: Any], let message = json["message"] as? String {
             return message
         }

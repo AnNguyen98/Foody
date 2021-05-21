@@ -44,6 +44,10 @@ final class Session {
         }
     }
     
+    var isResraurant: Bool {
+        user?.type == UserType.restaurant.rawValue
+    }
+    
 }
 
 extension Session {

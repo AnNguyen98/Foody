@@ -27,6 +27,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
     }
     
     func getProducts(page: Int = 0) {
+        guard !isLoading else { return }
         isLoading = true
         CustomerServices.getFavoriteProducts()
             .sink { (completion) in

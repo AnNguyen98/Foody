@@ -18,3 +18,13 @@ struct Notifications: Codable {
     
     var isRead: Bool = false
 }
+
+extension Notifications: Hashable {
+    static func ==(lhs: Notifications, rhs: Notifications?) -> Bool {
+            return lhs._id == rhs?._id
+        }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(_id)
+    }
+}

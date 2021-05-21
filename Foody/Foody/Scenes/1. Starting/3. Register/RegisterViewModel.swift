@@ -38,6 +38,7 @@ final class RegisterViewModel: ViewModel, ObservableObject {
     }
     
     func checkEmail() {
+        guard !isLoading else { return }
         isLoading = true
         AccountService.verifyEmail(email: userInfo.email, action: .register)
             .sink { (completion) in

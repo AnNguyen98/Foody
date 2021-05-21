@@ -17,7 +17,7 @@ struct RHomeView: View {
     var body: some View {
         LazyVStack(spacing: 15) {
             ForEach(viewModel.products, id: \._id) { product in
-                NavigationLink(destination: RestaurantDetailsView(), label: {
+                NavigationLink(destination: RFoodDetailsView(), label: {
                     VStack(alignment: .leading, spacing: 5) {
                         Image(product.productImages.first)
                             .resizable()
@@ -34,7 +34,7 @@ struct RHomeView: View {
                             
                             HStack(spacing: 5) {
                                 ForEach(0..<5) { index in
-                                    Image(systemName: "star.fill")
+                                    Image(systemName: SFSymbols.starFill)
                                         .resizable()
                                         .frame(width: 16 * scale, height: 16 * scale)
                                         .foregroundColor(index <= product.voteCount ? .yellow: .gray)
@@ -55,7 +55,7 @@ struct RHomeView: View {
                     }
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .shadow(color: .gray, radius: 3, x: 0.0, y: 2)
+                    .shadow(color: .gray, radius: 2, x: 0.0, y: 0)
                     .padding(.bottom, 15)
                     .onAppear(perform: {
                         if product == viewModel.products.last {
@@ -79,13 +79,9 @@ struct RHomeView: View {
                 .returnKeyType(.search)
         })
         .navigationBarItems(
-            trailing: NotificationView()
-                .onTapGesture {
-                    isNotificationsPresented.toggle()
-                }
-                .fullScreenCover(isPresented: $isNotificationsPresented, content: {
-                    NotificationsView()
-                })
+            trailing: NotificationView(action: {
+                isNotificationsPresented.toggle()
+            })
         )
         .navigationBarTitle("Home", displayMode: .automatic)
         .setupNavigationBar()
@@ -93,6 +89,10 @@ struct RHomeView: View {
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
         .addLoadingIcon($viewModel.isLoading)
+        .fullScreenCover(isPresented: $isNotificationsPresented, content: {
+            RNotificationsView(isActive: $isNotificationsPresented)
+        })
+        
     }
 }
 

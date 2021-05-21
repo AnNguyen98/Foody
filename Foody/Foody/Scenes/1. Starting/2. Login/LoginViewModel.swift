@@ -21,7 +21,7 @@ final class LoginViewModel: ViewModel, ObservableObject{
     }
     
     func login(completion: (() -> Void)? = nil) {
-        guard !invalidInfo else {
+        guard !invalidInfo, !isLoading else {
             return
         }
         isLoading = true

@@ -29,10 +29,10 @@ struct FoodDetailsView: View {
                     HStack {
                         Spacer()
                         
-                        CircleButton(systemName: "square.and.arrow.up", color: .black,
+                        CircleButton(systemName: SFSymbols.squareAndArrowUp, color: .black,
                                      action: { })
                         
-                        CircleButton(systemName: "star.fill", color: .red,
+                        CircleButton(systemName: SFSymbols.starFill, color: .red,
                                      action: { })
                     }
                     .padding()
