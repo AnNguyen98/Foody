@@ -66,6 +66,17 @@ final class AccountService: AccountFetchable {
             .eraseToAnyPublisher()
     }
     
+    struct InfoResponse: Decodable {
+        var user: User = User()
+        var restaurant: Restaurant?
+    }
+    
+    static func getInformation() -> AnyPublisher<InfoResponse, CommonError>  {
+        NetworkProvider.shared.request(.me)
+            .decode(type: InfoResponse.self)
+            .eraseToAnyPublisher()
+    }
+    
     static func logout() {
         try? Auth.auth().signOut()
     }

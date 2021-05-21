@@ -22,17 +22,27 @@ struct ProfileView: View {
             
             VStack {
                 Text("Profile")
-                    .systemBold(size: 34)
+                    .font(.largeTitle)
+                    .bold()
                     .foregroundColor(.white)
 
                 ZStack {
+                    Image(viewModel.restaurant.dataImages.first)
+                        .resizable()
+                        .frame(maxHeight: kScreenSize.height / 3.5)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 20)
+                        )
+                        .shadow(color: Color.gray, radius: 2, x: 0, y: 0)
+                    
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundColor(.white)
                         .frame(maxHeight: kScreenSize.height / 3.5)
-                        .shadow(color: Color.gray, radius: 2, x: -1, y: 2)
+                        .shadow(color: Color.gray, radius: 2, x: 0, y: 0)
+                        .hidden(!viewModel.restaurant.dataImages.isEmpty)
 
                     VStack {
-                        Image("no-user")
+                        Image(viewModel.user.imageProfile, isProfile: true)
                             .resizable()
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
@@ -40,7 +50,7 @@ struct ProfileView: View {
                             .overlay(Circle().stroke(Color.gray, lineWidth: 5))
 
                         HStack {
-                            Text("James Wiliam")
+                            Text(viewModel.user.username)
                                 .bold(size: 26)
 
                             Image(systemName: SFSymbolName.checkmarkCircleFill)
@@ -52,13 +62,13 @@ struct ProfileView: View {
                                         .foregroundColor(.white)
                                 )
                         }
-                        Text("jameswili@gmail.com")
+                        Text(viewModel.user.email)
                             .bold(size: 17)
                     }
                     .padding(.vertical)
 
                     NavigationLink(
-                        destination: Text("Destination"),
+                        destination: UpdateInfoView(),
                         label: {
                             Image("edit-icon")
                                 .resizable()
@@ -69,36 +79,45 @@ struct ProfileView: View {
                         .foregroundColor(.gray)
                 }
 
-                ProfileButtonView(action: {
+                ScrollView(showsIndicators: false) {
+                    if viewModel.isRestaurant {
+                        ProfileButtonView(text: Text(viewModel.restaurant.name).bold(), symbol: SFSymbols.houseFill)
+                            .padding(.top, 30)
+                            .disabled(true)
+                    }
+
+                    ProfileButtonView(text:
+                                        Text(viewModel.user.phoneNumber)
+                                            .foregroundColor(.blue),
+                                      symbol: SFSymbols.phone)
+                        .disabled(true)
                     
-                }, text: "Infomation", imageName: "account-icon")
-                .padding(.top, 35)
+                    ProfileButtonView(text: Text(viewModel.restaurant.address), symbol: SFSymbols.locationFill)
+                        .disabled(true)
 
-                if viewModel.isRestaurant {
                     ProfileButtonView(action: {
-
-                    }, text: "Chart", imageName: "chart-icon")
+                            openUrl(url: Config.applicationInfoUrl)
+                    }, text: Text("About application"), imageName: "info-icon")
+                    
+                    ProfileButtonView(action: {
+                        openUrl(url: Config.helpUrl)
+                    }, text: Text("Help"), imageName: "help-icon")
+                    
+                    ProfileButtonView(action: {
+                        logout()
+                    }, text: Text("Logout"), imageName: "logout-icon")
+                    .padding(.bottom, 30)
                 }
-
-                ProfileButtonView(action: {
-                    openUrl(url: Config.applicationInfoUrl)
-                }, text: "About application", imageName: "info-icon")
-                
-                ProfileButtonView(action: {
-                    openUrl(url: Config.helpUrl)
-                }, text: "Help", imageName: "help-icon")
-                
-                ProfileButtonView(action: {
-                    logout()
-                }, text: "Logout", imageName: "logout-icon")
-                .padding(.bottom, 30)
-                
-                Spacer()
             }
             .padding()
         }
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
+        .onReceive(viewModel.$isLogged, perform: { isLogged in
+            if !isLogged {
+                makeRoot(.login)
+            }
+        })
     }
 }
 
@@ -111,8 +130,7 @@ extension ProfileView {
     }
     
     private func logout() {
-        Session.shared.reset()
-        makeRoot(.login)
+        viewModel.logout()
     }
 }
 

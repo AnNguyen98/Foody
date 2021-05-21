@@ -10,7 +10,7 @@ import SwiftyUserDefaults
 
 struct Restaurant: Codable, DefaultsSerializable {
     var _id: String = UUID.init().uuidString
-    
+        
     var descriptions: String = ""
     
     var address: String = ""
@@ -25,6 +25,13 @@ struct Restaurant: Codable, DefaultsSerializable {
     
     var closeTime: String = ""
 }
+
+extension Restaurant {
+    var dataImages: [Data]  {
+        images.compactMap({ Data(base64Encoded: $0)})
+    }
+}
+
 
 extension Restaurant: Identifiable {
     var id: String { UUID.init().uuidString }

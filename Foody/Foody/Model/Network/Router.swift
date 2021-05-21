@@ -43,7 +43,7 @@ enum Router {
     case verifyEmail(email: String, VerifyAction)
     case login(String, String)
     case register(Parameters)
-    case trending
+    case me
 }
 
 extension Router: TargetType {
@@ -84,6 +84,8 @@ extension Router: TargetType {
         case .cancelOrder:
             return "/order/cancel"
             
+        case .me:
+            return "/account/me"
         case .updatePassword:
             return "/account/password/forgot"
         case .verifyEmail:
@@ -92,9 +94,6 @@ extension Router: TargetType {
             return "/register"
         case .login:
             return "/login"
-        case .trending:
-            return ""
-            
         case .getProducts:
             return "/products"
         case .getProduct, .newProduct, .deleteProduct, .updateProduct:
@@ -168,8 +167,8 @@ extension Router: TargetType {
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
             
-        case .trending, .popularRestaurants, .trendingProducts, .getFavorites,
-             .getProducts, .getChartInfo, .getOrders, .getNotifications: //, .newMovies(let page):
+        case .popularRestaurants, .trendingProducts, .getFavorites,
+             .getProducts, .getChartInfo, .getOrders, .getNotifications, .me: //, .newMovies(let page):
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }

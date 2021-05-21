@@ -9,24 +9,29 @@ import SwiftUI
 
 struct ProfileButtonView: View {
     var action: (() -> Void)?
-    var text: String
-    var imageName: String
+    var text: Text
+    var imageName: String = ""
+    var symbol: SFSymbols = .phone
+    
+    var iconImage: Image {
+        imageName.isEmpty ? Image(systemName: symbol): Image(imageName)
+    }
     
     var body: some View {
-        VStack(spacing: 25) {
+        VStack(spacing: 20) {
             Button(action: {
                 action?()
             }) {
                 Label(
                     title: {
-                        Text(text)
+                        text
                             .padding(.leading, 30)
                             .font(.body)
                         
                         Spacer()
                     },
                     icon: {
-                        Image(imageName)
+                        iconImage
                             .resizable()
                             .frame(.init(width: 22, height: 22))
                             .foregroundColor(.white)
@@ -42,8 +47,7 @@ struct ProfileButtonView: View {
             Divider()
                 .background(Color.black)
         }
-        
-        .padding([.top], 15)
+        .padding([.top], 10)
         .padding(.horizontal)
         .foregroundColor(.black)
     }

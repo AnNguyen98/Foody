@@ -8,11 +8,11 @@
 import SwiftUI
 
 extension Image {
-    init(_ data: Data?) {
+    init(_ data: Data?, isProfile: Bool = false) {
         if let data = data, let image = Image(data: data) {
             self = image
         } else {
-            self.init("default-thumbnail")
+            self.init(isProfile ? "no-user": "default-thumbnail")
         }
     }
 }
