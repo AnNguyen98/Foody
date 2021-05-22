@@ -48,6 +48,14 @@ final class Session {
         user?.type == UserType.restaurant.rawValue
     }
     
+    var restaurant: Restaurant? {
+        set {
+            Defaults.restaurant = newValue
+        } get {
+            Defaults.restaurant
+        }
+    }
+    
 }
 
 extension Session {

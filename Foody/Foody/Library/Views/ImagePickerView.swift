@@ -52,7 +52,9 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
         
         func dismiss(with images: [UIImage] = []) {
-            parent.images = images
+            if !images.isEmpty {
+                parent.images = images
+            }
             parent.presentationMode.wrappedValue.dismiss()
         }
     }

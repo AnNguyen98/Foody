@@ -113,6 +113,8 @@ struct ProfileView: View {
         }
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
+        .addLoadingIcon($viewModel.isLoading)
+        .handleErrors($viewModel.error)
         .onReceive(viewModel.$isLogged, perform: { isLogged in
             if !isLogged {
                 makeRoot(.login)

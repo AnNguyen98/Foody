@@ -170,7 +170,7 @@ struct RFoodDetailsView: View {
             )
         })
         .fullScreenCover(isPresented: $isPresentedEditView, content: {
-            RAddProductView(isActive: $isPresentedEditView)
+            RAddProductView(viewModel: viewModel.previewViewModel, isActive: $isPresentedEditView)
         })
         .setupNavigationBar()
         .navigationBarTitle(Text("Details"), displayMode: .inline)

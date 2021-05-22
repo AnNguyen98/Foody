@@ -13,6 +13,7 @@ class ViewModel {
     @Published var isLoading: Bool = false {
         didSet {
             UIApplication.shared.rootViewController?.view.isUserInteractionEnabled = !isLoading
+            UIApplication.shared.topmostViewController?.view.isUserInteractionEnabled = !isLoading
         }
     }
     @Published var error: CommonError?

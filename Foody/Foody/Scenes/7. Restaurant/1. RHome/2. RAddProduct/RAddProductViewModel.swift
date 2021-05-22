@@ -13,8 +13,9 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
     @Published var price: String = ""
     @Published var productName: String = ""
     @Published var description: String = ""
-    @State var isDrinkSelected = false
+    @Published var isDrinkSelected = false
     @Published var images: [UIImage] = []
+    @Published var isPresentedSuccessPopup = false
     
     var type: String {
         isDrinkSelected ? "drink": "food"
@@ -24,21 +25,52 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         price.isEmpty && productName.isEmpty && description.isEmpty && images.isEmpty
     }
     
-    var product: Product {
-        let restaurantId: String  = Session.shared.user?._id ?? ""
-        let restaurantName: String  = Session.shared.user?.username ?? ""
-        let price = Int(self.price) ?? 0
-        let imageEncodings = images.compactMap({ $0.pngBase64String() })
-        
-        return Product(restaurantId: restaurantId,
-                       restaurantName: restaurantName,
-                       imageBase64Encodings: imageEncodings,
-                       name: productName, price: price,
-                       descriptions: description, type: type
-        )
-    }
+    var product: Product = Product()
     
     var previewDetailViewModel: RProductDetailsViewModel {
         RProductDetailsViewModel(product)
+    }
+    
+    var isEditProduct: Bool = false
+    
+    init(_ product: Product = Product()) {
+        super.init()
+        
+        self.product = product
+        
+        price = String(product.price)
+        productName = product.name
+        description = product.descriptions
+        productName = product.name
+        isDrinkSelected = product.isDrink
+        images = product.productImages.compactMap({ UIImage(data: $0) })
+        
+        isEditProduct = product.name != ""
+    }
+    
+    func prepareProduct() {
+        product.restaurantId = Session.shared.user?._id ?? ""
+        product.restaurantName  = Session.shared.restaurant?.name ?? ""
+        product.name  = productName
+        product.descriptions = description
+        product.type = type
+        product.price = Int(self.price) ?? 0
+        product.imageBase64Encodings = images.compactMap({ $0.pngBase64String() })
+    }
+    
+    func updateProduct() {
+        prepareProduct()
+        
+        isLoading = true
+        RestaurantServices.updateProduct(product: product)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (product) in
+                self.isPresentedSuccessPopup = true
+            }
+            .store(in: &subscriptions)
     }
 }

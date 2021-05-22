@@ -23,6 +23,11 @@ final class ProfileViewModel: ViewModel, ObservableObject {
         Session.shared.user?.status == AccountStatus.active.rawValue
     }
     
+    override init() {
+        super.init()
+        getUserInfo()
+    }
+    
     func getUserInfo() {
         isLoading = true
         AccountService.getInformation()
@@ -36,6 +41,7 @@ final class ProfileViewModel: ViewModel, ObservableObject {
                     self.restaurant = restaurant
                 }
                 Session.shared.user = res.user
+                Session.shared.restaurant = res.restaurant
             }
             .store(in: &subscriptions)
     }

@@ -23,6 +23,10 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
         product.productImages
     }
     
+    var previewViewModel: RAddProductViewModel {
+        RAddProductViewModel(product)
+    }
+    
     init(_ product: Product = Product()) {
         self.product._id = product._id
         super.init()

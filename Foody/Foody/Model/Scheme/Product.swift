@@ -42,6 +42,10 @@ struct Product: Codable {
 }
 
 extension Product {
+    var isDrink: Bool {
+        type == ProductType.drink.rawValue
+    }
+    
     var accepted: Bool {
         status == ProductStatus.accepted.rawValue
     }

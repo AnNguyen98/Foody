@@ -10,8 +10,9 @@ import SwiftUIX
 import Introspect
 
 struct RAddProductView: View {
-    @StateObject private var viewModel = RAddProductViewModel()
+    @StateObject var viewModel = RAddProductViewModel()
     @Binding var isActive: Bool
+    
     @State private var isPresentedPickerView = false
     @State private var isPresentedProductDetails = false
     
@@ -127,9 +128,14 @@ struct RAddProductView: View {
                         }
                         
                         Button(action: {
-                            isPresentedProductDetails.toggle()
+                            if viewModel.isEditProduct {
+                                viewModel.updateProduct()
+                            } else {
+                                viewModel.prepareProduct()
+                                isPresentedProductDetails.toggle()
+                            }
                         }, label: {
-                            Text("Preview")
+                            Text(viewModel.isEditProduct ? "Update": "Preview")
                                 .bold(size: 18)
                                 .frame(maxWidth: .infinity, minHeight: 50)
                                 .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.inValidInfo ? 0.5: 0.9))
@@ -142,15 +148,22 @@ struct RAddProductView: View {
                     .padding(.horizontal, 15)
                 }
             }
-            .navigationTitle(Text("New Product"))
+            .navigationBarTitle(Text(viewModel.isEditProduct ? "Edit Product": "New Product"), displayMode: .inline)
             .handleHidenKeyboard()
             .fullScreenCover(isPresented: $isPresentedPickerView, content: {
                 ImagePickerView(images: $viewModel.images)
                     .ignoresSafeArea()
             })
+            .onReceive(viewModel.$isPresentedSuccessPopup, perform: { isPresented in
+                if isPresented {
+                    handleShowNotiPupup()
+                }
+            })
             .foregroundColor(.black)
             .setupNavigationBar()
             .setupBackgroundNavigationBar()
+            .addLoadingIcon($viewModel.isLoading)
+            .handleErrors($viewModel.error)
             .statusBarStyle(.lightContent)
             .navigationBarItems(
                 leading: Button(action: {
@@ -162,6 +175,20 @@ struct RAddProductView: View {
                 })
             )
         }
+    }
+}
+
+extension RAddProductView {
+    func handleShowNotiPupup() {
+        presentView(
+            AlertView(.constant(
+                PopupContent(message: "Product \(viewModel.isEditProduct ? "update": "create") successful",
+                             title: "Success", action: {
+                                makeRoot(.logged)
+                    })
+                )
+            )
+        )
     }
 }
 
