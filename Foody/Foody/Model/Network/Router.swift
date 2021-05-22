@@ -33,7 +33,7 @@ enum Router {
     case getNotifications, readNotification(id: String) // SWIP
     
     // Restaurant
-    case getProducts, newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
+    case getProducts(Int), newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
     case searchProducts(productName: String, page: Int)
     case getChartInfo(Int) //month
     case verifySending(id: String, status: OrderStatus)
@@ -156,7 +156,7 @@ extension Router: TargetType {
         case .getProduct(let id), .getComments(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
         case .searchProducts(let productName, let page):
-            return .requestParameters(parameters: ["productName": productName, "page": page], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["name": productName, "page": page], encoding: URLEncoding.queryString)
             
         case .updatePassword(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
@@ -166,9 +166,11 @@ extension Router: TargetType {
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
-            
-        case .popularRestaurants, .trendingProducts, .getFavorites,
-             .getProducts, .getChartInfo, .getOrders, .getNotifications, .me: //, .newMovies(let page):
+        
+        case .getProducts(let page):
+            return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
+        
+        case .popularRestaurants, .trendingProducts, .getFavorites, .getChartInfo, .getOrders, .getNotifications, .me: //, .newMovies(let page):
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }

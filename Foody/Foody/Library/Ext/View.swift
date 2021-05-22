@@ -96,14 +96,21 @@ extension View {
         self
             .onAppear(perform: {
                 UINavigationBar.appearance().tintColor = .white
-                UINavigationBar.appearance().largeTitleTextAttributes = [
-                    .font: UIFont.boldSystemFont(ofSize: largeTitleSize),
-                    .foregroundColor: titleCOlor,
-                ]
-                UINavigationBar.appearance().titleTextAttributes = [
+                let coloredAppearance = UINavigationBarAppearance()
+                coloredAppearance.configureWithOpaqueBackground()
+                coloredAppearance.backgroundColor = Colors.redColorCustom.toUIColor
+                coloredAppearance.titleTextAttributes = [
                     .font: UIFont.boldSystemFont(ofSize: titleSize),
-                    .foregroundColor: titleCOlor,
+                    .foregroundColor: titleCOlor
                 ]
+                coloredAppearance.largeTitleTextAttributes = [
+                    .font: UIFont.boldSystemFont(ofSize: largeTitleSize),
+                    .foregroundColor: titleCOlor
+                ]
+                       
+                UINavigationBar.appearance().standardAppearance = coloredAppearance
+                UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+                
                 UINavigationBar.appearance().barTintColor = Colors.redColorCustom.toUIColor
             })
             .statusBarStyle(.lightContent)

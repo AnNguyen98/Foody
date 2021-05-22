@@ -22,7 +22,7 @@ struct TabViews: View {
                         
                         UIKitTabView.Tab(view: NavigationView { ROrdersView() }.toAnyView)
                                             
-                        UIKitTabView.Tab(view: RChartsView().toAnyView)
+                        UIKitTabView.Tab(view: NavigationView { RChartsView() }.toAnyView)
                         
                         UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
                     }

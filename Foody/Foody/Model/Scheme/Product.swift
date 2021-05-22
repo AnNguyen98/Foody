@@ -37,11 +37,19 @@ struct Product: Codable {
     var orderCount: Int = 0
     
     var status: String = ProductStatus.none.rawValue
+    
+    var address: String = ""
+}
+
+extension Product {
+    var accepted: Bool {
+        status == ProductStatus.accepted.rawValue
+    }
 }
 
 extension Product: Identifiable {
     /// Only for ui
-    var id: String { UUID.init().uuidString }
+    var id: String { _id }
 }
 
 extension Product: Hashable {

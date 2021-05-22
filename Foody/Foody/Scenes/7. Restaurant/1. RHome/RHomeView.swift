@@ -16,8 +16,8 @@ struct RHomeView: View {
         
     var body: some View {
         LazyVStack(spacing: 15) {
-            ForEach(viewModel.products, id: \._id) { product in
-                NavigationLink(destination: RFoodDetailsView(), label: {
+            ForEach(viewModel.displayProducts, id: \.id) { product in
+                NavigationLink(destination: RFoodDetailsView(viewModel: viewModel.detailViewModel(product)), label: {
                     VStack(alignment: .leading, spacing: 5) {
                         Image(product.productImages.first)
                             .resizable()
@@ -26,7 +26,13 @@ struct RHomeView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 0))
 
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(product.name)
+                            HStack {
+                                Text(product.name)
+                                    .bold()
+                                
+                                Image(systemName: SFSymbols.checkmarkCircleFill)
+                                    .foregroundColor(product.accepted ? .green: .gray)
+                            }
                             
                             Text(product.restaurantName)
                                 .foregroundColor(Color(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1)))
@@ -37,7 +43,7 @@ struct RHomeView: View {
                                     Image(systemName: SFSymbols.starFill)
                                         .resizable()
                                         .frame(width: 16 * scale, height: 16 * scale)
-                                        .foregroundColor(index <= product.voteCount ? .yellow: .gray)
+                                        .foregroundColor(index < product.voteCount ? .yellow: .gray)
                                 }
                                 
                                 Spacer(minLength: 0)
@@ -56,35 +62,37 @@ struct RHomeView: View {
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                     .shadow(color: .gray, radius: 2, x: 0.0, y: 0)
-                    .padding(.bottom, 15)
                     .onAppear(perform: {
-                        if product == viewModel.products.last {
+                        if product == viewModel.displayProducts.last {
                             viewModel.isLastRow = true
                         }
                     })
                 })
             }
         }
+        .setupNavigationBar()
+        .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
+        .padding(.bottom, 15)
         .prepareForLoadMore(loadMore: {
             handleLoadMore()
         }, showIndicator: viewModel.canLoadMore)
         .onRefresh {
             refreshData()
         }
-        .setupBackgroundNavigationBar()
         .navigationSearchBar({
             SearchBar("Enter product name...", text: $viewModel.searchText)
                 .showsCancelButton(true)
                 .searchBarStyle(.default)
                 .returnKeyType(.search)
+                .onCancel {
+                    viewModel.searchText = ""
+                }
         })
         .navigationBarItems(
             trailing: NotificationView(action: {
                 isNotificationsPresented.toggle()
             })
         )
-        .navigationBarTitle("Home", displayMode: .automatic)
-        .setupNavigationBar()
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
@@ -92,7 +100,8 @@ struct RHomeView: View {
         .fullScreenCover(isPresented: $isNotificationsPresented, content: {
             RNotificationsView(isActive: $isNotificationsPresented)
         })
-        
+        .addEmptyView(isEmpty: viewModel.displayProducts.isEmpty)
+        .navigationBarTitle("Home", displayMode: .inline)
     }
 }
 

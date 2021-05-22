@@ -8,15 +8,15 @@
 import Combine
 
 struct ProductResponse: Decodable {
-    var currentPage: Int
-    var products: [Product]
-    var nextPage: Bool
+    var page: Int = 0
+    var products: [Product] = []
+    var nextPage: Bool = false
 }
 
 final class RestaurantServices {
     
-    static func getProducts() -> AnyPublisher<ProductResponse, CommonError> {
-        NetworkProvider.shared.request(.getProducts)
+    static func getProducts(page: Int = 0) -> AnyPublisher<ProductResponse, CommonError> {
+        NetworkProvider.shared.request(.getProducts(page))
             .decode(type: ProductResponse.self)
             .eraseToAnyPublisher()
     }

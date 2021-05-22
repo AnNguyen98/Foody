@@ -13,18 +13,18 @@ enum DetailsAction {
 }
 
 final class RProductDetailsViewModel: ViewModel, ObservableObject {
-    @Published var product: Product
-    @Published var comments: [Comment] = []
     @Published var showSuccessPopup = false
     @Published var deleteSuccess = false
     
+    var product: Product = Product()
+    var comments: [Comment] = []
     var action: DetailsAction = .normal
     var images: [Data] {
         product.productImages
     }
     
     init(_ product: Product = Product()) {
-        self.product = product
+        self.product._id = product._id
         super.init()
         if action == .normal {
             getProductInfo()
@@ -32,10 +32,14 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     }
     
     func getProductInfo() {
+        let group = DispatchGroup()
+        
         isLoading = true
+        
+        group.enter()
         CommonServices.getProduct(id: product._id)
             .sink { (completion) in
-                self.isLoading = false
+                group.leave()
                 if case .failure(let error) = completion {
                     self.error = error
                 }
@@ -44,20 +48,21 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
             }
             .store(in: &subscriptions)
 
-    }
-    
-    func getComments() {
-        isLoading = true
-        CommonServices.getComments(productId: product._id)
-            .sink { (completion) in
-                self.isLoading = false
-                if case .failure(let error) = completion {
-                    self.error = error
-                }
-            } receiveValue: { (comments) in
-                self.comments = comments
-            }
-            .store(in: &subscriptions)
+//        group.enter()
+//        CommonServices.getComments(productId: product._id)
+//            .sink { (completion) in
+//                group.leave()
+//                if case .failure(let error) = completion {
+//                    self.error = error
+//                }
+//            } receiveValue: { (comments) in
+//                self.comments = comments
+//            }
+//            .store(in: &subscriptions)
+        
+        group.notify(queue: .main) {
+            self.isLoading = false
+        }
     }
     
     func requestNewProduct() {

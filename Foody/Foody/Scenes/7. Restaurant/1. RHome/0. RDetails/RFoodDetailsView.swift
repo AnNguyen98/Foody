@@ -32,13 +32,6 @@ struct RFoodDetailsView: View {
                     
                     if viewModel.action != .preview {
                         HStack {
-                            NavigationLink(
-                                destination: RAddProductView(isActive: $isPresentedEditView),
-                                isActive: $isPresentedEditView,
-                                label: {
-                                    EmptyView()
-                                })
-                            
                             Spacer()
                             
                             CircleButton(systemName: SFSymbols.squareAndPencil, color: .blue,
@@ -65,6 +58,9 @@ struct RFoodDetailsView: View {
                         Text("Description")
                             .font(.title3)
                         
+                        Image(systemName: SFSymbols.checkmarkCircleFill)
+                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
+                        
                         Spacer()
                         
                         let voteCount = viewModel.product.voteCount
@@ -80,7 +76,7 @@ struct RFoodDetailsView: View {
                     Text(viewModel.product.descriptions)
                         .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(lineLimit)
+                        .lineLimit(5)
                     
                     HStack {
                         Spacer()
@@ -101,28 +97,29 @@ struct RFoodDetailsView: View {
                     Text("\(viewModel.product.price) vnđ")
                         .font(.title2)
                     
-                    Button(action: {
-                        viewModel.requestNewProduct()
-                    }, label: {
-                        ZStack {
-                            Text(viewModel.action == .preview ? "Add New Request": "Comtinue")
-                            
-                            HStack {
-                                Spacer()
-                                Image(systemName: SFSymbols.eject)
-                                    .font(.title3)
-                                    .padding(.trailing, 10)
+                    if viewModel.action != .normal {
+                        Button(action: {
+                            viewModel.requestNewProduct()
+                        }, label: {
+                            ZStack {
+                                Text(viewModel.action == .preview ? "Add New Request": "Comtinue")
+                                
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: SFSymbols.eject)
+                                        .font(.title3)
+                                        .padding(.trailing, 10)
+                                }
                             }
-                        }
-                        .regular(size: 17)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Colors.redColorCustom)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        
-                    })
+                            .regular(size: 17)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Colors.redColorCustom)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                        })
+                    }
                 }
-                .padding(EdgeInsets(top: 50, leading: 20, bottom: 20, trailing: 20))
+                .padding(EdgeInsets(top: 40, leading: 20, bottom: 20, trailing: 20))
                 
                 if viewModel.action != .preview {
                     VStack(alignment: .leading) {
@@ -148,13 +145,12 @@ struct RFoodDetailsView: View {
             .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
         }
         .onRefresh {
-            print("onRefreshing...")
+            viewModel.getProductInfo()
         }
         .handleAction(isActive: $viewModel.showSuccessPopup, action: {
             handleShowNotiPupup()
         })
         .addBackBarCustom()
-        .ignoresSafeArea()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .onReceive(viewModel.$deleteSuccess, perform: { deleted in
@@ -171,6 +167,11 @@ struct RFoodDetailsView: View {
                   secondaryButton: .cancel()
             )
         })
+        .fullScreenCover(isPresented: $isPresentedEditView, content: {
+            RAddProductView(isActive: $isPresentedEditView)
+        })
+        .setupNavigationBar()
+        .navigationBarTitle(Text("Details"), displayMode: .inline)
     }
 }
 

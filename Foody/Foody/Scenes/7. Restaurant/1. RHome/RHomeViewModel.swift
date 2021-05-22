@@ -9,22 +9,30 @@ import SwiftUI
 import SwifterSwift
 
 final class RHomeViewModel: ViewModel, ObservableObject {
-    private var displayProducts: [Product] = []
     private var nextPage = false
     private var currentPage: Int = 0
     
-    @Published var products: [Product] = []//(0...20).map({ _ in Product() })
+    @Published var products: [Product] = []
+    @Published var searchResults: [Product] = []
     @Published var searchText: String = ""
     @Published var isLastRow: Bool = false
     
+    var displayProducts: [Product] {
+        searchText.trimmed == "" ? products: searchResults
+    }
+    
     var canLoadMore: Bool  {
-        isLastRow && nextPage
+        !searchText.isEmpty ? false: isLastRow && nextPage
     }
     
     override init() {
         super.init()
         getProducts()
         setupObservers()
+    }
+    
+    func detailViewModel(_ product: Product) -> RProductDetailsViewModel {
+        RProductDetailsViewModel(product)
     }
     
     func setupObservers() {
@@ -34,7 +42,7 @@ final class RHomeViewModel: ViewModel, ObservableObject {
             .removeDuplicates()
             .sink { (text) in
                 if text.isEmpty {
-                    self.displayProducts = self.products
+                    self.searchResults.removeAll()
                 } else {
                     self.handleSearch()
                 }
@@ -45,44 +53,48 @@ final class RHomeViewModel: ViewModel, ObservableObject {
     func getProducts(page: Int = 0) {
         guard !isLoading else { return }
         isLoading = true
-        RestaurantServices.getProducts()
+        RestaurantServices.getProducts(page: page)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (response) in
-                if response.currentPage > 0 {
-                    self.products = response.products
-                } else {
+                if response.page > 0 {
                     self.products += response.products
+                } else {
+                    self.products = response.products
                 }
                 self.nextPage = response.nextPage
-                self.currentPage = response.currentPage
+                self.currentPage = response.page
             }
             .store(in: &subscriptions)
     }
     
-    func handleSearch() {
-        isLoading = true
-        CommonServices.searchProducts(productName: searchText)
+    func handleSearch(page: Int = 0) {
+        CommonServices.searchProducts(productName: searchText, page: page)
             .sink { (completion) in
-                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (response) in
-                self.displayProducts = response.products
+                self.searchResults = response.products
             }
             .store(in: &subscriptions)
     }
     
     func refreshData() {
+        products.removeAll()
+        searchResults.removeAll()
+        currentPage = 0
+        
         getProducts()
     }
     
     func handleLoadMore() {
-        getProducts(page: currentPage + 1)
+        if searchText.trimmed == "" {
+            getProducts(page: currentPage + 1)
+        }
     }
 }
 

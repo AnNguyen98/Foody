@@ -36,7 +36,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (res) in
-                self.currentPage = res.currentPage
+                self.currentPage = res.page
                 self.products = res.products
                 self.nextPage = res.nextPage
             }
