@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 import SwifterSwift
 
-struct ChartData: Decodable {
+struct ChartMonthData: Decodable {
     var time: String
     var orderCount: Int
 }
@@ -33,7 +33,7 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         getChartsInfo()
     }
     
-    func prepareData(_ charts: [ChartData]) {
+    func prepareData(_ charts: [ChartMonthData]) {
         
     }
     
