@@ -18,13 +18,13 @@ struct RNotificationsView: View {
                     ForEach(viewModel.notifications, id: \._id) { notification in
                         VStack(alignment: .leading) {
                             HStack(spacing: 10) {
-                                Image("default-thumbnail")
+                                Image(notification.userImage, isProfile: true)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 60 * scale, height: 60 * scale)
                                     .clipShape(Circle())
                                 
-                                VStack(spacing: 5) {
+                                VStack(alignment: .leading, spacing: 5) {
                                     Text(notification.content)
                                         .lineLimit(3)
                                         .font(.system(size: 16))
@@ -40,7 +40,7 @@ struct RNotificationsView: View {
                                 .padding(.top)
                             }
                             .onTapGesture {
-                                viewModel.markReadNotification(notification)
+//                                viewModel.markReadNotification(notification)
                             }
                             
                             Divider()

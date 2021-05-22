@@ -17,6 +17,14 @@ struct Notifications: Codable {
     var time: String = ""
     
     var isRead: Bool = false
+    
+    var userProfile: String = ""
+}
+
+extension Notifications {
+    var userImage: Data? {
+        Data(base64Encoded: userProfile)
+    }
 }
 
 extension Notifications: Hashable {
