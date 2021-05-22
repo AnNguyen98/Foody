@@ -169,8 +169,11 @@ extension Router: TargetType {
         
         case .getProducts(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
+            
+        case .getChartInfo(let month):
+            return .requestParameters(parameters: ["month": month], encoding: URLEncoding.queryString)
         
-        case .popularRestaurants, .trendingProducts, .getFavorites, .getChartInfo, .getOrders, .getNotifications, .me: //, .newMovies(let page):
+        case .popularRestaurants, .trendingProducts, .getFavorites, .getOrders, .getNotifications, .me: //, .newMovies(let page):
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }

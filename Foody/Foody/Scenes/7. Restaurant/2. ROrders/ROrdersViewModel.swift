@@ -18,6 +18,11 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
         orders[safeIndex: selectedIndex] ?? []
     }
     
+    override init() {
+        super.init()
+        getOrders()
+    }
+    
     func prepareOrders(_ orders: [Order]) {
         var prepareOrders: [Order] = orders
         [OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]

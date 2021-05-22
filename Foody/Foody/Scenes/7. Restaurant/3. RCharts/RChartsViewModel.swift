@@ -9,6 +9,11 @@ import Combine
 import SwiftUI
 import SwifterSwift
 
+struct ChartData: Decodable {
+    var time: String
+    var orderCount: Int
+}
+
 final class RChartsViewModel: ViewModel, ObservableObject {
     private var charts: [Int: [Int]] = [:]
     var currentMonth: Int = Date().month
@@ -26,6 +31,10 @@ final class RChartsViewModel: ViewModel, ObservableObject {
     override init() {
         super.init()
         getChartsInfo()
+    }
+    
+    func prepareData(_ charts: [ChartData]) {
+        
     }
     
     func getChartsInfo(month: Int = Date().month) {
