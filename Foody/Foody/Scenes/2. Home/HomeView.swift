@@ -41,7 +41,6 @@ struct HomeView: View {
         .onRefresh {
             refreshData()
         }
-        .setupBackgroundNavigationBar()
         .navigationBarItems(
             trailing: NotificationView()
         )

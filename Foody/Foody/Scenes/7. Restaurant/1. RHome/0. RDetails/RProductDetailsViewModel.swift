@@ -16,9 +16,9 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     @Published var showSuccessPopup = false
     @Published var deleteSuccess = false
     
+    var action: DetailsAction = .normal
     var product: Product = Product()
     var comments: [Comment] = []
-    var action: DetailsAction = .normal
     var images: [Data] {
         product.productImages
     }
@@ -48,17 +48,17 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
             }
             .store(in: &subscriptions)
 
-//        group.enter()
-//        CommonServices.getComments(productId: product._id)
-//            .sink { (completion) in
-//                group.leave()
-//                if case .failure(let error) = completion {
-//                    self.error = error
-//                }
-//            } receiveValue: { (comments) in
-//                self.comments = comments
-//            }
-//            .store(in: &subscriptions)
+        group.enter()
+        CommonServices.getComments(productId: product._id)
+            .sink { (completion) in
+                group.leave()
+                if case .failure(let error) = completion {
+                    //self.error = error
+                }
+            } receiveValue: { (comments) in
+                self.comments = comments
+            }
+            .store(in: &subscriptions)
         
         group.notify(queue: .main) {
             self.isLoading = false
@@ -81,6 +81,7 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     }
     
     func deleteProduct() {
+        self.isLoading = true
         RestaurantServices.deleteProduct(id: product._id)
             .sink { (completion) in
                 self.isLoading = false

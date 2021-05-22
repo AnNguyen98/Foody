@@ -132,14 +132,15 @@ struct RegisterView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, Constants.MARGIN_WITH_BACK_BAR)
             }
-            .addBackBarCustom()
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
         }
+        .addBackBarCustom(.white)
         .handleErrors($viewModel.error)
         .addLoadingIcon($viewModel.isLoading)
         .handleHidenKeyboard()
         .statusBarStyle(.lightContent)
         .regular(size: 17)
+        .navigationBarHidden(true)
     }
 }
 

@@ -23,7 +23,7 @@ struct RFoodDetailsView: View {
                                 Image(data)
                                     .resizable()
                                     .frame(maxWidth: kScreenSize.width, maxHeight: 358)
-                                    .scaledToFit()
+                                    .scaledToFill()
                             }
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
@@ -50,16 +50,18 @@ struct RFoodDetailsView: View {
                 
 
                 VStack(alignment: .leading, spacing: 13) {
-                    Text(viewModel.product.name)
-                        .font(.title)
-                        .lineLimit(2)
+                    HStack {
+                        Text(viewModel.product.name)
+                            .font(.title)
+                            .lineLimit(2)
+                        
+                        Image(systemName: SFSymbols.checkmarkCircleFill)
+                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
+                    }
                     
                     HStack(spacing: 3) {
                         Text("Description")
                             .font(.title3)
-                        
-                        Image(systemName: SFSymbols.checkmarkCircleFill)
-                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
                         
                         Spacer()
                         

@@ -73,7 +73,7 @@ struct VerifyPhoneView: View {
                             .bold(size: 18)
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .foregroundColor(Color.white.opacity(viewModel.isValid ? 1: 0.5))
-                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.isValid ? 0.7: 0.5))
+                            .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.isValid ? 0.9: 0.5))
                     })
                     .disabled(!viewModel.isValid)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
