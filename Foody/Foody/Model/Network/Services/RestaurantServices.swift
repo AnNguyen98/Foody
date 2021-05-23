@@ -64,7 +64,7 @@ final class RestaurantServices {
     }
     
     struct ChartResponse: Decodable {
-        var month: Int
+        var month: String
         var data: [Int]
     }
     

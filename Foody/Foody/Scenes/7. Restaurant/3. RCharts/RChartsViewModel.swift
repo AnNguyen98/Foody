@@ -15,7 +15,7 @@ struct ChartMonthData: Decodable {
 }
 
 final class RChartsViewModel: ViewModel, ObservableObject {
-    private var charts: [Int: [Int]] = [:]
+    @Published private var charts: [Int: [Int]] = [:]
     var currentMonth: Int = Date().month
     
     @Published var currentChart: [Int] = []
@@ -35,6 +35,11 @@ final class RChartsViewModel: ViewModel, ObservableObject {
     
     func prepareData(_ charts: [ChartMonthData]) {
         
+    }
+    
+    func refreshData() {
+        charts.removeAll()
+        getChartsInfo()
     }
     
     func getChartsInfo(month: Int = Date().month) {

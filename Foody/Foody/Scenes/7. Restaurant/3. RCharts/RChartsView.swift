@@ -71,6 +71,9 @@ struct RChartsView: View {
             }
             .padding(.horizontal)
         }
+        .onRefresh {
+            viewModel.getChartsInfo()
+        }
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .navigationBarHidden(true)
