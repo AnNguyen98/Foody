@@ -100,8 +100,6 @@
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
 		B54DBD65265A5D6B0010F4FA /* FloatButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */; };
 		B554FC3F2656996B005D2889 /* RNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */; };
-		B554FC5026569B51005D2889 /* ROrderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554FC4F26569B51005D2889 /* ROrderDetailsViewModel.swift */; };
-		B554FC5526569B60005D2889 /* ROrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554FC5426569B60005D2889 /* ROrderDetailsView.swift */; };
 		B55DA05E263164C200F73686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55DA05D263164C200F73686 /* GoogleService-Info.plist */; };
 		B55DE2E6261EA53200F6328A /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55DE2E5261EA53200F6328A /* OrdersView.swift */; };
 		B57AFE10265413E000EA2716 /* RestaurantServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AFE0F265413E000EA2716 /* RestaurantServices.swift */; };
@@ -263,8 +261,6 @@
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButtonView.swift; sourceTree = "<group>"; };
 		B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNotificationsViewModel.swift; sourceTree = "<group>"; };
-		B554FC4F26569B51005D2889 /* ROrderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROrderDetailsViewModel.swift; sourceTree = "<group>"; };
-		B554FC5426569B60005D2889 /* ROrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROrderDetailsView.swift; sourceTree = "<group>"; };
 		B55DA05D263164C200F73686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B55DE2E5261EA53200F6328A /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		B57AFE0F265413E000EA2716 /* RestaurantServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantServices.swift; sourceTree = "<group>"; };
@@ -746,7 +742,6 @@
 			children = (
 				B5E8F88F265660B90046782B /* ROrdersView.swift */,
 				B5E8F894265660CF0046782B /* ROrdersViewModel.swift */,
-				B554FC4E26569B36005D2889 /* ROrderDetails */,
 			);
 			path = "2. ROrders";
 			sourceTree = "<group>";
@@ -780,15 +775,6 @@
 				B5FC92EE26498E350037632F /* 5. Order */,
 			);
 			path = "2. Home";
-			sourceTree = "<group>";
-		};
-		B554FC4E26569B36005D2889 /* ROrderDetails */ = {
-			isa = PBXGroup;
-			children = (
-				B554FC4F26569B51005D2889 /* ROrderDetailsViewModel.swift */,
-				B554FC5426569B60005D2889 /* ROrderDetailsView.swift */,
-			);
-			path = ROrderDetails;
 			sourceTree = "<group>";
 		};
 		B55DE2E4261EA51E00F6328A /* 4. Orders */ = {
@@ -1244,10 +1230,8 @@
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
 				B5C3F88826491FF2003CBE8A /* ProfileViewModel.swift in Sources */,
 				B599A9E026540055008F995D /* RHomeView.swift in Sources */,
-				B554FC5526569B60005D2889 /* ROrderDetailsView.swift in Sources */,
 				B5D004BB25FF173200E4B9AE /* VerifyPhoneView.swift in Sources */,
 				8EEAC56F261B54DF004A052D /* HostingController.swift in Sources */,
-				B554FC5026569B51005D2889 /* ROrderDetailsViewModel.swift in Sources */,
 				B503D2672655276900A9F9A7 /* RChartsView.swift in Sources */,
 				8ED8833B264151D10091FD86 /* SFSymbols.swift in Sources */,
 				8E9419E52640E043008808D5 /* FavoritesViewModel.swift in Sources */,

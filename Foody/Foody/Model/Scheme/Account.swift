@@ -11,14 +11,10 @@ struct Account: Codable {
     var _id: String = UUID.init().uuidString
     
     var email: String = ""
-    
-    var username: String = ""
-    
+        
     var phoneNumber: String = ""
     
     var password: String = ""
-    
-    var status: String = AccountStatus.active.rawValue
-    
+        
     var type: String = UserType.customer.rawValue
 }

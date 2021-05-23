@@ -10,7 +10,6 @@ import SwiftUIX
 
 struct ROrdersView: View {
     @StateObject private var viewModel = ROrdersViewModel()
-    @State private var editMode = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -108,7 +107,11 @@ struct ROrdersView: View {
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow(color: .gray, radius: 3)
+                        .onTapGesture {
+                            print("OKKK")
+                        }
                     }
+                    
                 }
                 .prepareForLoadMore(loadMore: {
                     
