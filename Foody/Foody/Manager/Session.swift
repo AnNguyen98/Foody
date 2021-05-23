@@ -56,6 +56,7 @@ final class Session {
         }
     }
     
+    var favorites: [Product] = []
 }
 
 extension Session {

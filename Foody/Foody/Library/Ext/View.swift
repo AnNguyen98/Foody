@@ -126,7 +126,7 @@ extension View {
 // Prepare For LoadMore
 extension View {
     var defaultGridItemLayout: [GridItem] {
-        Array(repeating: GridItem(.flexible(), spacing: 15), count: 2)
+        Array(repeating: GridItem(.fixed((kScreenSize.width - 30 - 15) / 2) , spacing: 15), count: 2)
     }
     
     func prepareForLoadMore(loadMore: @escaping () -> Void, showIndicator: Bool) -> some View {

@@ -180,6 +180,8 @@ struct RefreshScrollModifier: ViewModifier {
                 refreshControl.transform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
                 refreshControl.addTarget(coordinator, action: #selector(coordinator.onRefresh(_:)), for: .valueChanged)
                 scrollView.refreshControl = refreshControl
+                
+                scrollView.keyboardDismissMode = .onDrag
             }
     }
     
@@ -202,7 +204,7 @@ struct RefreshScrollModifier: ViewModifier {
 // Refresh Scroll
 extension View {
     /// Before is scroll view
-    func addEmptyView(isEmpty: Bool, _ emptyText: String = "No items found") -> some View {
+    func addEmptyView(isEmpty: Bool, _ emptyText: String = "No items found.") -> some View {
         ZStack {
             self
             
@@ -211,6 +213,7 @@ extension View {
                 
                 Image(systemName: SFSymbols.scribble)
             }
+            .padding(30)
             .opacity(isEmpty ? 1: 0)
         }
     }

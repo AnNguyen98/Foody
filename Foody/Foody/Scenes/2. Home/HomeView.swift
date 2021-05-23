@@ -21,7 +21,7 @@ struct HomeView: View {
                             ForEach(0..<10) { item in
                                 NavigationLink(destination: FoodDetailsView(), label: {
                                     ProductCellView()
-                                        .frame(width: 250 * scale)
+                                        .frame(width: 250 * scale, height: 200 * scale)
                                 })
                             }
                         }

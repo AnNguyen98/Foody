@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct FavoritesView: View {
     @StateObject private var viewModel = FavoritesViewModel()
@@ -17,6 +18,7 @@ struct FavoritesView: View {
                 NavigationLink(destination: productView(with: product), label: {
                     ZStack(alignment: .topTrailing) {
                         ProductCellView(product: product)
+                            .frame(height: 250)
                         
                         Button(action: {
                             viewModel.deleteFavorite(id: product._id)
@@ -40,17 +42,16 @@ struct FavoritesView: View {
         }
         .prepareForLoadMore(loadMore: {
             handleLoadMore()
-        }, showIndicator: viewModel.canLoadMore)
+        }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
         .onRefresh {
             handleRefresh()
         }
-        .navigationBarTitle("Favorites", displayMode: .inline)
+        .navigationBarTitle("Favorites", displayMode: .automatic)
         .setupNavigationBar()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
-        .setupBackgroundNavigationBar()
         .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)
     }
     

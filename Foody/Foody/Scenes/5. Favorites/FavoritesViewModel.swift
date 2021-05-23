@@ -19,14 +19,14 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
     
     override init() {
         super.init()
-        getProducts()
+        getFavoriteProducts()
     }
     
     func detailsViewModel(with product: Product) -> ProductDetailsViewModel {
         ProductDetailsViewModel(id: product._id)
     }
     
-    func getProducts(page: Int = 0) {
+    func getFavoriteProducts(page: Int = 0) {
         guard !isLoading else { return }
         isLoading = true
         CustomerServices.getFavoriteProducts()
@@ -37,12 +37,13 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
                 }
             } receiveValue: { (items) in
                 self.products = items
+                Session.shared.favorites = items.map({ $0.product })
             }
             .store(in: &subscriptions)
     }
     
     func handleLoadMore() {
-        getProducts(page: currentPage + 1)
+        getFavoriteProducts(page: currentPage + 1)
     }
     
     func handleRefreshData() {
@@ -50,7 +51,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
         nextPage = true
         currentPage = 0
         
-        getProducts()
+        getFavoriteProducts()
     }
     
     func deleteFavorite(id: String) {
@@ -61,7 +62,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (item) in
-                self.products.removeAll(where: { $0.product == item.product })
+                self.products.removeAll(where: { $0.product == item?.product })
             }
             .store(in: &subscriptions)
     }

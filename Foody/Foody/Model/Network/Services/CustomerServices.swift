@@ -7,7 +7,7 @@
 
 import Combine
 
-struct FavoriteItemResponse: Decodable {
+struct FavoriteItemResponse: Codable {
     var _id: String
     var userId: String
     var product: Product
@@ -64,14 +64,14 @@ extension CustomerServices {
             .eraseToAnyPublisher()
     }
     
-    static func deleteFavorite(productId: String) -> AnyPublisher<FavoriteItemResponse, CommonError> {
+    static func deleteFavorite(productId: String) -> AnyPublisher<FavoriteItemResponse?, CommonError> {
         NetworkProvider.shared.request(.deleteFavorite(productId))
-            .decode(type: FavoriteItemResponse.self)
+            .decode(type: FavoriteItemResponse?.self)
             .eraseToAnyPublisher()
     }
     
-    static func addNewFavorie(_ product: Product) -> AnyPublisher<FavoriteItemResponse, CommonError> {
-        guard let params = try? product.toParameters() else {
+    static func addNewFavorie(_ item: FavoriteItemResponse) -> AnyPublisher<FavoriteItemResponse, CommonError> {
+        guard let params = try? item.toParameters() else {
             return Fail(error: CommonError.invalidInputData).eraseToAnyPublisher()
         }
         return NetworkProvider.shared.request(.newFavorite(params))

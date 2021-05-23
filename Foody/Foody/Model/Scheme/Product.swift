@@ -70,4 +70,8 @@ extension Product {
     var productImages: [Data] {
         imageBase64Encodings.compactMap({ Data(base64Encoded: $0) })
     }
+    
+    var isLiked: Bool {
+        Session.shared.favorites.contains(self)
+    }
 }
