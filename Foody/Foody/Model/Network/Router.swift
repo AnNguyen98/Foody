@@ -119,7 +119,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant:
+        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant, .updateInfo:
             return .post
         case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification:
             return .put

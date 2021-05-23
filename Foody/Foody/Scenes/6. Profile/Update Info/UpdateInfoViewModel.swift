@@ -14,23 +14,38 @@ final class UpdateInfoViewModel: ViewModel, ObservableObject {
     @Published var age: String = ""
     @Published var images: [UIImage] = []
     @Published var isUpdated: Bool = false
-    var gender: Bool = false
-    
-    @Published var isMale: Bool = true {
-        didSet {
-            gender = isMale
-        }
-    }
+    @Published var isMale: Bool = false
     
     var inValidInfo: Bool {
         username.isEmpty || address.isEmpty || age.isEmpty
+    }
+    
+    var user: User {
+        Session.shared.user ?? User()
+    }
+    
+    var restaurant: Restaurant {
+        Session.shared.restaurant ?? Restaurant()
+    }
+    
+    override init() {
+        super.init()
+        
+        username = user.username
+        address = user.address
+        age = user.age.string
+        isMale = user.gender
+        address = user.address
+        images = [user.imageProfile].compactMap({ $0 }) .compactMap({ UIImage(data: $0)})
+        
+        description = restaurant.descriptions
     }
     
     func updateInfo() {
         var params: Parameters = [
             "username"  : username,
             "address"   : address,
-            "gender"    : gender,
+            "gender"    : isMale,
             "age"       : Int(age) ?? 0,
         ]
         
