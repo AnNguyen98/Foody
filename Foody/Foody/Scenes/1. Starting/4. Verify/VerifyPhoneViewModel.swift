@@ -84,7 +84,6 @@ extension VerifyPhoneViewModel {
         account._id = user._id
         account.email = userInfo.email
         account.password = userInfo.password
-        account.username = userInfo.username
         account.phoneNumber = userInfo.phoneNumber
         
         guard !isLoading else { return }
