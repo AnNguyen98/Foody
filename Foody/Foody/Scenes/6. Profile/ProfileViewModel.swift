@@ -9,7 +9,6 @@ import SwiftUI
 
 final class ProfileViewModel: ViewModel, ObservableObject {
     @Published var isLogged: Bool = true
-    @Published var restaurant: Restaurant = Restaurant()
     
     var isRestaurant: Bool {
         user.type == UserType.restaurant.rawValue
@@ -17,6 +16,10 @@ final class ProfileViewModel: ViewModel, ObservableObject {
     
     var user: User {
         Session.shared.user ?? User()
+    }
+    
+    var restaurant: Restaurant {
+        Session.shared.restaurant ?? Restaurant()
     }
     
     var isActive: Bool {
@@ -37,9 +40,6 @@ final class ProfileViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (res) in
-                if let restaurant = res.restaurant {
-                    self.restaurant = restaurant
-                }
                 Session.shared.user = res.user
                 Session.shared.restaurant = res.restaurant
             }
@@ -54,5 +54,7 @@ final class ProfileViewModel: ViewModel, ObservableObject {
             self.isLoading = false
             self.isLogged = false
         }
+        
+        Date().timeString()
     }
 }

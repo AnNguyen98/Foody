@@ -11,6 +11,7 @@ import SwiftUIX
 struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
+    @State private var showAlertComfirm: Bool = false
     
     var body: some View {
         ZStack {
@@ -84,6 +85,12 @@ struct ProfileView: View {
                         ProfileButtonView(text: Text(viewModel.restaurant.name).bold(), symbol: SFSymbols.houseFill)
                             .padding(.top, 30)
                             .disabled(true)
+                        
+                        ProfileButtonView(text: Text("Open time: \(viewModel.restaurant.openTime) - \(viewModel.restaurant.closeTime)")
+                                            .font(.caption)
+                                            .foregroundColor(.red),
+                                          symbol: SFSymbols.timer)
+                            .disabled(true)
                     }
 
                     ProfileButtonView(text:
@@ -104,13 +111,23 @@ struct ProfileView: View {
                     }, text: Text("Help"), imageName: "help-icon")
                     
                     ProfileButtonView(action: {
-                        logout()
+                        showAlertComfirm.toggle()
                     }, text: Text("Logout"), imageName: "logout-icon")
                     .padding(.bottom, 30)
                 }
             }
             .padding()
         }
+        .alert(isPresented: $showAlertComfirm, content: {
+            Alert(title: Text("Logout"),
+                  message: Text("You will log out of the application!"),
+                  primaryButton: .destructive(
+                    Text("Logout"), action: {
+                        logout()
+                    }),
+                  secondaryButton: .cancel()
+            )
+        })
         .navigationBarHidden(true)
         .statusBarStyle(.lightContent)
         .addLoadingIcon($viewModel.isLoading)
