@@ -98,6 +98,7 @@ struct ProfileView: View {
                                             .foregroundColor(.blue),
                                       symbol: SFSymbols.phone)
                         .disabled(true)
+                        .padding(.top, viewModel.isRestaurant ? 0: 30)
                     
                     ProfileButtonView(text: Text(viewModel.restaurant.address), symbol: SFSymbols.locationFill)
                         .disabled(true)
@@ -116,7 +117,7 @@ struct ProfileView: View {
                     .padding(.bottom, 30)
                 }
             }
-            .padding()
+            .padding([.horizontal, .top])
         }
         .alert(isPresented: $showAlertComfirm, content: {
             Alert(title: Text("Logout"),

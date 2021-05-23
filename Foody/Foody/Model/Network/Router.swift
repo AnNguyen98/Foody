@@ -187,7 +187,6 @@ extension Router: TargetType {
         if let token = Session.shared.accessToken {
             headers["Authorization"] = token
         }
-        headers["Authorization"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRoZWFubmd1eWVuOThAZ21haWwuY29tIiwiZXhwIjo1MjIwMTE2MDY2fQ.REe2ueW0q0vow1yQfTmbtAx0yHMGY5O9pRvncVi5alQ"
         return headers
     }
     

@@ -10,48 +10,59 @@ import SwifterSwift
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
+    @State private var isNotificationsPresented = false
         
     var body: some View {
-        ScrollView {
-            Section(header: headerView("Trending products",  destination: TrendingProductsView().toAnyView)) {
-                ScrollView(.horizontal) {
-                    LazyHStack(spacing: 15) {
+        ZStack(alignment: .bottomTrailing) {
+            ScrollView {
+                Section(header: headerView("Trending products",  destination: TrendingProductsView().toAnyView)) {
+                    ScrollView(.horizontal) {
+                        LazyHStack(spacing: 15) {
+                            ForEach(0..<10) { item in
+                                NavigationLink(destination: FoodDetailsView(), label: {
+                                    ProductCellView()
+                                        .frame(width: 250 * scale)
+                                })
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
+                
+                Section(header: headerView("Most popular", destination: PopularRestaurantsView().toAnyView)) {
+                    LazyVStack(spacing: 15) {
                         ForEach(0..<10) { item in
-                            NavigationLink(destination: FoodDetailsView(), label: {
-                                ProductCellView()
-                                    .frame(width: 250 * scale)
+                            NavigationLink(destination: RestaurantDetailsView(), label: {
+                                RestaurantCellView()
                             })
                         }
                     }
-                    .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
                 }
             }
+            .onRefresh {
+                refreshData()
+            }
+            .navigationBarItems(
+                trailing: NotificationView(action: {
+                    isNotificationsPresented.toggle()
+                })
+            )
+            .navigationBarTitle("Home", displayMode: .inline)
+            .setupNavigationBar()
+            .statusBarStyle(.lightContent)
+            .handleHidenKeyboard()
+            .handleErrors($viewModel.error)
+            .addLoadingIcon($viewModel.isLoading)
+            .onAppear {
+                setupData()
+            }
+            .fullScreenCover(isPresented: $isNotificationsPresented, content: {
+                RNotificationsView(isActive: $isNotificationsPresented)
+            })
             
-            Section(header: headerView("Most popular", destination: PopularRestaurantsView().toAnyView)) {
-                LazyVStack(spacing: 15) {
-                    ForEach(0..<10) { item in
-                        NavigationLink(destination: RestaurantDetailsView(), label: {
-                            RestaurantCellView()
-                        })
-                    }
-                }
-                .padding([.horizontal, .bottom])
-            }
-        }
-        .onRefresh {
-            refreshData()
-        }
-        .navigationBarItems(
-            trailing: NotificationView()
-        )
-        .navigationBarTitle("Home", displayMode: .automatic)
-        .setupNavigationBar()
-        .statusBarStyle(.lightContent)
-        .handleHidenKeyboard()
-        .handleErrors($viewModel.error)
-        .addLoadingIcon($viewModel.isLoading)
-        .onAppear {
-            setupData()
+            FloatButtonView()
+
         }
     }
 }
