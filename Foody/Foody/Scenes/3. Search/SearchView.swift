@@ -56,6 +56,9 @@ struct SearchView: View {
                 .showsCancelButton(true)
                 .searchBarStyle(.default)
                 .returnKeyType(.search)
+                .onCancel {
+                    viewModel.isLastRow = false
+                }
         })
         .navigationBarTitle("Search", displayMode: .automatic)
         .setupNavigationBar()
