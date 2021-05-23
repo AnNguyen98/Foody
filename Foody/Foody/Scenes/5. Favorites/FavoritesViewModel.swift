@@ -22,7 +22,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
         getFavoriteProducts()
     }
     
-    func detailsViewModel(with product: Product) -> ProductDetailsViewModel {
+    func detailsViewModel(_ product: Product) -> ProductDetailsViewModel {
         ProductDetailsViewModel(id: product._id)
     }
     
@@ -48,7 +48,7 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
     
     func handleRefreshData() {
         products.removeAll()
-        nextPage = true
+        nextPage = false
         currentPage = 0
         
         getFavoriteProducts()

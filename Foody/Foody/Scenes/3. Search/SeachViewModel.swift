@@ -29,6 +29,10 @@ final class SearchViewModel: ViewModel, ObservableObject {
             .store(in: &subscriptions)
     }
     
+    func detailsViewModel(_ product: Product) -> ProductDetailsViewModel {
+        ProductDetailsViewModel(id: product._id)
+    }
+    
     func searchProducts(with text: String, page: Int = 0) {
         guard !searchText.isEmpty else {
             products.removeAll()
@@ -53,6 +57,8 @@ final class SearchViewModel: ViewModel, ObservableObject {
     
     func handleRefreshData() {
         products.removeAll()
+        canLoadMore = false
+        
         searchProducts(with: searchText)
     }
     

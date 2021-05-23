@@ -12,11 +12,17 @@ struct SearchView: View {
     
     @StateObject private var viewModel = SearchViewModel()
     @State private var product: Product?
+    @State private var isActiveDetails: Bool = false
     
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
             ForEach(viewModel.products, id: \._id) { product in
                 ZStack(alignment: .topTrailing) {
+                    NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                                   isActive: $isActiveDetails, label: {
+                                        EmptyView()
+                                   })
+                    
                     ProductCellView(product: product)
                         .frame(height: 250)
                     
@@ -41,7 +47,7 @@ struct SearchView: View {
                     }
                 })
                 .onTapGesture {
-                    
+                    isActiveDetails = true
                 }
             }
         }
