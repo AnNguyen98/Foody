@@ -77,6 +77,12 @@ final class AccountService: AccountFetchable {
             .eraseToAnyPublisher()
     }
     
+    static func updateInfo(_ params: Parameters) -> AnyPublisher<InfoResponse, CommonError> {
+        NetworkProvider.shared.request(.updateInfo(params))
+            .decode(type: InfoResponse.self)
+            .eraseToAnyPublisher()
+    }
+    
     static func logout() {
         try? Auth.auth().signOut()
     }

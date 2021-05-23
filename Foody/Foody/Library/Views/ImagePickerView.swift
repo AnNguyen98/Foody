@@ -13,6 +13,12 @@ struct ImagePickerView: UIViewControllerRepresentable {
     
     @Environment(\.presentationMode) private var presentationMode
     @Binding var images: [UIImage]
+    var isUpdatingInfo: Bool
+    
+    init(_ images: Binding<[UIImage]> = .constant([]), isUpdatingInfo: Bool = false) {
+        self.isUpdatingInfo = isUpdatingInfo
+        self._images = images
+    }
     
     func makeUIViewController(context: Context) -> some ImagePickerController {
         let configuration = Configuration()
@@ -40,6 +46,9 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
         
         func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+            if parent.isUpdatingInfo, !images.isEmpty {
+                dismiss(with: images)
+            }
             dismiss(with: images)
         }
         
@@ -48,6 +57,9 @@ struct ImagePickerView: UIViewControllerRepresentable {
         }
         
         func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+            if parent.isUpdatingInfo, !images.isEmpty {
+                dismiss(with: images)
+            }
             dismiss(with: images)
         }
         
@@ -76,7 +88,7 @@ struct ImagePickerViewDemo: View {
                     isPresented = true
                 }
                 .fullScreenCover(isPresented: $isPresented, content: {
-                    ImagePickerView(images: $images)
+                    ImagePickerView($images)
                         .onDisappear(perform: {
                             print("AAA", images.count)
                         })

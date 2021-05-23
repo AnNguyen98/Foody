@@ -39,7 +39,7 @@ enum Router {
     case verifySending(id: String, status: OrderStatus)
     case verifySend(id: String)
     
-    case updatePassword(String, String)
+    case updatePassword(String, String), updateInfo(Parameters)
     case verifyEmail(email: String, VerifyAction)
     case login(String, String)
     case register(Parameters)
@@ -84,8 +84,8 @@ extension Router: TargetType {
         case .cancelOrder:
             return "/order/cancel"
             
-        case .me:
-            return "/account/me"
+        case .updateInfo, .me:
+            return "/account"
         case .updatePassword:
             return "/account/password/forgot"
         case .verifyEmail:
@@ -162,7 +162,7 @@ extension Router: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
             return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
-        case .register(let params):
+        case .register(let params), .updateInfo(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)

@@ -100,6 +100,7 @@
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
 		B54DBD65265A5D6B0010F4FA /* FloatButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */; };
 		B54DBD6E265A75930010F4FA /* RTabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD6D265A75930010F4FA /* RTabViews.swift */; };
+		B54DBD76265A7FA40010F4FA /* UpdateInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD75265A7FA40010F4FA /* UpdateInfoViewModel.swift */; };
 		B554FC3F2656996B005D2889 /* RNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */; };
 		B55DA05E263164C200F73686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55DA05D263164C200F73686 /* GoogleService-Info.plist */; };
 		B55DE2E6261EA53200F6328A /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55DE2E5261EA53200F6328A /* OrdersView.swift */; };
@@ -262,6 +263,7 @@
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButtonView.swift; sourceTree = "<group>"; };
 		B54DBD6D265A75930010F4FA /* RTabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTabViews.swift; sourceTree = "<group>"; };
+		B54DBD75265A7FA40010F4FA /* UpdateInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInfoViewModel.swift; sourceTree = "<group>"; };
 		B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNotificationsViewModel.swift; sourceTree = "<group>"; };
 		B55DA05D263164C200F73686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B55DE2E5261EA53200F6328A /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
@@ -896,6 +898,7 @@
 			isa = PBXGroup;
 			children = (
 				B5FC92A526493E9B0037632F /* UpdateInfoView.swift */,
+				B54DBD75265A7FA40010F4FA /* UpdateInfoViewModel.swift */,
 			);
 			path = "Update Info";
 			sourceTree = "<group>";
@@ -1258,6 +1261,7 @@
 				8ED9505A263AB1EB00E0B5B1 /* Encodable.swift in Sources */,
 				8ED88340264162E10091FD86 /* NotificationView.swift in Sources */,
 				B57AFE10265413E000EA2716 /* RestaurantServices.swift in Sources */,
+				B54DBD76265A7FA40010F4FA /* UpdateInfoViewModel.swift in Sources */,
 				B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
 				B5FC92A626493E9B0037632F /* UpdateInfoView.swift in Sources */,

@@ -54,7 +54,5 @@ final class ProfileViewModel: ViewModel, ObservableObject {
             self.isLoading = false
             self.isLogged = false
         }
-        
-        Date().timeString()
     }
 }

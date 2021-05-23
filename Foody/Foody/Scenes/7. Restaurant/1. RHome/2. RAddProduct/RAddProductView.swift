@@ -151,7 +151,7 @@ struct RAddProductView: View {
             .navigationBarTitle(Text(viewModel.isEditProduct ? "Edit Product": "New Product"), displayMode: .inline)
             .handleHidenKeyboard()
             .fullScreenCover(isPresented: $isPresentedPickerView, content: {
-                ImagePickerView(images: $viewModel.images)
+                ImagePickerView($viewModel.images)
                     .ignoresSafeArea()
             })
             .onReceive(viewModel.$isPresentedSuccessPopup, perform: { isPresented in
