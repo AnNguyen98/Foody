@@ -138,6 +138,9 @@ struct ProfileView: View {
                 makeRoot(.login)
             }
         })
+        .onAppear {
+            viewModel.isLogged = true
+        }
     }
 }
 

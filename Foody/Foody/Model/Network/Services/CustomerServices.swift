@@ -7,6 +7,12 @@
 
 import Combine
 
+struct FavoriteItemResponse: Decodable {
+    var _id: String
+    var userId: String
+    var product: Product
+}
+
 final class CustomerServices {
 
     static func cancelOrder(id: String, reason: String = "") -> AnyPublisher<Order, CommonError> {
@@ -52,24 +58,24 @@ final class CustomerServices {
 // Favorites
 extension CustomerServices {
     
-    static func getFavoriteProducts() -> AnyPublisher<ProductResponse, CommonError> {
+    static func getFavoriteProducts() -> AnyPublisher<[FavoriteItemResponse], CommonError> {
         NetworkProvider.shared.request(.getFavorites)
-            .decode(type: ProductResponse.self)
+            .decode(type: [FavoriteItemResponse].self)
             .eraseToAnyPublisher()
     }
     
-    static func deleteFavorite(productId: String) -> AnyPublisher<Product, CommonError> {
+    static func deleteFavorite(productId: String) -> AnyPublisher<FavoriteItemResponse, CommonError> {
         NetworkProvider.shared.request(.deleteFavorite(productId))
-            .decode(type: Product.self)
+            .decode(type: FavoriteItemResponse.self)
             .eraseToAnyPublisher()
     }
     
-    static func addNewFavorie(_ product: Product) -> AnyPublisher<Product, CommonError> {
+    static func addNewFavorie(_ product: Product) -> AnyPublisher<FavoriteItemResponse, CommonError> {
         guard let params = try? product.toParameters() else {
             return Fail(error: CommonError.invalidInputData).eraseToAnyPublisher()
         }
         return NetworkProvider.shared.request(.newFavorite(params))
-            .decode(type: Product.self)
+            .decode(type: FavoriteItemResponse.self)
             .eraseToAnyPublisher()
     }
 }

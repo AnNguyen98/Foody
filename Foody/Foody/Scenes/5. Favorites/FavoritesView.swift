@@ -12,7 +12,8 @@ struct FavoritesView: View {
     
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
-            ForEach(viewModel.products, id: \._id) { product in
+            ForEach(viewModel.products, id: \._id) { item in
+                let product = item.product
                 NavigationLink(destination: productView(with: product), label: {
                     ZStack(alignment: .topTrailing) {
                         ProductCellView(product: product)
@@ -30,7 +31,7 @@ struct FavoritesView: View {
                     }
                     .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
                     .onAppear(perform: {
-                        if product == viewModel.products.last {
+                        if product == viewModel.products.last?.product {
                             viewModel.isLastRow = true
                         }
                     })
@@ -43,13 +44,14 @@ struct FavoritesView: View {
         .onRefresh {
             handleRefresh()
         }
-        .navigationBarTitle("Favorites", displayMode: .automatic)
+        .navigationBarTitle("Favorites", displayMode: .inline)
         .setupNavigationBar()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .setupBackgroundNavigationBar()
+        .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)
     }
     
     func productView(with product: Product) -> FoodDetailsView {

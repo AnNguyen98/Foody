@@ -8,10 +8,10 @@
 import Foundation
 
 final class FavoritesViewModel: ViewModel, ObservableObject {
-    @Published var products: [Product] = []
+    @Published var products: [FavoriteItemResponse] = []
     @Published var isLastRow: Bool = false
     var currentPage: Int = 0
-    var nextPage: Bool = true
+    var nextPage: Bool = false
     
     var canLoadMore: Bool  {
         isLastRow && nextPage
@@ -35,10 +35,8 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (res) in
-                self.currentPage = res.page
-                self.products = res.products
-                self.nextPage = res.nextPage
+            } receiveValue: { (items) in
+                self.products = items
             }
             .store(in: &subscriptions)
     }
@@ -62,8 +60,8 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (product) in
-                self.products.removeAll(product)
+            } receiveValue: { (item) in
+                self.products.removeAll(where: { $0.product == item.product })
             }
             .store(in: &subscriptions)
     }

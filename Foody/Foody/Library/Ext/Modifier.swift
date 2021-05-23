@@ -204,14 +204,14 @@ extension View {
     /// Before is scroll view
     func addEmptyView(isEmpty: Bool, _ emptyText: String = "No items found") -> some View {
         ZStack {
+            self
+            
             HStack {
                 Text(emptyText)
                 
                 Image(systemName: SFSymbols.scribble)
             }
             .opacity(isEmpty ? 1: 0)
-            
-            self
         }
     }
 }
