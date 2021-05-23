@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     var isResraurant: Bool {
-        true //Session.shared.isResraurant
+        Session.shared.isResraurant
     }
 }
 

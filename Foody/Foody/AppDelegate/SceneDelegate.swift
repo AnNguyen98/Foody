@@ -76,7 +76,7 @@ extension SceneDelegate {
         var contentView: AnyView {
             switch self {
             case .logged:
-                return TabViews().toAnyView
+                return Session.shared.isResraurant ? RTabViews().toAnyView: TabViews().toAnyView
             case .login:
                 return NavigationView { LoginView() }.toAnyView
             default:

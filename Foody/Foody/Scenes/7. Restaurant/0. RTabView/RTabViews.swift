@@ -1,29 +1,29 @@
 //
-//  TabViews.swift
+//  RTabView.swift
 //  Foody
 //
-//  Created by MBA0283F on 3/4/21.
+//  Created by MBA0283F on 5/23/21.
 //
 
 import SwiftUI
 
-struct TabViews: View {
+struct RTabViews: View {
     @State private var indexSelected: Int = 0
     
     var body: some View {
         VStack {
             UIKitTabView(selectedIndex: $indexSelected) {
                 
-                UIKitTabView.Tab(view: NavigationView { HomeView() }.toAnyView )
+                UIKitTabView.Tab(view: NavigationView { RHomeView() }.toAnyView )
                 
-                UIKitTabView.Tab(view: NavigationView { SearchView() }.toAnyView)
+                UIKitTabView.Tab(view: NavigationView { ROrdersView() }.toAnyView)
                                     
-                UIKitTabView.Tab(view: NavigationView { FavoritesView() }.toAnyView)
+                UIKitTabView.Tab(view: NavigationView { RChartsView() }.toAnyView)
                 
                 UIKitTabView.Tab(view: NavigationView { ProfileView() }.toAnyView)
             }
             
-            BottomTabBar(tabItems: [.home, .search, .likes, .profile], indexSelected: $indexSelected)
+            BottomTabBar(tabItems: [.home, .orders, .charts, .profile], indexSelected: $indexSelected)
                 .frame(maxWidth: kScreenSize.width)
                 .padding(.bottom, 20)
         }
@@ -31,8 +31,8 @@ struct TabViews: View {
     }
 }
 
-struct TabViews_Previews: PreviewProvider {
+struct RTabView_Previews: PreviewProvider {
     static var previews: some View {
-        TabViews()
+        RTabViews()
     }
 }

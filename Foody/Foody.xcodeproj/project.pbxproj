@@ -99,6 +99,7 @@
 		B54C7C3025F0AA1200AB8FE9 /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */; };
 		B54C7C3C25F0BDC100AB8FE9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */; };
 		B54DBD65265A5D6B0010F4FA /* FloatButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */; };
+		B54DBD6E265A75930010F4FA /* RTabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DBD6D265A75930010F4FA /* RTabViews.swift */; };
 		B554FC3F2656996B005D2889 /* RNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */; };
 		B55DA05E263164C200F73686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B55DA05D263164C200F73686 /* GoogleService-Info.plist */; };
 		B55DE2E6261EA53200F6328A /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55DE2E5261EA53200F6328A /* OrdersView.swift */; };
@@ -260,6 +261,7 @@
 		B54C7C2F25F0AA1200AB8FE9 /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
 		B54C7C3B25F0BDC100AB8FE9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B54DBD64265A5D6B0010F4FA /* FloatButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatButtonView.swift; sourceTree = "<group>"; };
+		B54DBD6D265A75930010F4FA /* RTabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTabViews.swift; sourceTree = "<group>"; };
 		B554FC3E2656996B005D2889 /* RNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNotificationsViewModel.swift; sourceTree = "<group>"; };
 		B55DA05D263164C200F73686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B55DE2E5261EA53200F6328A /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
@@ -777,6 +779,14 @@
 			path = "2. Home";
 			sourceTree = "<group>";
 		};
+		B54DBD6C265A757E0010F4FA /* 0. RTabView */ = {
+			isa = PBXGroup;
+			children = (
+				B54DBD6D265A75930010F4FA /* RTabViews.swift */,
+			);
+			path = "0. RTabView";
+			sourceTree = "<group>";
+		};
 		B55DE2E4261EA51E00F6328A /* 4. Orders */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +810,7 @@
 		B599A9DD26540006008F995D /* 7. Restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				B54DBD6C265A757E0010F4FA /* 0. RTabView */,
 				B599A9DE2654001E008F995D /* 1. RHome */,
 				B50F374D265559E300A14580 /* 2. ROrders */,
 				B599A9ED2654017F008F995D /* 3. RCharts */,
@@ -1197,6 +1208,7 @@
 				B599A9E82654008E008F995D /* RHomeViewModel.swift in Sources */,
 				B5DA5FD82632858300FCBDEB /* AlertView.swift in Sources */,
 				8E4C3F622642E3FE00E69662 /* PopularRestaurantsView.swift in Sources */,
+				B54DBD6E265A75930010F4FA /* RTabViews.swift in Sources */,
 				8EE1275626450E440010459C /* SWViewModel.swift in Sources */,
 				B534C965261EFA2B000B6CDF /* FirebaseAuth.swift in Sources */,
 				B534C946261EDDDF000B6CDF /* Moya.Response.swift in Sources */,
