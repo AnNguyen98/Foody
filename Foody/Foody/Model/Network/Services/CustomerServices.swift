@@ -89,3 +89,18 @@ extension CustomerServices {
             .eraseToAnyPublisher()
     }
 }
+
+extension CustomerServices {
+    
+    static func getRestaurant(id: String) -> AnyPublisher<Restaurant, CommonError> {
+        NetworkProvider.shared.request(.getRestaurant(id))
+            .decode(type: Restaurant.self)
+            .eraseToAnyPublisher()
+    }
+    
+    static func getPopularProducts(restaurantId: String) -> AnyPublisher<[Product], CommonError> {
+        NetworkProvider.shared.request(.popularProducts(restaurantId))
+            .decode(type: [Product].self)
+            .eraseToAnyPublisher()
+    }
+}

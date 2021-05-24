@@ -63,9 +63,14 @@ struct FoodDetailsView: View {
                 
 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(viewModel.product.name)
-                        .bold(size: 30)
-                        .lineLimit(2)
+                    HStack {
+                        Text(viewModel.product.name)
+                            .bold(size: 30)
+                            .lineLimit(2)
+                        
+                        Image(systemName: SFSymbols.checkmarkCircleFill)
+                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
+                    }
                     
                     Text(viewModel.product.restaurantName)
                         .foregroundColor(.gray)

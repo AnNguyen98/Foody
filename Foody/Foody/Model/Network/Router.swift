@@ -19,7 +19,7 @@ enum Router {
     
     //Customer
     case requestOrder(Parameters), cancelOrder(String)
-    case popularRestaurants(Int), trendingProducts(Int)
+    case popularRestaurants(Int), trendingProducts(Int), popularProducts(String)
     case getRestaurant(String)
     case comment(String, Parameters)
     case voteRestaurant(String, Int)
@@ -71,6 +71,8 @@ extension Router: TargetType {
         case .getFavorites, .deleteFavorite, .newFavorite:
             return "/products/favorite"
         
+        case .popularProducts:
+                return "/restaurant/products/popular"
         case .popularRestaurants:
             return "/restaurants/popular"
         case .getRestaurant, .voteRestaurant:
@@ -142,13 +144,13 @@ extension Router: TargetType {
             return .requestParameters(parameters: tempParams, encoding: JSONEncoding.default)
         
         case .deleteFavorite(let id), .deleteProduct(let id), .verifySend(let id),
-             .readNotification(let id), .cancelOrder(let id), .getRestaurant(let id):
+             .readNotification(let id), .cancelOrder(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
             
         case .verifySending(let id, let status):
             return .requestParameters(parameters: ["id": id, "status": status.rawValue], encoding: JSONEncoding.default)
         
-        case .getProduct(let id), .getComments(let id):
+        case .getProduct(let id), .getComments(let id), .getRestaurant(let id), .popularProducts(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
         case .searchProducts(let productName, let page):
             return .requestParameters(parameters: ["name": productName, "page": page], encoding: URLEncoding.queryString)

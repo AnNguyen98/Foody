@@ -9,24 +9,16 @@ import SwiftUI
 
 struct RestaurantDetailsView: View {
     @StateObject var viewModel = RestaurantDetailsViewModel()
-    
-    let menus = ["Popular items", "Salads", "Chicken", "Soups", "Vegetables", "Noodles", "Drink"]
-    
+        
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Image(systemName: "chevron.left")
-                    Text("Back")
-                        .fontWeight(.regular)
-                }
-                .foregroundColor(Colors.redColorCustom)
-                Text("Conrad Chicago Restaurant")
+            VStack(alignment: .leading, spacing: 15) {
+                Text(viewModel.restaurant.name)
                     .font(.largeTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .layoutPriority(1)
                 
-                Text("963 Madyson Drive Suite 679")
+                Text(viewModel.restaurant.address)
                 
                 HStack {
                     ForEach(0..<5) { _ in
@@ -45,7 +37,7 @@ struct RestaurantDetailsView: View {
                     }
                     VStack {
                         Text("Open time")
-                        Text("8:00 AM")
+                        Text(viewModel.restaurant.openTime)
                             .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                     }
                 }
@@ -56,7 +48,7 @@ struct RestaurantDetailsView: View {
                         CircleButton(systemName:  SFSymbols.squareAndArrowUp, color: .black,
                                      action: { })
                         
-                        CircleButton(systemName: SFSymbols.starFill, color: .black,
+                        CircleButton(systemName: SFSymbols.phoneFill, color: .black,
                                      action: { })
                         
                         CircleButton(systemName: SFSymbols.location, color: .black,
@@ -78,86 +70,60 @@ struct RestaurantDetailsView: View {
                     Divider()
                 }
                 
-                Text("Feature items:")
+                HStack {
+                    Text("Feature items:")
+                        .bold()
+                    
+                    Spacer()
+                    
+                    NavigationLink(
+                        destination: Text("Destination"),
+                        label: {
+                            Text("See more")
+                        }
+                    )
+                }
+                .padding(.vertical, 5)
+                
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 15) {
-                        ForEach(0..<10) { _ in
+                    LazyHStack(spacing: 15) {
+                        ForEach(viewModel.products, id: \.self) { product in
                             VStack(alignment: .leading) {
-                                Image("food_simple")
+                                Image(product.productImages.first)
                                     .resizable()
-                                    .frame(width: kScreenSize.width * 343 / 380,
-                                           height: 147)
-                                Text("Crispy Chicken Sandwich")
-                                Text("$25.00")
+                                    .frame(width: kScreenSize.width * 343 / 380, height: 160)
+                                    .clipped()
+                                
+                                Text(product.name)
+                                    .bold()
+                                
+                                Text("\(product.price) VNĐ")
                                     .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                             }
-                            .font(.system(size: 15))
+                            .font(.body)
+                            .background(Color.white)
+                            .border(cornerRadius: 10)
+                            .shadow(color: .gray, radius: 1, x: 0, y: 0)
                         }
                     }
                 }
-                
-                VStack(alignment: .leading) {
-                    Text("Menu")
-                    ForEach(menus, id: \.self) { value in
-                        Button(action: {}, label: {
-                            VStack {
-                                Divider()
-                                HStack {
-                                    Text(value)
-                                    Spacer()
-                                    Text("10")
-                                    Image(systemName: "chevron.right")
-                                }
-                            }
-                        })
-                    }
-                    Divider()
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("Review")
-                    ForEach(0..<10) { _ in
-                        Divider()
-                        HStack(alignment: .firstTextBaseline) {
-                            Image(systemName: "person.fill")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                            VStack {
-                                HStack(alignment: .firstTextBaseline) {
-                                    VStack {
-                                        Text("Ellen McLaughlin")
-                                            .bold(size: 15)
-                                        Text("2 hours ago")
-                                            .regular(size: 12)
-                                    }
-                                    HStack(spacing: 2) {
-                                        ForEach(0..<5) { _ in
-                                            Image(systemName: SFSymbols.starFill)
-    //                                            .resizable()
-                                                .frame(height: 16)
-                                                .foregroundColor(.yellow)
-                                                
-                                        }
-                                    }
-                                }
-                                Text("So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon.")
-                                    .regular(size: 15)
-                            }
-                        }
-                        
-                    }
-                    Divider()
-                }
-                
-                
+                .frame(maxWidth: kScreenSize.width, minHeight: 160)
+                .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)
             }
             .padding()
         }
+        .setupNavigationBar()
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+        .navigationBarBackButton()
+        .navigationBarTitle("Restaurant Details", displayMode: .inline)
     }
 }
 
 struct RestaurantDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        RestaurantDetailsView()
+        NavigationView {
+            RestaurantDetailsView()
+        }
     }
 }
