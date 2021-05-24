@@ -84,7 +84,14 @@ struct FoodDetailsView: View {
                         let voteCount = viewModel.product.voteCount
                         ForEach(0..<5) { index in
                             Image(systemName: SFSymbols.starFill)
+                                .resizable()
+                                .frame(width: 20 * scale, height: 20 * scale)
                                 .foregroundColor(voteCount > index ? .yellow: .gray)
+                                .onTapGesture {
+                                    if voteCount != index + 1 {
+                                        viewModel.voteProduct(vote: index + 1)
+                                    }
+                                }
                         }
                         Text(" \(voteCount) votes")
                             .font(.body)

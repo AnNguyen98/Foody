@@ -70,14 +70,10 @@ extension Router: TargetType {
             return "/product/comment"
         case .getFavorites, .deleteFavorite, .newFavorite:
             return "/products/favorite"
-        case .voteProduct:
-            return "/product/vote"
         
-        case .voteRestaurant:
-            return "/restaurant/vote"
         case .popularRestaurants:
             return "/restaurants/popular"
-        case .getRestaurant:
+        case .getRestaurant, .voteRestaurant:
             return "/restaurant"
         case .cancelOrder, .requestOrder:
             return "/order"
@@ -95,7 +91,7 @@ extension Router: TargetType {
             
         case .getProducts, .trendingProducts: // restaurant products -  trending products
             return "/products"
-        case .getProduct, .newProduct, .deleteProduct, .updateProduct:
+        case .getProduct, .newProduct, .deleteProduct, .updateProduct, .voteProduct:
             return "/product"
             
         case .searchProducts:
@@ -118,9 +114,9 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant, .updateInfo, .requestOrder:
+        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
             return .post
-        case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification:
+        case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification, .voteProduct, .voteRestaurant:
             return .put
         case .deleteFavorite, .deleteProduct, .cancelOrder:
             return .delete

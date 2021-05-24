@@ -41,6 +41,20 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
             .store(in: &subscriptions)
     }
     
+    func voteProduct(vote: Int) {
+        isLoading = true
+        CustomerServices.voteProduct(id: product._id, voteCount: vote)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (product) in
+                self.product = product
+            }
+            .store(in: &subscriptions)
+    }
+    
     func addToFavorite(_ product: Product) {
         guard let userId = Session.shared.user?._id else {
             error = .unknow("Can't get user id.")
