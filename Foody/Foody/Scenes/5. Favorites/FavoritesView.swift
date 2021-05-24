@@ -13,7 +13,7 @@ struct FavoritesView: View {
     @State private var isActiveDetails: Bool = false
     
     var body: some View {
-        LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
+        LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
             ForEach(viewModel.products, id: \._id) { item in
                 let product = item.product
                 

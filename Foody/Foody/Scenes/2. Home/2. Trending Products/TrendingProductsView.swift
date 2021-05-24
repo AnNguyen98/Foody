@@ -13,7 +13,7 @@ struct TrendingProductsView: View {
     @State private var isActiveDetails: Bool = false
     
     var body: some View {
-        LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
+        LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
             ForEach(viewModel.products, id: \._id) { product in
                 ZStack(alignment: .topTrailing) {
                     NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),

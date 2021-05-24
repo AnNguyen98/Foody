@@ -20,7 +20,7 @@ struct PopularRestaurantsView: View {
                                         EmptyView()
                                    })
                     
-                    RestaurantCellView()
+                    RestaurantCellView(restaurant: restaurant)
                         .onAppear(perform: {
                             if restaurant == viewModel.restaurants.last {
                                 viewModel.isLastRow = true

@@ -21,7 +21,8 @@ struct ProductCellView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(RoundedRectangle(cornerRadius: 0))
-                    .frame(width: geometry.size.width)
+                    .frame(width: geometry.size.width, height: geometry.size.height * 2 / 3)
+                    .clipped()
                 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(product.name)
