@@ -18,9 +18,9 @@ struct HomeView: View {
                 Section(header: headerView("Trending products",  destination: TrendingProductsView().toAnyView)) {
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 15) {
-                            ForEach(0..<10) { item in
+                            ForEach(viewModel.trendingProducts, id: \._id) { product in
                                 NavigationLink(destination: FoodDetailsView(), label: {
-                                    ProductCellView()
+                                    ProductCellView(product: product)
                                         .frame(width: 250, height: 270)
                                 })
                             }
@@ -31,9 +31,9 @@ struct HomeView: View {
                 
                 Section(header: headerView("Most popular", destination: PopularRestaurantsView().toAnyView)) {
                     LazyVStack(spacing: 15) {
-                        ForEach(0..<10) { item in
+                        ForEach(viewModel.popularRestaurants, id: \._id) { restaurant in
                             NavigationLink(destination: RestaurantDetailsView(), label: {
-                                RestaurantCellView()
+                                RestaurantCellView(restaurant: restaurant)
                             })
                         }
                     }

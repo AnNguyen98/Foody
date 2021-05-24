@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RestaurantDetailsView: View {
+    @StateObject var viewModel = RestaurantDetailsViewModel()
+    
     let menus = ["Popular items", "Salads", "Chicken", "Soups", "Vegetables", "Noodles", "Drink"]
     
     var body: some View {

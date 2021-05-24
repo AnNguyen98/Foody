@@ -8,5 +8,11 @@
 import SwiftUI
 
 final class RestaurantDetailsViewModel: ViewModel, ObservableObject {
+    var id: String
     
+    init(id: String = "") {
+        self.id = id
+        
+        super.init()
+    }
 }

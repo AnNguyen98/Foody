@@ -9,46 +9,45 @@ import SwiftUI
 
 struct PopularRestaurantsView: View {
     @StateObject private var viewModel = PopularRestaurantsViewModel()
+    @State private var isActiveDetails = false
     
     var body: some View {
         LazyVStack(spacing: 15) {
             ForEach(viewModel.restaurants, id: \._id) { restaurant in
-                RestaurantCellView()
-                    .onAppear(perform: {
-                        if restaurant == viewModel.restaurants.last {
-                            viewModel.isLastRow = true
-                        }
-                    })
+                ZStack {
+                    NavigationLink(destination: RestaurantDetailsView(viewModel: viewModel.detailsViewModel(restaurant)),
+                                   isActive: $isActiveDetails, label: {
+                                        EmptyView()
+                                   })
+                    
+                    RestaurantCellView()
+                        .onAppear(perform: {
+                            if restaurant == viewModel.restaurants.last {
+                                viewModel.isLastRow = true
+                            }
+                        })
+                }
+                .onTapGesture {
+                    isActiveDetails = true
+                }
             }
         }
         .padding(.bottom)
         .prepareForLoadMore(loadMore: {
-            handleLoadMore()
+            viewModel.handleLoadMore()
         }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
         .onRefresh {
-            handleRefresh()
-        }
-        .setupBackgroundNavigationBar()
-        .navigationBarTitle("Popular", displayMode: .automatic)
-        .setupNavigationBar()
-        .statusBarStyle(.lightContent)
-        .handleErrors($viewModel.error)
-        .addLoadingIcon($viewModel.isLoading)
-        .onAppear {
-            viewModel.getPopularRestaurants()
-        }
-    }
-}
-
-extension PopularRestaurantsView {
-    private func handleRefresh() {
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
             viewModel.handleRefreshData()
         }
-    }
-    
-    private func handleLoadMore() {
-        viewModel.handleLoadMore()
+        .navigationBarTitle("Popular", displayMode: .inline)
+        .setupNavigationBar()
+        .statusBarStyle(.lightContent)
+        .handleHidenKeyboard()
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+        .setupNavigationBar()
+        .navigationBarBackButton()
+        .addEmptyView(isEmpty: viewModel.restaurants.isEmpty && !viewModel.isLoading)
     }
 }
 

@@ -13,7 +13,7 @@ final class HomeViewModel: ViewModel, ObservableObject {
     
     override init() {
         super.init()
-//        getHomeData()
+        getHomeData()
     }
     
     func getHomeData() {
