@@ -12,9 +12,14 @@ struct FoodDetailsView: View {
     @StateObject var viewModel = ProductDetailsViewModel()
     @State private var product: Product?
     @State private var isPresentedAppActivityView = false
+    @State private var isPresentedOrderView = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
+            NavigationLink(destination: OrderView(viewModel: viewModel.orderViewModel),
+                           isActive: $isPresentedOrderView, label: {
+                                EmptyView()
+                           })
             VStack {
                 ZStack(alignment: .top) {
                     if viewModel.product.productImages.isEmpty {
@@ -98,7 +103,7 @@ struct FoodDetailsView: View {
                         .bold(size: 20)
                     
                     Button(action: {
-                        
+                        isPresentedOrderView.toggle()
                     }, label: {
                         ZStack {
                             Text("Add to order")

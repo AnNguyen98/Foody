@@ -49,6 +49,10 @@ struct User: Codable, UserInfomation, DefaultsSerializable {
 }
 
 extension User {
+    var isActive: Bool {
+        status == AccountStatus.active.rawValue
+    }
+    
     var imageProfile: Data?  {
         Data(base64Encoded: imageProfileBase64)
     }

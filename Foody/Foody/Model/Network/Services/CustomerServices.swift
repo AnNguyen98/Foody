@@ -14,6 +14,16 @@ struct FavoriteItemResponse: Codable {
 }
 
 final class CustomerServices {
+    
+    static func requestOrder(_ order: Order) -> AnyPublisher<Order, CommonError> {
+        guard let params = try? order.toParameters() else {
+            return Fail(error: CommonError.invalidInputData)
+                .eraseToAnyPublisher()
+        }
+        return NetworkProvider.shared.request(.requestOrder(params))
+            .decode(type: Order.self)
+            .eraseToAnyPublisher()
+    }
 
     static func cancelOrder(id: String, reason: String = "") -> AnyPublisher<Order, CommonError> {
         NetworkProvider.shared.request(.cancelOrder(id))

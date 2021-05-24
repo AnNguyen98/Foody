@@ -5,75 +5,149 @@
 //  Created by MBA0283F on 5/10/21.
 //
 
-import SwiftUI
+import SwiftUIX
 
 struct OrderView: View {
+    @StateObject var viewModel = OrderViewModel()
+    @Environment(\.presentationMode) private var presentationMode
+        
     var body: some View {
-        VStack {
-            HStack {
-                Text("Địa chỉ nhận hàng")
-                Button(action: {}, label: {
-                    Text("Thay đổi")
-                })
-            }
-            
-            Text("An Nguyen - 0399837373")
-            Text("264 Tôn Đản, Phường Hoà An, Quận Cẩm Lệ, Đà Nẵng")
-            
-            VStack {
-                Text("Đơn hàng sẽ được giao một lần")
-                Text("Giao trước 10:00 ngày mai")
-                Text("Được giao bời Tiki(từ Đà Nẵng)")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .center) {
+                    Text("Username:")
+                        .underline()
+                    
+                    Text(viewModel.user.username)
+                        .font(.title2)
+                    
+                    Image(systemName: SFSymbolName.checkmarkCircleFill)
+                        .foregroundColor(viewModel.user.isActive ?  .green: .gray)
+                        .background(
+                            Circle()
+                                .foregroundColor(.white)
+                        )
+                    
+                    Spacer()
+                }
+                .padding(.top, 10)
+                
+                
+                Text("Address:")
+                    .underline()
+                    .padding(.top, 10)
+                
+                TextView("", text: $viewModel.address)
+                    .frame(maxWidth: .infinity, minHeight: 46)
+                    .padding([.horizontal, .vertical])
+                    .border(cornerRadius: 15)
+                
+                Text("Phone number:")
+                    .underline()
+                    .padding(.top, 10)
+
+                TextField("", text: .constant(viewModel.user.phoneNumber))
+                    .frame(maxWidth: .infinity, minHeight: 46)
+                    .padding(.horizontal)
+                    .border(cornerRadius: 46 / 2)
+                    .keyboardType(.numberPad)
+                    .disabled(true)
+                    .opacity(0.6)
                 
                 HStack {
-                    Image("food-1")
+                    Image(viewModel.product.productImages.first)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: 130 * scale, minHeight: 130 * scale)
+                        .clipped()
                     
-                    VStack {
-                        Text("Nồi chiên không dầu điện tử...")
+                    
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text(viewModel.product.name)
+                            .bold()
+                        
+                        Text(viewModel.product.restaurantName)
+                            .foregroundColor(.gray)
                         
                         HStack {
-                            Text("Số lượng: x1")
-                            
                             HStack {
-                                Text("2.689.000")
+                                Text("\(viewModel.product.price)")
                                 
-                                Text(" đ")
+                                Text("vnđ")
                                     .underline()
                             }
                         }
                     }
-                }
-                
-                VStack {
-                    HStack {
-                        Text("Tạm tính")
-                        Text("Tạm tính")
-                    }
                     
-                    HStack {
-                        Text("Phí vận chuyển")
-                        Text("90.000 đ")
-                    }
+                    Spacer()
                 }
+                .padding(.top, 10)
                 
-                HStack {
-                    Text("Thành tiền")
-                    Text("20.000đ")
+                Stepper(value: $viewModel.itemCount, in: 1...20, step: 1) {
+                    Text("\(viewModel.itemCount) items")
                         .bold()
-                        .foregroundColor(.red)
                 }
-                
-                Button(action: {
+
+                VStack {
+                    Text("\(viewModel.product.price * viewModel.itemCount) VNĐ")
+                        .bold(size: 20)
                     
-                }, label: {
-                    Text("Tiến hành đặt hàng")
-                        .padding()
-                        .background(Color.red)
+                    Button(action: {
+                        viewModel.handleOrder()
+                    }, label: {
+                        ZStack {
+                            Text("Continue Order")
+                            
+                            HStack {
+                                Spacer()
+                                Image(systemName: SFSymbols.creditcard)
+                                    .font(.title3)
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                        .regular(size: 17)
                         .foregroundColor(.white)
-                })
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                        .background(Colors.redColorCustom)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(.top, 30)
+                        .opacity(viewModel.inValidInfo ? 0.8: 1)
+                    })
+                    .disabled(viewModel.inValidInfo)
+                }
+                .padding(.top, 50)
+                .padding(.bottom, 20)
             }
+            .padding()
+            .font(.body)
         }
-        .font(.body)
+        .introspectScrollView(customize: { (scrollView) in
+            scrollView.keyboardDismissMode = .onDrag
+        })
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+        .setupNavigationBar()
+        .navigationBarTitle("Order Infomation", displayMode: .inline)
+        .navigationBarBackButton()
+        .onReceive(viewModel.$isPresentedSuccessPopup, perform: { requested in
+            if requested {
+                handleShowNotiPupup()
+            }
+        })
+//        .handleHidenKeyboard()
+    }
+}
+
+extension OrderView {
+    func handleShowNotiPupup() {
+        presentView(
+            AlertView(
+                .constant(PopupContent(message: "Order request successful.", title: "Success"))
+            )
+            .onDisappear(perform: {
+                presentationMode.wrappedValue.dismiss()
+            })
+        )
     }
 }
 

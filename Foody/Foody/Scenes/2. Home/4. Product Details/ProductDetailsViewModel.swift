@@ -19,6 +19,10 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
         getProductDetails()
     }
     
+    var orderViewModel: OrderViewModel {
+        OrderViewModel(product)
+    }
+    
     func refreshData() {
         getProductDetails()
     }

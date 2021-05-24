@@ -18,7 +18,7 @@ enum VerifyAction: String {
 enum Router {
     
     //Customer
-    case cancelOrder(String)
+    case requestOrder(Parameters), cancelOrder(String)
     case popularRestaurants(Int), trendingProducts(Int)
     case getRestaurant(String)
     case comment(String, Parameters)
@@ -79,8 +79,8 @@ extension Router: TargetType {
             return "/restaurants/popular"
         case .getRestaurant:
             return "/restaurant"
-        case .cancelOrder:
-            return "/order/cancel"
+        case .cancelOrder, .requestOrder:
+            return "/order"
             
         case .updateInfo, .me:
             return "/account"
@@ -118,7 +118,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant, .updateInfo:
+        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .voteProduct, .voteRestaurant, .updateInfo, .requestOrder:
             return .post
         case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification:
             return .put
@@ -161,7 +161,7 @@ extension Router: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
             return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
-        case .register(let params), .updateInfo(let params):
+        case .register(let params), .updateInfo(let params), .requestOrder(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
