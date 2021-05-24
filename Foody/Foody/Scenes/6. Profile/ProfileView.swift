@@ -28,19 +28,19 @@ struct ProfileView: View {
                     .foregroundColor(.white)
 
                 ZStack {
-                    Image(viewModel.restaurant.dataImages.first)
-                        .resizable()
-                        .frame(maxHeight: kScreenSize.height / 3.5)
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 20)
-                        )
-                        .shadow(color: Color.gray, radius: 2, x: 0, y: 0)
+//                    Image(viewModel.restaurant.dataImages.first)
+//                        .resizable()
+//                        .frame(maxHeight: kScreenSize.height / 3.5)
+//                        .clipShape(
+//                            RoundedRectangle(cornerRadius: 20)
+//                        )
+//                        .shadow(color: Color.gray, radius: 2, x: 0, y: 0)
                     
                     RoundedRectangle(cornerRadius: 20)
                         .foregroundColor(.white)
                         .frame(maxHeight: kScreenSize.height / 3.5)
                         .shadow(color: Color.gray, radius: 2, x: 0, y: 0)
-                        .hidden(!viewModel.restaurant.dataImages.isEmpty)
+//                        .hidden(!viewModel.restaurant.dataImages.isEmpty)
 
                     VStack {
                         Image(viewModel.user.imageProfile, isProfile: true)
