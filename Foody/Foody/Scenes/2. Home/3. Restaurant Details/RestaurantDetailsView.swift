@@ -96,16 +96,19 @@ struct RestaurantDetailsView: View {
                                 
                                 Text(product.name)
                                     .bold()
+                                    .padding(.horizontal)
                                 
                                 Text("\(product.price) VNĐ")
                                     .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
+                                    .padding(.horizontal)
                             }
                             .font(.body)
                             .background(Color.white)
-                            .border(cornerRadius: 10)
-                            .shadow(color: .gray, radius: 1, x: 0, y: 0)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .shadow(color: .gray, radius: 2, x: 0.0, y: 0)
                         }
                     }
+                    .padding(.vertical)
                 }
                 .frame(maxWidth: kScreenSize.width, minHeight: 160)
                 .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)

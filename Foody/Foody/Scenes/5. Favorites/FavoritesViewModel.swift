@@ -54,15 +54,17 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
         getFavoriteProducts()
     }
     
-    func deleteFavorite(id: String) {
-        CustomerServices.deleteFavorite(productId: id)
+    func deleteFavorite(_ product: Product) {
+        isLoading = true
+        CustomerServices.deleteFavorite(productId: product._id)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (item) in
-                self.products.removeAll(where: { $0.product == item?.product })
+                self.products.removeAll(where: { $0.product == product })
+                Session.shared.favorites.removeAll(product)
             }
             .store(in: &subscriptions)
     }

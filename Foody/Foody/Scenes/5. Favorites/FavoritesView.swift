@@ -11,6 +11,7 @@ import SwiftUIX
 struct FavoritesView: View {
     @StateObject private var viewModel = FavoritesViewModel()
     @State private var isActiveDetails: Bool = false
+    @State private var product: Product?
     
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
@@ -27,7 +28,7 @@ struct FavoritesView: View {
                         .frame(height: 250)
                     
                     Button(action: {
-                        viewModel.deleteFavorite(id: product._id)
+                        self.product = product
                     }, label: {
                         Image(systemName: SFSymbols.heartFill)
                             .resizable()
@@ -61,6 +62,15 @@ struct FavoritesView: View {
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)
+        .alert(item: $product, content: { product in
+            Alert(title: Text("Delete favorite"),
+                  message: Text("Are you want to delete this item in your favorites?"),
+                  primaryButton: .destructive(Text("Delete"), action: {
+                    viewModel.deleteFavorite(product)
+                  }),
+                  secondaryButton: .cancel()
+            )
+        })
     }
 }
 
