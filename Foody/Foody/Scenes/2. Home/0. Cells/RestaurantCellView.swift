@@ -8,29 +8,38 @@
 import SwiftUI
 
 struct RestaurantCellView: View {
-    @State var voteCount: Int = Int.random(in: 1...5)
+    var restaurant: Restaurant = Restaurant()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 13) {
-                    ForEach(0..<3) { _ in
-                        Image("food1")
+                    if restaurant.dataImages.isEmpty {
+                        Image(nil)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 155 * scale, height: 85 * scale)
+                            .frame(width: 155 * scale, height: 90 * scale)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
+                        
+                    } else {
+                        ForEach(restaurant.dataImages, id: \.self) { data in
+                            Image(data)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 155 * scale, height: 90 * scale)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
                     }
                 }
                 .padding([.horizontal, .top])
             }
             
-            Text("Conrad Chicago Restaurant")
+            Text(restaurant.name)
                 .foregroundColor(Color(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1)))
                 .font(.title3)
                 .padding(.horizontal)
             
-            Text("963 Madyson Drive Suite 679")
+            Text(restaurant.address)
                 .padding(.horizontal)
             
             HStack(spacing: 5) {
@@ -38,15 +47,12 @@ struct RestaurantCellView: View {
                     Image(systemName: SFSymbols.starFill)
                         .resizable()
                         .frame(width: 16 * scale, height: 16 * scale)
-                        .foregroundColor(index <= voteCount ? .yellow: .gray)
-                        .onTapGesture {
-                            voteCount = index
-                        }
+                        .foregroundColor(index < restaurant.vote ? .yellow: .gray)
                 }
                 
                 Spacer(minLength: 0)
                 
-                Text("Open 8:00 AM")
+                Text(restaurant.openTime)
             }
             .padding(.top, 5)
             .padding([.horizontal, .bottom])

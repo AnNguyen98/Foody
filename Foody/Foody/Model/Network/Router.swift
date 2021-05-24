@@ -19,7 +19,7 @@ enum Router {
     
     //Customer
     case cancelOrder(String)
-    case popularRestaurants, trendingProducts
+    case popularRestaurants(Int), trendingProducts(Int)
     case getRestaurant(String)
     case comment(String, Parameters)
     case voteRestaurant(String, Int)
@@ -68,8 +68,6 @@ extension Router: TargetType {
             return "/product/comments"
         case .comment:
             return "/product/comment"
-        case .trendingProducts:
-            return "/products/trending"
         case .getFavorites, .deleteFavorite, .newFavorite:
             return "/products/favorite"
         case .voteProduct:
@@ -94,7 +92,8 @@ extension Router: TargetType {
             return "/register"
         case .login:
             return "/login"
-        case .getProducts:
+            
+        case .getProducts, .trendingProducts: // restaurant products -  trending products
             return "/products"
         case .getProduct, .newProduct, .deleteProduct, .updateProduct:
             return "/product"
@@ -167,13 +166,13 @@ extension Router: TargetType {
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         
-        case .getProducts(let page):
+        case .getProducts(let page), .popularRestaurants(let page), .trendingProducts(let page):
             return .requestParameters(parameters: ["page": page], encoding: URLEncoding.queryString)
             
         case .getChartInfo(let month):
             return .requestParameters(parameters: ["month": month], encoding: URLEncoding.queryString)
         
-        case .popularRestaurants, .trendingProducts, .getFavorites, .getOrders, .getNotifications, .me: //, .newMovies(let page):
+        case .getFavorites, .getOrders, .getNotifications, .me:
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }

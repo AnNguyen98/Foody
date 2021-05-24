@@ -35,7 +35,7 @@ struct ProductCellView: View {
                             Image(systemName: SFSymbols.starFill)
                                 .resizable()
                                 .frame(width: 15 * scale, height: 15 * scale)
-                                .foregroundColor(index <= product.voteCount ? .yellow: .gray)
+                                .foregroundColor(index < product.voteCount ? .yellow: .gray)
                                 .onTapGesture {
                                     voteProduct?(index)
                                 }

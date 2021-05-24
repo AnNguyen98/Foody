@@ -9,22 +9,33 @@ import SwiftUI
 
 struct TrendingProductsView: View {
     @StateObject private var viewModel = TrendingProductsViewModel()
+    @State private var product: Product?
+    @State private var isActiveDetails: Bool = false
     
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 0) {
             ForEach(viewModel.products, id: \._id) { product in
                 ZStack(alignment: .topTrailing) {
-                    ProductCellView()
+                    NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                                   isActive: $isActiveDetails, label: {
+                                        EmptyView()
+                                   })
+                    
+                    ProductCellView(product: product)
+                        .frame(height: 250)
                     
                     Button(action: {
-                        
+                        if product.isLiked {
+                            self.product = product
+                        } else {
+                            viewModel.addToFavorite(product)
+                        }
                     }, label: {
                         Image(systemName: SFSymbols.heartFill)
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.red)
+                            .foregroundColor(product.isLiked ? .red: .gray)
                             .padding(8)
-                            
                     })
                 }
                 .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
@@ -33,41 +44,35 @@ struct TrendingProductsView: View {
                         viewModel.isLastRow = true
                     }
                 })
-                
+                .onTapGesture {
+                    isActiveDetails = true
+                }
             }
         }
         .prepareForLoadMore(loadMore: {
-            handleLoadMore()
+            viewModel.handleLoadMore()
         }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
         .onRefresh {
-            handleRefresh()
+            viewModel.handleRefreshData()
         }
-        .setupBackgroundNavigationBar()
-        .navigationBarTitle("Trending", displayMode: .automatic)
+        .navigationBarTitle("Trending", displayMode: .inline)
         .setupNavigationBar()
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
         .addLoadingIcon($viewModel.isLoading)
-        .onAppear {
-            viewModel.getPopularRestaurants()
-        }
-    }
-}
-
-extension TrendingProductsView {
-    private func handleFavorite(_ id: String) {
-        
-    }
-    
-    private func handleRefresh() {
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
-            viewModel.handleRefreshData()
-        }
-    }
-    
-    private func handleLoadMore() {
-        viewModel.handleLoadMore()
+        .setupNavigationBar()
+        .navigationBarBackButton()
+        .addEmptyView(isEmpty: viewModel.products.isEmpty && !viewModel.isLoading)
+        .alert(item: $product, content: { product in
+            Alert(title: Text("Delete favorite"),
+                  message: Text("Are you want to delete this item in your favorites?"),
+                  primaryButton: .destructive(Text("Delete"), action: {
+                    viewModel.deleteInFavorite(product)
+                  }),
+                  secondaryButton: .cancel()
+            )
+        })
     }
 }
 

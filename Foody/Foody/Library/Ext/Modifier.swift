@@ -44,7 +44,7 @@ extension View {
     }
     
     /// Navi item
-    func addBackBarCustom(icon: SFSymbols = SFSymbols.arrowLeft, color: Color = .white) -> some View {
+    func navigationBarBackButton(icon: SFSymbols = SFSymbols.arrowLeft, color: Color = .white) -> some View {
         self
             .navigationBarItems(
                 leading: BackButton(icon: icon)

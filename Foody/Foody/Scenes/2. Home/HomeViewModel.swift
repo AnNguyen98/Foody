@@ -8,39 +8,35 @@
 import SwiftUI
 
 final class HomeViewModel: ViewModel, ObservableObject {
-    @Published var trendingProducts: [Product] = []
-    @Published var popularRestaurants: [Restaurant] = []
+    var trendingProducts: [Product] = []
+    var popularRestaurants: [Restaurant] = []
     
     override init() {
         super.init()
-        
-        getFavoriteProducts()
+//        getHomeData()
     }
     
-    func getProducts() {
-        
-    }
-    
-    func getRestaurants() {
-        
-    }
-    
-    func refreshData() {
-        
-    }
-    
-    func getFavoriteProducts(page: Int = 0) {
-        guard !isLoading else { return }
+    func getHomeData() {
         isLoading = true
-        CustomerServices.getFavoriteProducts()
+        CustomerServices.popularRestaurants()
+            .zip(CustomerServices.trendingProducts(), CustomerServices.getFavoriteProducts())
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (items) in
-                Session.shared.favorites = items.map({ $0.product })
+            } receiveValue: { (res1, res2, res3) in
+                self.popularRestaurants = res1.restaurants
+                self.trendingProducts = res2.products
+                Session.shared.favorites = res3.map({ $0.product })
             }
             .store(in: &subscriptions)
+    }
+    
+    func refreshData() {
+        trendingProducts.removeAll()
+        popularRestaurants.removeAll()
+        
+        getHomeData()
     }
 }

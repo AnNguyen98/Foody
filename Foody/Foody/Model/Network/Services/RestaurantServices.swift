@@ -13,6 +13,12 @@ struct ProductResponse: Decodable {
     var nextPage: Bool = false
 }
 
+struct RestaurantsResponse: Decodable {
+    var page: Int = 0
+    var restaurants: [Restaurant] = []
+    var nextPage: Bool = false
+}
+
 final class RestaurantServices {
     
     static func getProducts(page: Int = 0) -> AnyPublisher<ProductResponse, CommonError> {

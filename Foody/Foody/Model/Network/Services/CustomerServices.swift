@@ -21,15 +21,15 @@ final class CustomerServices {
             .eraseToAnyPublisher()
     }
     
-    static func popularRestaurants() -> AnyPublisher<[Restaurant], CommonError> {
-        NetworkProvider.shared.request(.popularRestaurants)
-            .decode(type: [Restaurant].self)
+    static func popularRestaurants(page: Int = 0) -> AnyPublisher<RestaurantsResponse, CommonError> {
+        NetworkProvider.shared.request(.popularRestaurants(page))
+            .decode(type: RestaurantsResponse.self)
             .eraseToAnyPublisher()
     }
     
-    static func trendingProducts() -> AnyPublisher<[Product], CommonError> {
-        NetworkProvider.shared.request(.trendingProducts)
-            .decode(type: [Product].self)
+    static func trendingProducts(page: Int = 0) -> AnyPublisher<ProductResponse, CommonError> {
+        NetworkProvider.shared.request(.trendingProducts(page))
+            .decode(type: ProductResponse.self)
             .eraseToAnyPublisher()
     }
     

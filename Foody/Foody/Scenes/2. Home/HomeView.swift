@@ -21,7 +21,7 @@ struct HomeView: View {
                             ForEach(0..<10) { item in
                                 NavigationLink(destination: FoodDetailsView(), label: {
                                     ProductCellView()
-                                        .frame(width: 250 * scale, height: 200 * scale)
+                                        .frame(width: 250, height: 270)
                                 })
                             }
                         }
@@ -41,28 +41,25 @@ struct HomeView: View {
                 }
             }
             .onRefresh {
-                refreshData()
+                viewModel.getHomeData()
             }
             .navigationBarItems(
                 trailing: NotificationView(action: {
                     isNotificationsPresented.toggle()
                 })
             )
-            .navigationBarTitle("Home", displayMode: .inline)
+            .navigationBarTitle("Home", displayMode: .automatic)
             .setupNavigationBar()
             .statusBarStyle(.lightContent)
             .handleHidenKeyboard()
             .handleErrors($viewModel.error)
             .addLoadingIcon($viewModel.isLoading)
-            .onAppear {
-                setupData()
-            }
             .fullScreenCover(isPresented: $isNotificationsPresented, content: {
                 RNotificationsView(isActive: $isNotificationsPresented)
             })
             
             FloatButtonView()
-
+            
         }
     }
 }
@@ -90,16 +87,6 @@ extension HomeView {
         .padding(.bottom, 5)
     }
 
-}
-
-extension HomeView {
-    func setupData() {
-        
-    }
-    
-    func refreshData() {
-        
-    }
 }
 
 struct HomeView_Previews: PreviewProvider {

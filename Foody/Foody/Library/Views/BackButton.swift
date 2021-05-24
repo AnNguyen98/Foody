@@ -10,6 +10,7 @@ import SwiftUI
 struct BackButton: View {
     
     @Environment(\.presentationMode) private var presentationMode
+    
     private var action: (() -> Void)?
     var icon: SFSymbols
     
