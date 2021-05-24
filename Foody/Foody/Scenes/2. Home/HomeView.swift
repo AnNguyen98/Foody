@@ -19,10 +19,13 @@ struct HomeView: View {
                     ScrollView(.horizontal) {
                         LazyHStack(spacing: 15) {
                             ForEach(viewModel.trendingProducts, id: \._id) { product in
-                                NavigationLink(destination: FoodDetailsView(), label: {
-                                    ProductCellView(product: product)
-                                        .frame(width: 250, height: 270)
-                                })
+                                NavigationLink(destination:
+                                                FoodDetailsView(viewModel: viewModel.foodDetailViewModel(product)),
+                                               label: {
+                                                    ProductCellView(product: product)
+                                                        .frame(width: 250, height: 270)                
+                                               }
+                                )
                             }
                         }
                         .padding(.horizontal)
@@ -32,9 +35,12 @@ struct HomeView: View {
                 Section(header: headerView("Most popular", destination: PopularRestaurantsView().toAnyView)) {
                     LazyVStack(spacing: 15) {
                         ForEach(viewModel.popularRestaurants, id: \._id) { restaurant in
-                            NavigationLink(destination: RestaurantDetailsView(), label: {
-                                RestaurantCellView(restaurant: restaurant)
-                            })
+                            NavigationLink(destination:
+                                            RestaurantDetailsView(viewModel: viewModel.restaurantDetailViewModel(restaurant)),
+                                           label: {
+                                                RestaurantCellView(restaurant: restaurant)
+                                           }
+                            )
                         }
                     }
                     .padding([.horizontal, .bottom])

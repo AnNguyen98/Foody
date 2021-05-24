@@ -6,110 +6,100 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct FoodDetailsView: View {
     @StateObject var viewModel = ProductDetailsViewModel()
-    
-    @State private var numberOfItems: Int = 0
-    @State private var checkItems: [Int] = []
+    @State private var product: Product?
+    @State private var isPresentedAppActivityView = false
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
                 ZStack(alignment: .top) {
-                    TabView {
-                        ForEach(0..<5) { _ in
-                            Image("food_img_details")
-                                .resizable()
-                                .scaledToFill()
+                    if viewModel.product.productImages.isEmpty {
+                        Image(nil)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: kScreenSize.width, minHeight: 358)
+                    } else {
+                        TabView {
+                            ForEach(viewModel.product.productImages, id: \.self) { data in
+                                Image(data)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: kScreenSize.width, minHeight: 358)
+                                    .clipped()
+                            }
                         }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                        .frame(maxWidth: kScreenSize.width, minHeight: 358)
                     }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                    .frame(height: 358)
+                    
                     HStack {
                         Spacer()
                         
                         CircleButton(systemName: SFSymbols.squareAndArrowUp, color: .black,
-                                     action: { })
+                                     action: {
+                                        isPresentedAppActivityView = true
+                                     })
                         
-                        CircleButton(systemName: SFSymbols.starFill, color: .red,
-                                     action: { })
+                        CircleButton(systemName: SFSymbols.starFill, color: viewModel.product.isLiked ? .red: .gray,
+                                     action: {
+                                        if viewModel.product.isLiked {
+                                            self.product = viewModel.product
+                                        } else {
+                                            viewModel.addToFavorite(viewModel.product)
+                                        }
+                                     })
                     }
-                    .padding()
+                    .padding(30)
                 }
                 
 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("California Roll with Black Sesame")
-                        .regular(size: 30)
+                    Text(viewModel.product.name)
+                        .bold(size: 30)
                         .lineLimit(2)
-                        .layoutPriority(1000)
-                        
                     
-                    HStack {
+                    Text(viewModel.product.restaurantName)
+                        .foregroundColor(.gray)
+                        .font(.title3)
+                    
+                    Text(viewModel.product.address)
+                        .font(.body)
+                        .foregroundColor(.red)
+                    
+                    HStack(spacing: 3) {
                         Text("Description")
-                            .bold(size: 17)
-                            .padding(.top, 10)
+                            .font(.title3)
+                        
                         Spacer()
-                        ForEach(0..<5) { _ in
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
+                        
+                        let voteCount = viewModel.product.voteCount
+                        ForEach(0..<5) { index in
+                            Image(systemName: SFSymbols.starFill)
+                                .foregroundColor(voteCount > index ? .yellow: .gray)
                         }
-                        Text("(votes)")
-                            .regular(size: 13)
+                        Text(" \(voteCount) votes")
+                            .font(.body)
                     }
+                    .padding(.top, 10)
                     
-                    Text("It is often frustrating to attempt to plan meals that are designed for one. Despite this fact, we are seeing more and more recipe books and Internet websites that are dedicated to the act of cooking for one. Despite this fact, we are seeing more and more recipe books and Internet websites that are dedicated to the act of cooking for one. ")
+                    Text(viewModel.product.descriptions)
                         .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                         .multilineTextAlignment(.leading)
-                        .lineLimit(5)
-                    
-                    Text("Extras")
-                        .bold(size: 17)
-                        .padding(.top, 20)
-                    
-                    VStack(alignment: .leading) {
-                        ForEach(0..<10) { value in
-                            Divider()
-                            Button(action: {
-                                if checkItems.contains(value) {
-                                    checkItems.removeAll(where: { $0 == value })
-                                } else {
-                                    checkItems.append(value)
-                                }
-                            }, label: {
-                                HStack {
-                                    Text("Tuna \(value)")
-                                    Text("+$35.00")
-                                        .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
-                                    Spacer()
-                                    Image(systemName: "checkmark")
-                                        .font(.system(size: 14, weight: .bold, design: Font.Design.default))
-                                        .foregroundColor(checkItems.contains(value) ? Colors.redColorCustom: .clear)
-                                }
-                            })
-                            
-                        }
-                        Divider()
-                    }
-                    
-                    Group {
-                        Text("Quantity")
-                            .bold(size: 17)
-                            .padding(.top, 20)
-
-                        Stepper(value: $numberOfItems, in: 1...50) {
-                            Text("\(numberOfItems) items")
-                        }
-                    }
+                        .lineLimit(nil)
                 }
                 .padding(.horizontal)
                                 
                 VStack {
-                    Text("$49.50")
+                    Text("\(viewModel.product.price) VNĐ")
                         .bold(size: 20)
                     
-                    Button(action: {}, label: {
+                    Button(action: {
+                        
+                    }, label: {
                         ZStack {
                             Text("Add to order")
                             HStack {
@@ -124,6 +114,7 @@ struct FoodDetailsView: View {
                         .frame(maxWidth: .infinity, maxHeight: 50)
                         .background(Colors.redColorCustom)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(.top, 30)
                         
                     })
                 }
@@ -142,13 +133,30 @@ struct FoodDetailsView: View {
                             CommentView()
                         }
                     }
-                    .frame(height: 400)
+                    .frame(height: viewModel.comments.isEmpty ? 0: 400)
                 }
+                .hidden(viewModel.comments.isEmpty)
+                .padding(.bottom, viewModel.comments.isEmpty ? 0: 30)
             }
             .regular(size: 15)
             .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
         }
         .ignoresSafeArea()
+        .addBackBarCustom()
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+        .alert(item: $product, content: { product in
+            Alert(title: Text("Delete favorite"),
+                  message: Text("Are you want to delete this item in your favorites?"),
+                  primaryButton: .destructive(Text("Delete"), action: {
+                    viewModel.deleteInFavorite(product)
+                  }),
+                  secondaryButton: .cancel()
+            )
+        })
+        .popover(isPresented: $isPresentedAppActivityView, content: {
+            AppActivityView(activityItems: [viewModel.product.name + " - " + viewModel.product.price.string + " vnđ"])
+        })
     }
 }
 

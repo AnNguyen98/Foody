@@ -16,6 +16,14 @@ final class HomeViewModel: ViewModel, ObservableObject {
         getHomeData()
     }
     
+    func foodDetailViewModel(_ product: Product) -> ProductDetailsViewModel {
+        ProductDetailsViewModel(id: product._id)
+    }
+    
+    func restaurantDetailViewModel(_ restaurant: Restaurant) -> RestaurantDetailsViewModel {
+        RestaurantDetailsViewModel(id: restaurant._id)
+    }
+    
     func getHomeData() {
         isLoading = true
         CustomerServices.popularRestaurants()

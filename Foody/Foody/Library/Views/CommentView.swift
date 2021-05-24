@@ -26,6 +26,7 @@ struct CommentView: View {
                     Spacer()
                     VotesView(numberOfVotes: 4, size: 12)
                 }
+                
                 Text("So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon.")
                     .regular(size: 14)
                     .padding(.top, 10)
