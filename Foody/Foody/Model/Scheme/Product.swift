@@ -20,6 +20,8 @@ struct Product: Codable {
     
     var restaurantId: String = ""
     
+    var phoneNumber: String?
+    
     var restaurantName: String = ""
     
     var imageBase64Encodings: [String] = []

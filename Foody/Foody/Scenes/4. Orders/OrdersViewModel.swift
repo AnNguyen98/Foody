@@ -11,7 +11,6 @@ import SwifterSwift
 
 final class OrdersViewModel: ViewModel, ObservableObject {
     @Published var cancelOrder: Order?
-    @Published var showSuccessPopup = false
     @Published var searchText: String = ""
     @Published var selectedIndex = 0
     @Published var orders: [[Order]] = []
@@ -37,6 +36,7 @@ final class OrdersViewModel: ViewModel, ObservableObject {
     
     func prepareOrders(_ orders: [Order]) {
         var prepareOrders: [Order] = orders
+        self.orders.removeAll()
         [OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]
             .forEach({ status in
                 let processingOrders = prepareOrders.filter({ OrderStatus(rawValue: $0.status) == status })
@@ -61,22 +61,46 @@ final class OrdersViewModel: ViewModel, ObservableObject {
             .store(in: &subscriptions)
     }
     
+//    func cancelOrder(_ order: Order) {
+//        isLoading = false
+//        CustomerServices.cancelOrder(id: order._id)
+//            .sink { (completion) in
+//                self.isLoading = false
+//                if case .failure(let error) = completion {
+//                    self.error = error
+//                }
+//            } receiveValue: { (_) in
+//                var newOrder: Order = order
+//                newOrder.status = OrderStatus.canceled.rawValue
+//                // TODO: Optimize...
+//                self.ordersData.removeAll(order)
+//                self.ordersData.append(newOrder)
+//            }
+//            .store(in: &subscriptions)
+//
+//    }
+    
     func cancelOrder(_ order: Order) {
-        isLoading = false
-        CustomerServices.cancelOrder(id: order._id)
+        guard !isLoading else { return }
+        let params: Parameters = [
+            "_id": order._id,
+            "canceledTime": Date().dateTimeString(),
+            "canceledReason": "Canceled by the user",
+            "status": OrderStatus.canceled.rawValue
+        ]
+        isLoading = true
+        CommonServices.verifyOrder(params)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (_) in
-                var newOrder: Order = order
-                newOrder.status = OrderStatus.canceled.rawValue
-                // TODO: Optimize...
+                var order: Order = order
+                order.status = OrderStatus.canceled.rawValue
                 self.ordersData.removeAll(order)
-                self.ordersData.append(newOrder)
+                self.ordersData.append(order)
             }
             .store(in: &subscriptions)
-
     }
 }

@@ -28,7 +28,7 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
     var product: Product = Product()
     
     var previewDetailViewModel: RProductDetailsViewModel {
-        RProductDetailsViewModel(product)
+        RProductDetailsViewModel(product, action: .preview)
     }
     
     var isEditProduct: Bool = false

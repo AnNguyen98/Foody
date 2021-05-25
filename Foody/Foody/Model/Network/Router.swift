@@ -36,8 +36,7 @@ enum Router {
     case getProducts(Int), newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
     case searchProducts(productName: String, page: Int)
     case getChartInfo(Int) //month
-    case verifySending(id: String, status: OrderStatus)
-    case verifySend(id: String)
+    case verifyOrder(Parameters)
     
     case updatePassword(String, String), updateInfo(Parameters)
     case verifyEmail(email: String, VerifyAction)
@@ -104,8 +103,8 @@ extension Router: TargetType {
         
         case .getOrders:
             return "/orders"
-        case .verifySending, .verifySend:
-            return "/order/verify"
+        case .verifyOrder:
+            return "/order"
             
         case .getNotifications:
             return "/notifications"
@@ -118,7 +117,7 @@ extension Router: TargetType {
         switch self {
         case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
             return .post
-        case .updateProduct, .updatePassword, .verifySending, .verifySend, .readNotification, .voteProduct, .voteRestaurant:
+        case .updateProduct, .updatePassword, .verifyOrder, .readNotification, .voteProduct, .voteRestaurant:
             return .put
         case .deleteFavorite, .deleteProduct, .cancelOrder:
             return .delete
@@ -143,12 +142,8 @@ extension Router: TargetType {
             tempParams["productId"] = id
             return .requestParameters(parameters: tempParams, encoding: JSONEncoding.default)
         
-        case .deleteFavorite(let id), .deleteProduct(let id), .verifySend(let id),
-             .readNotification(let id), .cancelOrder(let id):
+        case .deleteFavorite(let id), .deleteProduct(let id), .readNotification(let id), .cancelOrder(let id):
             return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
-            
-        case .verifySending(let id, let status):
-            return .requestParameters(parameters: ["id": id, "status": status.rawValue], encoding: JSONEncoding.default)
         
         case .getProduct(let id), .getComments(let id), .getRestaurant(let id), .popularProducts(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
@@ -159,7 +154,7 @@ extension Router: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
             return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
-        case .register(let params), .updateInfo(let params), .requestOrder(let params):
+        case .register(let params), .updateInfo(let params), .requestOrder(let params), .verifyOrder(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)

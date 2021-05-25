@@ -9,22 +9,43 @@ import Combine
 import SwifterSwift
 
 final class ROrdersViewModel: ViewModel, ObservableObject {
-    @Published var orders: [[Order]] = []
-    @Published var showSuccessPopup = false
     @Published var searchText: String = ""
     @Published var selectedIndex = 0
+    @Published var cureentOrder: Order?
+    @Published var orders: [[Order]] = []
+    @Published var searchResults: [Order] = []
+    
+    var isSearching: Bool {
+        !searchText.isEmpty || searchText != ""
+    }
+    
+    var ordersData: [Order] = [] {
+        didSet {
+            prepareOrders(ordersData)
+        }
+    }
     
     var currentOrders: [Order] {
-        orders[safeIndex: selectedIndex] ?? []
+        isSearching ? searchResults: orders[safeIndex: selectedIndex] ?? []
     }
     
     override init() {
         super.init()
         getOrders()
+        
+        $searchText.sink { (text) in
+            self.searchResults = self.ordersData.filter({ $0._id.lowercased().contains(text.trimmed.lowercased())})
+        }
+        .store(in: &subscriptions)
+    }
+    
+    func detailsViewModel(_ order: Order) -> RProductDetailsViewModel {
+        RProductDetailsViewModel(order.product)
     }
     
     func prepareOrders(_ orders: [Order]) {
         var prepareOrders: [Order] = orders
+        self.orders.removeAll()
         [OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]
             .forEach({ status in
                 let processingOrders = prepareOrders.filter({ OrderStatus(rawValue: $0.status) == status })
@@ -44,49 +65,35 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (orders) in
-                self.prepareOrders(orders)
+                self.ordersData = orders
             }
             .store(in: &subscriptions)
     }
     
-    func verifySendingOrder(order: Order, status: OrderStatus) {
+    func verifyOrder(order: Order, status: OrderStatus, canceledReason: String? = "Canceled by the restaurant") {
         guard !isLoading else { return }
+        var params: Parameters = [
+            "_id": order._id,
+            "\(status.rawValue)Time": Date().dateTimeString(),
+            "status": status.rawValue
+        ]
+        if status == .canceled {
+            params["canceledReason"] = canceledReason
+        }
+        
         isLoading = true
-        RestaurantServices.verifySendingOrder(id: order._id, status: status)
+        CommonServices.verifyOrder(params)
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
             } receiveValue: { (_) in
-                var order: Order = order
-                order.status = OrderStatus.shipping.rawValue
-                self.orders[self.selectedIndex].removeAll(order)
-                if self.orders.count > 2 {
-                    self.orders[2].append(order)
-                }
-                self.showSuccessPopup = true
-            }
-            .store(in: &subscriptions)
-    }
-    
-    func verifySendOrder(order: Order) {
-        guard !isLoading else { return }
-        isLoading = true
-        RestaurantServices.verifySendOrder(id: order._id)
-            .sink { (completion) in
-                self.isLoading = false
-                if case .failure(let error) = completion {
-                    self.error = error
-                }
-            } receiveValue: { (_) in
-                var order: Order = order
-                order.status = OrderStatus.paymented.rawValue
-                self.orders[self.selectedIndex].removeAll(order)
-                if self.orders.count > 3 {
-                    self.orders[3].append(order)
-                }
-                self.showSuccessPopup = true
+                var newOrder: Order = order
+                newOrder.status = status.rawValue
+                
+                self.ordersData.removeAll(order)
+                self.ordersData.append(newOrder)
             }
             .store(in: &subscriptions)
     }

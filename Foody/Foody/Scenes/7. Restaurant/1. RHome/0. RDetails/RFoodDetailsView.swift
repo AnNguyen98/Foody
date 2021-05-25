@@ -14,10 +14,16 @@ struct RFoodDetailsView: View {
     @State private var isPresentedEditView: Bool = false
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack {
-                ZStack(alignment: .top) {
-                    if !viewModel.images.isEmpty {
+        ZStack(alignment: .topTrailing) {
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    if viewModel.images.isEmpty {
+                        Image(nil)
+                            .resizable()
+                            .frame(maxWidth: kScreenSize.width, maxHeight: 358)
+                            .scaledToFill()
+                            .background(Color.red)
+                    } else {
                         TabView {
                             ForEach(viewModel.images, id: \.self) { data in
                                 Image(data)
@@ -30,129 +36,142 @@ struct RFoodDetailsView: View {
                         .frame(height: 358)
                     }
                     
-                    if viewModel.action != .preview {
+
+                    VStack(alignment: .leading, spacing: 13) {
+                        HStack {
+                            Text(viewModel.product.name)
+                                .font(.title)
+                                .lineLimit(2)
+                            
+                            Image(systemName: SFSymbols.checkmarkCircleFill)
+                                .resizable()
+                                .frame(maxWidth: 20, maxHeight: 20)
+                                .foregroundColor(viewModel.product.accepted ? .green: .gray)
+                        }
+                        
+                        HStack(spacing: 3) {
+                            Text("Description")
+                                .font(.title3)
+                            
+                            Spacer()
+                            
+                            let voteCount = viewModel.product.voteCount
+                            ForEach(0..<5) { index in
+                                Image(systemName: SFSymbols.starFill)
+                                    .resizable()
+                                    .frame(maxWidth: 20 * scale, maxHeight: 20 * scale)
+                                    .foregroundColor(voteCount > index ? .yellow: .gray)
+                            }
+                            Text(" \(voteCount) votes")
+                                .font(.body)
+                        }
+                        .padding(.top, 10)
+                        
+                        Text(viewModel.product.descriptions)
+                            .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(5)
+                        
                         HStack {
                             Spacer()
                             
-                            CircleButton(systemName: SFSymbols.squareAndPencil, color: .blue,
-                                         action: {
-                                            isPresentedEditView = true
-                                         })
+                            Button(action: {
+                                lineLimit = 0
+                            }, label: {
+                                Text("See more")
+                                    .underline()
+                            })
+                        }
+                        .opacity(lineLimit == 5
+                                    && !viewModel.product.descriptions.isEmpty ? 1: 0)
+                    }
+                    .padding(.horizontal)
+                                    
+                    VStack {
+                        Text("\(viewModel.product.price) VNĐ")
+                            .font(.title2)
+                        
+                        if viewModel.action != .normal {
+                            Button(action: {
+                                viewModel.requestNewProduct()
+                            }, label: {
+                                ZStack {
+                                    Text(viewModel.action == .preview ? "Add New Request": "Comtinue")
+                                    
+                                    HStack {
+                                        Spacer()
+                                        Image(systemName: SFSymbols.eject)
+                                            .font(.title3)
+                                            .padding(.trailing, 10)
+                                    }
+                                }
+                                .regular(size: 17)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(Colors.redColorCustom)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                            })
+                        }
+                    }
+                    .padding(EdgeInsets(top: 40, leading: 20, bottom: 20, trailing: 20))
+                    
+                    if viewModel.action != .preview {
+                        VStack(alignment: .leading) {
+                            Group {
+                                Divider()
+                                Text("Reviews")
+                                    .font(.title3)
+                            }
+                            .padding(.horizontal)
                             
-                            CircleButton(systemName: SFSymbols.trashFill, color: .red,
-                                         action: {
-                                            isPresentedConfirmDelete = true
-                                         })
-                        }
-                        .padding()
-                    }
-                }
-                
-
-                VStack(alignment: .leading, spacing: 13) {
-                    HStack {
-                        Text(viewModel.product.name)
-                            .font(.title)
-                            .lineLimit(2)
-                        
-                        Image(systemName: SFSymbols.checkmarkCircleFill)
-                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
-                    }
-                    
-                    HStack(spacing: 3) {
-                        Text("Description")
-                            .font(.title3)
-                        
-                        Spacer()
-                        
-                        let voteCount = viewModel.product.voteCount
-                        ForEach(0..<5) { index in
-                            Image(systemName: SFSymbols.starFill)
-                                .foregroundColor(voteCount > index ? .yellow: .gray)
-                        }
-                        Text(" \(voteCount) votes")
-                            .font(.body)
-                    }
-                    .padding(.top, 10)
-                    
-                    Text(viewModel.product.descriptions)
-                        .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(5)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        Button(action: {
-                            lineLimit = 0
-                        }, label: {
-                            Text("See more")
-                                .underline()
-                        })
-                    }
-                    .opacity(lineLimit == 5
-                                && !viewModel.product.descriptions.isEmpty ? 1: 0)
-                }
-                .padding(.horizontal)
-                                
-                VStack {
-                    Text("\(viewModel.product.price) vnđ")
-                        .font(.title2)
-                    
-                    if viewModel.action != .normal {
-                        Button(action: {
-                            viewModel.requestNewProduct()
-                        }, label: {
-                            ZStack {
-                                Text(viewModel.action == .preview ? "Add New Request": "Comtinue")
-                                
-                                HStack {
-                                    Spacer()
-                                    Image(systemName: SFSymbols.eject)
-                                        .font(.title3)
-                                        .padding(.trailing, 10)
+                            List {
+                                ForEach(viewModel.comments, id: \._id) { comment in
+                                    CommentView()
                                 }
                             }
-                            .regular(size: 17)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, minHeight: 50)
-                            .background(Colors.redColorCustom)
-                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                        })
+                            .frame(height: viewModel.comments.isEmpty ? 150: 400)
+                            .addEmptyView(isEmpty: viewModel.comments.isEmpty && !viewModel.isLoading, "No customer has commented yet!")
+                        }
                     }
                 }
-                .padding(EdgeInsets(top: 40, leading: 20, bottom: 20, trailing: 20))
-                
-                if viewModel.action != .preview {
-                    VStack(alignment: .leading) {
-                        Group {
-                            Divider()
-                            Text("Reviews")
-                                .font(.title3)
-                        }
-                        .padding(.horizontal)
-                        
-                        List {
-                            ForEach(viewModel.comments, id: \._id) { comment in
-                                CommentView()
-                            }
-                        }
-                        .frame(height: 400)
-                        
-                        
-                    }
-                }
+                .regular(size: 15)
+                .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
             }
-            .regular(size: 15)
-            .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
-        }
-        .onRefresh {
-            viewModel.getProductInfo()
+            .onRefresh {
+                viewModel.getProductInfo()
+            }
+            
+            HStack {
+                BackButton(icon: .arrowLeft)
+                    .foregroundColor(.white)
+                    .background(
+                        Circle()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.gray.opacity(0.4))
+                    )
+                
+                Spacer()
+                
+                CircleButton(systemName: SFSymbols.squareAndPencil, color: .blue,
+                             action: {
+                                isPresentedEditView = true
+                             }
+                )
+                .hidden(viewModel.action == .preview)
+                
+                CircleButton(systemName: SFSymbols.trashFill, color: .red,
+                             action: {
+                                isPresentedConfirmDelete = true
+                             }
+                )
+                .hidden(viewModel.action == .preview)
+            }
+            .padding(20)
         }
         .handleAction(isActive: $viewModel.showSuccessPopup, action: {
             handleShowNotiPupup()
         })
-        .addBackBarCustom()
+        .navigationBarHidden(true)
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .onReceive(viewModel.$deleteSuccess, perform: { deleted in
@@ -172,8 +191,8 @@ struct RFoodDetailsView: View {
         .fullScreenCover(isPresented: $isPresentedEditView, content: {
             RAddProductView(viewModel: viewModel.previewViewModel, isActive: $isPresentedEditView)
         })
-        .setupNavigationBar()
-        .navigationBarTitle(Text("Details"), displayMode: .inline)
+        .navigationBarTitle(viewModel.action == .preview ? "Preview": "Details", displayMode: .inline)
+        .ignoresSafeArea()
     }
 }
 
@@ -199,7 +218,9 @@ extension RFoodDetailsView {
 
 struct RFoodDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        RFoodDetailsView()
+        NavigationView {
+            RFoodDetailsView()
+        }
     }
 }
 

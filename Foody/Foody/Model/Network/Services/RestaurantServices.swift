@@ -57,17 +57,6 @@ final class RestaurantServices {
             .eraseToAnyPublisher()
     }
     
-    static func verifySendingOrder(id: String, status: OrderStatus) -> AnyPublisher<Order, CommonError> {
-        NetworkProvider.shared.request(.verifySending(id: id, status: status))
-            .decode(type: Order.self)
-            .eraseToAnyPublisher()
-    }
-    
-    static func verifySendOrder(id: String) -> AnyPublisher<Order, CommonError> {
-        NetworkProvider.shared.request(.verifySend(id: id))
-            .decode(type: Order.self)
-            .eraseToAnyPublisher()
-    }
     
     struct ChartResponse: Decodable {
         var month: String

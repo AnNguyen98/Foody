@@ -28,11 +28,15 @@ struct Order: Codable {
     
     var price: Int = 0
     
+    var canceledReason: String?
+    
     var orderTime: String = Date().dateTimeString()
     
-    var acceptedTime: String = ""
+    var shippingTime: String = ""
     
-    var deliveryTime: String = ""
+    var canceledTime: String = ""
+    
+    var paymentedTime: String = ""
     
     var address: String = ""
     
@@ -57,6 +61,10 @@ extension Order: Identifiable {
     
     var paymented: Bool {
         status == OrderStatus.paymented.rawValue
+    }
+    
+    var userProfile: Data? {
+        Data(base64Encoded: userProfileBase64)
     }
 }
 

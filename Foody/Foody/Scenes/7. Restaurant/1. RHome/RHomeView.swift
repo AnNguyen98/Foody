@@ -23,7 +23,7 @@ struct RHomeView: View {
                             Image(product.productImages.first)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(maxHeight: 250 * scale)
+                                .frame(maxHeight: 200 * scale)
                                 .clipShape(RoundedRectangle(cornerRadius: 0))
 
                             VStack(alignment: .leading, spacing: 2) {

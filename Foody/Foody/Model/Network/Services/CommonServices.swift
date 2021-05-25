@@ -38,4 +38,10 @@ final class CommonServices {
             .decode(type: Notifications.self)
             .eraseToAnyPublisher()
     }
+    
+    static func verifyOrder(_ params: Parameters) -> AnyPublisher<Order, CommonError> {
+        NetworkProvider.shared.request(.verifyOrder(params))
+            .decode(type: Order.self)
+            .eraseToAnyPublisher()
+    }
 }

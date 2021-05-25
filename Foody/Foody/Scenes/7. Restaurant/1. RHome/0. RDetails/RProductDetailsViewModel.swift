@@ -27,8 +27,9 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
         RAddProductViewModel(product)
     }
     
-    init(_ product: Product = Product()) {
+    init(_ product: Product = Product(), action: DetailsAction = .normal) {
         self.product._id = product._id
+        self.action = action
         super.init()
         if action == .normal {
             getProductInfo()

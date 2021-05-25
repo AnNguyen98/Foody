@@ -10,24 +10,39 @@ import SwiftUIX
 
 struct ROrdersView: View {
     @StateObject private var viewModel = ROrdersViewModel()
+    @State private var isActiveDetails = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            VStack {
-                Picker("orders", selection: $viewModel.selectedIndex, content: {
-                    Text("Processing").tag(0)
-                    Text("Canceled").tag(1)
-                    Text("Shipping").tag(2)
-                    Text("Payment").tag(3)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-                .padding([.top, .horizontal], 10)
+            VStack(spacing: 5) {
+                if !viewModel.isSearching {
+                    Picker("orders", selection: $viewModel.selectedIndex, content: {
+                        Text("Processing").tag(0)
+                        Text("Canceled").tag(1)
+                        Text("Shipping").tag(2)
+                        Text("Payment").tag(3)
+                    })
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding([.top, .horizontal], 10)
+                } else {
+                    HStack {
+                        Text("Total result: \(viewModel.currentOrders.count)")
+                            .padding([.top, .horizontal] ,15)
+                        
+                        Spacer()
+                    }
+                }
                 
                 LazyVStack(spacing: 15) {
                     ForEach(viewModel.currentOrders, id: \._id) { order in
                         VStack(spacing: 0) {
+                            NavigationLink(destination: RFoodDetailsView(viewModel: viewModel.detailsViewModel(order)),
+                                           isActive: $isActiveDetails, label: {
+                                                EmptyView()
+                                           })
+                            
                             HStack {
-                                Image("no-user")
+                                Image(order.userProfile, isProfile: true)
                                     .resizable()
                                     .frame(width: 30, height: 30)
                                     .clipShape(Circle())
@@ -84,18 +99,27 @@ struct ROrdersView: View {
                                     Text("ID: \(order._id)")
                                         .foregroundColor(.gray)
                                     
-                                    HStack {
-                                        Spacer()
-                                        
-                                        CircleButton(systemName: SFSymbols.xmark, color: .red,
-                                                     action: {
-                                                        cancelOrder(order)
-                                                     })
-                                        
-                                        CircleButton(systemName: SFSymbols.checkmark, color: .green,
-                                                     action: {
-                                                        verifyOrder(order)
-                                                     })
+                                    if !order.paymented {
+                                        HStack {
+                                            Spacer()
+                                            
+                                            CircleButton(systemName: SFSymbols.xmark, color: .red,
+                                                         action: {
+                                                            viewModel.cureentOrder = order
+                                                         }
+                                            )
+                                            .hidden(order.isCanceled)
+                                            
+                                            CircleButton(systemName: SFSymbols.checkmark, color: .green,
+                                                         action: {
+                                                            if order.isProcessing || order.isCanceled {
+                                                                viewModel.verifyOrder(order: order, status: .shipping)
+                                                            } else if order.shipping {
+                                                                viewModel.verifyOrder(order: order, status: .paymented)
+                                                            }
+                                                         }
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -108,7 +132,7 @@ struct ROrdersView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .shadow(color: .gray, radius: 3)
                         .onTapGesture {
-                            print("OKKK")
+                            isActiveDetails.toggle()
                         }
                     }
                     
@@ -119,17 +143,31 @@ struct ROrdersView: View {
                 .onRefresh {
                     viewModel.getOrders()
                 }
+                
             }
             .navigationSearchBar({
                 SearchBar("Enter id of order...", text: $viewModel.searchText)
                     .showsCancelButton(true)
                     .searchBarStyle(.default)
                     .returnKeyType(.search)
+                    .onCancel {
+                        viewModel.searchText = ""
+                    }
             })
+            .alert(item: $viewModel.cureentOrder) { (order) -> Alert in
+                Alert(title: Text("Cancel order"),
+                      message: Text("Do you want to cancel this order?"),
+                      primaryButton: .destructive(Text("Continue"), action: {
+                        viewModel.verifyOrder(order: order, status: .canceled)
+                      }),
+                      secondaryButton: .cancel()
+                )
+            }
             .navigationBarTitle("Orders", displayMode: .inline)
             .setupNavigationBar()
             .addLoadingIcon($viewModel.isLoading)
             .handleErrors($viewModel.error)
+            
             
             FloatButtonView()
         }
@@ -137,14 +175,6 @@ struct ROrdersView: View {
 }
 
 extension ROrdersView {
-    private func cancelOrder(_ order: Order) {
-        viewModel.verifySendingOrder(order: order, status: .canceled)
-    }
-    
-    private func verifyOrder(_ order: Order) {
-        viewModel.verifySendingOrder(order: order, status: .shipping)
-    }
-    
     private func callPhoneNumber(phoneNumber: String) {
         var phone = phoneNumber
         phone.removeAll(where: { "\($0)".elementsEqual("-") || "\($0)".elementsEqual(" ") })
