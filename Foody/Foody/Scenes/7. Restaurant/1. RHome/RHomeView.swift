@@ -101,7 +101,7 @@ struct RHomeView: View {
             .fullScreenCover(isPresented: $isNotificationsPresented, content: {
                 RNotificationsView(isActive: $isNotificationsPresented)
             })
-            .addEmptyView(isEmpty: viewModel.displayProducts.isEmpty)
+            .addEmptyView(isEmpty: viewModel.displayProducts.isEmpty && !viewModel.isLoading)
             .navigationBarTitle("Home", displayMode: .inline)
             
             FloatButtonView()

@@ -40,6 +40,26 @@ struct Order: Codable {
     
 }
 
+extension Order: Identifiable {
+    var id: String { _id }
+    
+    var isCanceled: Bool {
+        status == OrderStatus.canceled.rawValue
+    }
+    
+    var isProcessing: Bool {
+        status == OrderStatus.processing.rawValue
+    }
+    
+    var shipping: Bool {
+        status == OrderStatus.shipping.rawValue
+    }
+    
+    var paymented: Bool {
+        status == OrderStatus.paymented.rawValue
+    }
+}
+
 extension Order: Hashable {
     static func ==(lhs: Order, rhs: Order?) -> Bool {
             return lhs._id == rhs?._id

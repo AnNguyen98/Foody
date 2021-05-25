@@ -128,7 +128,6 @@ struct ROrdersView: View {
             })
             .navigationBarTitle("Orders", displayMode: .inline)
             .setupNavigationBar()
-            .setupBackgroundNavigationBar()
             .addLoadingIcon($viewModel.isLoading)
             .handleErrors($viewModel.error)
             
