@@ -16,6 +16,13 @@ struct SearchView: View {
     
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
+            HStack {
+                Text("Total result: \(viewModel.products.count)")
+                    .padding([.top, .horizontal] ,15)
+                
+                Spacer()
+            }
+            
             ForEach(viewModel.products, id: \._id) { product in
                 ZStack(alignment: .topTrailing) {
                     NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),

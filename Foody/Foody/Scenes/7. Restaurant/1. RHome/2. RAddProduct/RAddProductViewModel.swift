@@ -51,6 +51,7 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
     func prepareProduct() {
         product.restaurantId = Session.shared.user?._id ?? ""
         product.restaurantName  = Session.shared.restaurant?.name ?? ""
+        product.phoneNumber = Session.shared.user?.phoneNumber ?? ""
         product.name  = productName
         product.descriptions = description
         product.type = type

@@ -9,16 +9,22 @@ import Combine
 import SwiftUI
 import SwifterSwift
 
-struct ChartMonthData: Decodable {
-    var time: String
-    var orderCount: Int
-}
-
 final class RChartsViewModel: ViewModel, ObservableObject {
-    @Published private var charts: [Int: [Int]] = [:]
+    @Published var growthValuesData: [Int: [Double]] = [:]
+    @Published var salesData: [Int: [(String, Int)]] = [:]
     var currentMonth: Int = Date().month
+    var monthDisplay: String {
+        var date = Date()
+        date.month = currentMonth
+        return date.monthName()
+    }
     
-    @Published var currentChart: [Int] = []
+    var currentGrowthValues: [Double] {
+        growthValuesData[currentMonth] ?? []
+    }
+    var currentSales: [(String, Int)] {
+        salesData[currentMonth] ?? []
+    }
     
     var canNotNext: Bool  {
         Date().month == currentMonth
@@ -33,18 +39,29 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         getChartsInfo()
     }
     
-    func prepareData(_ charts: [ChartMonthData]) {
-        
+    func prepareData(_ charts: [ChartResponse]) {
+        let currentCharts = charts.filter({ $0.month == currentMonth })
+        var growths: [Double] = []
+        var sales: [(String, Int)] = []
+        for week in 1...4 {
+            let temp = currentCharts.filter({ $0.orderDate.weekOfMonth == week })
+            growths.append(temp.map({ $0.count }).reduce(0, +).double)
+            sales.append(("Week \(week)", temp.map({ $0.price }).reduce(0, +)))
+        }
+        growthValuesData[currentMonth] = growths
+        salesData[currentMonth] = sales
     }
     
     func refreshData() {
-        charts.removeAll()
+        growthValuesData.removeAll()
+        salesData.removeAll()
+        
         getChartsInfo()
     }
     
-    func getChartsInfo(month: Int = Date().month) {
-        if let data = charts[month] {
-            currentChart = data
+    func getChartsInfo(month: Int = Date().month, isRefreshing: Bool = false) {
+        if !isRefreshing, let _ = growthValuesData[month], let _ = salesData[month] {
+            currentMonth = month
             return
         }
         isLoading = true
@@ -54,9 +71,8 @@ final class RChartsViewModel: ViewModel, ObservableObject {
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (response) in
-                self.charts[month] = response.data
-                self.currentChart = response.data
+            } receiveValue: { (charts) in
+                self.prepareData(charts)
                 self.currentMonth = month
             }
             .store(in: &subscriptions)

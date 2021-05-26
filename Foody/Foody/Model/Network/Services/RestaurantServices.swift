@@ -57,15 +57,9 @@ final class RestaurantServices {
             .eraseToAnyPublisher()
     }
     
-    
-    struct ChartResponse: Decodable {
-        var month: String
-        var data: [Int]
-    }
-    
-    static func getChartsInfo(month: Int) -> AnyPublisher<ChartResponse, CommonError>  {
+    static func getChartsInfo(month: Int) -> AnyPublisher<[ChartResponse], CommonError>  {
         NetworkProvider.shared.request(.getChartInfo(month))
-            .decode(type: ChartResponse.self)
+            .decode(type: [ChartResponse].self)
             .eraseToAnyPublisher()
     }
 }

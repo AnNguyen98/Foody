@@ -42,6 +42,8 @@ struct Order: Codable {
     
     var phoneNumber: String = ""
     
+    var month: Int = Date().month
+    
 }
 
 extension Order: Identifiable {
@@ -71,9 +73,24 @@ extension Order: Identifiable {
 extension Order: Hashable {
     static func ==(lhs: Order, rhs: Order?) -> Bool {
             return lhs._id == rhs?._id
-        }
+    }
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(_id)
+    }
+}
+
+struct ChartResponse: Decodable {
+    var month: Int
+    var shippingTime: String
+    var count: Int
+    var price: Int
+    var paymentedTime: String
+    var orderTime: String
+    var status: String
+    var canceledTime: String
+    
+    var orderDate: Date {
+        orderTime.date(withFormat: "d MM yyyy 'at' HH:mm:ss") ?? Date()
     }
 }

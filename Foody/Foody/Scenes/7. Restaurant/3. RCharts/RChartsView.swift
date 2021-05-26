@@ -15,20 +15,15 @@ struct RChartsView: View {
         VStack {
             ScrollView {
                 LineView(
-                    data: [8,23,54,32],
+                    data: viewModel.currentGrowthValues,
                     title: "Growth chart",
-                    legend: "July"
+                    legend: viewModel.monthDisplay
                 )
                 .padding()
                 .frame(height: 400)
                 
                 BarChartView(
-                    data: ChartData(values: [
-                        ("2018 Q4", 100),
-                        ("2018 Q4", 30),
-                        ("2018 Q4", 80),
-                        ("2018 Q4", 10),
-                ]),
+                    data: ChartData(values: viewModel.currentSales),
                     title: "Sales",
                     legend: "Quarterly",
                     form: .init(width: kScreenSize.width - 30, height: 230)
@@ -72,7 +67,7 @@ struct RChartsView: View {
             .padding(.horizontal)
         }
         .onRefresh {
-            viewModel.getChartsInfo()
+            viewModel.getChartsInfo(isRefreshing: true)
         }
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
