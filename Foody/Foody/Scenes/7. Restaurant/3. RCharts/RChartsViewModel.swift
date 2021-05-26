@@ -12,7 +12,7 @@ import SwifterSwift
 final class RChartsViewModel: ViewModel, ObservableObject {
     @Published var growthValuesData: [Int: [Double]] = [:]
     @Published var salesData: [Int: [(String, Int)]] = [:]
-    var currentMonth: Int = Date().month
+    @Published var currentMonth: Int = Date().month
     var monthDisplay: String {
         var date = Date()
         date.month = currentMonth
@@ -22,6 +22,7 @@ final class RChartsViewModel: ViewModel, ObservableObject {
     var currentGrowthValues: [Double] {
         growthValuesData[currentMonth] ?? []
     }
+    
     var currentSales: [(String, Int)] {
         salesData[currentMonth] ?? []
     }
@@ -39,7 +40,7 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         getChartsInfo()
     }
     
-    func prepareData(_ charts: [ChartResponse]) {
+    func prepareData(_ charts: [ChartResponse], month: Int) {
         let currentCharts = charts.filter({ $0.month == currentMonth })
         var growths: [Double] = []
         var sales: [(String, Int)] = []
@@ -48,8 +49,8 @@ final class RChartsViewModel: ViewModel, ObservableObject {
             growths.append(temp.map({ $0.count }).reduce(0, +).double)
             sales.append(("Week \(week)", temp.map({ $0.price }).reduce(0, +)))
         }
-        growthValuesData[currentMonth] = growths
-        salesData[currentMonth] = sales
+        growthValuesData[month] = growths
+        salesData[month] = sales
     }
     
     func refreshData() {
@@ -72,7 +73,7 @@ final class RChartsViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (charts) in
-                self.prepareData(charts)
+                self.prepareData(charts, month: month)
                 self.currentMonth = month
             }
             .store(in: &subscriptions)

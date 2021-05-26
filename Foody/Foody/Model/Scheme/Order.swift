@@ -91,6 +91,6 @@ struct ChartResponse: Decodable {
     var canceledTime: String
     
     var orderDate: Date {
-        orderTime.date(withFormat: "d MM yyyy 'at' HH:mm:ss") ?? Date()
+        orderTime.date(withFormat: "dd MM yyyy 'at' HH:mm:ss") ?? Date()
     }
 }
