@@ -15,7 +15,7 @@ struct SearchView: View {
     @State private var isActiveDetails: Bool = false
     
     var body: some View {
-        LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
+        VStack {
             HStack {
                 Text("Total result: \(viewModel.products.count)")
                     .padding([.top, .horizontal] ,15)
@@ -23,46 +23,48 @@ struct SearchView: View {
                 Spacer()
             }
             
-            ForEach(viewModel.products, id: \._id) { product in
-                ZStack(alignment: .topTrailing) {
-                    NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
-                                   isActive: $isActiveDetails, label: {
-                                        EmptyView()
-                                   })
-                    
-                    ProductCellView(product: product)
-                        .frame(height: 250)
-                    
-                    Button(action: {
-                        if product.isLiked {
-                            self.product = product
-                        } else {
-                            viewModel.addToFavorite(product)
-                        }
-                    }, label: {
-                        Image(systemName: SFSymbols.heartFill)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(product.isLiked ? .red: .gray)
-                            .padding(8)
-                            
-                    })
-                }
-                .onAppear(perform: {
-                    if product == viewModel.products.last {
-                        viewModel.isLastRow = true
+            LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
+                ForEach(viewModel.products, id: \._id) { product in
+                    ZStack(alignment: .topTrailing) {
+                        NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                                       isActive: $isActiveDetails, label: {
+                                            EmptyView()
+                                       })
+                        
+                        ProductCellView(product: product)
+                            .frame(height: 250)
+                        
+                        Button(action: {
+                            if product.isLiked {
+                                self.product = product
+                            } else {
+                                viewModel.addToFavorite(product)
+                            }
+                        }, label: {
+                            Image(systemName: SFSymbols.heartFill)
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(product.isLiked ? .red: .gray)
+                                .padding(8)
+                                
+                        })
                     }
-                })
-                .onTapGesture {
-                    isActiveDetails = true
+                    .onAppear(perform: {
+                        if product == viewModel.products.last {
+                            viewModel.isLastRow = true
+                        }
+                    })
+                    .onTapGesture {
+                        isActiveDetails = true
+                    }
                 }
             }
-        }
-        .prepareForLoadMore(loadMore: {
-            handleLoadMore()
-        }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
-        .onRefresh {
-            handleRefresh()
+            .prepareForLoadMore(loadMore: {
+                handleLoadMore()
+            }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
+            .onRefresh {
+                handleRefresh()
+            }
         }
         .navigationSearchBar({
             SearchBar("Enter product name...", text: $viewModel.searchText)
