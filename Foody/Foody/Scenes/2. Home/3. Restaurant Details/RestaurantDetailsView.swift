@@ -56,7 +56,9 @@ struct RestaurantDetailsView: View {
                         
                         Spacer()
                         
-                        Button(action: {}, label: {
+                        Button(action: {
+                            
+                        }, label: {
                             Text("Contact")
                                 .frame(width: 113, height: 36)
                                 .foregroundColor(Colors.redColorCustom)
@@ -82,6 +84,7 @@ struct RestaurantDetailsView: View {
                             Text("See more")
                         }
                     )
+                    .disabled(true)
                 }
                 .padding(.vertical, 5)
                 

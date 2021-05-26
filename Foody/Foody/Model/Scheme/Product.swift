@@ -41,9 +41,15 @@ struct Product: Codable {
     var status: String = ProductStatus.none.rawValue
     
     var address: String = ""
+    
+    var votes: [String: Int]?
 }
 
 extension Product {
+    var myVote: Int {
+        votes?[Session.shared.user?._id ?? ""] ?? 0
+    }
+    
     var isDrink: Bool {
         type == ProductType.drink.rawValue
     }

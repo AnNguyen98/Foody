@@ -86,7 +86,7 @@ struct FoodDetailsView: View {
                         
                         Spacer()
                         
-                        let voteCount = viewModel.product.voteCount
+                        let voteCount = viewModel.product.myVote
                         ForEach(0..<5) { index in
                             Image(systemName: SFSymbols.starFill)
                                 .resizable()
@@ -98,7 +98,7 @@ struct FoodDetailsView: View {
                                     }
                                 }
                         }
-                        Text(" \(voteCount) votes")
+                        Text(" \(viewModel.product.votes?.count ?? 0) votes")
                             .font(.body)
                     }
                     .padding(.top, 10)

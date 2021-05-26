@@ -20,12 +20,27 @@ struct RHomeView: View {
                 ForEach(viewModel.displayProducts, id: \.id) { product in
                     NavigationLink(destination: RFoodDetailsView(viewModel: viewModel.detailViewModel(product)), label: {
                         VStack(alignment: .leading, spacing: 5) {
-                            Image(product.productImages.first)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(maxHeight: 200 * scale)
-                                .clipShape(RoundedRectangle(cornerRadius: 0))
-
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                if product.productImages.isEmpty {
+                                    Image(nil)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: kScreenSize.width * scale, height: 150 * scale)
+                                        .clipShape(RoundedRectangle(cornerRadius: 0))
+                                    
+                                } else {
+                                    LazyHStack {
+                                        ForEach(product.productImages, id: \.self) { data in
+                                            Image(data)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: kScreenSize.width - 20, height: 150 * scale)
+                                                .clipShape(RoundedRectangle(cornerRadius: 0))
+                                        }
+                                    }
+                                }
+                            }
+                            
                             VStack(alignment: .leading, spacing: 2) {
                                 HStack {
                                     Text(product.name)
