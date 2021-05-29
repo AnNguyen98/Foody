@@ -12,6 +12,7 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @State private var showAlertComfirm: Bool = false
+    @State private var isPresentedAboutApp: Bool = false
     
     var body: some View {
         ZStack {
@@ -103,9 +104,19 @@ struct ProfileView: View {
                     ProfileButtonView(text: Text(viewModel.restaurant.address), symbol: SFSymbols.locationFill)
                         .disabled(true)
 
-                    ProfileButtonView(action: {
-                            openUrl(url: Config.applicationInfoUrl)
-                    }, text: Text("About application"), imageName: "info-icon")
+                    ZStack {
+                        NavigationLink(
+                            destination: AppInfomation(),
+                            isActive: $isPresentedAboutApp,
+                            label: {
+                                EmptyView()
+                            })
+
+                        
+                        ProfileButtonView(action: {
+                            isPresentedAboutApp.toggle()
+                        }, text: Text("About application"), imageName: "info-icon")
+                    }
                     
                     ProfileButtonView(action: {
                         openUrl(url: Config.helpUrl)
@@ -160,7 +171,7 @@ extension ProfileView {
 extension ProfileView {
     struct Config {
         // TODO: - UPDATE WEBSITE
-        static let helpUrl: String = "https://www.mongodb.com/"
+        static let helpUrl: String = "https://www.foody.vn/lien-he"
         static let applicationInfoUrl: String = "https://www.mongodb.com/"
     }
 }

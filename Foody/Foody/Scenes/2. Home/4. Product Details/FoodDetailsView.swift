@@ -15,13 +15,13 @@ struct FoodDetailsView: View {
     @State private var isPresentedOrderView = false
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            NavigationLink(destination: OrderView(viewModel: viewModel.orderViewModel),
-                           isActive: $isPresentedOrderView, label: {
-                                EmptyView()
-                           })
-            VStack {
-                ZStack(alignment: .top) {
+        ZStack(alignment: .topTrailing) {
+            ScrollView(showsIndicators: false) {
+                NavigationLink(destination: OrderView(viewModel: viewModel.orderViewModel),
+                               isActive: $isPresentedOrderView, label: {
+                                    EmptyView()
+                               })
+                VStack {
                     if viewModel.product.productImages.isEmpty {
                         Image(nil)
                             .resizable()
@@ -40,128 +40,157 @@ struct FoodDetailsView: View {
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                         .frame(maxWidth: kScreenSize.width, minHeight: 358)
                     }
-                    
-                    HStack {
-                        Spacer()
-                        
-                        CircleButton(systemName: SFSymbols.squareAndArrowUp, color: .black,
-                                     action: {
-                                        isPresentedAppActivityView = true
-                                     })
-                        
-                        CircleButton(systemName: SFSymbols.starFill, color: viewModel.product.isLiked ? .red: .gray,
-                                     action: {
-                                        if viewModel.product.isLiked {
-                                            self.product = viewModel.product
-                                        } else {
-                                            viewModel.addToFavorite(viewModel.product)
-                                        }
-                                     })
-                    }
-                    .padding(30)
-                }
-                
 
-                VStack(alignment: .leading, spacing: 5) {
-                    HStack {
-                        Text(viewModel.product.name)
-                            .bold(size: 30)
-                            .lineLimit(2)
+                    VStack(alignment: .leading, spacing: 5) {
+                        HStack {
+                            Text(viewModel.product.name)
+                                .bold(size: 30)
+                                .lineLimit(2)
+                            
+                            Image(systemName: SFSymbols.checkmarkCircleFill)
+                                .foregroundColor(viewModel.product.accepted ? .green: .gray)
+                        }
                         
-                        Image(systemName: SFSymbols.checkmarkCircleFill)
-                            .foregroundColor(viewModel.product.accepted ? .green: .gray)
-                    }
-                    
-                    Text(viewModel.product.restaurantName)
-                        .foregroundColor(.gray)
-                        .font(.title3)
-                    
-                    Text(viewModel.product.address)
-                        .font(.body)
-                        .foregroundColor(.red)
-                    
-                    HStack(spacing: 3) {
-                        Text("Description")
+                        Text(viewModel.product.restaurantName)
+                            .foregroundColor(.gray)
                             .font(.title3)
                         
-                        Spacer()
-                        
-                        let voteCount = viewModel.product.myVote
-                        ForEach(0..<5) { index in
-                            Image(systemName: SFSymbols.starFill)
-                                .resizable()
-                                .frame(width: 20 * scale, height: 20 * scale)
-                                .foregroundColor(voteCount > index ? .yellow: .gray)
-                                .onTapGesture {
-                                    if voteCount != index + 1 {
-                                        viewModel.voteProduct(vote: index + 1)
-                                    }
-                                }
-                        }
-                        Text(" \(viewModel.product.votes?.count ?? 0) votes")
+                        Text(viewModel.product.address)
                             .font(.body)
-                    }
-                    .padding(.top, 10)
-                    
-                    Text(viewModel.product.descriptions)
-                        .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                }
-                .padding(.horizontal)
-                                
-                VStack {
-                    Text("\(viewModel.product.price) VNĐ")
-                        .bold(size: 20)
-                    
-                    Button(action: {
-                        isPresentedOrderView.toggle()
-                    }, label: {
-                        ZStack {
-                            Text("Add to order")
-                            HStack {
-                                Spacer()
-                                Image(systemName: "creditcard")
-                                    .font(.title3)
-                                    .padding(.trailing, 10)
-                            }
-                        }
-                        .regular(size: 17)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: 50)
-                        .background(Colors.redColorCustom)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .padding(.top, 30)
+                            .foregroundColor(.red)
                         
-                    })
-                }
-                .padding(EdgeInsets(top: 50, leading: 20, bottom: 20, trailing: 20))
-                
-                VStack(alignment: .leading) {
-                    Group {
-                        Divider()
-                        Text("Reviews")
-                            .bold(size: 17)
+                        HStack(spacing: 3) {
+                            Text("Description")
+                                .font(.title3)
+                            
+                            Spacer()
+                            
+                            let voteCount = viewModel.product.myVote
+                            ForEach(0..<5) { index in
+                                Image(systemName: SFSymbols.starFill)
+                                    .resizable()
+                                    .frame(width: 20 * scale, height: 20 * scale)
+                                    .foregroundColor(voteCount > index ? .yellow: .gray)
+                                    .onTapGesture {
+                                        if voteCount != index + 1 {
+                                            viewModel.voteProduct(vote: index + 1)
+                                        }
+                                    }
+                            }
+                            Text(" \(viewModel.product.votes?.count ?? 0) votes")
+                                .font(.body)
+                        }
+                        .padding(.top, 10)
+                        
+                        Text(viewModel.product.descriptions)
+                            .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
                     }
                     .padding(.horizontal)
-                    
-                    List {
-                        ForEach(0..<10) { _ in
-                            CommentView()
-                        }
+                                    
+                    VStack {
+                        Text("\(viewModel.product.price) VNĐ")
+                            .bold(size: 20)
+                        
+                        Button(action: {
+                            isPresentedOrderView.toggle()
+                        }, label: {
+                            ZStack {
+                                Text("Add to order")
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "creditcard")
+                                        .font(.title3)
+                                        .padding(.trailing, 10)
+                                }
+                            }
+                            .regular(size: 17)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, maxHeight: 50)
+                            .background(Colors.redColorCustom)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .padding(.top, 30)
+                            
+                        })
                     }
-                    .frame(height: viewModel.comments.isEmpty ? 0: 400)
+                    .padding(EdgeInsets(top: 50, leading: 20, bottom: 20, trailing: 20))
+                    
+                    VStack(alignment: .leading) {
+                        Group {
+                            Divider()
+                            Text("Reviews")
+                                .font(.title3)
+                        }
+                        .padding(.horizontal)
+                        
+                        List {
+                            ForEach(viewModel.comments, id: \._id) { comment in
+                                CommentView(comment: comment)
+                            }
+                        }
+                        .frame(height: viewModel.comments.isEmpty ? 150:
+                                viewModel.comments.count < 5 ? viewModel.comments.count.cgFloat * 80: 400)
+                        .addEmptyView(isEmpty: viewModel.comments.isEmpty && !viewModel.isLoading, "No customer has commented yet!")
+                        
+                        Divider()
+                        
+                        HStack {
+                            TextField("Comment...", text: $viewModel.commentText)
+                                .frame(maxWidth: .infinity, minHeight: 40)
+                                .padding(.horizontal)
+                                .border(cornerRadius: 20)
+                            
+                            Button(action: {
+                                viewModel.comment()
+                                hideKeyboard()
+                            }, label: {
+                                Image(systemName: SFSymbols.paperplaneFill)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.blue)
+                            })
+                            .disabled(viewModel.inValidComment)
+                            .opacity(viewModel.inValidComment ? 0.5: 1)
+                        }
+                        .padding([.bottom, .horizontal])
+                    }
+                    .padding(.bottom, viewModel.comments.isEmpty ? 15: 30)
                 }
-                .hidden(viewModel.comments.isEmpty)
-                .padding(.bottom, viewModel.comments.isEmpty ? 0: 30)
+                .regular(size: 15)
+                .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
+                .offset(y: -viewModel.keyboardHeight - (viewModel.keyboardHeight == 0 ? 0.0: 10))
+                .animation(.easeInOut(duration: 0.5))
             }
-            .regular(size: 15)
-            .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
+            .ignoresSafeArea()
+            
+            HStack {
+                BackButton(icon: .arrowLeft)
+                    .foregroundColor(.white)
+                    .background(
+                        Circle()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(Color.gray.opacity(0.4))
+                    )
+                
+                Spacer()
+                
+                CircleButton(systemName: SFSymbols.squareAndArrowUp, color: .black,
+                             action: {
+                                isPresentedAppActivityView = true
+                             })
+                
+                CircleButton(systemName: SFSymbols.starFill, color: viewModel.product.isLiked ? .red: .gray,
+                             action: {
+                                if viewModel.product.isLiked {
+                                    self.product = viewModel.product
+                                } else {
+                                    viewModel.addToFavorite(viewModel.product)
+                                }
+                             })
+            }
+            .padding(20)
         }
-        .ignoresSafeArea()
-        .addBackBarCustom()
-        .handleErrors($viewModel.error)
-        .addLoadingIcon($viewModel.isLoading)
         .alert(item: $product, content: { product in
             Alert(title: Text("Delete favorite"),
                   message: Text("Are you want to delete this item in your favorites?"),
@@ -174,6 +203,11 @@ struct FoodDetailsView: View {
         .popover(isPresented: $isPresentedAppActivityView, content: {
             AppActivityView(activityItems: [viewModel.product.name + " - " + viewModel.product.price.string + " vnđ"])
         })
+        .navigationBarHidden(true)
+        .handleHidenKeyboard()
+        .handleErrors($viewModel.error)
+        .addLoadingIcon($viewModel.isLoading)
+
     }
 }
 

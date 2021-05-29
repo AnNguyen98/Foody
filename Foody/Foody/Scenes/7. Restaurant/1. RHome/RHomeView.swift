@@ -109,7 +109,6 @@ struct RHomeView: View {
                     isNotificationsPresented.toggle()
                 })
             )
-            .statusBarStyle(.lightContent)
             .handleHidenKeyboard()
             .handleErrors($viewModel.error)
             .addLoadingIcon($viewModel.isLoading)
@@ -121,6 +120,7 @@ struct RHomeView: View {
             
             FloatButtonView()
         }
+        .statusBarStyle(.lightContent)
     }
 }
 

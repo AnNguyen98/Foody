@@ -20,7 +20,7 @@ struct Comment: Codable {
     
     var content: String = ""
     
-    var time: String
+    var time: String = Date().dateTimeString()
 }
 
 extension Comment {

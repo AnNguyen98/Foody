@@ -12,7 +12,7 @@ enum ProductType: String {
 }
 
 enum ProductStatus: String {
-    case accepted, none
+    case accepted, none, rejected
 }
 
 struct Product: Codable {

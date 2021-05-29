@@ -12,15 +12,22 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
     
     @Published var product = Product()
     @Published var comments: [Comment] = []
+    @Published var keyboardHeight: CGFloat = 0
+    @Published var commentText: String = ""
+
+    var inValidComment: Bool {
+        commentText.trimmed.isEmpty
+    }
+    
+    var orderViewModel: OrderViewModel {
+        OrderViewModel(product)
+    }
     
     init(id: String = "") {
         self.productId = id
         super.init()
         getProductDetails()
-    }
-    
-    var orderViewModel: OrderViewModel {
-        OrderViewModel(product)
+        listenForKeyboardNotifications()
     }
     
     func refreshData() {
@@ -30,13 +37,15 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
     func getProductDetails() {
         isLoading = true
         CommonServices.getProduct(id: productId)
+            .zip(CommonServices.getComments(productId: productId))
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (product) in
+            } receiveValue: { (product, comments) in
                 self.product = product
+                self.comments = comments
             }
             .store(in: &subscriptions)
     }
@@ -87,4 +96,49 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
             }
             .store(in: &subscriptions)
     }
+    
+    func comment() {
+        guard let user = Session.shared.user else {
+            error = .unknow("Can't get user information.")
+            return
+        }
+        let comment = Comment(
+            productId: product._id,
+            userId: product.restaurantId, username: user.username,
+            imageProfileBase64: user.imageProfileBase64,
+            content: commentText.trimmed
+        )
+        isLoading = true
+        CustomerServices.comment(id: product._id, comment: comment)
+            .sink { (completion) in
+                self.isLoading = false
+                self.commentText = ""
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (comment) in
+                self.comments.prepend(comment)
+            }
+            .store(in: &subscriptions)
+    }
 }
+
+extension ProductDetailsViewModel {
+    private func listenForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification,
+                                               object: nil,
+                                               queue: .main) { (notification) in
+                                                guard let userInfo = notification.userInfo,
+                                                    let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                                                
+                                                self.keyboardHeight = keyboardRect.height
+        }
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification,
+                                               object: nil,
+                                               queue: .main) { (notification) in
+                                                self.keyboardHeight = 0
+        }
+    }
+}
+

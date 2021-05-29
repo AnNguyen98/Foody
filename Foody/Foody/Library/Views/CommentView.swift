@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct CommentView: View {
+    var comment = Comment()
     var body: some View {
         HStack(alignment: .top) {
-            Image(systemName: "person.fill")
+            Image(comment.imageProdile, isProfile: true)
                 .resizable()
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
-            VStack(alignment: .leading) {
+            
+            VStack(alignment: .leading, spacing: 7) {
                 HStack(alignment: .firstTextBaseline) {
                     VStack(alignment: .leading) {
-                        Text("Ellen McLaughlin")
+                        Text(comment.username)
                             .bold(size: 15)
-                        Text("2 hours ago")
+                        Text(comment.time)
                             .regular(size: 12)
                             .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                     }
@@ -27,9 +29,9 @@ struct CommentView: View {
                     VotesView(numberOfVotes: 4, size: 12)
                 }
                 
-                Text("So we needed up ordering the deep fried salmon roll with Chinese hot mustard and wasabi noodles with salmon.")
-                    .regular(size: 14)
-                    .padding(.top, 10)
+                Text(comment.content)
+                    .font(.body)
+                    .lineLimit(3)
             }
         }
     }

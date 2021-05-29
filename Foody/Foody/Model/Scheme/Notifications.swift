@@ -16,9 +16,13 @@ struct Notifications: Codable {
     
     var time: String = ""
     
-    var isRead: Bool = false
+    var isRead: Bool?
     
     var userProfile: String = ""
+    
+    var productId: String = ""
+    
+    var username: String = ""
 }
 
 extension Notifications {

@@ -126,7 +126,7 @@ struct RFoodDetailsView: View {
                             
                             List {
                                 ForEach(viewModel.comments, id: \._id) { comment in
-                                    CommentView()
+                                    CommentView(comment: comment)
                                 }
                             }
                             .frame(height: viewModel.comments.isEmpty ? 150: 400)

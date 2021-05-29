@@ -37,37 +37,19 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     }
     
     func getProductInfo() {
-        let group = DispatchGroup()
-        
         isLoading = true
-        
-        group.enter()
         CommonServices.getProduct(id: product._id)
+            .zip(CommonServices.getComments(productId: product._id))
             .sink { (completion) in
-                group.leave()
+                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (product) in
+            } receiveValue: { (product, comments) in
                 self.product = product
-            }
-            .store(in: &subscriptions)
-
-        group.enter()
-        CommonServices.getComments(productId: product._id)
-            .sink { (completion) in
-                group.leave()
-                if case .failure(let error) = completion {
-                    //self.error = error
-                }
-            } receiveValue: { (comments) in
                 self.comments = comments
             }
             .store(in: &subscriptions)
-        
-        group.notify(queue: .main) {
-            self.isLoading = false
-        }
     }
     
     func requestNewProduct() {

@@ -104,7 +104,7 @@ struct UpdateInfoView: View {
         })
         .navigationBarTitle("Update Profile", displayMode: .inline)
         .setupNavigationBar()
-        .addBackBarCustom()
+        .navigationBarBackButton()
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .handleHidenKeyboard()

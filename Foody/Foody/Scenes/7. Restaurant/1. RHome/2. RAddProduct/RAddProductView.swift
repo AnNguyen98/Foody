@@ -161,7 +161,6 @@ struct RAddProductView: View {
             })
             .foregroundColor(.black)
             .setupNavigationBar()
-            .setupBackgroundNavigationBar()
             .addLoadingIcon($viewModel.isLoading)
             .handleErrors($viewModel.error)
             .statusBarStyle(.lightContent)
