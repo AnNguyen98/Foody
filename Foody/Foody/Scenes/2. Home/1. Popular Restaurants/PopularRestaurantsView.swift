@@ -9,27 +9,20 @@ import SwiftUI
 
 struct PopularRestaurantsView: View {
     @StateObject private var viewModel = PopularRestaurantsViewModel()
-    @State private var isActiveDetails = false
     
     var body: some View {
         LazyVStack(spacing: 15) {
             ForEach(viewModel.restaurants, id: \._id) { restaurant in
-                ZStack {
-                    NavigationLink(destination: RestaurantDetailsView(viewModel: viewModel.detailsViewModel(restaurant)),
-                                   isActive: $isActiveDetails, label: {
-                                        EmptyView()
-                                   })
-                    
-                    RestaurantCellView(restaurant: restaurant)
-                        .onAppear(perform: {
-                            if restaurant == viewModel.restaurants.last {
-                                viewModel.isLastRow = true
-                            }
-                        })
-                }
-                .onTapGesture {
-                    isActiveDetails = true
-                }
+                NavigationLink(
+                    destination: RestaurantDetailsView(viewModel: viewModel.detailsViewModel(restaurant)),
+                    label: {
+                        RestaurantCellView(restaurant: restaurant)
+                            .onAppear(perform: {
+                                if restaurant == viewModel.restaurants.last {
+                                    viewModel.isLastRow = true
+                                }
+                            })
+                    })
             }
         }
         .padding(.bottom)

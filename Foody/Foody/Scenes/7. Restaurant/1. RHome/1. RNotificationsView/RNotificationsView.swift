@@ -50,9 +50,6 @@ struct RNotificationsView: View {
                 .padding()
                 .font(.body)
             }
-            .onRefresh {
-                viewModel.getNotifications()
-            }
             .navigationBarItems(
                 leading: Button(action: {
                     isActive.toggle()

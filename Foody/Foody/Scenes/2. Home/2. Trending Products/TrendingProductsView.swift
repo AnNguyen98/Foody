@@ -15,38 +15,34 @@ struct TrendingProductsView: View {
     var body: some View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
             ForEach(viewModel.products, id: \._id) { product in
-                ZStack(alignment: .topTrailing) {
-                    NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
-                                   isActive: $isActiveDetails, label: {
-                                        EmptyView()
-                                   })
-                    
-                    ProductCellView(product: product)
-                        .frame(height: 250)
-                    
-                    Button(action: {
-                        if product.isLiked {
-                            self.product = product
-                        } else {
-                            viewModel.addToFavorite(product)
+                NavigationLink(
+                    destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                    label: {
+                        ZStack(alignment: .topTrailing) {
+                            ProductCellView(product: product)
+                                .frame(height: 250)
+                            
+                            Button(action: {
+                                if product.isLiked {
+                                    self.product = product
+                                } else {
+                                    viewModel.addToFavorite(product)
+                                }
+                            }, label: {
+                                Image(systemName: SFSymbols.heartFill)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(product.isLiked ? .red: .gray)
+                                    .padding(8)
+                            })
                         }
-                    }, label: {
-                        Image(systemName: SFSymbols.heartFill)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(product.isLiked ? .red: .gray)
-                            .padding(8)
-                    })
-                }
-                .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
-                .onAppear(perform: {
-                    if product == viewModel.products.last {
-                        viewModel.isLastRow = true
-                    }
+                        .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
+                        .onAppear(perform: {
+                            if product == viewModel.products.last {
+                                viewModel.isLastRow = true
+                            }
+                        })
                 })
-                .onTapGesture {
-                    isActiveDetails = true
-                }
             }
         }
         .prepareForLoadMore(loadMore: {

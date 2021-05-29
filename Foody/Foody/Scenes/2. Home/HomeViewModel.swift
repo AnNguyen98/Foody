@@ -27,16 +27,17 @@ final class HomeViewModel: ViewModel, ObservableObject {
     func getHomeData() {
         isLoading = true
         CustomerServices.popularRestaurants()
-            .zip(CustomerServices.trendingProducts(), CustomerServices.getFavoriteProducts())
+            .zip(CustomerServices.trendingProducts(), CustomerServices.getFavoriteProducts(), CommonServices.getNotifications())
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (res1, res2, res3) in
+            } receiveValue: { (res1, res2, res3, res4) in
                 self.popularRestaurants = res1.restaurants
                 self.trendingProducts = res2.products
                 Session.shared.favorites = res3.map({ $0.product })
+                Session.shared.haveNotifications = res4.contains(where: { $0.isRead == false })
             }
             .store(in: &subscriptions)
     }

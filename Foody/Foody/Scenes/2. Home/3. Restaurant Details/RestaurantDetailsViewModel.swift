@@ -19,6 +19,10 @@ final class RestaurantDetailsViewModel: ViewModel, ObservableObject {
         getRestaurantInfo()
     }
     
+    func detailsViewModel(_ product: Product) -> ProductDetailsViewModel {
+        ProductDetailsViewModel(id: product._id)
+    }
+    
     func getRestaurantInfo() {
         isLoading = true
         CustomerServices.getRestaurant(id: id)

@@ -160,7 +160,7 @@ struct FoodDetailsView: View {
                 .regular(size: 15)
                 .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
                 .offset(y: -viewModel.keyboardHeight - (viewModel.keyboardHeight == 0 ? 0.0: 10))
-                .animation(.easeInOut(duration: 0.5))
+                .animation(.easeInOut(duration: 0.4))
             }
             .ignoresSafeArea()
             

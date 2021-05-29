@@ -91,24 +91,28 @@ struct RestaurantDetailsView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 15) {
                         ForEach(viewModel.products, id: \.self) { product in
-                            VStack(alignment: .leading) {
-                                Image(product.productImages.first)
-                                    .resizable()
-                                    .frame(width: kScreenSize.width * 343 / 380, height: 160)
-                                    .clipped()
-                                
-                                Text(product.name)
-                                    .bold()
-                                    .padding(.horizontal)
-                                
-                                Text("\(product.price) VNĐ")
-                                    .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
-                                    .padding(.horizontal)
-                            }
-                            .font(.body)
-                            .background(Color.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .shadow(color: .gray, radius: 2, x: 0.0, y: 0)
+                            NavigationLink(
+                                destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                                label: {
+                                    VStack(alignment: .leading) {
+                                        Image(product.productImages.first)
+                                            .resizable()
+                                            .frame(width: kScreenSize.width * 343 / 380, height: 160)
+                                            .clipped()
+                                        
+                                        Text(product.name)
+                                            .bold()
+                                            .padding(.horizontal)
+                                        
+                                        Text("\(product.price) VNĐ")
+                                            .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
+                                            .padding(.horizontal)
+                                    }
+                                    .font(.body)
+                                    .background(Color.white)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .shadow(color: .gray, radius: 2, x: 0.0, y: 0)
+                            })
                         }
                     }
                     .padding(.vertical)

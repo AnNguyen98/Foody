@@ -57,6 +57,8 @@ final class Session {
     }
     
     var favorites: [Product] = []
+    
+    var haveNotifications: Bool = false
 }
 
 extension Session {

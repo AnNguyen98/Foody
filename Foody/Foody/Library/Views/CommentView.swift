@@ -26,7 +26,7 @@ struct CommentView: View {
                             .foregroundColor(#colorLiteral(red: 0.6078431373, green: 0.6078431373, blue: 0.6078431373, alpha: 1).color)
                     }
                     Spacer()
-                    VotesView(numberOfVotes: 4, size: 12)
+                    VotesView(numberOfVotes: comment.voteCount ?? 0, size: 12)
                 }
                 
                 Text(comment.content)

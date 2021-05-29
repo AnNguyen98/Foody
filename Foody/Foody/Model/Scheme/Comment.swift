@@ -21,6 +21,8 @@ struct Comment: Codable {
     var content: String = ""
     
     var time: String = Date().dateTimeString()
+    
+    var voteCount: Int?
 }
 
 extension Comment {

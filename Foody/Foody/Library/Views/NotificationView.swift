@@ -18,10 +18,12 @@ struct NotificationView: View {
                 Image(systemName: SFSymbols.bellFill)
                     .resizable()
                     .frame(width: 20, height: 20)
+                
                 Circle()
                     .frame(width: 10, height: 10)
                     .foregroundColor(.blue)
                     .offset(x: 6, y: -6)
+                    .opacity(Session.shared.haveNotifications ? 1: 0)
             }
             .shadow(color: .white, radius: 10, x: 0.0, y: 0.0)
         })

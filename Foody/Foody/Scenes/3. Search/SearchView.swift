@@ -12,12 +12,11 @@ struct SearchView: View {
     
     @StateObject private var viewModel = SearchViewModel()
     @State private var product: Product?
-    @State private var isActiveDetails: Bool = false
     
     var body: some View {
         VStack {
             HStack {
-                Text("Total result: \(viewModel.products.count)")
+                Text("Total results: \(viewModel.products.count)")
                     .padding([.top, .horizontal] ,15)
                 
                 Spacer()
@@ -25,38 +24,35 @@ struct SearchView: View {
             
             LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
                 ForEach(viewModel.products, id: \._id) { product in
-                    ZStack(alignment: .topTrailing) {
-                        NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
-                                       isActive: $isActiveDetails, label: {
-                                            EmptyView()
-                                       })
-                        
-                        ProductCellView(product: product)
-                            .frame(height: 250)
-                        
-                        Button(action: {
-                            if product.isLiked {
-                                self.product = product
-                            } else {
-                                viewModel.addToFavorite(product)
-                            }
-                        }, label: {
-                            Image(systemName: SFSymbols.heartFill)
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(product.isLiked ? .red: .gray)
-                                .padding(8)
+                    NavigationLink(
+                        destination:
+                            FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                        label: {
+                            ZStack(alignment: .topTrailing) {
+                                ProductCellView(product: product)
+                                    .frame(height: 250)
                                 
-                        })
-                    }
-                    .onAppear(perform: {
-                        if product == viewModel.products.last {
-                            viewModel.isLastRow = true
-                        }
+                                Button(action: {
+                                    if product.isLiked {
+                                        self.product = product
+                                    } else {
+                                        viewModel.addToFavorite(product)
+                                    }
+                                }, label: {
+                                    Image(systemName: SFSymbols.heartFill)
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(product.isLiked ? .red: .gray)
+                                        .padding(8)
+                                        
+                                })
+                            }
+                            .onAppear(perform: {
+                                if product == viewModel.products.last {
+                                    viewModel.isLastRow = true
+                                }
+                            })
                     })
-                    .onTapGesture {
-                        isActiveDetails = true
-                    }
                 }
             }
             .prepareForLoadMore(loadMore: {
