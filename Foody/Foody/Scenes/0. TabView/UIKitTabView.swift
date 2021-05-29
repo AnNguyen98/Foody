@@ -83,18 +83,21 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
     
     class Coordinator: NSObject, UITabBarControllerDelegate {
         var parent: TabBarController
+        var oldValue: Int = 0
 
         init(_ tabBarController: TabBarController) {
             self.parent = tabBarController
+            self.oldValue = tabBarController.selectedIndex
             super.init()
             NotificationCenter.default.addObserver(self, selector: #selector(onDidSelectedTab), name: .didSelectedTab, object: nil)
         }
         
         @objc private func onDidSelectedTab(_ notification: Notification) {
             if let selectedIndex = notification.object as? Int,
-               selectedIndex < parent.controllers.count, parent.selectedIndex == selectedIndex {
+               selectedIndex < parent.controllers.count, oldValue == selectedIndex {
                 popToRootOrScrollUp(on: parent.controllers[selectedIndex])
             }
+            oldValue = parent.selectedIndex
         }
         
         func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

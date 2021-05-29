@@ -104,7 +104,8 @@ final class ProductDetailsViewModel: ViewModel, ObservableObject {
         }
         let comment = Comment(
             productId: product._id,
-            userId: product.restaurantId, username: user.username,
+            userId: product.restaurantId,
+            username: user.username,
             imageProfileBase64: user.imageProfileBase64,
             content: commentText.trimmed
         )
