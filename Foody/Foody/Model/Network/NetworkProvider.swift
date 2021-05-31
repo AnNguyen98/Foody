@@ -13,6 +13,8 @@ import Foundation
 struct NetworkProvider {
     static var shared: NetworkProvider = NetworkProvider()
     
+    static var isRefreshToken: Bool = false
+    
     private var provider = MoyaProvider<Router>(plugins: [NetworkLoggerPlugin()])
     private init() { }
     
@@ -22,6 +24,9 @@ struct NetworkProvider {
                 switch result {
                 case .success(let response):
                     if 400...499 ~= response.statusCode {
+                        if response.statusCode == 401 {
+                            promise(.failure(.expiredToken))
+                        }
                         promise(.failure(.unknow(response.messageError)))
                     } else {
                         promise(.success(response.data))
@@ -36,5 +41,21 @@ struct NetworkProvider {
         .retry(Constants.RETRYTIME)
         .subscribe(on: DispatchQueue.global())
         .eraseToAnyPublisher()
+    }
+    
+    func refreshToken(completion: @escaping (MoyaError?) -> Void) {
+        NetworkProvider.isRefreshToken = true
+        provider.request(.refreshToken) { (result) in
+            switch result {
+            case .success(let response):
+                NetworkProvider.isRefreshToken = false
+                if let json = response.data.toJSON() as? [String: Any] {
+                    Session.shared.accessToken = json["accessToken"] as? String
+                }
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@
 
 import Moya
 
-enum CommonError: Error, Identifiable {
+enum CommonError: Error, Identifiable, Equatable {
     case invalidData
     case invalidInputData
     case invalidJSONFormat
@@ -21,11 +21,14 @@ enum CommonError: Error, Identifiable {
     case invalidAreaCode
     case timeout
     case unknow(String)
+    case expiredToken
     
     var id: String { UUID().uuidString }
     
     var description: String {
         switch self {
+        case .expiredToken:
+            return "Token is expired."
         case .timeout:
             return "Request timeout."
         case .apiKey:

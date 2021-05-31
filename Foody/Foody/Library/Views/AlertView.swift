@@ -29,6 +29,9 @@ struct AlertView<Item>: View where Item: Identifiable {
                     presentationMode.wrappedValue.dismiss()
                     dismiss()
                     (item as? PopupContent)?.action?()
+                    if let error = item as? CommonError, error == .expiredToken {
+                        makeRoot(.login)
+                    }
                 }, label: {
                     Text(buttonTitle)
                         .bold(size: 17)

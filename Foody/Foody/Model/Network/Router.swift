@@ -27,6 +27,7 @@ enum Router {
     case getFavorites, newFavorite(Parameters), deleteFavorite(String)
     
     // Common
+    case refreshToken
     case getProduct(String)
     case getComments(String)
     case getOrders
@@ -63,6 +64,9 @@ extension Router: TargetType {
     
     var path: String {
         switch self {
+        case .refreshToken:
+            return "account/token/refresh"
+        
         case .getComments:
             return "/product/comments"
         case .comment:
@@ -115,7 +119,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
+        case .refreshToken, .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
             return .post
         case .updateProduct, .updatePassword, .verifyOrder, .readNotification, .voteProduct, .voteRestaurant:
             return .put
@@ -167,6 +171,9 @@ extension Router: TargetType {
         
         case .getFavorites, .getOrders, .getNotifications, .me:
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
+        
+        case .refreshToken:
+            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
         }
     }
     

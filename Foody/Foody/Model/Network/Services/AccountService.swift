@@ -87,3 +87,11 @@ final class AccountService: AccountFetchable {
         try? Auth.auth().signOut()
     }
 }
+
+extension AccountService {
+    static func refreshToken() -> AnyPublisher<LoginResponse, CommonError>  {
+        NetworkProvider.shared.request(.refreshToken)
+            .decode(type: LoginResponse.self)
+            .eraseToAnyPublisher()
+    }
+}
