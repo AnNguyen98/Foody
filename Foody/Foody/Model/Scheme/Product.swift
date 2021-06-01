@@ -43,6 +43,8 @@ struct Product: Codable {
     var address: String = ""
     
     var votes: [String: Int]?
+    
+    var timeCreated: String? = Date().dateTimeString()
 }
 
 extension Product {

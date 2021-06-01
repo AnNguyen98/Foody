@@ -201,7 +201,7 @@ struct FoodDetailsView: View {
             )
         })
         .popover(isPresented: $isPresentedAppActivityView, content: {
-            AppActivityView(activityItems: [viewModel.product.name + " - " + viewModel.product.price.string + " vnđ"])
+            AppActivityView(activityItems: [viewModel.product.name + " - " + viewModel.product.price.kFormatted + " vnđ"])
         })
         .navigationBarHidden(true)
         .handleHidenKeyboard()

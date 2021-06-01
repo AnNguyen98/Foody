@@ -73,7 +73,6 @@ struct SearchView: View {
         })
         .navigationBarTitle("Search", displayMode: .automatic)
         .setupNavigationBar()
-        .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
