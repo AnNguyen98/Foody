@@ -84,6 +84,7 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
     class Coordinator: NSObject, UITabBarControllerDelegate {
         var parent: TabBarController
         var oldValue: Int = 0
+        var numberOfTap: Int = 0
 
         init(_ tabBarController: TabBarController) {
             self.parent = tabBarController
@@ -95,6 +96,7 @@ fileprivate struct TabBarController: UIViewControllerRepresentable {
         @objc private func onDidSelectedTab(_ notification: Notification) {
             if let selectedIndex = notification.object as? Int,
                selectedIndex < parent.controllers.count, oldValue == selectedIndex {
+                numberOfTap += 1
                 popToRootOrScrollUp(on: parent.controllers[selectedIndex])
             }
             oldValue = parent.selectedIndex

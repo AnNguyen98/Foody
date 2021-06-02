@@ -22,17 +22,15 @@ struct FoodDetailsView: View {
                                     EmptyView()
                                })
                 VStack {
-                    if viewModel.product.productImages.isEmpty {
+                    if viewModel.product.imageUrls.isEmpty {
                         Image(nil)
                             .resizable()
                             .scaledToFill()
                             .frame(maxWidth: kScreenSize.width, minHeight: 358)
                     } else {
                         TabView {
-                            ForEach(viewModel.product.productImages, id: \.self) { data in
-                                Image(data)
-                                    .resizable()
-                                    .scaledToFill()
+                            ForEach(viewModel.product.imageUrls, id: \.self) { url in
+                                SDImageView(url: url)
                                     .frame(maxWidth: kScreenSize.width, minHeight: 358)
                                     .clipped()
                             }
@@ -142,8 +140,8 @@ struct FoodDetailsView: View {
                                 .border(cornerRadius: 20)
                             
                             Button(action: {
-                                viewModel.comment()
                                 hideKeyboard()
+                                viewModel.comment()
                             }, label: {
                                 Image(systemName: SFSymbols.paperplaneFill)
                                     .resizable()
@@ -155,11 +153,11 @@ struct FoodDetailsView: View {
                         }
                         .padding([.bottom, .horizontal])
                     }
-                    .padding(.bottom, viewModel.comments.isEmpty ? 15: 30)
+                    .padding(.bottom, viewModel.comments.isEmpty ? 0: 10)
                 }
                 .regular(size: 15)
                 .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
-                .offset(y: -viewModel.keyboardHeight - (viewModel.keyboardHeight == 0 ? 0.0: 10))
+                .offset(y: -viewModel.keyboardHeight)
                 .animation(.easeInOut(duration: 0.4))
             }
             .ignoresSafeArea()
@@ -201,7 +199,11 @@ struct FoodDetailsView: View {
             )
         })
         .popover(isPresented: $isPresentedAppActivityView, content: {
-            AppActivityView(activityItems: [viewModel.product.name + " - " + viewModel.product.price.kFormatted + " vnđ"])
+            AppActivityView(activityItems: [
+                    viewModel.product.name + " - " + viewModel.product.price.kFormatted + " vnđ",
+                    viewModel.product.imageUrls.first ?? ""
+                ]
+            )
         })
         .navigationBarHidden(true)
         .handleHidenKeyboard()

@@ -34,7 +34,7 @@ final class OrderViewModel: ViewModel, ObservableObject {
     func prepareOrderInfo() {
         order.username = user.username
         order.userId = user._id
-        order.userProfileBase64 = user.imageProfileBase64
+        order.userProfile = user.imageProfile
         order.phoneNumber = user.phoneNumber
         order.address = address
         order.count = itemCount

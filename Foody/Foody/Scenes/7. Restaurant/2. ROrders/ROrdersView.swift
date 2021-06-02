@@ -42,8 +42,7 @@ struct ROrdersView: View {
                                            })
                             
                             HStack {
-                                Image(order.userProfile, isProfile: true)
-                                    .resizable()
+                                SDImageView(url: order.userProfile, isProfile: true)
                                     .frame(width: 30, height: 30)
                                     .clipShape(Circle())
                                     .shadow(radius: 2)
@@ -65,9 +64,7 @@ struct ROrdersView: View {
                                 .padding(.vertical, 10)
                             
                             HStack(spacing: 10) {
-                                Image(order.product.productImages.first)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                SDImageView(url: order.product.imageUrls.first)
                                     .frame(width: 120, height: 150)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
 

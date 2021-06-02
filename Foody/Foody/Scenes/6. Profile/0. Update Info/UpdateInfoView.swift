@@ -79,7 +79,7 @@ struct UpdateInfoView: View {
                 .animation(.easeInOut(duration: 0.3))
                 
                 Button(action: {
-                    viewModel.updateInfo()
+                    viewModel.updateProfile()
                 }, label: {
                     Text("Update")
                         .bold(size: 18)

@@ -52,10 +52,10 @@ extension Router: TargetType {
     }
     
     var baseURL: URL {
-        let baseURLString: String = "https://flask-fast-food.herokuapp.com" / version
-//        #if DEBUG
-//        baseURLString = "http://127.0.0.1:5000" / version
-//        #endif
+        var baseURLString: String = "https://foody-app-final.herokuapp.com" / version // "https://flask-fast-food.herokuapp.com" / version
+        #if DEBUG
+        baseURLString = "http://127.0.0.1:5000" / version
+        #endif
         guard let url = URL(string: baseURLString) else {
             fatalError("baseURL could not be configured.")
         }

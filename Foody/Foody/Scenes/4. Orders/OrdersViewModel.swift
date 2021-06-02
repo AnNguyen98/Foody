@@ -11,7 +11,6 @@ import SwifterSwift
 
 final class OrdersViewModel: ViewModel, ObservableObject {
     @Published var cancelOrder: Order?
-    @Published var searchText: String = ""
     @Published var selectedIndex = 0
     @Published var orders: [[Order]] = []
     
@@ -40,7 +39,7 @@ final class OrdersViewModel: ViewModel, ObservableObject {
         [OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]
             .forEach({ status in
                 let processingOrders = prepareOrders.filter({ OrderStatus(rawValue: $0.status) == status })
-                                                    .sorted(by: { $0.orderTime < $1.orderTime })
+                                                    .sorted(by: { $0.orderTime > $1.orderTime })
                 self.orders.append(processingOrders)
                 prepareOrders.removeAll(processingOrders)
         })
@@ -98,6 +97,7 @@ final class OrdersViewModel: ViewModel, ObservableObject {
             } receiveValue: { (_) in
                 var order: Order = order
                 order.status = OrderStatus.canceled.rawValue
+                
                 self.ordersData.removeAll(order)
                 self.ordersData.append(order)
             }

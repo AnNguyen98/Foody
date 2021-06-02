@@ -95,8 +95,7 @@ struct RestaurantDetailsView: View {
                                 destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
                                 label: {
                                     VStack(alignment: .leading) {
-                                        Image(product.productImages.first)
-                                            .resizable()
+                                        SDImageView(url: product.imageUrls.first)
                                             .frame(width: kScreenSize.width * 343 / 380, height: 160)
                                             .clipped()
                                         

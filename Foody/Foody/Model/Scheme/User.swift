@@ -31,7 +31,7 @@ struct User: Codable, UserInfomation, DefaultsSerializable {
     
     var age: Int = 0
     
-    var imageProfileBase64: String = ""
+    var imageProfile: String = ""
     
     var email: String = ""
         
@@ -53,7 +53,4 @@ extension User {
         status == AccountStatus.active.rawValue
     }
     
-    var imageProfile: Data?  {
-        Data(base64Encoded: imageProfileBase64)
-    }
 }

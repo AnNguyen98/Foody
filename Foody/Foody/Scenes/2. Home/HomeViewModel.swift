@@ -14,6 +14,7 @@ final class HomeViewModel: ViewModel, ObservableObject {
     override init() {
         super.init()
         getHomeData()
+//        loginFirebase()
     }
     
     func foodDetailViewModel(_ product: Product) -> ProductDetailsViewModel {
@@ -22,6 +23,16 @@ final class HomeViewModel: ViewModel, ObservableObject {
     
     func restaurantDetailViewModel(_ restaurant: Restaurant) -> RestaurantDetailsViewModel {
         RestaurantDetailsViewModel(id: restaurant._id)
+    }
+    
+    func loginFirebase() {
+        FirebaseTask.loginFirebase()
+            .sink { (completion) in
+                print(completion)
+            } receiveValue: { (value) in
+                print("DEBUG - LOGIN FIREBASE SUCCESS")
+            }
+            .store(in: &subscriptions)
     }
     
     func getHomeData() {

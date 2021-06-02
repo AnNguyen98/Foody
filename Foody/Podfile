@@ -10,7 +10,7 @@ target 'Foody' do
   pod 'Moya', '~> 14.0'
  
   pod 'ImagePicker'
-  # pod 'SDWebImageSwiftUI'
+  pod 'SDWebImageSwiftUI'
   pod 'ToastUI'
   pod 'SwifterSwift', '~> 5.2.0'
   pod 'SwiftyUserDefaults', '~> 5.0'
@@ -27,6 +27,8 @@ target 'Foody' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Crashlytics'
+  pod 'Firebase/Storage'
+
   
   # Combine
   pod 'CombineExt'

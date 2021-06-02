@@ -11,8 +11,7 @@ struct CommentView: View {
     var comment = Comment()
     var body: some View {
         HStack(alignment: .top) {
-            Image(comment.imageProdile, isProfile: true)
-                .resizable()
+            SDImageView(url: comment.imageProfile, isProfile: true)
                 .frame(width: 30, height: 30)
                 .clipShape(Circle())
             

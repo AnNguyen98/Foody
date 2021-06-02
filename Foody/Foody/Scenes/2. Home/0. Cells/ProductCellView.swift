@@ -17,9 +17,7 @@ struct ProductCellView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 5) {
-                Image(product.productImages.first)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                SDImageView(url: product.imageUrls.first)
                     .clipShape(RoundedRectangle(cornerRadius: 0))
                     .frame(width: geometry.size.width, height: geometry.size.height * 2 / 3)
                     .clipped()

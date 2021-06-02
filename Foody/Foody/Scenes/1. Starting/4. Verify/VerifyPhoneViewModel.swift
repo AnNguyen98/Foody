@@ -108,7 +108,7 @@ extension VerifyPhoneViewModel {
             error = CommonError.unknow("OTP code confirmations exceeded!")
             return
         }
-        FirebaseAuth.verifyPhoneNumber(phoneNumber: phoneNumber)
+        FirebaseTask.verifyPhoneNumber(phoneNumber: phoneNumber)
             .sink { (completion) in
                 if case .failure(let error) = completion {
                     self.error = error
@@ -121,7 +121,7 @@ extension VerifyPhoneViewModel {
     }
     
     func handleVerifyOTP() {
-        FirebaseAuth.signInAuth(verificationID: verificationID, code: code)
+        FirebaseTask.signInAuth(verificationID: verificationID, code: code)
             .sink { (completion) in
                 if case .failure(let error) = completion {
                     self.error = error

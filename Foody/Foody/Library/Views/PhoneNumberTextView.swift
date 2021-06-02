@@ -23,13 +23,15 @@ struct PhoneNumberTextView: UIViewRepresentable {
         textField.leftViewMode = .always
         textField.maxDigits = 9
         textField.withPrefix = true
-        textField.placeholder = PartialFormatter().formatPartial("+84399879847")
+        textField.placeholder = ""//PartialFormatter().formatPartial("+84399879847")
         textField.numberPlaceholderColor = .gray
+        textField.addTarget(context.coordinator, action: #selector(context.coordinator.textChange(_:)), for: .editingChanged)
         return textField
     }
  
     func updateUIView(_ uiView: PhoneNumberTextField, context: Context) {
         uiView.text = phoneNumber
+        uiView.numberPlaceholderColor = .gray
     }
     
     func makeCoordinator() -> Coordinator {
@@ -46,6 +48,10 @@ struct PhoneNumberTextView: UIViewRepresentable {
         func textFieldDidEndEditing(_ textField: UITextField) {
             self.phoneNumberTextView.phoneNumber = textField.text ?? ""
             print("DEBUG - PhoneNumberTextView", textField.text ?? "")
+        }
+        
+        @objc func textChange(_ textField: UITextField) {
+            self.phoneNumberTextView.phoneNumber = textField.text ?? ""
         }
     }
 }

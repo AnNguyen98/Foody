@@ -33,8 +33,7 @@ struct OrdersView: View {
                                            })
                             
                             HStack {
-                                Image("no-user")
-                                    .resizable()
+                                SDImageView(url: order.userProfile, isProfile: true)
                                     .frame(width: 30, height: 30)
                                     .clipShape(Circle())
                                     .shadow(radius: 2)
@@ -56,8 +55,7 @@ struct OrdersView: View {
                                 .padding(.vertical, 10)
                             
                             HStack(spacing: 10) {
-                                Image(order.product.productImages.first)
-                                    .resizable()
+                                SDImageView(url: order.product.imageUrls.first)
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 120, height: 150)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -121,6 +119,7 @@ struct OrdersView: View {
                 .onRefresh {
                     viewModel.getOrders()
                 }
+                .addEmptyView(isEmpty: viewModel.currentOrders.isEmpty && !viewModel.isLoading)
             }
             .navigationBarTitle("My Orders", displayMode: .inline)
             .setupNavigationBar()

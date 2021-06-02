@@ -55,12 +55,9 @@ struct OrderView: View {
                     .opacity(0.6)
                 
                 HStack {
-                    Image(viewModel.product.productImages.first)
-                        .resizable()
-                        .scaledToFill()
+                    SDImageView(url: viewModel.product.imageUrls.first)
                         .frame(maxWidth: 130 * scale, minHeight: 130 * scale)
                         .clipped()
-                    
                     
                     VStack(alignment: .leading, spacing: 15) {
                         Text(viewModel.product.name)

@@ -27,9 +27,9 @@ struct Restaurant: Codable, DefaultsSerializable {
 }
 
 extension Restaurant {
-    var dataImages: [Data]  {
-        images.compactMap({ Data(base64Encoded: $0)})
-    }
+//    var dataImages: [Data]  {
+//        images.compactMap({ Data(base64Encoded: $0)})
+//    }
 }
 
 

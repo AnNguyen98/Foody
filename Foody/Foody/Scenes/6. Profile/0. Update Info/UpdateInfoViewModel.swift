@@ -30,28 +30,48 @@ final class UpdateInfoViewModel: ViewModel, ObservableObject {
     
     override init() {
         super.init()
-        
         username = user.username
         address = user.address
         age = user.age.string
         isMale = user.gender
         address = user.address
-        images = [user.imageProfile].compactMap({ $0 }) .compactMap({ UIImage(data: $0)})
+                
+        DispatchQueue.main.async {
+            self.images = [self.user.imageProfile]
+                .compactMap({ URL(string: $0) })
+                .compactMap({ try? Data(contentsOf: $0) })
+                .compactMap({ UIImage(data: $0)})
+        }
         
         description = restaurant.descriptions
     }
     
-    func updateInfo() {
+    func updateProfile() {
+        guard let data = images.first?.pngData() else {
+            self.error = .invalidInputData
+            return
+        }
+        isLoading = true
+        FirebaseTask.uploadFile(data: data, name: user.imageProfile.url?.lastPathComponent ?? "")
+            .sink { (completion) in
+                if case .failure(let error) = completion {
+                    self.isLoading = false
+                    self.error = error
+                }
+            } receiveValue: { (url) in
+                self.updateInfo(profileUrl: url.absoluteString)
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func updateInfo(profileUrl: String) {
         var params: Parameters = [
             "username"  : username,
             "address"   : address,
             "gender"    : isMale,
             "age"       : Int(age) ?? 0,
+            "imageProfile": profileUrl
         ]
-        
-        if let image = images.first?.pngData()?.base64EncodedString() {
-            params["imageProfileBase64"] = image
-        }
         if !description.isEmpty {
             params["descriptions"] = description
         }
@@ -64,9 +84,9 @@ final class UpdateInfoViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (res) in
-                self.isUpdated = true
                 Session.shared.user = res.user
                 Session.shared.restaurant = res.restaurant
+                self.isUpdated = true
             }
             .store(in: &subscriptions)
     }

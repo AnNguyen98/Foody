@@ -27,7 +27,7 @@ struct RAddProductView: View {
                     )
                     
                     if viewModel.images.isEmpty {
-                        Image("default-thumbnail")
+                        Image(nil)
                             .resizable()
                             .scaledToFill()
                             .frame(height: 200)
@@ -129,7 +129,7 @@ struct RAddProductView: View {
                         
                         Button(action: {
                             if viewModel.isEditProduct {
-                                viewModel.updateProduct()
+                                viewModel.handleUpdateProduct()
                             } else {
                                 viewModel.prepareProduct()
                                 isPresentedProductDetails.toggle()

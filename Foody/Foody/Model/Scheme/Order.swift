@@ -18,7 +18,7 @@ struct Order: Codable {
     
     var username: String = ""
     
-    var userProfileBase64: String = ""
+    var userProfile: String = ""
     
     var product: Product = Product()
     
@@ -63,10 +63,6 @@ extension Order: Identifiable {
     
     var paymented: Bool {
         status == OrderStatus.paymented.rawValue
-    }
-    
-    var userProfile: Data? {
-        Data(base64Encoded: userProfileBase64)
     }
 }
 

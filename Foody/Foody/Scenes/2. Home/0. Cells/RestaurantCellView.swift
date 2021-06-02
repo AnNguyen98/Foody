@@ -14,7 +14,7 @@ struct RestaurantCellView: View {
         VStack(alignment: .leading, spacing: 5) {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 13) {
-                    if restaurant.dataImages.isEmpty {
+                    if restaurant.images.isEmpty {
                         Image(nil)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
@@ -22,10 +22,8 @@ struct RestaurantCellView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                         
                     } else {
-                        ForEach(restaurant.dataImages, id: \.self) { data in
-                            Image(data)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                        ForEach(restaurant.images, id: \.self) { url in
+                            SDImageView(url: url)
                                 .frame(width: 155 * scale, height: 90 * scale)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }

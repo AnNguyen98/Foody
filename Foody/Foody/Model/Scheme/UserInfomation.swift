@@ -12,7 +12,7 @@ protocol UserInfomation {
     
     var username: String { get set }
     
-    var imageProfileBase64: String { get set }
+    var imageProfile: String { get set }
     
     var email: String { get set }
         

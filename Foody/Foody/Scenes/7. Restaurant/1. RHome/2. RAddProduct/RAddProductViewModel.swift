@@ -43,7 +43,10 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         description = product.descriptions
         productName = product.name
         isDrinkSelected = product.isDrink
-        images = product.productImages.compactMap({ UIImage(data: $0) })
+        
+        DispatchQueue.main.async {
+            self.images = product.imageUrls.compactMap({ URL(string: $0) }).compactMap({ try? UIImage(url: $0) })
+        }
         
         isEditProduct = product.name != ""
     }
@@ -56,10 +59,30 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         product.descriptions = description
         product.type = type
         product.price = Int(self.price) ?? 0
-        product.imageBase64Encodings = images.compactMap({ $0.pngBase64String() })
     }
     
-    func updateProduct() {
+    func handleUpdateProduct() {
+        let dataImages = images.compactMap({ $0.pngData() })
+        let lastPathComponents = product.imageBase64Encodings.compactMap({ $0.url?.lastPathComponent })
+        var images: [(Data, String)] = []
+        for index in 0..<dataImages.count {
+            images.append((dataImages[index], lastPathComponents[safeIndex: index] ?? ""))
+        }
+        
+        FirebaseTask.uploadImages(images: [])
+            .sink { (completion) in
+                if case .failure(let error) = completion {
+                    self.isLoading = false
+                    self.error = error
+                }
+            } receiveValue: { (urls) in
+                self.product.imageBase64Encodings = urls.compactMap({ $0.absoluteString })
+                self.updateProduct()
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func updateProduct() {
         prepareProduct()
         
         isLoading = true

@@ -7,6 +7,48 @@
 
 import SwiftUI
 import SwiftUIX
+import PhoneNumberKit
+
+struct MultilineTextView: UIViewRepresentable {
+
+    @Binding var text: String
+    @Binding var textStyle: UIFont.TextStyle
+    var textColor: UIColor = .white
+
+    func makeUIView(context: Context) -> UITextView {
+        let textView = UITextView()
+        textView.delegate = context.coordinator
+        textView.font = UIFont.preferredFont(forTextStyle: textStyle)
+        textView.autocapitalizationType = .sentences
+        textView.textColor = textColor
+        textView.backgroundColor = .clear
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
+
+        return textView
+    }
+
+    func updateUIView(_ uiView: UITextView, context: Context) {
+        uiView.text = text
+        uiView.font = UIFont.preferredFont(forTextStyle: textStyle)
+    }
+    
+    func makeCoordinator() -> Coodinator {
+        Coodinator(self)
+    }
+    
+    class Coodinator: NSObject, UITextViewDelegate {
+        var textView: MultilineTextView
+        
+        init(_ textView: MultilineTextView) {
+            self.textView = textView
+        }
+        
+        func textViewDidChange(_ textView: UITextView) {
+            self.textView.text = textView.text
+        }
+    }
+}
 
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
@@ -48,9 +90,18 @@ struct RegisterView: View {
                                             systemNameImage: "house"
                             )
                             
-                            TextView("Descriptions...", text: $viewModel.userInfo.description)
-                                .frame(minHeight: 100, maxHeight: 150)
-                                .padding(.vertical)
+                            ZStack(alignment: .topLeading) {
+                                Text("Descriptions...")
+                                    .foregroundColor(.gray)
+                                    .hidden(!viewModel.userInfo.description.isEmpty)
+                                    .padding(.top, 10)
+                                    .padding(.leading, 2)
+                                
+                                MultilineTextView(text: $viewModel.userInfo.description, textStyle: .constant(.body))
+                                    .frame(minHeight: 100, maxHeight: 150)
+                            }
+                            .padding()
+                            .border(cornerRadius: 5)
                         }
                     }
                     
@@ -81,9 +132,15 @@ struct RegisterView: View {
                                         placeholder: Text("Email").foregroundColor(.gray)
                         )
                         
-                        PhoneNumberTextView(phoneNumber: $viewModel.userInfo.phoneNumber)
+                        ZStack(alignment: .leading) {
+                            Text(PartialFormatter().formatPartial("+84399879847"))
+                                .foregroundColor(.gray)
+                                .padding(.leading, 29)
+                                .hidden(!viewModel.userInfo.phoneNumber.isEmpty)
+                            
+                            PhoneNumberTextView(phoneNumber: $viewModel.userInfo.phoneNumber)
+                        }
                     }
-                    
                     
                     Section(header: Text(""), footer: Text("")) {
                         TextFieldCustom(text: $viewModel.userInfo.password,
@@ -139,7 +196,7 @@ struct RegisterView: View {
         .addLoadingIcon($viewModel.isLoading)
         .handleHidenKeyboard()
         .statusBarStyle(.lightContent)
-        .regular(size: 17)
+        .font(.body)
         .navigationBarHidden(true)
     }
 }

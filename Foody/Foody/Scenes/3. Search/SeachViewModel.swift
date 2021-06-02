@@ -38,10 +38,8 @@ final class SearchViewModel: ViewModel, ObservableObject {
             products.removeAll()
             return
         }
-        isLoading = true
         CommonServices.searchProducts(productName: searchText, page: page)
             .sink { (completion) in
-                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }

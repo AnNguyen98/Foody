@@ -17,7 +17,7 @@ struct RFoodDetailsView: View {
         ZStack(alignment: .topTrailing) {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    if viewModel.images.isEmpty {
+                    if viewModel.product.imageUrls.isEmpty {
                         Image(nil)
                             .resizable()
                             .frame(maxWidth: kScreenSize.width, maxHeight: 358)
@@ -25,9 +25,8 @@ struct RFoodDetailsView: View {
                             .background(Color.red)
                     } else {
                         TabView {
-                            ForEach(viewModel.images, id: \.self) { data in
-                                Image(data)
-                                    .resizable()
+                            ForEach(viewModel.product.imageUrls, id: \.self) { url in
+                                SDImageView(url: url)
                                     .frame(maxWidth: kScreenSize.width, maxHeight: 358)
                                     .scaledToFill()
                             }

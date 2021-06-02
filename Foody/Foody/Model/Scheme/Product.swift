@@ -77,7 +77,11 @@ extension Product: Hashable {
 }
 
 extension Product {
-    var productImages: [Data] {
+    var imageUrls: [String] {
+        imageBase64Encodings
+    }
+    
+    private var productImages: [Data] {
         imageBase64Encodings.compactMap({ Data(base64Encoded: $0) })
     }
     

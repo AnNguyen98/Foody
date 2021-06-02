@@ -19,9 +19,6 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     var action: DetailsAction = .normal
     var product: Product = Product()
     var comments: [Comment] = []
-    var images: [Data] {
-        product.productImages
-    }
     
     var previewViewModel: RAddProductViewModel {
         RAddProductViewModel(product)

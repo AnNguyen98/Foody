@@ -44,8 +44,7 @@ struct ProfileView: View {
 //                        .hidden(!viewModel.restaurant.dataImages.isEmpty)
 
                     VStack {
-                        Image(viewModel.user.imageProfile, isProfile: true)
-                            .resizable()
+                        SDImageView(url: viewModel.user.imageProfile, isProfile: true)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
                             .shadow(radius: 2)

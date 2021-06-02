@@ -16,17 +16,11 @@ struct Comment: Codable {
     
     var username: String = ""
     
-    var imageProfileBase64: String = ""
+    var imageProfile: String = ""
     
     var content: String = ""
     
     var time: String = Date().dateTimeString()
     
     var voteCount: Int?
-}
-
-extension Comment {
-    var imageProdile: Data? {
-        Data(base64Encoded: imageProfileBase64)
-    }
 }

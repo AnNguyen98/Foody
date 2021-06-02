@@ -23,7 +23,7 @@ struct RHomeView: View {
                         label: {
                             VStack(alignment: .leading, spacing: 5) {
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    if product.productImages.isEmpty {
+                                    if product.imageUrls.isEmpty {
                                         Image(nil)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
@@ -32,10 +32,8 @@ struct RHomeView: View {
                                         
                                     } else {
                                         LazyHStack {
-                                            ForEach(product.productImages, id: \.self) { data in
-                                                Image(data)
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
+                                            ForEach(product.imageUrls, id: \.self) { url in
+                                                SDImageView(url: url)
                                                     .frame(width: kScreenSize.width - 20, height: 150 * scale)
                                                     .clipShape(RoundedRectangle(cornerRadius: 0))
                                             }
