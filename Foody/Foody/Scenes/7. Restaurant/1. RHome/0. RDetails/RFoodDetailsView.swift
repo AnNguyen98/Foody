@@ -29,6 +29,7 @@ struct RFoodDetailsView: View {
                                 SDImageView(url: url)
                                     .frame(maxWidth: kScreenSize.width, maxHeight: 358)
                                     .scaledToFill()
+                                    .clipped()
                             }
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))

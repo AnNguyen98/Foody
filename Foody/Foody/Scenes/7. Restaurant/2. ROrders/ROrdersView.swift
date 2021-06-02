@@ -140,7 +140,7 @@ struct ROrdersView: View {
                 .onRefresh {
                     viewModel.getOrders()
                 }
-                
+                .addEmptyView(isEmpty: viewModel.currentOrders.isEmpty && !viewModel.isLoading)
             }
             .navigationSearchBar({
                 SearchBar("Enter id of order...", text: $viewModel.searchText)

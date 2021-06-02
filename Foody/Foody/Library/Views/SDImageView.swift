@@ -11,10 +11,11 @@ import SDWebImageSwiftUI
 struct SDImageView: View {
     var url: String?
     var isProfile: Bool = false
+    
     var body: some View {
-        AnimatedImage(url: URL(string: url ?? ""), options: [.progressiveLoad, .delayPlaceholder])
+        WebImage(url: URL(string: url ?? ""), options: [])
             .resizable()
-            .placeholder(UIImage(named: isProfile ? "no-user": "default-thumbnail"))
+            .placeholder(Image(isProfile ? "no-user": "default-thumbnail"))
             .indicator(.activity)
             .transition(.fade(duration: 0.5))
             .aspectRatio(contentMode: .fill)
