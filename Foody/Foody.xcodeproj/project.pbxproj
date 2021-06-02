@@ -10,6 +10,7 @@
 		804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42209B1F55409F5741708C67 /* Pods_Foody.framework */; };
 		8E0F0F2725EB45700060C2A9 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0F0F2625EB45700060C2A9 /* RegisterView.swift */; };
 		8E0FF0A62641BE6B0013B5CC /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */; };
+		8E12EFF02667710B0049408E /* Keyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E12EFEF2667710B0049408E /* Keyword.swift */; };
 		8E29E2A22639AAD6008F67B3 /* ProfileButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */; };
 		8E3170402625FB400085AB4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31703F2625FB400085AB4E /* User.swift */; };
 		8E40D91925DEB90200E73E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E40D91825DEB90200E73E20 /* AppDelegate.swift */; };
@@ -169,6 +170,7 @@
 		8E0F0F2625EB45700060C2A9 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		8E0FF083264199AC0013B5CC /* UIScrollView_InfiniteScroll.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = UIScrollView_InfiniteScroll.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E0FF0A52641BE6B0013B5CC /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		8E12EFEF2667710B0049408E /* Keyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyword.swift; sourceTree = "<group>"; };
 		8E29E2A12639AAD6008F67B3 /* ProfileButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButtonView.swift; sourceTree = "<group>"; };
 		8E31703F2625FB400085AB4E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8E40D91525DEB90200E73E20 /* Foody.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foody.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -894,6 +896,7 @@
 				8E5DAD1F263CED5000234F92 /* Order.swift */,
 				8E94CFAD263DBB1600155D59 /* Notifications.swift */,
 				8E5DAD11263CE9D200234F92 /* UserInfomation.swift */,
+				8E12EFEF2667710B0049408E /* Keyword.swift */,
 				8E5DAD27263CEDA200234F92 /* Observable Objects */,
 			);
 			path = Scheme;
@@ -1281,6 +1284,7 @@
 				B51E0B3C26310DF10051A892 /* Publisher.swift in Sources */,
 				B5055B3F26045C84003DE804 /* IndefiniteProgressView.swift in Sources */,
 				B5FC92A626493E9B0037632F /* UpdateInfoView.swift in Sources */,
+				8E12EFF02667710B0049408E /* Keyword.swift in Sources */,
 				8E5DACFD263B92E200234F92 /* TextView.swift in Sources */,
 				B507FF2D2632FA96003C54DE /* View.swift in Sources */,
 				8E4C3F7C2642E73E00E69662 /* PopularRestaurantsViewModel.swift in Sources */,

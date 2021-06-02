@@ -34,6 +34,7 @@ enum Router {
     case getNotifications, readNotification(id: String) // SWIP
     
     // Restaurant
+    case getKeywords(String)
     case getProducts(Int), newProduct(Parameters), deleteProduct(String), updateProduct(Parameters)
     case searchProducts(productName: String, page: Int)
     case getChartInfo(Int) //month
@@ -100,7 +101,9 @@ extension Router: TargetType {
             return "/product"
             
         case .searchProducts:
-            return "search/products"
+            return "/search/products"
+        case .getKeywords:
+            return "/keywords"
             
         case .getChartInfo:
             return "/charts"
@@ -174,6 +177,9 @@ extension Router: TargetType {
         
         case .refreshToken:
             return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        
+        case .getKeywords(let text):
+            return .requestParameters(parameters: ["text": text], encoding: URLEncoding.queryString)
         }
     }
     

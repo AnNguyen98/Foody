@@ -96,13 +96,23 @@ struct RHomeView: View {
                 refreshData()
             }
             .navigationSearchBar({
-                SearchBar("Enter product name...", text: $viewModel.searchText)
-                    .showsCancelButton(true)
-                    .searchBarStyle(.default)
-                    .returnKeyType(.search)
-                    .onCancel {
-                        viewModel.searchText = ""
-                    }
+                SearchBar("Enter product name...", text: $viewModel.searchText,
+                          onEditingChanged: { isEditing in
+                             viewModel.isHiddenKeywords = !isEditing
+                          },
+                          onCommit: {
+                             let searchText = viewModel.searchText.trimmed
+                             if !searchText.isEmpty {
+                                viewModel.handleSearch(text: searchText)
+                             }
+                          }
+                )
+                .showsCancelButton(true)
+                .searchBarStyle(.default)
+                .returnKeyType(.search)
+                .onCancel {
+                    viewModel.searchText = ""
+                }
             })
             .navigationBarItems(
                 trailing: NotificationView(action: {
@@ -119,6 +129,20 @@ struct RHomeView: View {
             .navigationBarTitle("Home", displayMode: .inline)
             
             FloatButtonView()
+            
+            List {
+                ForEach(0..<viewModel.keywords.count, id: \.self) { index in
+                    let keyword = viewModel.keywords[index].keyword
+                    Text("\(keyword)")
+                        .onTapGesture {
+                            hideKeyboard()
+                            viewModel.handleSearch(text: keyword)
+                        }
+                }
+            }
+            .listStyle(PlainListStyle())
+            .hidden(viewModel.isHiddenKeywords)
+            
         }
         .statusBarStyle(.lightContent)
     }

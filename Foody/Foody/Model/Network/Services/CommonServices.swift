@@ -44,4 +44,10 @@ final class CommonServices {
             .decode(type: Order.self)
             .eraseToAnyPublisher()
     }
+    
+    static func getKeywords(text: String) -> AnyPublisher<[Keyword], CommonError> {
+        NetworkProvider.shared.request(.getKeywords(text))
+            .decode(type: [Keyword].self)
+            .eraseToAnyPublisher()
+    }
 }

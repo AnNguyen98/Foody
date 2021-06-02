@@ -16,6 +16,8 @@ final class RHomeViewModel: ViewModel, ObservableObject {
     @Published var searchResults: [Product] = []
     @Published var searchText: String = ""
     @Published var isLastRow: Bool = false
+    @Published var keywords: [Keyword] = []
+    @Published var isHiddenKeywords: Bool = true
     
     var displayProducts: [Product] {
         searchText.trimmed == "" ? products: searchResults
@@ -42,12 +44,24 @@ final class RHomeViewModel: ViewModel, ObservableObject {
             .removeDuplicates()
             .sink { (text) in
                 if text.isEmpty {
-                    self.searchResults.removeAll()
+                    self.keywords.removeAll()
                 } else {
-                    self.handleSearch()
+                    self.getKeywords()
                 }
         }
         .store(in: &subscriptions)
+    }
+    
+    func getKeywords() {
+        CommonServices.getKeywords(text: searchText)
+            .sink { (completion) in
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (keywords) in
+                self.keywords = keywords
+            }
+            .store(in: &subscriptions)
     }
     
     func getProducts(page: Int = 0) {
@@ -71,9 +85,12 @@ final class RHomeViewModel: ViewModel, ObservableObject {
             .store(in: &subscriptions)
     }
     
-    func handleSearch(page: Int = 0) {
-        CommonServices.searchProducts(productName: searchText, page: page)
+    func handleSearch(text: String, page: Int = 0) {
+        isLoading = true
+        searchResults.removeAll()
+        CommonServices.searchProducts(productName: text, page: page)
             .sink { (completion) in
+                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
