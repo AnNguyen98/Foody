@@ -35,9 +35,10 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         Date().month - currentMonth == 5
     }
     
-    override init() {
-        super.init()
-        getChartsInfo()
+    override var tabIndex: Int? { 2 }
+    
+    override func setupData() {
+        getChartsInfo(forceData: true)
     }
     
     func prepareData(_ charts: [ChartResponse], month: Int) {
@@ -60,8 +61,8 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         getChartsInfo()
     }
     
-    func getChartsInfo(month: Int = Date().month, isRefreshing: Bool = false) {
-        if !isRefreshing, let _ = growthValuesData[month], let _ = salesData[month] {
+    func getChartsInfo(month: Int = Date().month, isRefreshing: Bool = false, forceData: Bool = false) {
+        if !forceData, !isRefreshing, let _ = growthValuesData[month], let _ = salesData[month] {
             currentMonth = month
             return
         }

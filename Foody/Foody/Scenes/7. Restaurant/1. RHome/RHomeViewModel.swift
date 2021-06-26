@@ -27,8 +27,9 @@ final class RHomeViewModel: ViewModel, ObservableObject {
         !searchText.isEmpty ? false: isLastRow && nextPage
     }
     
-    override init() {
-        super.init()
+    override var tabIndex: Int? { 0 }
+    
+    override func setupData() {
         getProducts()
         setupObservers()
     }

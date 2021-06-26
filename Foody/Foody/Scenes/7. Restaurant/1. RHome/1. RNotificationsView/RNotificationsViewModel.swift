@@ -10,6 +10,11 @@ import Combine
 final class RNotificationsViewModel: ViewModel, ObservableObject {
     @Published var notifications: [Notifications] = []
     
+    func detailViewModel(_ noti: Notifications) -> RProductDetailsViewModel {
+        let product = Product(_id: noti.productId)
+        return RProductDetailsViewModel(product, action: .normal)
+    }
+    
     func getNotifications() {
         isLoading = true
         CommonServices.getNotifications()
@@ -19,7 +24,7 @@ final class RNotificationsViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (notifications) in
-                self.notifications = notifications.sorted(by: { $0.time < $1.time})
+                self.notifications = notifications.sorted(by: { $0.time > $1.time})
             }
             .store(in: &subscriptions)
     }

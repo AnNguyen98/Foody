@@ -96,7 +96,7 @@ struct RHomeView: View {
                 refreshData()
             }
             .navigationSearchBar({
-                SearchBar("Enter product name...", text: $viewModel.searchText,
+                SearchBar("Search...", text: $viewModel.searchText,
                           onEditingChanged: { isEditing in
                              viewModel.isHiddenKeywords = !isEditing
                           },
@@ -133,11 +133,18 @@ struct RHomeView: View {
             List {
                 ForEach(0..<viewModel.keywords.count, id: \.self) { index in
                     let keyword = viewModel.keywords[index].keyword
-                    Text("\(keyword)")
-                        .onTapGesture {
-                            hideKeyboard()
-                            viewModel.handleSearch(text: keyword)
-                        }
+                    HStack {
+                        Text("\(keyword)")
+                            .onTapGesture {
+                                hideKeyboard()
+                                viewModel.handleSearch(text: keyword)
+                            }
+                        
+                        Spacer()
+                        
+                        Image(systemName: SFSymbols.arrowUpLeft)
+                        
+                    }
                 }
             }
             .listStyle(PlainListStyle())

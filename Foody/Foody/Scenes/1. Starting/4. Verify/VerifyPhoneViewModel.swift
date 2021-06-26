@@ -173,7 +173,7 @@ extension VerifyPhoneViewModel {
         if case .register = action {
             return "Congratulations your account has been successfully created."
         }
-        return "Successful password reset."
+        return "Password reset successful."
     }
     
     var title: String {

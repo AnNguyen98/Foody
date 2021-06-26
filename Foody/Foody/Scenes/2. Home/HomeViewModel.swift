@@ -11,10 +11,10 @@ final class HomeViewModel: ViewModel, ObservableObject {
     var trendingProducts: [Product] = []
     var popularRestaurants: [Restaurant] = []
     
-    override init() {
-        super.init()
+    override var tabIndex: Int? { 0 }
+    
+    override func setupData() {
         getHomeData()
-//        loginFirebase()
     }
     
     func foodDetailViewModel(_ product: Product) -> ProductDetailsViewModel {

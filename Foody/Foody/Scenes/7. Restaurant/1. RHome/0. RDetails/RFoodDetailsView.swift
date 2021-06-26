@@ -74,7 +74,7 @@ struct RFoodDetailsView: View {
                         
                         HStack {
                             Spacer()
-                            
+
                             Button(action: {
                                 lineLimit = 0
                             }, label: {
@@ -82,6 +82,7 @@ struct RFoodDetailsView: View {
                                     .underline()
                             })
                         }
+                        .hidden(viewModel.product.descriptions.lines().count <= 5)
                         .opacity(lineLimit == 5
                                     && !viewModel.product.descriptions.isEmpty ? 1: 0)
                     }

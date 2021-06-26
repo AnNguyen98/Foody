@@ -10,46 +10,42 @@ import SwiftUI
 struct RNotificationsView: View {
     @StateObject private var viewModel = RNotificationsViewModel()
     @Binding var isActive: Bool
+    @State var isPresentedDetail: Bool = false
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.notifications, id: \._id) { notification in
-                        VStack(alignment: .leading) {
-                            HStack(spacing: 10) {
-                                Image(notification.userImage, isProfile: true)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 60 * scale, height: 60 * scale)
-                                    .clipShape(Circle())
-                                
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(notification.content)
-                                        .lineLimit(3)
-                                        .font(.system(size: 16))
+            List {
+                ForEach(viewModel.notifications, id: \._id) { notification in
+                    NavigationLink(
+                        destination: RFoodDetailsView(viewModel: viewModel.detailViewModel(notification)),
+                        label: {
+                            VStack(alignment: .leading) {
+                                HStack(spacing: 10) {
+                                    SDImageView(url: notification.userProfile, isProfile: true)
+                                        .frame(width: 60 * scale, height: 60 * scale)
+                                        .clipShape(Circle())
                                     
-                                    HStack {
-                                        Spacer()
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(notification.content)
+                                            .lineLimit(3)
+                                            .font(.system(size: 16))
                                         
-                                        Text(notification.time) //1h/ 1day
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.gray)
+                                        HStack {
+                                            Spacer()
+                                            
+                                            Text(notification.time) //1h/ 1day
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.gray)
+                                        }
                                     }
+                                    .padding(.top)
                                 }
-                                .padding(.top)
                             }
-                            .onTapGesture {
-//                                viewModel.markReadNotification(notification)
-                            }
-                            
-                            Divider()
                         }
-                    }
+                    )
                 }
-                .padding()
-                .font(.body)
             }
+            .listStyle(PlainListStyle())
             .navigationBarItems(
                 leading: Button(action: {
                     isActive.toggle()

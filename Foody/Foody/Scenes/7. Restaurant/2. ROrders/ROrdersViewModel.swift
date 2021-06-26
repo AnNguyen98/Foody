@@ -29,8 +29,9 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
         isSearching ? searchResults: orders[safeIndex: selectedIndex] ?? []
     }
     
-    override init() {
-        super.init()
+    override var tabIndex: Int? { 1 }
+    
+    override func setupData() {
         getOrders()
         
         $searchText.sink { (text) in

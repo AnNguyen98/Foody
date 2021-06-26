@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let didSelectedTab = Notification.Name("didSelectedTab")
+    static let refreshTab = Notification.Name("refreshTab")
 }

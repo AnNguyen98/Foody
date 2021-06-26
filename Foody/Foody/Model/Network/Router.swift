@@ -184,10 +184,6 @@ extension Router: TargetType {
     }
     
     var headers: [String : String]? {
-//        {
-//            "email": "theannguyen98@gmail.com",
-//            "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRoZWFubmd1eWVuOThAZ21haWwuY29tIiwiZXhwIjo1MjIwMTE2MDY2fQ.REe2ueW0q0vow1yQfTmbtAx0yHMGY5O9pRvncVi5alQ"
-//        }
         var headers = ["Content-type": "application/json"]
         if let token = Session.shared.accessToken {
             headers["Authorization"] = token

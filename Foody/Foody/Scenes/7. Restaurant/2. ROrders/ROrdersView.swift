@@ -143,7 +143,7 @@ struct ROrdersView: View {
                 .addEmptyView(isEmpty: viewModel.currentOrders.isEmpty && !viewModel.isLoading)
             }
             .navigationSearchBar({
-                SearchBar("Enter id of order...", text: $viewModel.searchText)
+                SearchBar("Order id...", text: $viewModel.searchText)
                     .showsCancelButton(true)
                     .searchBarStyle(.default)
                     .returnKeyType(.search)

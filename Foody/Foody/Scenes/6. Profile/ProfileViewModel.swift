@@ -26,8 +26,9 @@ final class ProfileViewModel: ViewModel, ObservableObject {
         Session.shared.user?.status == AccountStatus.active.rawValue
     }
     
-    override init() {
-        super.init()
+    override var tabIndex: Int? { 3 }
+    
+    override func setupData() {
         getUserInfo()
     }
     

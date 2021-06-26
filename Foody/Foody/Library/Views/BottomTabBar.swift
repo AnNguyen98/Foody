@@ -129,8 +129,14 @@ struct TabBarItem: View {
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .animation(.interpolatingSpring(mass: 1.0, stiffness: 200,
                                         damping: 20, initialVelocity: 0.1))
+        .onTapGesture(count: 2) {
+            print("DEBUG - Double tappp...")
+            NotificationCenter.default.post(name: .refreshTab, object: item.index)
+        }
         .onTapGesture {
+            print("DEBUG - Tappp...")
             indexSelected = item.index
+            Session.shared.currentTab = indexSelected
             NotificationCenter.default.post(name: .didSelectedTab, object: indexSelected)
             isClicking = true
             Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { (_) in

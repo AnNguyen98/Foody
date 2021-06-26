@@ -59,6 +59,8 @@ final class Session {
     var favorites: [Product] = []
     
     var haveNotifications: Bool = false
+    
+    var currentTab: Int = 0
 }
 
 extension Session {

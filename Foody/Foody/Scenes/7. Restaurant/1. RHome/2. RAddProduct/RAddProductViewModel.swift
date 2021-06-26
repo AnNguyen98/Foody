@@ -44,8 +44,12 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         productName = product.name
         isDrinkSelected = product.isDrink
         
-        DispatchQueue.main.async {
-            self.images = product.imageUrls.compactMap({ URL(string: $0) }).compactMap({ try? UIImage(url: $0) })
+        DispatchQueue.global().async {
+            let imgs = product.imageUrls.compactMap({ URL(string: $0) })
+                .compactMap({ try? UIImage(url: $0) })
+            DispatchQueue.main.async {
+                self.images = imgs
+            }
         }
         
         isEditProduct = product.name != ""

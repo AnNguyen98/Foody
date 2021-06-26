@@ -17,8 +17,9 @@ final class FavoritesViewModel: ViewModel, ObservableObject {
         isLastRow && nextPage
     }
     
-    override init() {
-        super.init()
+    override var tabIndex: Int? { 2 }
+    
+    override func setupData() {
         getFavoriteProducts()
     }
     

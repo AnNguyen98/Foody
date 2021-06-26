@@ -22,54 +22,87 @@ struct SearchView: View {
                 Spacer()
             }
             
-            LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
-                ForEach(viewModel.products, id: \._id) { product in
-                    NavigationLink(
-                        destination:
-                            FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
-                        label: {
-                            ZStack(alignment: .topTrailing) {
-                                ProductCellView(product: product)
-                                    .frame(height: 250)
-                                
-                                Button(action: {
-                                    if product.isLiked {
-                                        self.product = product
-                                    } else {
-                                        viewModel.addToFavorite(product)
-                                    }
-                                }, label: {
-                                    Image(systemName: SFSymbols.heartFill)
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundColor(product.isLiked ? .red: .gray)
-                                        .padding(8)
-                                        
-                                })
-                            }
-                            .onAppear(perform: {
-                                if product == viewModel.products.last {
-                                    viewModel.isLastRow = true
+            ZStack {
+                LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
+                    ForEach(viewModel.products, id: \._id) { product in
+                        NavigationLink(
+                            destination:
+                                FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                            label: {
+                                ZStack(alignment: .topTrailing) {
+                                    ProductCellView(product: product)
+                                        .frame(height: 250)
+                                    
+                                    Button(action: {
+                                        if product.isLiked {
+                                            self.product = product
+                                        } else {
+                                            viewModel.addToFavorite(product)
+                                        }
+                                    }, label: {
+                                        Image(systemName: SFSymbols.heartFill)
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(product.isLiked ? .red: .gray)
+                                            .padding(8)
+                                            
+                                    })
                                 }
-                            })
-                    })
+                                .onAppear(perform: {
+                                    if product == viewModel.products.last {
+                                        viewModel.isLastRow = true
+                                    }
+                                })
+                        })
+                    }
                 }
+                .prepareForLoadMore(loadMore: {
+                    handleLoadMore()
+                }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
+                .onRefresh {
+                    handleRefresh()
+                }
+                
+                List {
+                    ForEach(0..<viewModel.keywords.count, id: \.self) { index in
+                        let keyword = viewModel.keywords[index].keyword
+                        HStack {
+                            Text("\(keyword)")
+                                .onTapGesture {
+                                    hideKeyboard()
+                                    viewModel.searchProducts(with: keyword)
+                                }
+                            
+                            Spacer()
+                            
+                            Image(systemName: SFSymbols.arrowUpLeft)
+                            
+                        }
+                    }
+                }
+                .listStyle(PlainListStyle())
+                .hidden(viewModel.isHiddenKeywords)
             }
-            .prepareForLoadMore(loadMore: {
-                handleLoadMore()
-            }, showIndicator: viewModel.canLoadMore && viewModel.isLastRow)
-            .onRefresh {
-                handleRefresh()
-            }
+            
         }
         .navigationSearchBar({
-            SearchBar("Enter product name...", text: $viewModel.searchText)
-                .showsCancelButton(true)
-                .searchBarStyle(.default)
-                .returnKeyType(.search)
-                .onCancel {
-                    viewModel.isLastRow = false
-                }
+            SearchBar("Search...", text: $viewModel.searchText,
+                      onEditingChanged: { isEditing in
+                         viewModel.isHiddenKeywords = !isEditing
+                      },
+                      onCommit: {
+                         let searchText = viewModel.searchText.trimmed
+                         if !searchText.isEmpty {
+                            viewModel.searchProducts(with: searchText)
+                         }
+                      }
+            )
+            .showsCancelButton(true)
+            .searchBarStyle(.default)
+            .returnKeyType(.search)
+            .onCancel {
+                viewModel.isLastRow = false
+            }
         })
         .navigationBarTitle("Search", displayMode: .automatic)
         .setupNavigationBar()
