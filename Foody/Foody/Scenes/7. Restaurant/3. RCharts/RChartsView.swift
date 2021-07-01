@@ -11,6 +11,17 @@ import SwiftUICharts
 struct RChartsView: View {
     @StateObject private var viewModel = RChartsViewModel()
     
+    func barChartView() -> some View {
+        BarChartView(
+            data: ChartData(values: viewModel.currentSales),
+            title: "Sales for \(viewModel.monthDisplay)",
+            legend: "Quarterly",
+            form: .init(width: kScreenSize.width - 30, height: 230),
+            animatedToBack: true
+        )
+        .padding(.vertical)
+    }
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -22,14 +33,12 @@ struct RChartsView: View {
                 .padding()
                 .frame(height: 400)
                 
-                BarChartView(
-                    data: ChartData(values: viewModel.currentSales),
-                    title: "Sales for \(viewModel.monthDisplay)",
-                    legend: "Quarterly",
-                    form: .init(width: kScreenSize.width - 30, height: 230),
-                    animatedToBack: true
-                )
-                .padding(.vertical)
+                // Fix no render animation
+                if viewModel.currentMonth.isOdd {
+                    barChartView()
+                } else {
+                    barChartView()
+                }
             }
             .padding(.top, Constants.MARGIN_TOP_STATUS_BAR)
             
@@ -73,6 +82,7 @@ struct RChartsView: View {
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .navigationBarHidden(true)
+        .statusBar(hidden: true)
 //        .statusBarStyle(.darkContent)
     }
 }

@@ -36,11 +36,14 @@ final class UpdateInfoViewModel: ViewModel, ObservableObject {
         isMale = user.gender
         address = user.address
                 
-        DispatchQueue.main.async {
-            self.images = [self.user.imageProfile]
+        DispatchQueue.global().async {
+            let images = [self.user.imageProfile]
                 .compactMap({ URL(string: $0) })
                 .compactMap({ try? Data(contentsOf: $0) })
                 .compactMap({ UIImage(data: $0)})
+            DispatchQueue.main.async {
+                self.images = images
+            }
         }
         
         description = restaurant.descriptions

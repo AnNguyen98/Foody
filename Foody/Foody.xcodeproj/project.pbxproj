@@ -45,8 +45,8 @@
 		8E5DAD20263CED5000234F92 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5DAD1F263CED5000234F92 /* Order.swift */; };
 		8E5DAD2F263CF18500234F92 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5DAD2E263CF18500234F92 /* Comment.swift */; };
 		8E62C84C25E6804800F0614D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E62C84B25E6804800F0614D /* LoginView.swift */; };
+		8E7E3331268D8055007388D9 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7E3330268D8055007388D9 /* SwiftUICharts */; };
 		8E8B9A6C26386612002C8210 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8B9A6B26386612002C8210 /* Account.swift */; };
-		8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 8E8B9A9226386CC6002C8210 /* SwiftUICharts */; settings = {ATTRIBUTES = (Weak, ); }; };
 		8E9419E52640E043008808D5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9419E42640E043008808D5 /* FavoritesViewModel.swift */; };
 		8E94CFAE263DBB1600155D59 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E94CFAD263DBB1600155D59 /* Notifications.swift */; };
 		8E9ABB8925EA148C002FF3FA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABB8825EA148C002FF3FA /* Colors.swift */; };
@@ -313,8 +313,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E7E3331268D8055007388D9 /* SwiftUICharts in Frameworks */,
 				B59764152644ECDA00086482 /* SwiftUIX in Frameworks */,
-				8E8B9A9326386CC6002C8210 /* SwiftUICharts in Frameworks */,
 				804F41C7BAFB3FEAA17851BA /* Pods_Foody.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -948,8 +948,8 @@
 			);
 			name = Foody;
 			packageProductDependencies = (
-				8E8B9A9226386CC6002C8210 /* SwiftUICharts */,
 				B59764142644ECDA00086482 /* SwiftUIX */,
+				8E7E3330268D8055007388D9 /* SwiftUICharts */,
 			);
 			productName = Foody;
 			productReference = 8E40D91525DEB90200E73E20 /* Foody.app */;
@@ -1026,8 +1026,8 @@
 			);
 			mainGroup = 8E40D90C25DEB90200E73E20;
 			packageReferences = (
-				8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */,
 				B59764132644ECDA00086482 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				8E7E332F268D8055007388D9 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 8E40D91625DEB90200E73E20 /* Products */;
 			projectDirPath = "";
@@ -1635,7 +1635,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		8E7E332F268D8055007388D9 /* XCRemoteSwiftPackageReference "ChartView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView";
 			requirement = {
@@ -1654,9 +1654,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8E8B9A9226386CC6002C8210 /* SwiftUICharts */ = {
+		8E7E3330268D8055007388D9 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8E8B9A9126386CC6002C8210 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = 8E7E332F268D8055007388D9 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
 		};
 		B59764142644ECDA00086482 /* SwiftUIX */ = {

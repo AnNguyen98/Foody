@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-//public protocol EnvironmentKey {
-//
-//    associatedtype Value
-//
-//    static var defaultValue: Self.Value { get }
-//}
-
-struct IndexSelectedKey: EnvironmentKey {
-    static let defaultValue: Int = 0
-}
-
-extension EnvironmentValues {
-    var indexSelected: Int {
-        get {
-            return self[IndexSelectedKey.self]
-        }
-        set {
-            self[IndexSelectedKey.self] = newValue
-        }
-    }
-}
-
 struct RTabViews: View {
     @State private var indexSelected: Int = 0
     

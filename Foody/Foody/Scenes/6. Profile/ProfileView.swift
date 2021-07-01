@@ -156,10 +156,11 @@ struct ProfileView: View {
 
 extension ProfileView {
     private func openUrl(url: String) {
-        guard let url = URL(string: url) else {
-            return
+        if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            viewModel.error = .unknown("Can't open url!")
         }
-        UIApplication.shared.open(url, options: [:])
     }
     
     private func logout() {
@@ -170,7 +171,7 @@ extension ProfileView {
 extension ProfileView {
     struct Config {
         // TODO: - UPDATE WEBSITE
-        static let helpUrl: String = "https://www.foody.vn/lien-he"
+        static let helpUrl: String = "tel://\(19008198)"
         static let applicationInfoUrl: String = "https://www.mongodb.com/"
     }
 }
