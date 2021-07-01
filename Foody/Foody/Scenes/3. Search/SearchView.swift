@@ -62,6 +62,11 @@ struct SearchView: View {
                 .onRefresh {
                     handleRefresh()
                 }
+                .addEmptyView(isEmpty:
+                    viewModel.products.isEmpty, viewModel.searchText.isEmpty
+                        ? "Please enter the name of the product you are looking for.": "No items found."
+                )
+
                 
                 List {
                     ForEach(0..<viewModel.keywords.count, id: \.self) { index in
@@ -70,6 +75,7 @@ struct SearchView: View {
                             Text("\(keyword)")
                                 .onTapGesture {
                                     hideKeyboard()
+                                    viewModel.searchText = keyword
                                     viewModel.searchProducts(with: keyword)
                                 }
                             
@@ -109,8 +115,6 @@ struct SearchView: View {
         .statusBarStyle(.lightContent)
         .handleHidenKeyboard()
         .handleErrors($viewModel.error)
-        .addEmptyView(isEmpty: viewModel.products.isEmpty,
-                      viewModel.searchText.isEmpty ? "Please enter the name of the product you are looking for.": "No items found.")
         .alert(item: $product, content: { product in
             Alert(title: Text("Delete favorite"),
                   message: Text("Are you want to delete this item in your favorites?"),

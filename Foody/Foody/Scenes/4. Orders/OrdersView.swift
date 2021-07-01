@@ -111,6 +111,13 @@ struct OrdersView: View {
                         .onTapGesture {
                             isActiveDetails = true
                         }
+                        .contextMenu(menuItems: {
+                            Button(action: {
+                                print("Action 1 triggered")
+                            }, label: {
+                                Text("Delete")
+                            })
+                        })
                     }
                     
                 }

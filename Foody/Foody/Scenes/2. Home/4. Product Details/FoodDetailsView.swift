@@ -159,6 +159,7 @@ struct FoodDetailsView: View {
                 .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
                 .offset(y: -viewModel.keyboardHeight)
                 .animation(.easeInOut(duration: 0.4))
+                .padding(.bottom, 10)
             }
             .ignoresSafeArea()
             
@@ -200,7 +201,7 @@ struct FoodDetailsView: View {
         })
         .popover(isPresented: $isPresentedAppActivityView, content: {
             AppActivityView(activityItems: [
-                    viewModel.product.name + " - " + viewModel.product.price.kFormatted + " vnđ",
+                    viewModel.product.name + " - " + viewModel.product.price.kFormatted,
                     viewModel.product.imageUrls.first ?? ""
                 ]
             )
