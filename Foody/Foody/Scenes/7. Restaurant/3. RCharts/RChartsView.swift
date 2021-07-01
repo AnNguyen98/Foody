@@ -24,9 +24,10 @@ struct RChartsView: View {
                 
                 BarChartView(
                     data: ChartData(values: viewModel.currentSales),
-                    title: "Sales",
+                    title: "Sales for \(viewModel.monthDisplay)",
                     legend: "Quarterly",
-                    form: .init(width: kScreenSize.width - 30, height: 230)
+                    form: .init(width: kScreenSize.width - 30, height: 230),
+                    animatedToBack: true
                 )
                 .padding(.vertical)
             }
@@ -72,7 +73,7 @@ struct RChartsView: View {
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
         .navigationBarHidden(true)
-        .statusBarStyle(.darkContent)
+//        .statusBarStyle(.darkContent)
     }
 }
 

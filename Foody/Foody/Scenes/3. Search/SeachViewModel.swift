@@ -83,7 +83,7 @@ final class SearchViewModel: ViewModel, ObservableObject {
     
     func addToFavorite(_ product: Product) {
         guard let userId = Session.shared.user?._id else {
-            error = .unknow("Can't get user id.")
+            error = .unknown("Can't get user id.")
             return
         }
         let item = FavoriteItemResponse(_id: UUID.init().uuidString, userId: userId, product: product)

@@ -15,7 +15,7 @@ struct FirebaseTask {
         return Future<Any, CommonError> { promise in
             Auth.auth().signIn(withEmail: "theannguyen98@gmail.com", password: "") { authResult, error in
                 if let error = error {
-                    promise(.failure(CommonError.unknow(error.localizedDescription)))
+                    promise(.failure(CommonError.unknown(error.localizedDescription)))
                 } else {
                     promise(.success(true))
                 }
@@ -33,12 +33,12 @@ struct FirebaseTask {
             PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
                 if let error = error {
                     print("DEBUG - FirebaseAuth verifyPhoneNumber: ", error.localizedDescription)
-                    promise(.failure(.unknow(error.localizedDescription)))
+                    promise(.failure(.unknown(error.localizedDescription)))
                 } else {
                     if let verificationID = verificationID {
                         promise(.success(verificationID))
                     } else {
-                        promise(.failure(.unknow("Verification ID is empty.")))
+                        promise(.failure(.unknown("Verification ID is empty.")))
                     }
                 }
             }
@@ -54,7 +54,7 @@ struct FirebaseTask {
             Auth.auth().signIn(with: credential) { (result, error) in
                 if let error = error {
                     print("DEBUG - FirebaseAuth signIn: ", error.localizedDescription)
-                    promise(.failure(.unknow(error.localizedDescription)))
+                    promise(.failure(.unknown(error.localizedDescription)))
                 } else {
                     promise(.success(result ?? ""))
                 }
@@ -74,7 +74,7 @@ struct FirebaseTask {
             let _ = riversRef.putData(data, metadata: nil) { (metadata, error) in
               guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
-                promise(.failure(CommonError.unknow("Can't upload file.")))
+                promise(.failure(CommonError.unknown("Can't upload file.")))
                 return
               }
               // Metadata contains file metadata such as size, content-type.
@@ -83,7 +83,7 @@ struct FirebaseTask {
               riversRef.downloadURL { (url, error) in
                 guard let downloadURL = url else {
                   // Uh-oh, an error occurred!
-                    return promise(.failure(CommonError.unknow("Can't get file url.")))
+                    return promise(.failure(CommonError.unknown("Can't get file url.")))
                 }
                 promise(.success(downloadURL))
               }
@@ -114,7 +114,7 @@ struct FirebaseTask {
         return Future<String, CommonError> { promise in
             desertRef.delete { error in
               if let error = error {
-                promise(.failure(.unknow(error.localizedDescription)))
+                promise(.failure(.unknown(error.localizedDescription)))
               } else {
                 // File deleted successfully
                 promise(.success(""))

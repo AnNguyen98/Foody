@@ -43,7 +43,7 @@ final class ForgotPasswordViewModel: ViewModel, ObservableObject {
                         self.phoneNumber = phoneNumber
                         self.emailExist = res.isValid ?? false
                     } else {
-                        self.error = .unknow("Phone number is invalid.")
+                        self.error = .unknown("Phone number is invalid.")
                     }
                 }
             }

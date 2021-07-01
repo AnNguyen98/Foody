@@ -2,6 +2,9 @@ PODS:
   - Alamofire (5.4.1)
   - AlamofireNetworkActivityIndicator (3.1.0):
     - Alamofire (~> 5.1)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - CombineExt (1.3.0)
   - Firebase/Analytics (7.9.0):
     - Firebase/Core
@@ -142,6 +145,7 @@ PODS:
 
 DEPENDENCIES:
   - AlamofireNetworkActivityIndicator (~> 3.1)
+  - Charts
   - CombineExt
   - Firebase/Analytics
   - Firebase/Auth
@@ -163,6 +167,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireNetworkActivityIndicator
+    - Charts
     - CombineExt
     - Firebase
     - FirebaseAnalytics
@@ -194,6 +199,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   AlamofireNetworkActivityIndicator: 6564782bd7b9e6c430ae67d9277af01907b01ca4
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CombineExt: 542a01bb7485a13ff891ac3e7a0b86ed7fa05939
   Firebase: d8bd6bd34b4c7ed57bfdd056c66ff5adcdde53ab
   FirebaseAnalytics: 31b1269830dfe16687db3c60b76082c12bd6d527
@@ -222,6 +228,6 @@ SPEC CHECKSUMS:
   ToastUI: 391eb9a1cc15e7ef4b79ee112e4a0b969259154f
   WaterfallGrid: 0554a759d9a8aa136fc1769480ddb01bc6fb94b9
 
-PODFILE CHECKSUM: e445fca25109f670b9e72e9eb60968dac25bba37
+PODFILE CHECKSUM: e095c652e81867675973201fff5c1701b0ee93f0
 
 COCOAPODS: 1.10.1

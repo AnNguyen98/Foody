@@ -132,18 +132,17 @@ struct ROrdersView: View {
                             isActiveDetails.toggle()
                         }
                     }
-                    
                 }
                 .prepareForLoadMore(loadMore: {
                     
                 }, showIndicator: false)
-                .onRefresh {
-                    viewModel.getOrders()
-                }
+    //                .onRefresh {
+    //                    viewModel.getOrders()
+    //                }
                 .addEmptyView(isEmpty: viewModel.currentOrders.isEmpty && !viewModel.isLoading)
             }
             .navigationSearchBar({
-                SearchBar("Order id...", text: $viewModel.searchText)
+                SearchBar("Search by id", text: $viewModel.searchText)
                     .showsCancelButton(true)
                     .searchBarStyle(.default)
                     .returnKeyType(.search)
@@ -165,7 +164,6 @@ struct ROrdersView: View {
             .addLoadingIcon($viewModel.isLoading)
             .handleErrors($viewModel.error)
             
-            
             FloatButtonView()
         }
     }
@@ -178,7 +176,7 @@ extension ROrdersView {
         if let url = URL(string: "tel://\(phone)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:])
         } else {
-            viewModel.error = .unknow("Can't open url!")
+            viewModel.error = .unknown("Can't open url!")
         }
     }
 }

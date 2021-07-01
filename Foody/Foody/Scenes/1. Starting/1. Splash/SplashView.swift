@@ -29,7 +29,7 @@ struct SplashView: View {
                     .frame(width: 85, height: 85)
                     .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
                 
-                Text("Fast Food")
+                Text("Foody")
                     .font(.largeTitle)
                     .foregroundColor(Color.black.opacity(0.7))
                 

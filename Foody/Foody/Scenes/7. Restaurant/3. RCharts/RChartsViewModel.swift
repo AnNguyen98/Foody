@@ -64,6 +64,7 @@ final class RChartsViewModel: ViewModel, ObservableObject {
     func getChartsInfo(month: Int = Date().month, isRefreshing: Bool = false, forceData: Bool = false) {
         if !forceData, !isRefreshing, let _ = growthValuesData[month], let _ = salesData[month] {
             currentMonth = month
+            print("DEBUG - Return getChartsInfo", forceData, isRefreshing, growthValuesData[month] == nil, salesData[month] == nil)
             return
         }
         isLoading = true
@@ -74,8 +75,8 @@ final class RChartsViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (charts) in
-                self.prepareData(charts, month: month)
                 self.currentMonth = month
+                self.prepareData(charts, month: month)
             }
             .store(in: &subscriptions)
     }

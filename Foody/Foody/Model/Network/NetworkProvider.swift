@@ -27,12 +27,13 @@ struct NetworkProvider {
                         if response.statusCode == 401 {
                             promise(.failure(.expiredToken))
                         }
-                        promise(.failure(.unknow(response.messageError)))
+                        promise(.failure(.unknown(response.messageError)))
                     } else {
                         promise(.success(response.data))
                     }
                 case .failure(let error):
-                    promise(.failure(.unknow(error.errorDescription ?? "")))
+                    let errorDescription = error.errorDescription?.split(separator: ":").last ?? "Unknown"
+                    promise(.failure(.unknown(String(errorDescription))))
                 }
             }
         }

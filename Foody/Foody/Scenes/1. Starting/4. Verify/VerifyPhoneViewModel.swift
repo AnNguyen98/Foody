@@ -105,7 +105,7 @@ extension VerifyPhoneViewModel {
     
     func handleSendOTP() {
         guard otpCount < 5 else {
-            error = CommonError.unknow("OTP code confirmations exceeded!")
+            error = CommonError.unknown("OTP code confirmations exceeded!")
             return
         }
         FirebaseTask.verifyPhoneNumber(phoneNumber: phoneNumber)

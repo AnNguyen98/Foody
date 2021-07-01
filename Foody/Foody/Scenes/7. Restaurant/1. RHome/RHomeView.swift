@@ -27,7 +27,7 @@ struct RHomeView: View {
                                         Image(nil)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
-                                            .frame(width: kScreenSize.width * scale, height: 150 * scale)
+                                            .frame(width: kScreenSize.width - 20, height: 150 * scale)
                                             .clipShape(RoundedRectangle(cornerRadius: 0))
                                         
                                     } else {
@@ -96,7 +96,7 @@ struct RHomeView: View {
                 refreshData()
             }
             .navigationSearchBar({
-                SearchBar("Search...", text: $viewModel.searchText,
+                SearchBar("Search", text: $viewModel.searchText,
                           onEditingChanged: { isEditing in
                              viewModel.isHiddenKeywords = !isEditing
                           },

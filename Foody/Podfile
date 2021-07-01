@@ -20,6 +20,7 @@ target 'Foody' do
   pod 'PhoneNumberKit', '~> 3.3'
   pod 'Introspect'
   pod 'SwiftyGif'
+  pod 'Charts'
   
   pod 'WaterfallGrid', '~> 1.0.0'
   

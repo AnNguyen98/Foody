@@ -86,7 +86,7 @@ struct SearchView: View {
             
         }
         .navigationSearchBar({
-            SearchBar("Search...", text: $viewModel.searchText,
+            SearchBar("Search", text: $viewModel.searchText,
                       onEditingChanged: { isEditing in
                          viewModel.isHiddenKeywords = !isEditing
                       },

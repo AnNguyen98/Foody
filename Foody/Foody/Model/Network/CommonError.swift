@@ -20,7 +20,7 @@ enum CommonError: Error, Identifiable, Equatable {
     case invalidURL
     case invalidAreaCode
     case timeout
-    case unknow(String)
+    case unknown(String)
     case expiredToken
     
     var id: String { UUID().uuidString }
@@ -49,7 +49,7 @@ enum CommonError: Error, Identifiable, Equatable {
             return "Invalid JSON Format"
         case .invalidData:
             return "Invalid Data Format."
-        case .unknow(let description):
+        case .unknown(let description):
             return description
         case .invalidAreaCode:
             return "Invalid area code."

@@ -15,6 +15,7 @@ extension View {
 
 struct FloatButtonView: View {
     @State private var showOrdersView: Bool = false
+    @State private var isScaled: Bool = false
     
     var body: some View {
         Button(action: {
@@ -38,6 +39,9 @@ struct FloatButtonView: View {
                     .shadow(color: .gray, radius: 2, x: 0.0, y: 0.0)
             }
         })
+        .scaleEffect(isScaled ? 0.9: 1)
+        .animation(.interpolatingSpring(mass: 1.0, stiffness: 200,
+                                        damping: 20, initialVelocity: 0.1))
         .padding()
         .fullScreenCover(isPresented: $showOrdersView, content: {
             if isResraurant {
@@ -46,6 +50,11 @@ struct FloatButtonView: View {
                 OrdersView()
             }
         })
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+                isScaled.toggle()
+            }
+        }
     }
 }
 

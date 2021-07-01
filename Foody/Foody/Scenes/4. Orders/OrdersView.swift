@@ -34,6 +34,7 @@ struct OrdersView: View {
                             
                             HStack {
                                 SDImageView(url: order.userProfile, isProfile: true)
+                                    
                                     .frame(width: 30, height: 30)
                                     .clipShape(Circle())
                                     .shadow(radius: 2)
