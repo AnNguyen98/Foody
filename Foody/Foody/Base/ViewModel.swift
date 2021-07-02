@@ -30,10 +30,27 @@ class ViewModel {
             return
         }
         setupData()
+        checkUserState() // TEST
     }
     
     func setupData() {
         
+    }
+    
+    func checkUserState() {
+        AccountService.getInformation()
+            .sink { (completion) in
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (res) in
+                Session.shared.user = res.user
+                print("DEBUG - USER STATUE \(res.user.status)")
+                if !res.user.isActive {
+                    self.error = .isBlocked
+                }
+            }
+            .store(in: &subscriptions)
     }
     
     @objc func refreshData(_ notification: Notification) {

@@ -22,11 +22,14 @@ enum CommonError: Error, Identifiable, Equatable {
     case timeout
     case unknown(String)
     case expiredToken
+    case isBlocked
     
     var id: String { UUID().uuidString }
     
     var description: String {
         switch self {
+        case .isBlocked:
+            return "Your account has been locked due to reporting.\n Please call admin for help with this."
         case .expiredToken:
             return "Token is expired."
         case .timeout:

@@ -26,6 +26,12 @@ struct AlertView<Item>: View where Item: Identifiable {
                     .padding(.horizontal, 15)
                 
                 Button(action: {
+                    if let error = item as? CommonError, error == .isBlocked {
+                        if let url = URL(string: ProfileView.Config.helpUrl), UIApplication.shared.canOpenURL(url) {
+                            UIApplication.shared.open(url, options: [:])
+                        }
+                        return
+                    }
                     presentationMode.wrappedValue.dismiss()
                     dismiss()
                     (item as? PopupContent)?.action?()
@@ -75,18 +81,29 @@ struct AlertView<Item>: View where Item: Identifiable {
 
 extension AlertView {
     enum AlertType {
-        case error, normal
+        case error, normal, isBlocked
         
         var color: Color {
-            self == .error ? Color(#colorLiteral(red: 0.7568627451, green: 0.1725490196, blue: 0.1764705882, alpha: 1)): .green
+            self == .error || self == .isBlocked ? Color(#colorLiteral(red: 0.7568627451, green: 0.1725490196, blue: 0.1764705882, alpha: 1)): .green
         }
         
         var systemImage: String {
-            self == .error ? "xmark": "checkmark"
+            self == .error || self == .isBlocked ? "xmark": "checkmark"
         }
         
         var title: String {
-            self == .error ? "Error": "Success"
+            self == .error || self == .isBlocked ? "Error": "Success"
+        }
+        
+        var buttonTitle: String {
+            switch self {
+            case .error:
+                return "Close"
+            case .normal:
+                return "OK"
+            default:
+                return "Call"
+            }
         }
     }
     
@@ -94,7 +111,7 @@ extension AlertView {
         if let content = item as? PopupContent {
             return content.title
         }
-        return type == .error ? "Close": "OK"
+        return type.buttonTitle
     }
     
     var message: String {
@@ -107,8 +124,8 @@ extension AlertView {
     }
     
     var type: AlertType {
-        if let _ = item as? CommonError {
-            return .error
+        if let error = item as? CommonError {
+            return error == .isBlocked ? .isBlocked: .error
         }
         return .normal
     }
@@ -121,6 +138,6 @@ extension AlertView {
 struct PopupContent: Identifiable {
     var id: String = UUID.init().uuidString
     var message: String
-    var title: String = "Success"
+    var title: String = ""
     var action: (() -> Void)?
 }
