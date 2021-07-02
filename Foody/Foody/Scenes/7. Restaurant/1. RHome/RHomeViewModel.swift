@@ -60,7 +60,16 @@ final class RHomeViewModel: ViewModel, ObservableObject {
                     self.error = error
                 }
             } receiveValue: { (keywords) in
-                self.keywords = keywords
+                if keywords.isEmpty {
+                    self.keywords.removeAll()
+                } else {
+                    keywords.forEach { (keyword) in
+                        if !self.keywords.contains(where: { $0.keyword == keyword.keyword}) {
+                            self.keywords.append(keyword)
+                        }
+                    }
+                }
+                
             }
             .store(in: &subscriptions)
     }
