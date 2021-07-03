@@ -45,14 +45,21 @@ struct RestaurantDetailsView: View {
                 Group {
                     Divider()
                     HStack {
-                        CircleButton(systemName:  SFSymbols.squareAndArrowUp, color: .black,
-                                     action: { })
+                        CircleButton(systemName:  SFSymbols.envelopeFill, color: .black,
+                                     action: {
+                                        openUrl(url: "mailto:annguyenit@gmail.com")
+                                     })
                         
                         CircleButton(systemName: SFSymbols.phoneFill, color: .black,
-                                     action: { })
+                                     action: {
+                                        openUrl(url: "tel://\(0398888888)")
+                                     })
                         
                         CircleButton(systemName: SFSymbols.location, color: .black,
-                                     action: { })
+                                     action: {
+                                        //comgooglemaps://?saddr=&daddr=\(place.latitude),\(place.longitude)&directionsmode=driving"
+                                        openUrl(url: "comgooglemaps://?center=\(16.060703561526726),\(108.19019829889342)&zoom=14&views=traffic")
+                                     })
                         
                         Spacer()
                         
@@ -126,6 +133,14 @@ struct RestaurantDetailsView: View {
         .addLoadingIcon($viewModel.isLoading)
         .navigationBarBackButton()
         .navigationBarTitle("Restaurant Details", displayMode: .inline)
+    }
+    
+    private func openUrl(url: String) {
+        if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:])
+        } else {
+            viewModel.error = .unknown("Can't open url!")
+        }
     }
 }
 
