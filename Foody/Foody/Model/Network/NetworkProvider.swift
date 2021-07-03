@@ -23,6 +23,7 @@ struct NetworkProvider {
             self.provider.request(api) { (result) in
                 switch result {
                 case .success(let response):
+                    print("DEBUG - Response: ", response.data.toJSON() ?? "")
                     if 400...499 ~= response.statusCode {
                         if response.statusCode == 401 {
                             promise(.failure(.expiredToken))

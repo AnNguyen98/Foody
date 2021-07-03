@@ -27,6 +27,7 @@ class ViewModel {
             NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .refreshTab, object: nil)
         }
         guard Session.shared.currentTab == tabIndex else {
+            print("DEBUG - Return and can't get init data! Tab - \(Session.shared.currentTab)")
             return
         }
         setupData()

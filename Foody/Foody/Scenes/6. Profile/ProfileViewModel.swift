@@ -9,13 +9,25 @@ import SwiftUI
 
 final class ProfileViewModel: ViewModel, ObservableObject {
     @Published var isLogged: Bool = true
+    var canLoadedInfo: Bool = true
+    @Published var userPreview: User? {
+        didSet {
+            if canLoadedInfo {
+                canLoadedInfo = false
+                getUserPreviewIfNeeded()
+            }
+        }
+    }
     
     var isRestaurant: Bool {
         user.type == UserType.restaurant.rawValue
     }
     
     var user: User {
-        Session.shared.user ?? User()
+        if userPreview != nil  {
+            return userPreview ?? User()
+        }
+        return Session.shared.user ?? User()
     }
     
     var restaurant: Restaurant {
@@ -30,6 +42,20 @@ final class ProfileViewModel: ViewModel, ObservableObject {
     
     override func setupData() {
         getUserInfo()
+    }
+    
+    func getUserPreviewIfNeeded() {
+        isLoading = true
+        AccountService.getUserInformation(id: user._id)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (user) in
+                self.userPreview = user
+            }
+            .store(in: &subscriptions)
     }
     
     func getUserInfo() {

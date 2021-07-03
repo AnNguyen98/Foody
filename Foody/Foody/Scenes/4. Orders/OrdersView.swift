@@ -15,14 +15,20 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Picker("orders", selection: $viewModel.selectedIndex, content: {
-                    Text("Processing").tag(0)
-                    Text("Canceled").tag(1)
-                    Text("Shipping").tag(2)
-                    Text("Payment").tag(3)
-                })
-                .pickerStyle(SegmentedPickerStyle())
-                .padding([.top, .horizontal], 10)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        Picker("orders", selection: $viewModel.selectedIndex, content: {
+                            Text("Pending").tag(0)
+                            Text("Processing").tag(1)
+                            Text("Canceled").tag(2)
+                            Text("Shipping").tag(3)
+                            Text("Payment").tag(4)
+                        })
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding([.top, .horizontal], 10)
+                    }
+                    .frame(width: kScreenSize.width + 60, height: 50)
+                }
                 
                 LazyVStack(spacing: 15) {
                     ForEach(viewModel.currentOrders, id: \._id) { order in

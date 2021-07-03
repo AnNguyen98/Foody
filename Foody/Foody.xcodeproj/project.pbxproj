@@ -60,6 +60,7 @@
 		8E9C946625EA530C00D00B03 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946525EA530C00D00B03 /* Font.swift */; };
 		8E9C946E25EA594800D00B03 /* NavigationCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9C946D25EA594800D00B03 /* NavigationCustom.swift */; };
 		8E9CBA6426330F9000C9954F /* UserObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CBA6326330F9000C9954F /* UserObservableObject.swift */; };
+		8EB75C482690764800B96185 /* ROrderDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB75C472690764800B96185 /* ROrderDetails.swift */; };
 		8EC9BDDB263064FB00A711A6 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC9BDDA263064FB00A711A6 /* AccountService.swift */; };
 		8ED8832B26413AE50091FD86 /* UIKitTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8832A26413AE50091FD86 /* UIKitTabView.swift */; };
 		8ED8833326414FA10091FD86 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8833226414FA10091FD86 /* HomeViewModel.swift */; };
@@ -225,6 +226,7 @@
 		8E9C946525EA530C00D00B03 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		8E9C946D25EA594800D00B03 /* NavigationCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCustom.swift; sourceTree = "<group>"; };
 		8E9CBA6326330F9000C9954F /* UserObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserObservableObject.swift; sourceTree = "<group>"; };
+		8EB75C472690764800B96185 /* ROrderDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ROrderDetails.swift; sourceTree = "<group>"; };
 		8EC9BDDA263064FB00A711A6 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		8ED8832A26413AE50091FD86 /* UIKitTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitTabView.swift; sourceTree = "<group>"; };
 		8ED8833226414FA10091FD86 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -634,6 +636,14 @@
 			path = "5. Forgot pasword";
 			sourceTree = "<group>";
 		};
+		8EB75C462690762800B96185 /* 0. OrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8EB75C472690764800B96185 /* ROrderDetails.swift */,
+			);
+			path = "0. OrderDetails";
+			sourceTree = "<group>";
+		};
 		8EE1274E26450E250010459C /* SwipeableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,6 +762,7 @@
 		B50F374D265559E300A14580 /* 2. ROrders */ = {
 			isa = PBXGroup;
 			children = (
+				8EB75C462690762800B96185 /* 0. OrderDetails */,
 				B5E8F88F265660B90046782B /* ROrdersView.swift */,
 				B5E8F894265660CF0046782B /* ROrdersViewModel.swift */,
 			);
@@ -1261,6 +1272,7 @@
 				B55DE2E6261EA53200F6328A /* OrdersView.swift in Sources */,
 				B5DA5FD32632751600FCBDEB /* Constants.swift in Sources */,
 				8E40D91D25DEB90200E73E20 /* OnboardingView.swift in Sources */,
+				8EB75C482690764800B96185 /* ROrderDetails.swift in Sources */,
 				B5C3F88826491FF2003CBE8A /* ProfileViewModel.swift in Sources */,
 				B599A9E026540055008F995D /* RHomeView.swift in Sources */,
 				B5A75F072660947400E6D8B0 /* AppInfomation.swift in Sources */,

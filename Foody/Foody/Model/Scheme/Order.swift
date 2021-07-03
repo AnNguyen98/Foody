@@ -8,7 +8,7 @@
 import Foundation
 
 enum OrderStatus: String {
-    case processing, shipping, paymented, canceled
+    case pending, processing, shipping, paymented, canceled
 }
 
 struct Order: Codable {
@@ -57,8 +57,12 @@ extension Order: Identifiable {
         status == OrderStatus.processing.rawValue
     }
     
-    var shipping: Bool {
+    var isShipping: Bool {
         status == OrderStatus.shipping.rawValue
+    }
+    
+    var isPending: Bool {
+        status == OrderStatus.pending.rawValue
     }
     
     var paymented: Bool {

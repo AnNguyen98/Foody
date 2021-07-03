@@ -25,12 +25,13 @@ struct BackBarModifier: ViewModifier {
                     .background(
                         Circle()
                             .frame(width: 40, height: 40)
-                            .foregroundColor(Color.gray.opacity(0.4))
+                            .foregroundColor(Color.gray.opacity(color == .clear ? 0: 0.4))
                     )
                 Spacer()
             }
             .padding(.horizontal, 15)
             .padding(.top, 15)
+            .disabled(color == .clear)
         }
         .navigationBarHidden(navigationBarHidden)
     }

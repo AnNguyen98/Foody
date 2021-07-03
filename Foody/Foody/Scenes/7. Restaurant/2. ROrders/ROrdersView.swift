@@ -11,19 +11,26 @@ import SwiftUIX
 struct ROrdersView: View {
     @StateObject private var viewModel = ROrdersViewModel()
     @State private var isActiveDetails = false
+    @State private var isPresentedUserDetail = false
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack(spacing: 5) {
                 if !viewModel.isSearching {
-                    Picker("orders", selection: $viewModel.selectedIndex, content: {
-                        Text("Processing").tag(0)
-                        Text("Canceled").tag(1)
-                        Text("Shipping").tag(2)
-                        Text("Payment").tag(3)
-                    })
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding([.top, .horizontal], 10)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            Picker("orders", selection: $viewModel.selectedIndex, content: {
+                                Text("Pending").tag(0)
+                                Text("Processing").tag(1)
+                                Text("Canceled").tag(2)
+                                Text("Shipping").tag(3)
+                                Text("Payment").tag(4)
+                            })
+                            .pickerStyle(SegmentedPickerStyle())
+                            .padding([.top, .horizontal], 10)
+                        }
+                        .frame(width: kScreenSize.width + 60, height: 50)
+                    }
                 } else {
                     HStack {
                         Text("Total result: \(viewModel.currentOrders.count)")
@@ -40,13 +47,19 @@ struct ROrdersView: View {
                                            isActive: $isActiveDetails, label: {
                                                 EmptyView()
                                            })
-                            
                             HStack {
+                                NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order.userId)),
+                                               isActive: $isPresentedUserDetail, label: {
+                                                    EmptyView()
+                                               })
                                 SDImageView(url: order.userProfile, isProfile: true)
                                     .frame(width: 30, height: 30)
                                     .clipShape(Circle())
                                     .shadow(radius: 2)
-                                
+                                    .onTapGesture {
+                                        isPresentedUserDetail = true
+                                    }
+                                    
                                 VStack(alignment: .leading) {
                                     Text(order.username)
                                     
@@ -109,9 +122,11 @@ struct ROrdersView: View {
                                             
                                             CircleButton(systemName: SFSymbols.checkmark, color: .green,
                                                          action: {
-                                                            if order.isProcessing || order.isCanceled {
+                                                            if order.isCanceled {
+                                                                viewModel.verifyOrder(order: order, status: .pending)
+                                                            } else if order.isProcessing {
                                                                 viewModel.verifyOrder(order: order, status: .shipping)
-                                                            } else if order.shipping {
+                                                            } else if order.isShipping {
                                                                 viewModel.verifyOrder(order: order, status: .paymented)
                                                             }
                                                          }

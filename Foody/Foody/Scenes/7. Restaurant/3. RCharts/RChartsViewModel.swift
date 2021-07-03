@@ -48,7 +48,8 @@ final class RChartsViewModel: ViewModel, ObservableObject {
         for week in 1...4 {
             let temp = currentCharts.filter({ $0.orderDate.weekOfMonth == week })
             growths.append(temp.map({ $0.count }).reduce(0, +).double)
-            sales.append(("Week \(week)", temp.map({ Double($0.price) }).reduce(0.0, +)))
+            let temp2 = temp.filter({ $0.status == OrderStatus.paymented })
+            sales.append(("Week \(week)", temp2.map({ Double($0.price) }).reduce(0.0, +)))
         }
         growthValuesData[month] = growths
         salesData[month] = sales

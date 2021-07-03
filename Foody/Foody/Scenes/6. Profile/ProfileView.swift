@@ -10,7 +10,7 @@ import SwiftUIX
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @StateObject var viewModel = ProfileViewModel()
     @State private var showAlertComfirm: Bool = false
     @State private var isPresentedAboutApp: Bool = false
     
@@ -78,6 +78,7 @@ struct ProfileView: View {
                         })
                         .offset(x: kScreenSize.width / 2 - 50, y: -kScreenSize.height / (3.5 * 2) + 30)
                         .foregroundColor(.gray)
+                        .hidden(viewModel.userPreview != nil)
                 }
 
                 ScrollView(showsIndicators: false) {
@@ -100,8 +101,11 @@ struct ProfileView: View {
                         .disabled(true)
                         .padding(.top, viewModel.isRestaurant ? 0: 30)
                     
-                    ProfileButtonView(text: Text(viewModel.restaurant.address), symbol: SFSymbols.locationFill)
-                        .disabled(true)
+                    ProfileButtonView(
+                        text: Text(viewModel.userPreview != nil ? viewModel.user.address: viewModel.restaurant.address),
+                        symbol: SFSymbols.locationFill
+                    )
+                    .disabled(true)
 
                     ZStack {
                         NavigationLink(
@@ -116,15 +120,18 @@ struct ProfileView: View {
                             isPresentedAboutApp.toggle()
                         }, text: Text("About application"), imageName: "info-icon")
                     }
+                    .hidden(viewModel.userPreview != nil)
                     
                     ProfileButtonView(action: {
                         openUrl(url: Config.helpUrl)
                     }, text: Text("Help"), imageName: "help-icon")
+                    .hidden(viewModel.userPreview != nil)
                     
                     ProfileButtonView(action: {
                         showAlertComfirm.toggle()
                     }, text: Text("Logout"), imageName: "logout-icon")
                     .padding(.bottom, 30)
+                    .hidden(viewModel.userPreview != nil)
                 }
             }
             .padding([.horizontal, .top])
@@ -151,6 +158,7 @@ struct ProfileView: View {
         .onAppear {
             viewModel.isLogged = true
         }
+        .addBackBarCustom(viewModel.userPreview != nil ? .white: .clear)
     }
 }
 
