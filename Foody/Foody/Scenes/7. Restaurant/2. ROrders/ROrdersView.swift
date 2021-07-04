@@ -94,7 +94,7 @@ struct ROrdersView: View {
                                                     Image(systemName: order.canceledByUser ? SFSymbols.person: SFSymbols.house)
                                                 }
                                                 
-                                                Text(order.time)
+                                                Text(order.time.components(separatedBy: "at").first ?? "")
                                                     .font(.caption2)
                                             }
                                             
