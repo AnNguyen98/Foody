@@ -102,7 +102,7 @@ struct OrdersView: View {
                                                      action: {
                                                         viewModel.cancelOrder = order
                                                      })
-                                            .hidden(!order.isProcessing)
+                                            .hidden(!order.isPending)
                                     }
                                 }
                             }
