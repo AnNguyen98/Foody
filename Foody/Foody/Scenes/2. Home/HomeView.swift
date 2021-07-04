@@ -70,7 +70,9 @@ struct HomeView: View {
             
         }
         .onAppear {
-            viewModel.setupData()
+            if viewModel.trendingProducts.isEmpty {
+                viewModel.setupData()
+            }
         }
     }
 }
