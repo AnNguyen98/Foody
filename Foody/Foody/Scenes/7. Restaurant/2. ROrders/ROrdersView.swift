@@ -21,8 +21,8 @@ struct ROrdersView: View {
                         HStack {
                             Picker("orders", selection: $viewModel.selectedIndex, content: {
                                 Text("Pending").tag(0)
-                                Text("Processing").tag(1)
-                                Text("Canceled").tag(2)
+                                Text("Canceled").tag(1)
+                                Text("Processing").tag(2)
                                 Text("Shipping").tag(3)
                                 Text("Payment").tag(4)
                             })
@@ -48,7 +48,7 @@ struct ROrdersView: View {
                                                 EmptyView()
                                            })
                             HStack {
-                                NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order.userId)),
+                                NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order)),
                                                isActive: $isPresentedUserDetail, label: {
                                                     EmptyView()
                                                })
@@ -61,7 +61,13 @@ struct ROrdersView: View {
                                     }
                                     
                                 VStack(alignment: .leading) {
-                                    Text(order.username)
+                                    HStack {
+                                        Text(order.username)
+                                        
+                                        Image(systemName: SFSymbols.exclamationmarkTriangleFill)
+                                            .foregroundColor(.red)
+                                            .hidden(!Session.shared.blacklist.contains(where: { $0.userId == order.userId}))
+                                    }
                                     
                                     Text(order.orderTime)
                                         .foregroundColor(.gray)
@@ -95,8 +101,8 @@ struct ROrdersView: View {
                                     }
                                     
                                     HStack {
-                                        Text("Price:")
-                                        Text("\(order.product.price) vnđ")
+                                        Text(order.isShipping ? "Total price:": "Price:")
+                                        Text("\(order.isShipping ? order.product.price * order.count: order.product.price) VNĐ")
                                             .foregroundColor(.blue)
                                     }
                                     .font(.body)
@@ -125,7 +131,6 @@ struct ROrdersView: View {
                                                             viewModel.cureentOrder = order
                                                          }
                                             )
-                                            .hidden(order.isShipping)
                                             
                                             CircleButton(systemName: SFSymbols.checkmark, color: .green,
                                                          action: {
@@ -153,6 +158,7 @@ struct ROrdersView: View {
                         .onTapGesture {
                             isActiveDetails.toggle()
                         }
+                        .opacity(order.isCanceled ? 0.8: 1)
                     }
                 }
                 .prepareForLoadMore(loadMore: {

@@ -61,6 +61,8 @@ final class Session {
     var haveNotifications: Bool = false
     
     var currentTab: Int = 0
+    
+    var blacklist: [WarningUser] = []
 }
 
 extension Session {

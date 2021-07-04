@@ -18,9 +18,9 @@ struct OrdersView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         Picker("orders", selection: $viewModel.selectedIndex, content: {
-                            Text("Pending").tag(0)
+                            Text("Canceled").tag(0)
+                            Text("Pending").tag(2)
                             Text("Processing").tag(1)
-                            Text("Canceled").tag(2)
                             Text("Shipping").tag(3)
                             Text("Payment").tag(4)
                         })

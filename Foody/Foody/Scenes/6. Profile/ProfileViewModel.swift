@@ -10,6 +10,7 @@ import SwiftUI
 final class ProfileViewModel: ViewModel, ObservableObject {
     @Published var isLogged: Bool = true
     var canLoadedInfo: Bool = true
+    var order: Order?
     @Published var userPreview: User? {
         didSet {
             if canLoadedInfo {
@@ -82,4 +83,28 @@ final class ProfileViewModel: ViewModel, ObservableObject {
             self.isLogged = false
         }
     }
+}
+
+extension ProfileViewModel {
+    var isInBlacklist: Bool {
+        Session.shared.blacklist.contains(where: { $0.userId == order?.userId})
+    }
+    
+    func addToBlacklist() {
+        guard let order = order else { return }
+        let warningUser = WarningUser(userId: order.userId, time: Date().dateTimeString(),
+                    restaurantId: Session.shared.restaurant?._id ?? "", productId: order.product._id)
+        self.isLoading = true
+        RestaurantServices.addToBlacklist(warningUser)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure(let error) = completion {
+                    self.error = error
+                }
+            } receiveValue: { (warningUser) in
+                Session.shared.blacklist.append(warningUser)
+            }
+            .store(in: &subscriptions)
+    }
+
 }

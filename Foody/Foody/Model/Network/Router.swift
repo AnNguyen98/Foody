@@ -39,6 +39,8 @@ enum Router {
     case searchProducts(productName: String, page: Int)
     case getChartInfo(Int) //month
     case verifyOrder(Parameters)
+    case blacklist(Parameters)
+    case getBlacklist
     
     case updatePassword(String, String), updateInfo(Parameters)
     case verifyEmail(email: String, VerifyAction)
@@ -69,6 +71,8 @@ extension Router: TargetType {
         case .refreshToken:
             return "account/token/refresh"
         
+        case .blacklist, .getBlacklist:
+            return "blacklist"
         case .getComments:
             return "/product/comments"
         case .comment:
@@ -123,7 +127,7 @@ extension Router: TargetType {
     
     var method: Method {
         switch self {
-        case .refreshToken, .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
+        case .blacklist, .refreshToken, .login, .register, .verifyEmail, .newFavorite, .newProduct, .comment, .updateInfo, .requestOrder:
             return .post
         case .updateProduct, .updatePassword, .verifyOrder, .readNotification, .voteProduct, .voteRestaurant:
             return .put
@@ -162,7 +166,7 @@ extension Router: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .verifyEmail(let email, let action):
             return .requestParameters(parameters: ["email": email, "action": action.rawValue], encoding: JSONEncoding.default)
-        case .register(let params), .updateInfo(let params), .requestOrder(let params), .verifyOrder(let params):
+        case .blacklist(let params), .register(let params), .updateInfo(let params), .requestOrder(let params), .verifyOrder(let params):
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .login(let email, let password):
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
@@ -173,7 +177,7 @@ extension Router: TargetType {
         case .getChartInfo(let month):
             return .requestParameters(parameters: ["month": month], encoding: URLEncoding.queryString)
         
-        case .getFavorites, .getOrders, .getNotifications, .me:
+        case .getFavorites, .getOrders, .getNotifications, .me, .getBlacklist:
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         
         case .refreshToken:

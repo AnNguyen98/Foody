@@ -44,9 +44,10 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
         RProductDetailsViewModel(order.product)
     }
     
-    func profileViewModel(_ userId: String) -> ProfileViewModel {
+    func profileViewModel(_ order: Order) -> ProfileViewModel {
         let vm = ProfileViewModel()
-        vm.userPreview = User(_id: userId)
+        vm.userPreview = User(_id: order.userId)
+        vm.order = order
         print("DEBUG - \(vm.userPreview?._id ?? "")")
         return vm
     }
@@ -54,7 +55,7 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
     func prepareOrders(_ orders: [Order]) {
         var prepareOrders: [Order] = orders
         self.orders.removeAll()
-        [OrderStatus.pending, OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]
+        [OrderStatus.pending, OrderStatus.canceled, OrderStatus.processing, OrderStatus.shipping, OrderStatus.paymented]
             .forEach({ status in
                 let processingOrders = prepareOrders.filter({ OrderStatus(rawValue: $0.status) == status })
                                                     .sorted(by: { $0.orderTime < $1.orderTime })
@@ -67,13 +68,15 @@ final class ROrdersViewModel: ViewModel, ObservableObject {
         guard !isLoading else { return }
         isLoading = true
         RestaurantServices.getOrders()
+            .zip(RestaurantServices.getBlacklist())
             .sink { (completion) in
                 self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 }
-            } receiveValue: { (orders) in
+            } receiveValue: { (orders, blacklist) in
                 self.ordersData = orders
+                Session.shared.blacklist = blacklist
             }
             .store(in: &subscriptions)
     }

@@ -36,7 +36,7 @@ final class OrdersViewModel: ViewModel, ObservableObject {
     func prepareOrders(_ orders: [Order]) {
         var prepareOrders: [Order] = orders
         self.orders.removeAll()
-        [OrderStatus.processing, OrderStatus.canceled, OrderStatus.shipping, OrderStatus.paymented]
+        [OrderStatus.pending, OrderStatus.canceled, OrderStatus.processing, OrderStatus.shipping, OrderStatus.paymented]
             .forEach({ status in
                 let processingOrders = prepareOrders.filter({ OrderStatus(rawValue: $0.status) == status })
                                                     .sorted(by: { $0.orderTime > $1.orderTime })

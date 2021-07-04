@@ -106,6 +106,25 @@ struct ProfileView: View {
                         symbol: SFSymbols.locationFill
                     )
                     .disabled(true)
+                    
+                    if viewModel.userPreview != nil {
+                        ProfileButtonView(action: {
+                            openUrl(url: Config.helpUrl)
+                        }, text: Text("Call Admin (Report)"), imageName: "help-icon")
+                        
+                        Button(action: {
+                            showAlertComfirm.toggle()
+                        }, label: {
+                            Text("Add to Blacklist")
+                                .bold(size: 18)
+                                .frame(maxWidth: .infinity, minHeight: 50)
+                                .background(Color(#colorLiteral(red: 0.9607843137, green: 0.1764705882, blue: 0.337254902, alpha: 1)).opacity(viewModel.isInBlacklist ? 0.7: 1))
+                                .foregroundColor(Color.white)
+                        })
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(.vertical, 30)
+                        .disabled(viewModel.isInBlacklist)
+                    }
 
                     ZStack {
                         NavigationLink(
@@ -137,11 +156,17 @@ struct ProfileView: View {
             .padding([.horizontal, .top])
         }
         .alert(isPresented: $showAlertComfirm, content: {
-            Alert(title: Text("Logout"),
-                  message: Text("You will log out of the application!"),
+            Alert(title: Text(viewModel.order != nil ? "Warning": "Logout"),
+                  message: Text(
+                    viewModel.order != nil ? "Do you want add current user to blacklist?": "You will log out of the application!"
+                  ),
                   primaryButton: .destructive(
-                    Text("Logout"), action: {
-                        logout()
+                    Text(viewModel.order != nil ? "OK": "Logout"), action: {
+                        if viewModel.order != nil {
+                            viewModel.addToBlacklist()
+                        } else {
+                            logout()
+                        }
                     }),
                   secondaryButton: .cancel()
             )

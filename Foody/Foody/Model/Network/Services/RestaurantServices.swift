@@ -62,4 +62,19 @@ final class RestaurantServices {
             .decode(type: [ChartResponse].self)
             .eraseToAnyPublisher()
     }
+    
+    static func addToBlacklist(_ warningUser: WarningUser) -> AnyPublisher<WarningUser, CommonError>   {
+        guard let params = try? warningUser.toParameters() else {
+            return Fail(error: .invalidInputData).eraseToAnyPublisher()
+        }
+        return NetworkProvider.shared.request(.blacklist(params))
+            .decode(type: WarningUser.self)
+            .eraseToAnyPublisher()
+    }
+    
+    static func getBlacklist() -> AnyPublisher<[WarningUser], CommonError>   {
+        return NetworkProvider.shared.request(.getBlacklist)
+            .decode(type: [WarningUser].self)
+            .eraseToAnyPublisher()
+    }
 }

@@ -54,3 +54,12 @@ extension User {
     }
     
 }
+
+
+struct WarningUser: Codable {
+    var _id: String = UUID.init().uuidString
+    var userId: String
+    var time: String
+    var restaurantId: String
+    var productId: String
+}
