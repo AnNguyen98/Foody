@@ -10,7 +10,6 @@ import SwiftUIX
 
 struct ROrdersView: View {
     @StateObject private var viewModel = ROrdersViewModel()
-    @State private var isActiveDetails = false
     @State private var isPresentedUserDetail = false
     
     var body: some View {
@@ -42,123 +41,122 @@ struct ROrdersView: View {
                 
                 LazyVStack(spacing: 15) {
                     ForEach(viewModel.currentOrders, id: \._id) { order in
-                        VStack(spacing: 0) {
-                            NavigationLink(destination: RFoodDetailsView(viewModel: viewModel.detailsViewModel(order)),
-                                           isActive: $isActiveDetails, label: {
-                                                EmptyView()
-                                           })
-                            HStack {
-                                NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order)),
-                                               isActive: $isPresentedUserDetail, label: {
-                                                    EmptyView()
-                                               })
-                                SDImageView(url: order.userProfile, isProfile: true)
-                                    .frame(width: 30, height: 30)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 2)
-                                    .onTapGesture {
-                                        isPresentedUserDetail = true
-                                    }
-                                    
-                                VStack(alignment: .leading) {
+                        NavigationLink(
+                            destination: RFoodDetailsView(viewModel: viewModel.detailsViewModel(order)),
+                            label: {
+                                VStack(spacing: 0) {
                                     HStack {
-                                        Text(order.username)
-                                        
-                                        Image(systemName: SFSymbols.exclamationmarkTriangleFill)
-                                            .foregroundColor(.red)
-                                            .hidden(!Session.shared.blacklist.contains(where: { $0.userId == order.userId}))
-                                    }
-                                    
-                                    Text(order.orderTime)
-                                        .foregroundColor(.gray)
-                                }
-                                
-                                Spacer()
-                                
-                                Text("Total: \(order.count)")
-                                    .font(.body)
-                            }
-                            
-                            Divider()
-                                .padding(.vertical, 10)
-                            
-                            HStack(spacing: 10) {
-                                SDImageView(url: order.product.imageUrls.first)
-                                    .frame(width: 120, height: 150)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
-
-                                VStack(alignment: .leading, spacing: 5) {
-                                    HStack {
-                                        Text(order.product.name)
-                                            .font(.title2)
-                                        
-                                        if order.isCanceled {
-                                            Image(systemName: order.canceledByUser ? SFSymbols.person: SFSymbols.house)
-                                        }
-                                        
-                                        Text(order.time)
-                                            .font(.caption2)
-                                    }
-                                    
-                                    HStack {
-                                        Text(order.isShipping ? "Total price:": "Price:")
-                                        Text("\(order.isShipping ? order.product.price * order.count: order.product.price) VNĐ")
-                                            .foregroundColor(.blue)
-                                    }
-                                    .font(.body)
-                                    
-                                    Text("Address: \(order.address)")
-                                    
-                                    HStack {
-                                        Text("Phone:")
-                                        Text(order.phoneNumber)
-                                            .underline()
-                                            .foregroundColor(.blue)
+                                        NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order)),
+                                                       isActive: $isPresentedUserDetail, label: {
+                                                            EmptyView()
+                                                       })
+                                        SDImageView(url: order.userProfile, isProfile: true)
+                                            .frame(width: 30, height: 30)
+                                            .clipShape(Circle())
+                                            .shadow(radius: 2)
                                             .onTapGesture {
-                                                callPhoneNumber(phoneNumber: order.phoneNumber)
+                                                isPresentedUserDetail = true
                                             }
+                                            
+                                        VStack(alignment: .leading) {
+                                            HStack {
+                                                Text(order.username)
+                                                
+                                                Image(systemName: SFSymbols.exclamationmarkTriangleFill)
+                                                    .foregroundColor(.red)
+                                                    .hidden(!Session.shared.blacklist.contains(where: { $0.userId == order.userId}))
+                                            }
+                                            
+                                            Text(order.orderTime)
+                                                .foregroundColor(.gray)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Text("Total: \(order.count)")
+                                            .font(.body)
                                     }
                                     
-                                    Text("ID: \(order._id)")
-                                        .foregroundColor(.gray)
+                                    Divider()
+                                        .padding(.vertical, 10)
                                     
-                                    if !order.paymented, !order.isCanceled {
-                                        HStack {
-                                            Spacer()
+                                    HStack(spacing: 10) {
+                                        SDImageView(url: order.product.imageUrls.first)
+                                            .frame(width: 120, height: 150)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+
+                                        VStack(alignment: .leading, spacing: 5) {
+                                            HStack {
+                                                Text(order.product.name)
+                                                    .font(.title2)
+                                                
+                                                if order.isCanceled {
+                                                    Image(systemName: order.canceledByUser ? SFSymbols.person: SFSymbols.house)
+                                                }
+                                                
+                                                Text(order.time)
+                                                    .font(.caption2)
+                                            }
                                             
-                                            CircleButton(systemName: SFSymbols.xmark, color: .red,
-                                                         action: {
-                                                            viewModel.cureentOrder = order
-                                                         }
-                                            )
+                                            HStack {
+                                                Text(order.isShipping ? "Total price:": "Price:")
+                                                Text("\(order.isShipping ? order.product.price * order.count: order.product.price) VNĐ")
+                                                    .foregroundColor(.blue)
+                                            }
+                                            .font(.body)
                                             
-                                            CircleButton(systemName: SFSymbols.checkmark, color: .green,
-                                                         action: {
-                                                            if order.isPending {
-                                                                viewModel.verifyOrder(order: order, status: .processing)
-                                                            } else if order.isProcessing {
-                                                                viewModel.verifyOrder(order: order, status: .shipping)
-                                                            } else if order.isShipping {
-                                                                viewModel.verifyOrder(order: order, status: .paymented)
-                                                            }
-                                                         }
-                                            )
+                                            Text("Address: \(order.address)")
+                                            
+                                            HStack {
+                                                Text("Phone:")
+                                                Text(order.phoneNumber)
+                                                    .underline()
+                                                    .foregroundColor(.blue)
+                                                    .onTapGesture {
+                                                        callPhoneNumber(phoneNumber: order.phoneNumber)
+                                                    }
+                                            }
+                                            
+                                            Text("ID: \(order._id)")
+                                                .foregroundColor(.gray)
+                                            
+                                            if !order.paymented, !order.isCanceled {
+                                                HStack {
+                                                    Spacer()
+                                                    
+                                                    CircleButton(systemName: SFSymbols.xmark, color: .red,
+                                                                 action: {
+                                                                    viewModel.cureentOrder = order
+                                                                 }
+                                                    )
+                                                    
+                                                    CircleButton(systemName: SFSymbols.checkmark, color: .green,
+                                                                 action: {
+                                                                    if order.isPending {
+                                                                        viewModel.verifyOrder(order: order, status: .processing)
+                                                                    } else if order.isProcessing {
+                                                                        viewModel.verifyOrder(order: order, status: .shipping)
+                                                                    } else if order.isShipping {
+                                                                        viewModel.verifyOrder(order: order, status: .paymented)
+                                                                    }
+                                                                 }
+                                                    )
+                                                }
+                                            }
                                         }
                                     }
                                 }
+                                .font(.caption)
+                                .padding(10)
+                                .lineLimit(1)
+                                .frame(maxWidth: kScreenSize.width)
+                                .background(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .shadow(color: .gray, radius: 3)
+                                .opacity(order.isCanceled ? 0.8: 1)
+                                .foregroundColor(.black)
                             }
-                        }
-                        .font(.caption)
-                        .padding(10)
-                        .lineLimit(1)
-                        .frame(maxWidth: kScreenSize.width)
-                        .background(Color.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                        .shadow(color: .gray, radius: 3)
-                        .onTapGesture {
-                            isActiveDetails.toggle()
-                        }
-                        .opacity(order.isCanceled ? 0.8: 1)
+                        )
                     }
                 }
                 .prepareForLoadMore(loadMore: {

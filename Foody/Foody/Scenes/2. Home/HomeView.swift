@@ -69,6 +69,9 @@ struct HomeView: View {
             FloatButtonView()
             
         }
+        .onAppear {
+            viewModel.setupData()
+        }
     }
 }
 

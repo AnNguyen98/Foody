@@ -121,8 +121,10 @@ extension VerifyPhoneViewModel {
     }
     
     func handleVerifyOTP() {
+        isLoading = true
         FirebaseTask.signInAuth(verificationID: verificationID, code: code)
             .sink { (completion) in
+                self.isLoading = false
                 if case .failure(let error) = completion {
                     self.error = error
                 } else {

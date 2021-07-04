@@ -75,7 +75,6 @@ final class RHomeViewModel: ViewModel, ObservableObject {
     }
     
     func getProducts(page: Int = 0) {
-        guard !isLoading else { return }
         isLoading = true
         RestaurantServices.getProducts(page: page)
             .sink { (completion) in
@@ -113,14 +112,19 @@ final class RHomeViewModel: ViewModel, ObservableObject {
     func refreshData() {
         products.removeAll()
         searchResults.removeAll()
+        nextPage = false
         currentPage = 0
         
         getProducts()
     }
     
     func handleLoadMore() {
+        print(canLoadMore, nextPage, isLastRow, searchText)
         if searchText.trimmed == "" {
+            print("DEBUG - Load more!")
             getProducts(page: currentPage + 1)
+        } else {
+            print("DEBUG - Can't load more!")
         }
     }
 }
