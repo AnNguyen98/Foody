@@ -45,6 +45,9 @@ struct Product: Codable {
     var votes: [String: Int]?
     
     var timeCreated: String? = Date().dateTimeString()
+    
+    ///
+    var localImages: [Data]?
 }
 
 extension Product {

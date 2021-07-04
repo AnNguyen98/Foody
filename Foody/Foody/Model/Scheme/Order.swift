@@ -49,6 +49,19 @@ struct Order: Codable {
 extension Order: Identifiable {
     var id: String { _id }
     
+    var time: String {
+        switch status {
+        case OrderStatus.canceled.rawValue:
+            return canceledTime
+        case OrderStatus.processing.rawValue:
+            return shippingTime
+        case OrderStatus.paymented.rawValue:
+            return paymentedTime
+        default:
+            return ""
+        }
+    }
+    
     var isCanceled: Bool {
         status == OrderStatus.canceled.rawValue
     }
@@ -67,6 +80,10 @@ extension Order: Identifiable {
     
     var paymented: Bool {
         status == OrderStatus.paymented.rawValue
+    }
+    
+    var canceledByUser: Bool {
+        canceledReason?.contains("user") == true
     }
 }
 

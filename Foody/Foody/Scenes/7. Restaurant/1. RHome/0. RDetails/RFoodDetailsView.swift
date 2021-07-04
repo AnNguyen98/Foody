@@ -12,28 +12,51 @@ struct RFoodDetailsView: View {
     @State private var lineLimit: Int = 5
     @State private var isPresentedConfirmDelete: Bool = false
     @State private var isPresentedEditView: Bool = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
             ScrollView(showsIndicators: false) {
                 VStack {
-                    if viewModel.product.imageUrls.isEmpty {
+                    if viewModel.product.imageUrls.isEmpty, viewModel.product.localImages.isNilOrEmpty {
                         Image(nil)
                             .resizable()
                             .frame(maxWidth: kScreenSize.width, maxHeight: 358)
                             .scaledToFill()
                             .background(Color.red)
                     } else {
-                        TabView {
-                            ForEach(viewModel.product.imageUrls, id: \.self) { url in
-                                SDImageView(url: url)
+                        if viewModel.action == .preview {
+                            if viewModel.product.localImages.isNilOrEmpty {
+                                Image(nil)
+                                    .resizable()
                                     .frame(maxWidth: kScreenSize.width, maxHeight: 358)
                                     .scaledToFill()
-                                    .clipped()
+                                    .background(Color.red)
+                            } else {
+                                TabView {
+                                    ForEach(viewModel.product.localImages ?? [], id: \.self) { data in
+                                        Image(data: data)
+                                            .frame(maxWidth: kScreenSize.width, maxHeight: 358)
+                                            .scaledToFill()
+                                            .clipped()
+                                    }
+                                }
+                                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                                .frame(height: 358)
                             }
+                        } else {
+                            TabView {
+                                ForEach(viewModel.product.imageUrls, id: \.self) { url in
+                                    SDImageView(url: url)
+                                        .frame(maxWidth: kScreenSize.width, maxHeight: 358)
+                                        .scaledToFill()
+                                        .clipped()
+                                }
+                            }
+                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                            .frame(height: 358)
                         }
-                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                        .frame(height: 358)
+                        
                     }
                     
 
@@ -94,7 +117,7 @@ struct RFoodDetailsView: View {
                         
                         if viewModel.action != .normal {
                             Button(action: {
-                                viewModel.requestNewProduct()
+                                viewModel.handleAddNewProduct()
                             }, label: {
                                 ZStack {
                                     Text(viewModel.action == .preview ? "Add New Request": "Comtinue")
@@ -138,9 +161,13 @@ struct RFoodDetailsView: View {
                 .regular(size: 15)
                 .foregroundColor(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1568627451, alpha: 1).color)
             }
+            
             .onRefresh {
-                viewModel.getProductInfo()
+                if viewModel.action != .preview {
+                    viewModel.getProductInfo()
+                }
             }
+            .navigationBarHidden(true)
             
             HStack {
                 BackButton(icon: .arrowLeft)
@@ -168,16 +195,19 @@ struct RFoodDetailsView: View {
                 .hidden(viewModel.action == .preview)
             }
             .padding(20)
+            .navigationBarHidden(true)
         }
-        .handleAction(isActive: $viewModel.showSuccessPopup, action: {
-            handleShowNotiPupup()
-        })
         .navigationBarHidden(true)
         .addLoadingIcon($viewModel.isLoading)
         .handleErrors($viewModel.error)
+        .onReceive(viewModel.$showSuccessPopup, perform: { success in
+            if success {
+                handleShowNotiPupup()
+            }
+        })
         .onReceive(viewModel.$deleteSuccess, perform: { deleted in
             if deleted {
-                topController?.navigationController?.popToRoot(withAnimation: .easeOut)
+                presentationMode.wrappedValue.dismiss()
             }
         })
         .alert(isPresented: $isPresentedConfirmDelete, content: {
@@ -192,7 +222,8 @@ struct RFoodDetailsView: View {
         .fullScreenCover(isPresented: $isPresentedEditView, content: {
             RAddProductView(viewModel: viewModel.previewViewModel, isActive: $isPresentedEditView)
         })
-        .navigationBarTitle(viewModel.action == .preview ? "Preview": "Details", displayMode: .inline)
+        .navigationBarHidden(true)
+//        .navigationBarTitle(viewModel.action == .preview ? "Preview": "Details", displayMode: .inline)
         .ignoresSafeArea()
     }
 }
@@ -209,7 +240,7 @@ extension RFoodDetailsView {
                         message: "Congratulations, your request for a new product has been created. Waiting for admin approval. Thanks!",
                         title: "Preview",
                         action: {
-                        topController?.navigationController?.popToRoot()
+                            presentationMode.wrappedValue.dismiss()
                     })
                 )
             )

@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct ROrderDetails: View {
+    var viewModel = OrderDetailsViewModel()
+    var orderID: String = ""
+    
     var body: some View {
         Text("Hello, World!")
+            .onAppear {
+                viewModel.getOrderInfo(orderID: orderID)
+            }
     }
 }
 

@@ -85,6 +85,13 @@ struct ROrdersView: View {
                                     HStack {
                                         Text(order.product.name)
                                             .font(.title2)
+                                        
+                                        if order.isCanceled {
+                                            Image(systemName: order.canceledByUser ? SFSymbols.person: SFSymbols.house)
+                                        }
+                                        
+                                        Text(order.time)
+                                            .font(.caption2)
                                     }
                                     
                                     HStack {
@@ -109,7 +116,7 @@ struct ROrdersView: View {
                                     Text("ID: \(order._id)")
                                         .foregroundColor(.gray)
                                     
-                                    if !order.paymented {
+                                    if !order.paymented, !order.isCanceled {
                                         HStack {
                                             Spacer()
                                             
@@ -118,12 +125,12 @@ struct ROrdersView: View {
                                                             viewModel.cureentOrder = order
                                                          }
                                             )
-                                            .hidden(order.isCanceled)
+                                            .hidden(order.isShipping)
                                             
                                             CircleButton(systemName: SFSymbols.checkmark, color: .green,
                                                          action: {
-                                                            if order.isCanceled {
-                                                                viewModel.verifyOrder(order: order, status: .pending)
+                                                            if order.isPending {
+                                                                viewModel.verifyOrder(order: order, status: .processing)
                                                             } else if order.isProcessing {
                                                                 viewModel.verifyOrder(order: order, status: .shipping)
                                                             } else if order.isShipping {
@@ -166,10 +173,10 @@ struct ROrdersView: View {
                     }
             })
             .alert(item: $viewModel.cureentOrder) { (order) -> Alert in
-                Alert(title: Text("Cancel order"),
-                      message: Text("Do you want to cancel this order?"),
+                Alert(title: Text("\(order.isProcessing ? "Pending": "Cancel") order"),
+                      message: Text("Do you want \(order.isProcessing ? "move this order to pending": "to cancel this order")?"),
                       primaryButton: .destructive(Text("Continue"), action: {
-                        viewModel.verifyOrder(order: order, status: .canceled)
+                        viewModel.verifyOrder(order: order, status: order.isProcessing ? .pending: .canceled)
                       }),
                       secondaryButton: .cancel()
                 )

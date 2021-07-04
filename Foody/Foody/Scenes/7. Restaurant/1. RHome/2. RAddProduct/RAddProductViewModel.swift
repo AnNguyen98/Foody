@@ -14,7 +14,13 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
     @Published var productName: String = ""
     @Published var description: String = ""
     @Published var isDrinkSelected = false
-    @Published var images: [UIImage] = []
+    @Published var images: [UIImage] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.product.localImages = self.images.compactMap({ $0.pngData() })
+            }
+        }
+    }
     @Published var isPresentedSuccessPopup = false
     
     var type: String {
@@ -28,7 +34,8 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
     var product: Product = Product()
     
     var previewDetailViewModel: RProductDetailsViewModel {
-        RProductDetailsViewModel(product, action: .preview)
+        prepareProduct()
+        return RProductDetailsViewModel(product, action: .preview)
     }
     
     var isEditProduct: Bool = false
@@ -73,10 +80,10 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
             images.append((dataImages[index], lastPathComponents[safeIndex: index] ?? ""))
         }
         
-        FirebaseTask.uploadImages(images: [])
+        FirebaseTask.uploadImages(images: images)
             .sink { (completion) in
+                self.isLoading = false
                 if case .failure(let error) = completion {
-                    self.isLoading = false
                     self.error = error
                 }
             } receiveValue: { (urls) in

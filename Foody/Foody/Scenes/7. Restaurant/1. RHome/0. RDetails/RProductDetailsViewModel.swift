@@ -25,8 +25,9 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     }
     
     init(_ product: Product = Product(), action: DetailsAction = .normal) {
-        self.product._id = product._id
         self.action = action
+        self.product = product
+        print("DEBUG - product.localImages", product.localImages?.count ?? 0)
         super.init()
         if action == .normal {
             getProductInfo()
@@ -74,6 +75,30 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
                 }
             } receiveValue: { (product) in
                 self.deleteSuccess = true
+            }
+            .store(in: &subscriptions)
+    }
+}
+
+extension RProductDetailsViewModel {
+    func handleAddNewProduct() {
+        let dataImages = product.localImages ?? []
+        var images: [(Data, String)] = []
+        for index in 0..<dataImages.count {
+            let uuid = UUID.init().uuidString + ".png"
+            images.append((dataImages[index], uuid))
+        }
+        isLoading = true
+        FirebaseTask.uploadImages(images: images)
+            .sink { (completion) in
+                self.isLoading = false
+                if case .failure = completion {
+                    self.error = .unknown("Failure for upload image.")
+                }
+            } receiveValue: { (urls) in
+                self.product.imageBase64Encodings = urls.compactMap({ $0.absoluteString })
+                print("DEBUG - Uploaded: \(urls)")
+                self.requestNewProduct()
             }
             .store(in: &subscriptions)
     }
