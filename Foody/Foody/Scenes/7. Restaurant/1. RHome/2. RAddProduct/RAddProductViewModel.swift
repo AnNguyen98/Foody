@@ -79,7 +79,7 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         for index in 0..<dataImages.count {
             images.append((dataImages[index], lastPathComponents[safeIndex: index] ?? ""))
         }
-        
+        isLoading = true
         FirebaseTask.uploadImages(images: images)
             .sink { (completion) in
                 self.isLoading = false
@@ -97,6 +97,7 @@ final class RAddProductViewModel: ViewModel, ObservableObject {
         prepareProduct()
         
         isLoading = true
+        product.localImages = nil
         RestaurantServices.updateProduct(product: product)
             .sink { (completion) in
                 self.isLoading = false

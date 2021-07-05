@@ -109,6 +109,10 @@ struct ProfileView: View {
                     
                     if viewModel.userPreview != nil {
                         ProfileButtonView(action: {
+                            isPresentedAboutApp.toggle()
+                        }, text: Text("ID: \(viewModel.user._id)"), imageName: "info-icon")
+                        
+                        ProfileButtonView(action: {
                             openUrl(url: Config.helpUrl)
                         }, text: Text("Call Admin (Report)"), imageName: "help-icon")
                         
@@ -124,33 +128,30 @@ struct ProfileView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         .padding(.vertical, 30)
                         .disabled(viewModel.isInBlacklist)
-                    }
+                    } else {
+                        ZStack {
+                            NavigationLink(
+                                destination: AppInfomation(),
+                                isActive: $isPresentedAboutApp,
+                                label: {
+                                    EmptyView()
+                                })
 
-                    ZStack {
-                        NavigationLink(
-                            destination: AppInfomation(),
-                            isActive: $isPresentedAboutApp,
-                            label: {
-                                EmptyView()
-                            })
-
+                            
+                            ProfileButtonView(action: {
+                                isPresentedAboutApp.toggle()
+                            }, text: Text("About application"), imageName: "info-icon")
+                        }
                         
                         ProfileButtonView(action: {
-                            isPresentedAboutApp.toggle()
-                        }, text: Text("About application"), imageName: "info-icon")
+                            openUrl(url: Config.helpUrl)
+                        }, text: Text("Help"), imageName: "help-icon")
+                        
+                        ProfileButtonView(action: {
+                            showAlertComfirm.toggle()
+                        }, text: Text("Logout"), imageName: "logout-icon")
+                        .padding(.bottom, 30)
                     }
-                    .hidden(viewModel.userPreview != nil)
-                    
-                    ProfileButtonView(action: {
-                        openUrl(url: Config.helpUrl)
-                    }, text: Text("Help"), imageName: "help-icon")
-                    .hidden(viewModel.userPreview != nil)
-                    
-                    ProfileButtonView(action: {
-                        showAlertComfirm.toggle()
-                    }, text: Text("Logout"), imageName: "logout-icon")
-                    .padding(.bottom, 30)
-                    .hidden(viewModel.userPreview != nil)
                 }
             }
             .padding([.horizontal, .top])

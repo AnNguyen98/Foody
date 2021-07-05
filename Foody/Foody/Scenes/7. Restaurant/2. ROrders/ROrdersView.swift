@@ -46,33 +46,31 @@ struct ROrdersView: View {
                             label: {
                                 VStack(spacing: 0) {
                                     HStack {
-                                        NavigationLink(destination: ProfileView(viewModel: viewModel.profileViewModel(order)),
-                                                       isActive: $isPresentedUserDetail, label: {
-                                                            EmptyView()
-                                                       })
-                                        SDImageView(url: order.userProfile, isProfile: true)
-                                            .frame(width: 30, height: 30)
-                                            .clipShape(Circle())
-                                            .shadow(radius: 2)
-                                            .onTapGesture {
-                                                isPresentedUserDetail = true
+                                        NavigationLink(
+                                            destination: ProfileView(viewModel: viewModel.profileViewModel(order)),
+                                            label: {
+                                                SDImageView(url: order.userProfile, isProfile: true)
+                                                    .frame(width: 30, height: 30)
+                                                    .clipShape(Circle())
+                                                    .shadow(radius: 2)
+                                                    
+                                                VStack(alignment: .leading) {
+                                                    HStack {
+                                                        Text(order.username)
+                                                        
+                                                        Image(systemName: SFSymbols.exclamationmarkTriangleFill)
+                                                            .foregroundColor(.red)
+                                                            .hidden(!Session.shared.blacklist.contains(where: { $0.userId == order.userId}))
+                                                    }
+                                                    
+                                                    Text(order.orderTime)
+                                                        .foregroundColor(.gray)
+                                                }
                                             }
-                                            
-                                        VStack(alignment: .leading) {
-                                            HStack {
-                                                Text(order.username)
-                                                
-                                                Image(systemName: SFSymbols.exclamationmarkTriangleFill)
-                                                    .foregroundColor(.red)
-                                                    .hidden(!Session.shared.blacklist.contains(where: { $0.userId == order.userId}))
-                                            }
-                                            
-                                            Text(order.orderTime)
-                                                .foregroundColor(.gray)
-                                        }
+                                        )
                                         
                                         Spacer()
-                                        
+                                         
                                         Text("Total: \(order.count)")
                                             .font(.body)
                                     }

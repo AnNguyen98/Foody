@@ -17,36 +17,32 @@ struct FavoritesView: View {
         LazyVGrid(columns: defaultGridItemLayout, spacing: 10) {
             ForEach(viewModel.products, id: \._id) { item in
                 let product = item.product
-                
-                ZStack(alignment: .topTrailing) {
-                    NavigationLink(destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
-                                   isActive: $isActiveDetails, label: {
-                                        EmptyView()
-                                   })
-                    
-                    ProductCellView(product: product)
-                        .frame(height: 250)
-                    
-                    Button(action: {
-                        self.product = product
-                    }, label: {
-                        Image(systemName: SFSymbols.heartFill)
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(.red)
-                            .padding(8)
+                NavigationLink(
+                    destination: FoodDetailsView(viewModel: viewModel.detailsViewModel(product)),
+                    label: {
+                        ZStack(alignment: .topTrailing) {
+                            ProductCellView(product: product)
+                                .frame(height: 250)
                             
-                    })
-                }
-                .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
-                .onAppear(perform: {
-                    if product == viewModel.products.last?.product {
-                        viewModel.isLastRow = true
+                            Button(action: {
+                                self.product = product
+                            }, label: {
+                                Image(systemName: SFSymbols.heartFill)
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.red)
+                                    .padding(8)
+                                    
+                            })
+                        }
+                        .frame(maxWidth: (kScreenSize.width - 15 * 3) / 2)
+                        .onAppear(perform: {
+                            if product == viewModel.products.last?.product {
+                                viewModel.isLastRow = true
+                            }
+                        })
                     }
-                })
-                .onTapGesture {
-                    isActiveDetails = true
-                }
+                )
             }
         }
         .prepareForLoadMore(loadMore: {

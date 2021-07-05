@@ -24,7 +24,7 @@ struct Order: Codable {
     
     var count: Int = 0
     
-    var status: String = OrderStatus.processing.rawValue
+    var status: String = OrderStatus.pending.rawValue
     
     var price: Int = 0
     

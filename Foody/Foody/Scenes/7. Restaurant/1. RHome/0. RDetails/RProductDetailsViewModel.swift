@@ -52,6 +52,7 @@ final class RProductDetailsViewModel: ViewModel, ObservableObject {
     
     func requestNewProduct() {
         self.isLoading = true
+        product.localImages = nil
         RestaurantServices.addNewProduct(product: product)
             .sink { (completion) in
                 self.isLoading = false

@@ -24,6 +24,9 @@ struct NetworkProvider {
                 switch result {
                 case .success(let response):
                     print("DEBUG - Response: ", response.data.toJSON() ?? "")
+                    if response.data.toJSON() == nil {
+                        promise(.failure(.unknown("Data is empty.")))
+                    }
                     if 400...499 ~= response.statusCode {
                         if response.statusCode == 401 {
                             promise(.failure(.expiredToken))
